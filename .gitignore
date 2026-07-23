@@ -1,0 +1,22 @@
+# Ignored Folders
+_Work_Area/
+tools/
+
+# Compiled ROM binaries, lists, objects, and scripts
+*.bin
+*.lst
+*.hex
+*.bat
+*.tmp
+*.py
+*Ω*
+
+# Ignore all .txt files by default...
+*.txt
+
+# OS generated hidden files
+.DS_Store
+Thumbs.db
+
+# Special cases
+Original Extra Bases files and folders/
