@@ -80,11 +80,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command ^
     "    Write-Host ('  -> Wrote ' + $romName + ' (' + $slice.Length + ' bytes)');" ^
     "}"
 
-echo [4/4] Packaging roms\extrabas.zip...
+echo [4/4] Packaging roms\ebases.zip...
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
     "$filesToZip = [System.Collections.Generic.List[string]]::new();" ^
     "@('m761a', 'm761b', 'm761c', 'm761d') | ForEach-Object { $filesToZip.Add((Join-Path 'roms' $_)) };" ^
-    "Compress-Archive -Path $filesToZip -DestinationPath 'roms\extrabas.zip' -Force"
+    "Compress-Archive -Path $filesToZip -DestinationPath 'roms\ebases.zip' -Force"
 
 if %ERRORLEVEL% neq 0 (
     echo ERROR: Packaging failed.

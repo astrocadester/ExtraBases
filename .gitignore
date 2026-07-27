@@ -27,3 +27,4 @@ Original Extra Bases files and folders/
 !build.sh
 !tools/
 !tools/.gitkeep
+!roms/**/*.bin
