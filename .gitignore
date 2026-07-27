@@ -13,18 +13,30 @@ src/zout/
 *.py
 *.txt
 *.exe
+
+# Personal scratch files reserved for the repository maintainer
 *Ω*
+
+# Extra Bases ROM Sets & Archives
+# Excluded to avoid committing copyrighted game ROMs to the repository.
+ebases.zip
+m761a
+m761b
+m761c
+m761d
 
 # OS & System-generated files
 .DS_Store
 Thumbs.db
 
-# Special cases
-Original Extra Bases files and folders/
+
 
 # Explicit exceptions for required scripts & structure
 !build.bat
 !build.sh
 !tools/
 !tools/.gitkeep
-!roms/**/*.bin
+
+
+
+
