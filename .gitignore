@@ -1,6 +1,4 @@
 # Ignored Folders
-_Work_Area/
-cfg/
 src/zout/
 
 # Compiled ROM binaries, lists, objects, and scripts
@@ -13,6 +11,7 @@ src/zout/
 *.py
 *.txt
 *.exe
+*.zip
 
 # Personal scratch files reserved for the repository maintainer
 *Ω*
@@ -28,8 +27,7 @@ m761d
 # OS & System-generated files
 .DS_Store
 Thumbs.db
-
-
+*.lnk
 
 # Explicit exceptions for required scripts & structure
 !build.bat
