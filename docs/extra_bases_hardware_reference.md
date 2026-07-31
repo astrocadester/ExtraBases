@@ -1,7 +1,7 @@
 # Extra Bases Dual Memory & Hardware Blueprint
 
 ```text
-       SYSTEM MEMORY MAP                       HARDWARE ROM SOCKETS
+     SYSTEM MEMORY MAP                     HARDWARE ROM SOCKETS
 ┌─────────────────────────┐ $FFFF      ┌─────────────────────────┐ $FFFF
 │     NOT ADDRESSABLE     │            │     NOT ADDRESSABLE     │
 │    (NO DECODE LOGIC)    │            │    (NO DECODE LOGIC)    │
