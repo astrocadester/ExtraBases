@@ -1,71 +1,68 @@
-# Extra Bases Dual Memory & Hardware Blueprint
+# Extra Bases Hardware Reference Guide
 
-```text
+~~~text
      SYSTEM MEMORY MAP                     HARDWARE ROM SOCKETS
 ┌─────────────────────────┐ $FFFF      ┌─────────────────────────┐ $FFFF
 │     NOT ADDRESSABLE     │            │     NOT ADDRESSABLE     │
 │    (NO DECODE LOGIC)    │            │    (NO DECODE LOGIC)    │
 └─────────────────────────┘ $8000      └─────────────────────────┘ $8000
 ┌─────────────────────────┐ $7FFF      ┌─────────────────────────┐ $7FFF
-│ Parameter & Return Stks │            │      Onboard SRAM       │
-│ (PSP SP=$7F80/RSP=IX)   │            │ (CPU Board A082-91354)  │
-└─────────────────────────┘ $7C00      └─────────────────────────┘ $7C00
-┌─────────────────────────┐ $7F7F      ┌─────────────────────────┐ $7BFF
-│   TERSE & System Work   │            │                         │
-│ (Vectors/Flags/Buffers) │            │                         │
+│ Parameter & Return Stks │            │                         │
+│ (PSP SP=$7F80/RSP=IX)   │            │                         │
+└─────────────────────────┘ $7F00      │                         │
+┌─────────────────────────┐ $7EFF      │     RAM Board x 2       │
+│   System Variables &    │            │   (A082-91356-C000)     │
+│  Game State (Overlaps)  │            │ (16x MK4027 DRAM ICs)   │
 └─────────────────────────┘ $7C00      │                         │
-┌─────────────────────────┐ $7BFF      │  Dual RAM Board Assy    │
-│  Game State & Work RAM  │            │  (2x A082-91356-C000)   │
-│ (Vars/Scores/Inputs)    │            │                         │
-└─────────────────────────┘ $4C00      │                         │
-┌─────────────────────────┐ $4BFF      │                         │
+┌─────────────────────────┐ $7BFF      │                         │
 │  Viewable SCREEN RAM    │            │                         │
 │  (320x204 Framebuffer)  │            │                         │
 └─────────────────────────┘ $4000      └─────────────────────────┘ $4000
 ┌─────────────────────────┐ $3FFF      ┌─────────────────────────┐ $3FFF
-│  ROM m761d / Socket X7  │            │        Socket X7        │
-│                         │            │        ROM m761d        │
-│  Sound Data, Char GFX   │            │  Sound Data, Char GFX   │
-│  & Opcode Jump Table    │            │  & Opcode Jump Table    │
+│  Sound Data, Char GFX   │            │        Socket X7        │
+│  & Opcode Jump Table    │            │        ROM m761d        │
 └─────────────────────────┘ $3000      └─────────────────────────┘ $3000
 ┌─────────────────────────┐ $2FFF      ┌─────────────────────────┐ $2FFF
-│  ROM m761c / Socket X5  │            │        Socket X5        │
-│                         │            │        ROM m761c        │
-│ TERSE Word Definitions  │            │ TERSE Word Definitions  │
-│ & Game Jump Tables      │            │ & Game Jump Tables      │
+│ TERSE Word Definitions  │            │        Socket X5        │
+│ & Game Jump Tables      │            │        ROM m761c        │
 └─────────────────────────┘ $2000      └─────────────────────────┘ $2000
 ┌─────────────────────────┐ $1FFF      ┌─────────────────────────┐ $1FFF
-│  ROM m761b / Socket X3  │            │        Socket X3        │
-│                         │            │        ROM m761b        │
-│ Main Game Loop, Player  │            │ Main Game Loop, Player  │
-│ & Ball Control Logic    │            │ & Ball Control Logic    │
+│ Main Game Loop, Player  │            │        Socket X3        │
+│ & Ball Control Logic    │            │        ROM m761b        │
 └─────────────────────────┘ $1000      └─────────────────────────┘ $1000
 ┌─────────────────────────┐ $0FFF      ┌─────────────────────────┐ $0FFF
-│  ROM m761a / Socket X1  │            │        Socket X1        │
-│                         │            │        ROM m761a        │
-│ Boot Entry, Interrupts  │            │ Boot Entry, Interrupts  │
-│ & Inner Interpreter     │            │ & Inner Interpreter     │
+│ Boot Entry, Interrupts  │            │        Socket X1        │
+│ & Inner Interpreter     │            │        ROM m761a        │
 └─────────────────────────┘ $0000      └─────────────────────────┘ $0000
-```
+~~~
 ---
 
-## Memory Map Details
+## Hardware
 
-| Address Range | Description | Hardware Allocation | Notes |
-| :--- | :--- | :--- | :--- |
-| **`$8000 - $FFFF`** | **Not Addressable** | Open Bus | Open-bus behavior. Extra Bases has no decode logic for $A15; upper ROM/RAM expansion boards are not present. |
-| **`$7C00 - $7FFF`** | **SRAM Scratchpad & Stacks** | CPU Board (`A082-91354-C000`) | High-speed, zero-wait-state SRAM for PSP (`SP`=$7F80), RSP (`IX`=$8000), vectors (`I`=$7C), and flags. |
-| **`$4C00 - $7BFF`** | **Game Work RAM & Variables** | Dual RAM Boards (`A082-91356-C000`) | Runtime workspace for inning counters, scores, trackball input buffers, and game state. |
-| **`$4000 - $4BFF`** | **Viewable Screen RAM** | Dual RAM Boards (`A082-91356-C000`) | Framebuffer memory (320 x 204 resolution, 2 bits per pixel, 0x50 bytes per scanline). |
-| **`$0000 - $3FFF`** | **Low ROM / Magic Write** | Game Logic Board (`A084-90700-D761`) | Reads fetch program ROMs (`m761a`–`m761d`). Writes trigger Magic Function Generator blits into VRAM (`$4000` + offset). Sockets X2, X4, X6, X8 unused. |
+### Game Logic Board
+* **Board Number:** `A084-90700-D761`
+* **Overview:** Houses the main Z80 CPU, address decoding logic for low memory (`$0000–$3FFF`), and eight IC sockets (X1–X8). It integrates the custom Bally/Midway hardware chipset, including the Magic Function Generator (MFG). Writes to the low ROM address space are intercepted by the logic board to trigger hardware-accelerated graphic blitting directly into VRAM.
 
----
+### CPU Board
+* **Board Number:** `A082-91354-0000`
+* **Overview:** Houses the main Z80 CPU running at 1.79 MHz (derived from a 14.318 MHz crystal), the custom Address LSI chip (`2719` / `0066-115XX`), and the custom Data LSI chip (`2721` / `0066-116XX`). It handles core program execution, system timing, memory bus arbitration, and hardware watchdog reset logic via an MC14024 ripple counter.
 
-## Hardware ROM Socket Configuration
+### Dynamic RAM Board
+* **Board Number:** `A082-91356-C000`
+* **Overview:** Provides the system's entire 16 KB workspace using 16× MK4027 Dynamic RAM (DRAM) ICs mapped to address space `$4000–$7FFF`. This single memory board accommodates the 320×204 viewable bitmapped screen buffer (`$4000–$7FBF`), off-screen system flags and interrupt vectors (`$7C00–$7EFF`), as well as the TERSE interpreter's parameter and return stacks (`$7F00–$7FFF`).
 
-| Socket | Address Range | ROM Binary | Size | Purpose |
-| :--- | :--- | :--- | :--- | :--- |
-| **X1** | `$0000 - $0FFF` | `m761a` | 4 KB | Reset / Boot entry, Interrupt vectors, TERSE Inner Interpreter. |
-| **X3** | `$1000 - $1FFF` | `m761b` | 4 KB | Main game loop, player motion & ball control logic. |
-| **X5** | `$2000 - $2FFF` | `m761c` | 4 KB | TERSE word definitions & game state jump tables. |
-| **X7** | `$3000 - $3FFF` | `m761d` | 4 KB | Sound data, character graphics & TERSE Opcode Jump Table (`$3EA7`). |
+### Audio Amplifier Board
+* **Board Number:** `A082-90903-A000`
+* **Overview:** Receives analog audio generated by the custom sound chip on the Game I/O board and amplifies it to drive cabinet speakers. Includes volume controls, mono/stereo jumper selection (`JU1`), and the master game test switch.
+
+### Ball Control Sensor Board (Trackball Assembly)
+* **Board Number:** `A082-91323-E000`
+* **Overview:** Contains the optical/mechanical quadrature sensing circuitry for player trackball inputs (x-axis and y-axis motion). Converts physical trackball rotation into directional pulse streams sent directly to the Game I/O board multiplexers.
+
+### Power Supply Board
+* **Board Number:** `A082-90401-D000` / `A082-90408-D000`
+* **Overview:** Regulates DC power rails (+5V at 3A for logic, +12V, -5V at 0.47A) stepping down power from the cabinet transformer. Built around an SG3532 regulator IC and a 2N3055 power transistor, it includes power-on reset generation, coin counter drivers, and credit/tilt sensing logic interfaces.
+
+### Back Panel PC Board (Motherboard)
+* **Board Number:** `A082-90006-B000`
+* **Overview:** The commercial card rack backplane that interconnects all system PCBs through 100-pin edge connectors. It routes system power rails (+5V, +12V, -5V), system clocks (7.16 MHz 7M, 3.58 MHz CHROMA, 1.79 MHz CPU clock), analog video signals (Composite Video, R-Y, B-Y, 2.5V reference), and the shared 16-bit address and 8-bit data buses across the card rack.
