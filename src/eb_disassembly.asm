@@ -926,255 +926,67 @@ CHRTBL:
             DB      $3C, $7E, $66, $06, $3E  ; $02EF: Character '2' (bytes 1-5)
             DB      $7C, $60, $60, $7E, $7E  ; $02F4: Character '2' (bytes 6-10)
 
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   b,$1C
-			ld   e,$06
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   b,$06
-			ld   b,$06
-			ld   a,h
-			ld   a,h
-			ld   h,b
-			ld   h,b
-			ld   a,h
-			ld   a,(hl)
-			ld   b,$66
-			ld   a,(hl)
-			inc  a
-			inc  a
-			ld   a,h
-			ld   h,b
-			ld   h,b
-			ld   a,h
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   b,$0E
-			inc  c
-			inc  e
-			jr   $0361
-			jr   nc,$035B
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,$06
-			ld   b,$3E
-			inc  a
-			jr   $037D
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,h
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,h
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,h
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			ld   a,h
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,h
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   h,b
-			ld   h,b
-			ld   a,h
-			ld   a,h
-			ld   h,b
-			ld   h,b
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   h,b
-			ld   h,b
-			ld   a,h
-			ld   a,h
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			inc  a
-			ld   a,(hl)
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   l,(hl)
-			ld   l,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			inc  a
-			inc  a
-			jr   $03AB
-			jr   $03AD
-			jr   $03AF
-			inc  a
-			inc  a
-			ld   b,$06
-			ld   b,$06
-			ld   b,$06
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   l,(hl)
-			ld   a,h
-			ld   a,b
-			ld   a,b
-			ld   l,h
-			ld   l,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   a,(hl)
-			ld   a,(hl)
-			jp   $E7E7
-			in   a,($DB)
-			jp   $C3C3
-			jp   $66C3
-			ld   h,(hl)
-			halt
-			ld   a,(hl)
-			ld   a,(hl)
-			ld   l,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			ld   a,h
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,h
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			ld   h,b
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   l,(hl)
-			ld   h,h
-			ld   a,($7E7C)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			ld   a,h
-			ld   l,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,b
-			ld   a,h
-			ld   a,$06
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			ld   a,(hl)
-			ld   a,(hl)
-			jr   $0419
-			jr   $041B
-			jr   $041D
-			jr   $041F
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
+            DB      $3C, $7E, $66, $06, $1C  ; $02F9: Character '3' (bytes 1-5)
+            DB      $1E, $06, $66, $7E, $3C  ; $02FE: Character '3' (bytes 6-10)
+            DB      $66, $66, $66, $66, $7E  ; $0303: Character '4' (bytes 1-5)
+            DB      $7E, $06, $06, $06, $06  ; $0308: Character '4' (bytes 6-10)
+            DB      $7C, $7C, $60, $60, $7C  ; $030D: Character '5' (bytes 1-5)
+            DB      $7E, $06, $66, $7E, $3C  ; $0312: Character '5' (bytes 6-10)
+            DB      $3C, $7C, $60, $60, $7C  ; $0317: Character '6' (bytes 1-5)
+            DB      $7E, $66, $66, $7E, $3C  ; $031C: Character '6' (bytes 6-10)
+
+            DB      $7E, $7E, $06, $0E, $0C  ; $0321: Character '7' (bytes 1-5)
+            DB      $1C, $18, $38, $30, $30  ; $0326: Character '7' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $3C  ; $032B: Character '8' (bytes 1-5)
+            DB      $7E, $66, $66, $7E, $3C  ; $0330: Character '8' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $7E  ; $0335: Character '9' (bytes 1-5)
+            DB      $3E, $06, $06, $3E, $3C  ; $033A: Character '9' (bytes 6-10)
+            DB      $18, $3C, $7E, $66, $66  ; $033F: Character 'A' (bytes 1-5)
+            DB      $66, $7E, $7E, $66, $66  ; $0344: Character 'A' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $7C  ; $0349: Character 'B' (bytes 1-5)
+            DB      $7E, $66, $66, $7E, $7C  ; $034E: Character 'B' (bytes 6-10)
+            DB      $3C, $7E, $66, $60, $60  ; $0353: Character 'C' (bytes 1-5)
+            DB      $60, $60, $66, $7E, $3C  ; $0358: Character 'C' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $66  ; $035D: Character 'D' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $7C  ; $0362: Character 'D' (bytes 6-10)
+            DB      $7E, $7E, $60, $60, $7C  ; $0367: Character 'E' (bytes 1-5)
+            DB      $7C, $60, $60, $7E, $7E  ; $036C: Character 'E' (bytes 6-10)
+
+
+            DB      $7E, $7E, $60, $60, $7C  ; $0371: Character 'F' (bytes 1-5)
+            DB      $7C, $60, $60, $60, $60  ; $0376: Character 'F' (bytes 6-10)
+            DB      $3C, $7E, $60, $60, $60  ; $037B: Character 'G' (bytes 1-5)
+            DB      $6E, $6E, $66, $7E, $3C  ; $0380: Character 'G' (bytes 6-10)
+            DB      $66, $66, $66, $66, $7E  ; $0385: Character 'H' (bytes 1-5)
+            DB      $7E, $66, $66, $66, $66  ; $038A: Character 'H' (bytes 6-10)
+            DB      $3C, $3C, $18, $18, $18  ; $038F: Character 'I' (bytes 1-5)
+            DB      $18, $18, $18, $3C, $3C  ; $0394: Character 'I' (bytes 6-10)
+            DB      $06, $06, $06, $06, $06  ; $0399: Character 'J' (bytes 1-5)
+            DB      $06, $66, $66, $7E, $3C  ; $039E: Character 'J' (bytes 6-10)
+            DB      $66, $66, $6E, $7C, $78  ; $03A3: Character 'K' (bytes 1-5)
+            DB      $78, $6C, $6E, $66, $66  ; $03A8: Character 'K' (bytes 6-10)
+            DB      $60, $60, $60, $60, $60  ; $03AD: Character 'L' (bytes 1-5)
+            DB      $60, $60, $60, $7E, $7E  ; $03B2: Character 'L' (bytes 6-10)
+            DB      $C3, $E7, $E7, $DB, $DB  ; $03B7: Character 'M' (bytes 1-5)
+            DB      $C3, $C3, $C3, $C3, $C3  ; $03BC: Character 'M' (bytes 6-10)
+            DB      $66, $66, $76, $7E, $7E  ; $03C1: Character 'N' (bytes 1-5)
+            DB      $6E, $66, $66, $66, $66  ; $03C6: Character 'N' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $66  ; $03CB: Character 'O' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $3C  ; $03D0: Character 'O' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $7E  ; $03D5: Character 'P' (bytes 1-5)
+            DB      $7C, $60, $60, $60, $60  ; $03DA: Character 'P' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $66  ; $03DF: Character 'Q' (bytes 1-5)
+            DB      $66, $66, $6E, $64, $3A  ; $03E4: Character 'Q' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $7E  ; $03E9: Character 'R' (bytes 1-5)
+            DB      $7C, $6E, $66, $66, $66  ; $03EE: Character 'R' (bytes 6-10)
+            DB      $3C, $7E, $66, $60, $7C  ; $03F3: Character 'S' (bytes 1-5)
+            DB      $3E, $06, $66, $7E, $3C  ; $03F8: Character 'S' (bytes 6-10)
+            DB      $7E, $7E, $18, $18, $18  ; $03FD: Character 'T' (bytes 1-5)
+            DB      $18, $18, $18, $18, $18  ; $0402: Character 'T' (bytes 6-10)
+            DB      $66, $66, $66, $66, $66  ; $0407: Character 'U' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $3C  ; $040C: Character 'U' (bytes 6-10)
+
+
 			ld   h,(hl)
 			ld   h,(hl)
 			ld   h,(hl)
