@@ -912,16 +912,10 @@ L02CD:
             jp      (iy)                    ; Return to TERSE inner interpreter
 ;******************************************************************************
 
-			nop
-			nop
-			nop
-			nop
-			nop
-			nop
-			nop
-			nop
-			nop
-			nop
+L02D3:
+            DB      $00, $00, $00, $00, $00     ; $02D3 - $02DA:
+            DB      $00, $00, $00, $00, $00
+
 			inc  a
 			ld   a,(hl)
 			ld   h,(hl)
