@@ -951,8 +951,6 @@ CHRTBL:
             DB      $66, $66, $66, $7E, $7C  ; $0362: Character 'D' (bytes 6-10)
             DB      $7E, $7E, $60, $60, $7C  ; $0367: Character 'E' (bytes 1-5)
             DB      $7C, $60, $60, $7E, $7E  ; $036C: Character 'E' (bytes 6-10)
-
-
             DB      $7E, $7E, $60, $60, $7C  ; $0371: Character 'F' (bytes 1-5)
             DB      $7C, $60, $60, $60, $60  ; $0376: Character 'F' (bytes 6-10)
             DB      $3C, $7E, $60, $60, $60  ; $037B: Character 'G' (bytes 1-5)
@@ -985,6 +983,7 @@ CHRTBL:
             DB      $18, $18, $18, $18, $18  ; $0402: Character 'T' (bytes 6-10)
             DB      $66, $66, $66, $66, $66  ; $0407: Character 'U' (bytes 1-5)
             DB      $66, $66, $66, $7E, $3C  ; $040C: Character 'U' (bytes 6-10)
+
 
 
 			ld   h,(hl)
