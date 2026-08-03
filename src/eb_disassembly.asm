@@ -1,20 +1,21 @@
-;===============================================================================
+;=========================================================================================
 ; Extra Bases Disassembly
 ; David E. Turner (Commander Dave)
 ; daveturner0x2a@gmail.com
 ;
-; ROM Checksums (MAME 'ebases' set):
+;=========================================================================================
+;   ROM Checksums (MAME 'ebases' set):
 ;   m761a ($0000-$0FFF): CRC32(34422147) SHA1(6483ca1359b675b0dd739605db2a1dbd4b7fb8cb)
 ;   m761b ($1000-$1FFF): CRC32(4f28dfd6) SHA1(52e571e671fa61b0f9ab397a5947094c24f6c388)
 ;   m761c ($2000-$2FFF): CRC32(bff6c97e) SHA1(e41fb9db919039c8a48b4caebf80821a066d7ccf)
 ;   m761d ($3000-$3FFF): CRC32(5173781a) SHA1(e60c3f4b075f8b811ff6a8637c4aa0b089847a82)
-;===============================================================================
+;=========================================================================================
 
             ORG     $0000
 
-;===============================================================================
+;=========================================================================================
 ; COLD START ENTRY POINT ($0000 - $0007)
-;===============================================================================
+;=========================================================================================
             nop
             nop
             di                              ; Disable interrupts
@@ -22,9 +23,9 @@
             nop
             nop
 
-;===============================================================================
+;=========================================================================================
 ; TERSE INNER INTERPRETER ENTRY: _ENTER / RST $08 ($0008 - $0014)
-;===============================================================================
+;=========================================================================================
 _ENTER:
             dec     ix
             ld      (ix+$00),b              ; Save current Instruction Pointer (BC)
@@ -33,9 +34,9 @@ _ENTER:
             pop     bc                      ; Fetch next Thread Pointer into BC
             jp      (iy)                    ; Dispatch TERSE word
 
-;===============================================================================
+;=========================================================================================
 ; HARDWARE & TERSE STACK INITIALIZATION ($0015 - $002A)
-;===============================================================================
+;=========================================================================================
 L0015:
             ld      a,$01
             out     ($08),a                 ; Set High Resolution mode
@@ -49,12 +50,12 @@ L001B:
             ld      bc,L3E96                ; Set initial TERSE Instruction Pointer
             ld      iy,$002B                ; Set TERSE Dispatcher address
 
-;===============================================================================
+;=========================================================================================
 ; ----> NEXT           TERSE INNER INTERPRETER DISPATCHER  ($002B - $0039)
 ;   Inner interpreter dispatcher loop. Fetches the next opcode byte from
 ;   the Instruction Pointer (BC), indexes the primitive jump table at $3EA7,
 ;   and branches to the target execution routine.
-;===============================================================================
+;=========================================================================================
 _NEXT:
             ld      a,(bc)
             inc     bc
@@ -69,11 +70,11 @@ _NEXT:
             ex      de,hl
             jp      (hl)
 
-;===============================================================================
+;=========================================================================================
 ; ----> RETURN         EXIT TERSE WORD / RESTORE IP  ($003A - $0045)
 ;   Exits the current TERSE word by popping the saved Instruction Pointer
 ;   from the Return Stack (IX) back into BC and returning to the interpreter.
-;===============================================================================
+;=========================================================================================
 _RETURN:
             ld      c,(ix+$00)              ; Pop LSB of saved IP from Return Stack
             inc     ix
@@ -81,11 +82,11 @@ _RETURN:
             inc     ix
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;===============================================================================
+;=========================================================================================
 ; ----> LITERAL        16-BIT INLINE LITERAL  ($0046 - $004E)
 ;   Reads a 16-bit word from the TERSE instruction stream and pushes it
 ;   onto the parameter stack. (Opcode: $1B)
-;===============================================================================
+;=========================================================================================
 _LITERAL:
             ld      a,(bc)                  ; Read low byte from instruction pointer
             inc     bc                      ; Advance instruction pointer
@@ -96,11 +97,11 @@ _LITERAL:
             push    hl                      ; Push 16-bit word onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;===============================================================================
+;=========================================================================================
 ; ----> LITbyte        8-BIT INLINE LITERAL  ($004F - $0056)
 ;   Reads an 8-bit byte from the TERSE instruction stream, zero-extends
 ;   it to 16 bits, and pushes it onto the parameter stack. (Opcode: $19)
-;===============================================================================
+;=========================================================================================
 _LITbyte:
             ld      a,(bc)                  ; Read literal byte from instruction pointer
             inc     bc                      ; Advance instruction pointer
@@ -109,11 +110,11 @@ _LITbyte:
             push    hl                      ; Push 16-bit value onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;=========================================================================================
+;===================================================================================================
 ; ----> DLIT           PUSH TWO INLINE 16-BIT LITERALS  ($0057 - $0060)
 ;   Fetches two consecutive 16-bit words from the instruction stream (BC)
 ;   and pushes both onto the Parameter Stack.
-;=========================================================================================
+;===================================================================================================
             ld      a,(bc)                  ; Read low byte of first literal word
             inc     bc                      ; Advance instruction pointer
             ld      l,a
@@ -123,11 +124,11 @@ _LITbyte:
             push    hl                      ; Push first 16-bit word onto parameter stack
             jp      $0046                   ; Jump to _LITERAL to fetch/push second word
 
-;=========================================================================================
+;===================================================================================================
 ; ----> +!             ADD INLINE OFFSET TO STACK WORD  ($0061 - $006B)
 ;   Pops a value from the Parameter Stack, reads a 16-bit inline offset from
 ;   the instruction stream, adds them together, and pushes the sum. (Opcode: $0E)
-;=========================================================================================
+;===================================================================================================
             pop     hl                      ; Pop target value from parameter stack
             ld      a,(bc)                  ; Read low byte of inline offset
             inc     bc                      ; Advance instruction pointer
@@ -139,43 +140,43 @@ _LITbyte:
             push    hl                      ; Push sum onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;=========================================================================================
+;===================================================================================================
 ; ----> ARRAY          CALCULATE WORD ARRAY ELEMENT ADDRESS  ($006C - $0070)
 ;   Pops an index from the Parameter Stack, doubles it for 16-bit word alignment,
 ;   and jumps to $0062 to add the inline base address and push the result.
-;=========================================================================================
+;===================================================================================================
             pop     hl                      ; Pop array index from parameter stack
             add     hl,hl                   ; Double index for 16-bit word offset
             jp      $0062                   ; Jump to add inline base address and push
 
-;=========================================================================================
+;===================================================================================================
 ; ----> 0              PUSH CONSTANT ZERO  ($0071 - $0076)
 ;   Pushes a 16-bit constant value of 0 onto the Parameter Stack. (Opcode: $0D)
-;=========================================================================================
+;===================================================================================================
             ld      hl,$0000                ; Load 16-bit constant 0
             push    hl                      ; Push 0 onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;=========================================================================================
+;===================================================================================================
 ; ----> 1              PUSH CONSTANT ONE  ($0077 - $007C)
 ;   Pushes a 16-bit constant value of 1 onto the Parameter Stack. (Opcode: $22)
-;=========================================================================================
+;===================================================================================================
             ld      hl,$0001                ; Load 16-bit constant 1
             push    hl                      ; Push 1 onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;=========================================================================================
+;===================================================================================================
 ; ----> DUP            DUPLICATE TOP STACK ITEM  ($007D - $0081)
 ;   Duplicates the top 16-bit value on the Parameter Stack. (Opcode: $08)
-;=========================================================================================
+;===================================================================================================
             pop     hl                      ; Pop top value from parameter stack
             push    hl                      ; Push first copy back onto stack
             push    hl                      ; Push second copy onto stack
             jp      (iy)                    ; Return to TERSE inner interpreter
-;=========================================================================================
+;===================================================================================================
 ; ----> 2DUP           DUPLICATE TOP TWO STACK ITEMS  ($0082 - $0089)
 ;   Duplicates the top two 16-bit values on the Parameter Stack. (Opcode: $06)
-;=========================================================================================
+;===================================================================================================
             pop     hl                      ; Pop top value from parameter stack
             pop     de                      ; Pop second value from parameter stack
             push    de                      ; Push second value back
@@ -184,28 +185,28 @@ _LITbyte:
             push    hl                      ; Push duplicate of top value
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;=========================================================================================
+;===================================================================================================
 ; ----> DROP           DISCARD TOP STACK ITEM  ($008A - $008C)
 ;   Discards the top 16-bit value from the Parameter Stack. (Opcode: $07)
-;=========================================================================================
+;===================================================================================================
             pop     hl                      ; Pop and discard top value from stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;=========================================================================================
+;===================================================================================================
 ; ----> SWAP           EXCHANGE TOP TWO STACK ITEMS  ($008D - $0092)
 ;   Exchanges the positions of the top two 16-bit values on the Parameter Stack. (Opcode: $01)
-;=========================================================================================
+;===================================================================================================
             pop     hl                      ; Pop top value from parameter stack
             pop     de                      ; Pop second value from parameter stack
             push    hl                      ; Push top value into second position
             push    de                      ; Push second value into top position
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;=========================================================================================
+;===================================================================================================
 ; ----> @              FETCH 16-BIT WORD FROM MEMORY  ($0093 - $0099)
 ;   Fetches the 16-bit word stored at the memory address on the Parameter Stack
 ;   and pushes the fetched value back onto the stack. (Opcode: $24)
-;=========================================================================================
+;===================================================================================================
             pop     hl                      ; Pop target memory address from stack
             ld      e,(hl)                  ; Read low byte from memory address
             inc     hl                      ; Advance memory pointer
@@ -213,898 +214,702 @@ _LITbyte:
             push    de                      ; Push 16-bit fetched word onto stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
-;******************************************************************************
-; Command ----> C@
-;
-; Opcode:	$17
-; Diagram:	addr -- 8b
-; Short code	pop hl, de = ($00)(hl), push de
-; Description:	8b is the contents of the byte at addr
-;
-;******************************************************************************
-
-pop  hl
-ld   e,(hl)
-ld   d,$00
-push de
-jp   (iy)
-
-;******************************************************************************
-; Command ----> !		"store"
-;
-; Opcode:	$02
-; Diagram:	16b addr --
-; Short code	pop hl, pop de, (hl)(hl+1)=de
-; Description:	16b is stored at addr.
-;
-;******************************************************************************
-
-pop  hl
-pop  de
-ld   (hl),e
-inc  hl
-ld   (hl),d
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$04
-; Diagram:	???
-; Short code	pop hl, pop de, (HL)=e
-; Description:	Get address and byte value from PS, save byte value to address.
-;
-;******************************************************************************
-
-pop  hl
-pop  de
-ld   (hl),e
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	pop hl, (HL)(hl+1)=$0000
-; Description:	Get address from PS and save $0000 to address.
-;
-;******************************************************************************
-
-pop  hl
-ld   (hl),$00
-inc  hl
-ld   (hl),$00
-jp   (iy)
-
-
-;******************************************************************************
-; Command ----> +	'PLUS'
-;
-; Opcode:	$14
-; Diagram:	w1 w2 -- w3
-; Short code	???
-; Description:	w3 is the arithmetic sum of w1 plus w2
-;
-;******************************************************************************
-
-pop  de
-pop  hl
-add  hl,de
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> -	'MINUS'
-;
-; Opcode:	$xx
-; Diagram:	w1 w2 -- w3
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-pop  de
-pop  hl
-xor  a
-sbc  hl,de
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> 1-	"one-minus"
-;
-; Opcode:	$0A
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-pop  hl
-dec  hl
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> 1+	"one-plus"
-;
-; Opcode:	$09
-; Diagram:	w1 -- w2
-; Short code	???
-; Description:	w2 is the result of adding one to w1
-;
-;******************************************************************************
-
-pop  hl
-inc  hl
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> 2+		"two-plus"
-;
-; Opcode:	$xx
-; Diagram:	w1 -- w2
-; Short code	???
-; Description:	w2 is the result of adding two to w1
-;
-;******************************************************************************
-
-pop  hl
-inc  hl
-inc  hl
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> 2-		"two-minus"
-;
-; Opcode:	$xx
-; Diagram:	w1 -- w2
-; Short code	???
-; Description:	w2 is the result of subtracting two from w1
-;
-;******************************************************************************
-
-pop  hl
-dec  hl
-dec  hl
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-add  hl,hl
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-sra  h
-rr   l
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-ld   a,(hl)
-inc  hl
-push hl
-ld   l,a
-res  7,l
-ld   h,$00
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-inc  (hl)
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  de
-pop  hl
-xor  a
-sbc  hl,de
-ld   hl,$0000
-jp   nz,$0102
-inc  hl
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  de
-pop  hl
-xor  a
-sbc  hl,de
-ld   hl,$0000
-jp   z,$0111
-inc  hl
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  de
-pop  hl
-xor  a
-sbc  hl,de
-ld   de,$0000
-push af
-pop  hl
-ld   a,l
-and  $84
-jp   pe,$0125
-inc  de
-push de
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  de
-pop  hl
-xor  a
-sbc  hl,de
-ld   de,$0000
-push af
-pop  hl
-ld   a,l
-and  $84
-jp   po,$0139
-inc  de
-push de
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-pop  de
-jp   $0116
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$28
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-ld   de,$0000
-jp   $00F7
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$1A
-; Diagram:	???
-; Short code	???
-; Description:	Check if bits are set in HL according to DE
-;
-;******************************************************************************
-
-pop  de		; Bits to check for
-pop  hl		; Value to check against
-ld   a,l
-and  e
-ld   l,a
-ld   a,h
-and  d
-ld   h,a
-push hl		; Put result on PS
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$1D
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  de
-pop  hl
-ld   a,l
-or   e
-ld   l,a
-ld   a,h
-or   d
-ld   h,a
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> XOR
-;
-; Opcode:	$1C
-; Diagram:	16b1 16b2 -- 16b3
-; Description:	16b3 is the bit-by-bit exclusive-or of 16b1 with 16b2
-;
-;******************************************************************************
-
-pop  de
-pop  hl
-ld   a,l
-xor  e
-ld   l,a
-ld   a,h
-xor  d
-ld   h,a
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> FILL
-;
-; Opcode:	$0B
-; Diagram:	addr u 8b --
-; Short code	???
-; Description:	u bytes of memory beginning at addr are set to 8b.
-;		No action is taken if u is zero.
-;
-;******************************************************************************
-
-
-exx
-pop  bc
-pop  de
-pop  hl
-ld   a,b
-or   c
-jp   z,$0173
-ldir
-exx
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$15
-; Diagram:	x1, x2 -- R: x2, x1, IP
-; Description:	x1 is counter, x2 is limit for count
-;		Looks like this sets up for a count from x1 to x2
-;		So far code $18 follows. Not sure why... timer?
-;
-;******************************************************************************
-
-
-ld   de,$FFFA		;
-add  ix,de		; Move RSP down three words
-pop  hl
-pop  de
-ld   (ix+$00),l		; ???
-ld   (ix+$01),h
-ld   (ix+$02),e		; ???
-ld   (ix+$03),d
-ld   (ix+$04),c		; Calling IP
-ld   (ix+$05),b
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$18
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-ld   l,(ix+$00)
-ld   h,(ix+$01)
-inc  hl
-ld   (ix+$00),l
-ld   (ix+$01),h
-ld   e,(ix+$02)
-ld   d,(ix+$03)
-xor  a
-sbc  hl,de
-push af
-pop  hl
-ld   a,l
-and  $84
-jp   po,$01B7
-ld   de,$0006
-add  ix,de
-jp   $01BD
-ld   c,(ix+$04)
-ld   b,(ix+$05)
-jp   (iy)
-
-;******************************************************************************
-; Command ----> R@		"r-fetch"
-;
-; Opcode:	$16
-; Diagram:	-- 16b
-; Short code	???
-; Description:	16b is a copy of the top of the return stack
-;
-;******************************************************************************
-
-ld   l,(ix+$00)
-ld   h,(ix+$01)
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> OVER
-;
-; Opcode:	$13
-; Diagram:	16b1 16b2 -- 16b1 16b2 16b3
-; Short code	???
-; Description:	16b3 is a copy of 16b1
-;
-;******************************************************************************
-
-pop  hl
-pop  de
-push de
-push hl
-push de
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-ld   e,l
-ld   l,h
-ld   h,e
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$4B
-; Diagram:	???
-; Short code	???
-; Description:	Write to data to output port
-;		The port and data values are on the PS popped into
-;		c for the port and l for the value and then it writes to the port.
-;
-;******************************************************************************
-
-exx
-pop  bc
-pop  hl
-out  (c),l
-exx
-jp   (iy)
-
-;******************************************************************************
-; Command ----> PC@ ??? (The difference is that this gets the port off
-;			the parm stack)
-;
-; Opcode:	$7E
-; Diagram:	???
-; Short code	???
-; Description:	Read port given in C into register L. Save result on stack.
-;		Note: Register B is put on upper half of data bus during read
-;
-;******************************************************************************
-
-exx
-pop  bc
-in   l,(c)
-ld   h,$00
-push hl
-exx
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ROT		"ROTE"
-;
-; Opcode:	$05
-; Diagram:	16b1 16b2 16b3 -- 16b2 16b3 16b1
-; Short code	???
-; Description:	The top three stack entries are rotated, bringing the
-;		deepest to the top.
-;
-;******************************************************************************
-
-pop  de
-pop  hl
-ex   (sp),hl
-push de
-push hl
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-dec  hl
-add  hl,hl
-add  hl,sp
-ld   e,(hl)
-inc  hl
-ld   d,(hl)
-push de
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$1F
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-ld   a,(bc)
-ld   e,a
-inc  bc
-ld   a,(bc)
-ld   b,a
-ld   c,e
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$1E
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-pop  hl
-ld   a,h
-or   l
-jp   z,$020B
-inc  bc
-inc  bc
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-jp   $01F9
-push bc
-ld   a,(bc)
-inc  bc
-ld   l,a
-ld   h,$00
-add  hl,bc
-ld   b,h
-ld   c,l
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-
-
-
-rst  $08
-ld   bc,$0302
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$23
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-rst  $08
-ld   bc,$0304
-pop  af
-pop  bc
-pop  de
-pop  hl
-exx
-ex   af,af'
-pop  af
-pop  bc
-pop  de
-pop  hl
-ei
-ret
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$78
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-di
-pop  hl
-ld   ($7C00),hl
-ld   a,$08
-out  ($0E),a
-ld   a,$7C
-ld   i,a
-ld   a,$00
-out  ($0D),a
-im   2
-ei
-jp   (iy)
-
-;********************************************************************
-; Command -----> ???
-;
-; Opcode: $A0
-; Disable Interrupts
-;
-;********************************************************************
-
-di
-jp   (iy)
-
-;********************************************************************
-;
-; Command -----> EI
-;
-; Opcode: $25
-; Enable Interrupts
-;
-;********************************************************************
-
-ei
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$20
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-pop  hl
-ld   a,l
-rlca
-rlca
-rlca
-rlca
-ld   l,a
-push hl
-jp   (iy)
-
-;********************************************************************
-; Opcode: $44 - Fill Subroutine
-; Input: [fill] [addr] [count] --
-;
-; Description:  Given the input on the stack it will fill memory
-;		from [addr] to [addr+count] with [fill]
-;
-;********************************************************************
-
-rst  $08		; Save where we were
-db  $05	; ROT
-db  $05	; ROT
-db  $06	; 2DUP
-			db  $02	; !
-db  $01	; SWAP
-			db  $07	; DROP
-			db  $08	; DUP
-db  $09      	; 1+
-db  $05      	; ROT
-db  $0A      	; 1-
-db  $0B      	; FILL
-db  $03      	; NEXT
-
-;**************************************
-
-exx
-pop  bc
-dec  c
-ld   hl,$0001
-add  hl,sp
-add  hl,bc
-add  hl,bc
-ld   d,(hl)
-dec  hl
-ld   e,(hl)
-push de
-dec  hl
-dec  c
-jp   p,$0269
-exx
-jp   (iy)
-
-;******************************************************************************
-; Command ----> ???
-;
-; Opcode:	$xx
-; Diagram:	???
-; Short code	???
-; Description:	???
-;
-;******************************************************************************
-
-exx
-ld   bc,($7C02)
-ld   hl,$1321
-add  hl,bc
-push hl
-ld   hl,$2776
-adc  hl,bc
-ld   de,($7C04)
-add  hl,de
-ex   (sp),hl
-add  hl,bc
-ex   (sp),hl
-adc  hl,de
-ex   (sp),hl
-add  hl,bc
-ex   (sp),hl
-adc  hl,de
-ex   (sp),hl
-ld   d,e
-ld   e,b
-ld   b,c
-ld   c,$00
-add  hl,bc
-ld   ($7C02),hl
-pop  hl
-adc  hl,de
-ld   ($7C04),hl
-exx
-ld   hl,$0000
-ld   d,h
-ld   e,l
-exx
-ex   de,hl
-pop  bc
-ld   hl,$0000
-srl  b
-rr   c
-jp   nc,$02BB
-add  hl,de
-exx
-adc  hl,de
-exx
-ld   a,b
-or   c
-jp   z,$02CD
-sla  e
-rl   d
-exx
-rl   e
-rl   d
-exx
-jp   $02AF
-exx
-push hl
-jp   (iy)
-
+;=========================================================================================
+; ----> B@             FETCH BYTE FROM MEMORY  ($009A - $00A0)
+;   Fetches the 8-bit byte stored at the memory address on the Parameter Stack,
+;   zero-extends it to 16 bits, and pushes the result back onto the stack. (Opcode: $17)
+;=========================================================================================
+_Bat:
+            pop     hl                      ; Pop memory address from parameter stack
+            ld      e,(hl)                  ; Fetch byte from memory address
+            ld      d,$00                   ; Zero-extend high byte
+            push    de                      ; Push 16-bit zero-extended value
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> !              STORE 16-BIT WORD TO MEMORY  ($00A1 - $00A7)
+;   Pops a 16-bit memory address and a 16-bit word value from the Parameter
+;   Stack and stores the word into memory. (Opcode: $02)
+;=========================================================================================
+_bang:
+            pop     hl                      ; Pop target memory address
+            pop     de                      ; Pop 16-bit word value
+            ld      (hl),e                  ; Write LSB to memory address
+            inc     hl                      ; Advance memory pointer
+            ld      (hl),d                  ; Write MSB to memory address
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> B!             STORE BYTE TO MEMORY  ($00A8 - $00AC)
+;   Pops an 8-bit byte-address and a value from the Parameter Stack and stores
+;   the low-order byte into memory. (Opcode: $04)
+;=========================================================================================
+_Bbang:
+            pop     hl                      ; Pop target byte-address
+            pop     de                      ; Pop byte value
+            ld      (hl),e                  ; Store low-order byte to memory
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> ZERO           CLEAR 16-BIT WORD IN MEMORY  ($00AD - $00B4)
+;   Pops a memory address from the Parameter Stack and clears the 16-bit word
+;   at that location to zero. (Opcode: $73)
+;=========================================================================================
+_ZERO:
+            pop     hl                      ; Pop target memory address
+            ld      (hl),$00                ; Clear LSB in memory to zero
+            inc     hl                      ; Advance memory pointer
+            ld      (hl),$00                ; Clear MSB in memory to zero
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> +              16-BIT INTEGER ADDITION  ($00B5 - $00BA)
+;   Pops two 16-bit values from the Parameter Stack, adds them together,
+;   and pushes the 16-bit sum back onto the stack. (Opcode: $14)
+;=========================================================================================
+_plus:
+            pop     de                      ; Pop second operand from parameter stack
+            pop     hl                      ; Pop first operand from parameter stack
+            add     hl,de                   ; Calculate 16-bit sum
+            push    hl                      ; Push sum onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> -              16-BIT INTEGER SUBTRACTION  ($00BB - $00C2)
+;   Pops two 16-bit values from the Parameter Stack, subtracts the top value
+;   from the second value, and pushes the result. (Opcode: $1F)
+;=========================================================================================
+_minus:
+            pop     de                      ; Pop subtrahend from parameter stack
+            pop     hl                      ; Pop minuend from parameter stack
+            xor     a                       ; Clear carry flag
+            sbc     hl,de                   ; Subtract subtrahend from minuend
+            push    hl                      ; Push difference onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 1-             DECREMENT TOP STACK ITEM  ($00C3 - $00C7)
+;   Pops the top 16-bit value from the Parameter Stack, decrements it by 1,
+;   and pushes the result back onto the stack. (Opcode: $0A)
+;=========================================================================================
+_1minus:
+            pop     hl                      ; Pop target value from parameter stack
+            dec     hl                      ; Decrement value by 1
+            push    hl                      ; Push decremented result onto stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 1+             INCREMENT TOP STACK ITEM  ($00C8 - $00CC)
+;   Pops the top 16-bit value from the Parameter Stack, increments it by 1,
+;   and pushes the result back onto the stack. (Opcode: $09)
+;=========================================================================================
+_1plus:
+            pop     hl                      ; Pop target value from parameter stack
+            inc     hl                      ; Increment value by 1
+            push    hl                      ; Push result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 2+             ADD TWO TO TOP STACK ITEM  ($00CD - $00D2)
+;   Pops the top 16-bit value from the Parameter Stack, increments it by 2,
+;   and pushes the result back onto the stack. (Opcode: $2A)
+;=========================================================================================
+_2plus:
+            pop     hl                      ; Pop target value from parameter stack
+            inc     hl                      ; Increment value by 1
+            inc     hl                      ; Increment value by 1
+            push    hl                      ; Push result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 2-             SUBTRACT TWO FROM TOP STACK ITEM  ($00D3 - $00D8)
+;   Pops the top 16-bit value from the Parameter Stack, decrements it by 2,
+;   and pushes the result back onto the stack. (Opcode: $2B)
+;=========================================================================================
+_2minus:
+            pop     hl                      ; Pop target value from parameter stack
+            dec     hl                      ; Decrement value by 1
+            dec     hl                      ; Decrement value by 1
+            push    hl                      ; Push result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 2*             MULTIPLY TOP STACK ITEM BY TWO  ($00D9 - $00DD)
+;   Pops the top 16-bit value from the Parameter Stack, shifts it left by 1 bit,
+;   and pushes the doubled value back onto the stack. (Opcode: $18)
+;=========================================================================================
+_2star:
+            pop     hl                      ; Pop target value from parameter stack
+            add     hl,hl                   ; Shift left 1 bit (multiply by 2)
+            push    hl                      ; Push result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 2/             DIVIDE TOP STACK ITEM BY TWO  ($00DE - $00E5)
+;   Pops the top 16-bit signed integer from the Parameter Stack, shifts it right
+;   arithmetically by 1 bit, and pushes the quotient back onto the stack. (Opcode: $1A)
+;=========================================================================================
+_2slash:
+            pop     hl                      ; Pop target value from parameter stack
+            sra     h                       ; Arithmetic shift right high byte
+            rr      l                       ; Rotate right low byte with carry
+            push    hl                      ; Push result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> B@+7           FETCH CHARACTER AND STRIP HIGH BIT  ($00E6 - $00F1)
+;   Fetches byte at address, advances pointer, strips bit 7 end-of-string flag,
+;   and pushes the zero-extended character code and updated pointer.
+;=========================================================================================
+_Bat_inc7:
+            pop     hl                      ; Pop string address from parameter stack
+            ld      a,(hl)                  ; Read character byte
+            inc     hl                      ; Advance string pointer
+            push    hl                      ; Push updated string pointer
+            ld      l,a                     ; Move character code to low byte
+            res     7,l                     ; Strip bit 7 string-end flag
+            ld      h,$00                   ; Zero-extend high byte
+            push    hl                      ; Push character code onto stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 1+B!           INCREMENT BYTE IN MEMORY  ($00F2 - $00F5)
+;   Pops a byte address from the Parameter Stack and increments the byte value
+;   stored at that memory location by 1.
+;=========================================================================================
+
+_1plusBbang:
+            pop     hl                      ; Pop target byte address
+            inc     (hl)                    ; Increment byte value in memory
+            jp      (iy)                    ; Return to TERSE inner interpreter
+;=========================================================================================
+; ----> =              EQUAL COMPARISON  ($00F6 - $00F7)
+;   Pops two 16-bit values from the Parameter Stack, compares them, and pushes
+;   1 (true) if they are equal or 0 (false) if they are not. (Opcode: $27)
+;=========================================================================================
+_equal:
+            pop     de                      ; Pop second operand from parameter stack
+            pop     hl                      ; Pop first operand from parameter stack
+            xor     a                       ; Clear carry flag
+            sbc     hl,de                   ; Compare operands via subtraction
+            ld      hl,$0000                ; Default result to 0 (false)
+            jp      nz,$0102                ; If not equal, skip to push false
+            inc     hl                      ; Set result to 1 (true)
+            push    hl                      ; Push boolean result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> <>             NOT EQUAL COMPARISON  ($0105 - $0113)
+;   Pops two 16-bit values from the Parameter Stack, compares them, and pushes
+;   1 (true) if they are not equal or 0 (false) if they are equal.
+;=========================================================================================
+_not_equal:
+            pop     de                      ; Pop second operand from parameter stack
+            pop     hl                      ; Pop first operand from parameter stack
+            xor     a                       ; Clear carry flag
+            sbc     hl,de                   ; Compare operands via subtraction
+            ld      hl,$0000                ; Default result to 0 (false)
+            jp      z,$0111                 ; If equal, skip to push false
+            inc     hl                      ; Set result to 1 (true)
+            push    hl                      ; Push boolean result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> <              SIGNED LESS THAN COMPARISON  ($0114 - $0127)
+;   Pops two signed 16-bit integers from the Parameter Stack and pushes 1 (true)
+;   if the first is strictly less than the second, otherwise 0 (false).
+;=========================================================================================
+_less:
+            pop     de                      ; Pop second operand (n) from parameter stack
+            pop     hl                      ; Pop first operand (m) from parameter stack
+            xor     a                       ; Clear carry flag
+            sbc     hl,de                   ; Compute m - n
+            ld      de,$0000                ; Default result to 0 (false)
+            push    af                      ; Save flags resulting from subtraction
+            pop     hl                      ; Move flags into HL
+            ld      a,l                     ; Extract Z80 status flags byte
+            and     $84                     ; Mask Sign (bit 7) and Overflow (bit 2) flags
+            jp      pe,$0125                ; If sign matches overflow flag, m >= n
+            inc     de                      ; Set result to 1 (true, m < n)
+            push    de                      ; Push boolean result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> >=             SIGNED GREATER OR EQUAL COMPARISON  ($0128 - $013B)
+;   Pops two signed 16-bit integers from the Parameter Stack and pushes 1 (true)
+;   if the first is greater than or equal to the second, otherwise 0 (false).
+;=========================================================================================
+_gt_equal:
+            pop     de                      ; Pop second operand (n) from parameter stack
+            pop     hl                      ; Pop first operand (m) from parameter stack
+            xor     a                       ; Clear carry flag
+            sbc     hl,de                   ; Compute m - n
+            ld      de,$0000                ; Default result to 0 (false)
+            push    af                      ; Save flags resulting from subtraction
+            pop     hl                      ; Move flags into HL
+            ld      a,l                     ; Extract Z80 status flags byte
+            and     $84                     ; Mask Sign (bit 7) and Overflow (bit 2) flags
+            jp      po,$0139                ; If sign differs from overflow flag, m < n
+            inc     de                      ; Set result to 1 (true, m >= n)
+            push    de                      ; Push boolean result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> >              SIGNED GREATER THAN COMPARISON  ($013C - $0140)
+;   Pops two signed 16-bit integers from the Parameter Stack in reverse order
+;   and branches to the signed less-than handler to evaluate m > n.
+;=========================================================================================
+_gt:
+            pop     hl                      ; Pop first operand (m)
+            pop     de                      ; Pop second operand (n)
+            jp      $0116                   ; Jump into signed less-than evaluation
+
+;=========================================================================================
+; ----> 0=             TEST IF EQUAL TO ZERO  ($0141 - $0146)
+;   Pops a 16-bit value from the Parameter Stack, sets second operand to 0,
+;   and jumps into the equal comparison primitive. (Opcode: $28)
+;=========================================================================================
+_zeroequal:
+            ld      de,$0000                ; Load 0 as second operand
+            jp      $00F7                   ; Jump into equal comparison routine
+
+;=========================================================================================
+; ----> AND            BITWISE LOGICAL AND  ($0147 - $0151)
+;   Pops two 16-bit words from the Parameter Stack, performs a bitwise AND,
+;   and pushes the 16-bit logical result back onto the stack. (Opcode: $1A)
+;=========================================================================================
+_AND:
+            pop     de                      ; Pop second 16-bit operand
+            pop     hl                      ; Pop first 16-bit operand
+            ld      a,l                     ; Perform bitwise AND on LSB
+            and     e
+            ld      l,a
+            ld      a,h                     ; Perform bitwise AND on MSB
+            and     d
+            ld      h,a
+            push    hl                      ; Push bitwise result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+;=========================================================================================
+; ----> OR             BITWISE LOGICAL INCLUSIVE OR  ($0152 - $015C)
+;   Pops two 16-bit values from the Parameter Stack, performs a bitwise inclusive
+;   OR operation, and pushes the result back onto the stack. (Opcode: $1D)
+;=========================================================================================
+_OR:
+            pop     de                      ; Pop second 16-bit operand
+            pop     hl                      ; Pop first 16-bit operand
+            ld      a,l                     ; Perform bitwise OR on LSB
+            or      e
+            ld      l,a
+            ld      a,h                     ; Perform bitwise OR on MSB
+            or      d
+            ld      h,a
+            push    hl                      ; Push bitwise result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> XOR            BITWISE LOGICAL EXCLUSIVE OR  ($015D - $0167)
+;   Pops two 16-bit words from the Parameter Stack, performs a bitwise Exclusive-OR,
+;   and pushes the result back onto the stack. (Opcode: $1C)
+;=========================================================================================
+_XOR:
+            pop     de                      ; Pop second 16-bit operand
+            pop     hl                      ; Pop first 16-bit operand
+            ld      a,l                     ; Perform bitwise XOR on LSB
+            xor     e
+            ld      l,a
+            ld      a,h                     ; Perform bitwise XOR on MSB
+            xor     d
+            ld      h,a
+            push    hl                      ; Push bitwise result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> FILL           BLOCK MEMORY COPY  ($0168 - $0175)
+;   Block-transfers BC bytes from source address (HL) to destination address (DE).
+;   Takes count, destination, and source from the Parameter Stack. (Opcode: $0B)
+;=========================================================================================
+_FILL:
+            exx                             ; Save TERSE VM registers in alternate set
+            pop     bc                      ; Pop byte count (u)
+            pop     de                      ; Pop destination memory address
+            pop     hl                      ; Pop source memory address
+            ld      a,b                     ; Test if byte count is zero
+            or      c
+            jp      z,$0173                 ; If count is zero, skip block transfer
+            ldir                            ; Block copy BC bytes from (HL) to (DE)
+            exx                             ; Restore TERSE VM registers
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> DO             INITIALIZE COUNTED DO-LOOP  ($0176 - $0190)
+;   Allocates a 3-word frame on the Return Stack (IX), pops initial index and limit
+;   from the Parameter Stack, and stores loop state and calling IP. (Opcode: $15)
+;=========================================================================================
+_DO:
+            ld      de,$FFFA                ; Offset to allocate 3 words on Return Stack
+            add     ix,de                   ; Move Return Stack Pointer (IX) down 6 bytes
+            pop     hl                      ; Pop loop initial index (x1)
+            pop     de                      ; Pop loop limit value (x2)
+            ld      (ix+$00),l              ; Store loop index LSB on Return Stack
+            ld      (ix+$01),h              ; Store loop index MSB on Return Stack
+            ld      (ix+$02),e              ; Store loop limit LSB on Return Stack
+            ld      (ix+$03),d              ; Store loop limit MSB on Return Stack
+            ld      (ix+$04),c              ; Store current IP LSB (loop body start)
+            ld      (ix+$05),b              ; Store current IP MSB (loop body start)
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> LOOP           INCREMENT AND TEST DO-LOOP  ($0191 - $01BE)
+;   Increments the innermost DO-loop index on the Return Stack by 1 and checks
+;   against the limit. Branches back to loop start or deallocates frame. (Opcode: $18)
+;=========================================================================================
+_LOOP:
+            ld      l,(ix+$00)              ; Read current loop index from Return Stack
+            ld      h,(ix+$01)
+            inc     hl                      ; Increment loop index by 1
+            ld      (ix+$00),l              ; Store updated index back to Return Stack
+            ld      (ix+$01),h
+            ld      e,(ix+$02)              ; Read loop limit value from Return Stack
+            ld      d,(ix+$03)
+            xor     a                       ; Clear carry flag
+            sbc     hl,de                   ; Compare index against limit (index - limit)
+            push    af                      ; Save comparison flags
+            pop     hl                      ; Move flags into HL
+            ld      a,l                     ; Extract status flags byte
+            and     $84                     ; Mask Sign (bit 7) and Overflow (bit 2) flags
+            jp      po,$01B7                ; If sign matches overflow, loop continues
+            ld      de,$0006                ; Loop complete: deallocate 3-word loop frame
+            add     ix,de                   ; Advance Return Stack Pointer (IX)
+            jp      $01BD                   ; Jump to exit loop and return to interpreter
+            ld      c,(ix+$04)              ; Loop continues: reload loop start IP into BC
+            ld      b,(ix+$05)
+            jp      (iy)                    ; Return to TERSE inner interpreter
+;=========================================================================================
+; ----> R@             FETCH FROM RETURN STACK  ($01BF - $01C7)
+;   Copies the top 16-bit word from the Return Stack (IX) without popping it
+;   and pushes the value onto the Parameter Stack. (Opcode: $16)
+;=========================================================================================
+_Rgt:
+            ld      l,(ix+$00)              ; Read Return Stack top LSB
+            ld      h,(ix+$01)              ; Read Return Stack top MSB
+            push    hl                      ; Push copied word onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> OVER           DUPLICATE SECOND STACK ITEM  ($01C8 - $01CE)
+;   Copies the second 16-bit word on the Parameter Stack to the top of the stack.
+;   (Opcode: $13)
+;=========================================================================================
+_OVER:
+            pop     hl                      ; Pop top value from parameter stack
+            pop     de                      ; Pop second value from parameter stack
+            push    de                      ; Push second value back
+            push    hl                      ; Push top value back
+            push    de                      ; Push copy of second value onto stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> SWAB           SWAP HIGH AND LOW BYTES  ($01CF - $01D5)
+;   Pops a 16-bit word from the Parameter Stack, exchanges its high and low bytes,
+;   and pushes the byte-swapped word back onto the stack.
+;=========================================================================================
+_SWAB:
+            pop     hl                      ; Pop target word from parameter stack
+            ld      e,l                     ; Swap high and low bytes via DE register
+            ld      l,h
+            ld      h,e
+            push    hl                      ; Push byte-swapped word onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> OUTP           OUTPUT BYTE TO HARDWARE PORT  ($01D6 - $01DD)
+;   Pops 16-bit port number (BC) and 8-bit data value (L) from Parameter Stack
+;   and writes data to the specified hardware output port. (Opcode: $4B)
+;=========================================================================================
+_OUTP:
+            exx                             ; Save TERSE VM registers in alternate set
+            pop     bc                      ; Pop 16-bit port address (C=port, B=sub-port)
+            pop     hl                      ; Pop 16-bit value (L = 8-bit data byte)
+            out     (c),l                   ; Output byte L to hardware port C
+            exx                             ; Restore TERSE VM registers
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> INP            INPUT BYTE FROM HARDWARE PORT  ($01DE - $01E7)
+;   Pops 16-bit port number (BC) from Parameter Stack, reads an 8-bit byte from
+;   the hardware port, zero-extends it, and pushes the result. (Opcode: $7E)
+;=========================================================================================
+_INP:
+            exx                             ; Save TERSE VM registers in alternate set
+            pop     bc                      ; Pop 16-bit port address (C=port, B=sub-port)
+            in      l,(c)                   ; Read byte from hardware port C into L
+            ld      h,$00                   ; Zero-extend high byte
+            push    hl                      ; Push 16-bit input value onto parameter stack
+            exx                             ; Restore TERSE VM registers
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> ROT            ROTATE TOP THREE STACK ITEMS  ($01E8 - $01EE)
+;   Rotates the top three 16-bit items on the Parameter Stack, bringing the
+;   third item (deepest) to the top position. (Opcode: $05)
+;=========================================================================================
+_ROT:
+            pop     de                      ; Pop top value (first item)
+            pop     hl                      ; Pop second value
+            ex      (sp),hl                 ; Swap second value with third value on stack
+            push    de                      ; Push top value into second position
+            push    hl                      ; Push third value into top position
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> PICK           FETCH N-TH STACK ITEM  ($01EF - $01F8)
+;   Pops 1-based index (n) from Parameter Stack, calculates stack frame offset
+;   relative to SP, fetches the 16-bit word, and pushes it onto the stack.
+;=========================================================================================
+_PICK:
+            pop     hl                      ; Pop 1-based stack index (n)
+            dec     hl                      ; Convert to 0-based offset
+            add     hl,hl                   ; Convert word index to byte offset
+            add     hl,sp                   ; Calculate stack memory address
+            ld      e,(hl)                  ; Read low byte from target stack location
+            inc     hl                      ; Advance pointer
+            ld      d,(hl)                  ; Read high byte from target stack location
+            push    de                      ; Push indexed word onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> BRANCH         UNCONDITIONAL INSTRUCTION BRANCH  ($01F9 - $0200)
+;   Reads a 16-bit destination address from the instruction stream (BC)
+;   and updates the Instruction Pointer to branch unconditionally. (Opcode: $1F)
+;=========================================================================================
+_BRANCH:
+            ld      a,(bc)                  ; Fetch destination LSB from instruction stream
+            ld      e,a
+            inc     bc                      ; Advance instruction pointer
+            ld      a,(bc)                  ; Fetch destination MSB from instruction stream
+            ld      b,a                     ; Load new IP high byte
+            ld      c,e                     ; Load new IP low byte
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> 0BRANCH        BRANCH IF ZERO / FALSE  ($0201 - $020A)
+;   Pops a boolean flag from Parameter Stack. If 0 (false), branches to inline
+;   destination address; if non-zero (true), skips destination word. (Opcode: $1E)
+;=========================================================================================
+_0BRANCH:
+            pop     hl                      ; Pop boolean test flag from parameter stack
+            ld      a,h                     ; Test if 16-bit flag is zero
+            or      l
+            jp      z,$020B                 ; If zero (false), branch to load jump address
+            inc     bc                      ; If non-zero (true), skip inline jump address
+            inc     bc
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> A"             INLINE STRING ADDRESS / SKIP  ($020B - $0218)
+;   Pushes current Instruction Pointer (string base address) onto stack and skips
+;   IP past the length-prefixed inline string data.
+;=========================================================================================
+_Aquote:
+            jp      $01F9                   ; Jump to branch handler
+            push    bc                      ; Push string address onto parameter stack
+            ld      a,(bc)                  ; Read string length byte from stream
+            inc     bc                      ; Advance pointer past length byte
+            ld      l,a                     ; Load length into L
+            ld      h,$00                   ; Zero-extend length
+            add     hl,bc                   ; Calculate address past string data
+            ld      b,h                     ; Update Instruction Pointer (BC)
+            ld      c,l
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> TERSE_EXEC     EXECUTE HIGH-LEVEL TERSE DEFINITION  ($0219 - $021C)
+;   Enters TERSE execution mode via RST $08 and sets the instruction thread
+;   pointer to $0302.
+;=========================================================================================
+            rst     $08                     ; Enter TERSE inner interpreter
+            ld      bc,$0302                ; Load instruction thread address into IP
+
+;=========================================================================================
+; ----> ENDINT         RESTORE CONTEXT & EXIT INTERRUPT  ($021D - $022C)
+;   Restores CPU register context from stack, re-enables interrupts, and returns
+;   from hardware interrupt processing to background context. (Opcode: $23)
+;=========================================================================================
+_ENDINT:
+            rst     $08                     ; Enter TERSE inner interpreter
+            ld      bc,$0304                ; Load continuation thread address
+            pop     af                      ; Restore primary accumulator & flags
+            pop     bc                      ; Restore primary BC registers
+            pop     de                      ; Restore primary DE registers
+            pop     hl                      ; Restore primary HL registers
+            exx                             ; Switch to alternate register set
+            ex      af,af'                  ; Switch to alternate AF flags
+            pop     af                      ; Restore alternate accumulator & flags
+            pop     bc                      ; Restore alternate BC registers
+            pop     de                      ; Restore alternate DE registers
+            pop     hl                      ; Restore alternate HL registers
+            ei                              ; Enable hardware interrupts
+            ret                             ; Return from interrupt service routine
+
+;=========================================================================================
+; ----> INTSTART       INITIALIZE IM2 INTERRUPT VECTOR  ($022D - $0241)
+;   Pops vector address from Parameter Stack, stores it at $7C00, configures Z80
+;   Interrupt Page Register I=$7C, and enables Interrupt Mode 2. (Opcode: $78)
+;=========================================================================================
+_INTSTART:
+            di                              ; Disable interrupts during vector setup
+            pop     hl                      ; Pop interrupt handler address from stack
+            ld      ($7C00),hl              ; Store handler address in vector table
+            ld      a,$08                   ; Set interrupt mode control
+            out     ($0E),a
+            ld      a,$7C                   ; Load vector table high page byte
+            ld      i,a                     ; Set Z80 Interrupt Vector Register
+            ld      a,$00
+            out     ($0D),a                 ; Clear interrupt vector register
+            im      2                       ; Set Z80 Interrupt Mode 2
+            ei                              ; Enable interrupts
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> DI             DISABLE INTERRUPTS  ($0242 - $0244)
+;   Disables hardware interrupts and returns to inner interpreter. (Opcode: $A0)
+;=========================================================================================
+_DI:
+            di                              ; Disable hardware interrupts
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> EI             ENABLE INTERRUPTS  ($0245 - $0247)
+;   Enables hardware interrupts and returns to inner interpreter. (Opcode: $25)
+;=========================================================================================
+_EI:
+            ei                              ; Enable hardware interrupts
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> SWABN          SWAP LOW BYTE NIBBLES  ($0248 - $0252)
+;   Pops 16-bit word from Parameter Stack, rotates low byte nibbles 4 bits left,
+;   and pushes the result back onto the stack. (Opcode: $20)
+;=========================================================================================
+_SWABN:
+            pop     hl                      ; Pop target word from parameter stack
+            ld      a,l                     ; Extract low byte
+            rlca                            ; Rotate nibbles left 4 bits
+            rlca
+            rlca
+            rlca
+            ld      l,a                     ; Store swapped nibble byte back into L
+            push    hl                      ; Push result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> FILLSUB        FILL MEMORY SUBROUTINE  ($0253 - $025F)
+;   High-level TERSE thread executed via Opcode $44. Reorders stack arguments
+;   (fill, addr, count) and calls the core FILL primitive ($0168).
+;=========================================================================================
+_FILLSUB:
+            rst     $08                     ; Enter TERSE inner interpreter
+            DB      $05                     ; ROT
+            DB      $05                     ; ROT
+            DB      $06                     ; 2DUP
+            DB      $02                     ; !
+            DB      $01                     ; SWAP
+            DB      $07                     ; DROP
+            DB      $08                     ; DUP
+            DB      $09                     ; 1+
+            DB      $05                     ; ROT
+            DB      $0A                     ; 1-
+            DB      $0B                     ; FILL
+            DB      $03                     ; NEXT
+
+;=========================================================================================
+; ----> NPICK          PUSH COPIES OF NTH STACK ITEM  ($0260 - $0274)
+;   Pops item count from stack, iterates through parameter stack frame, and pushes
+;   copied 16-bit words back onto the Parameter Stack.
+;=========================================================================================
+_NPICK:
+            exx                             ; Save TERSE VM registers in alternate set
+            pop     bc                      ; Pop item count from parameter stack
+            dec     c                       ; Decrement loop count
+            ld      hl,$0001                ; Offset to target stack frame
+            add     hl,sp                   ; Add stack pointer
+            add     hl,bc                   ; Multiply count by 2 for word offset
+            add     hl,bc
+L0269:
+            ld      d,(hl)                  ; Read high byte from stack
+            dec     hl                      ; Decrement stack pointer
+            ld      e,(hl)                  ; Read low byte from stack
+            push    de                      ; Push copied word onto stack
+            dec     hl                      ; Decrement stack pointer
+            dec     c                       ; Decrement loop counter
+            jp      p,L0269                 ; Loop until all requested items copied
+            exx                             ; Restore TERSE VM registers
+            jp      (iy)                    ; Return to TERSE inner interpreter
+
+;=========================================================================================
+; ----> D*             32-BIT RANDOM / DOUBLE MULTIPLY  ($0275 - $02D0)
+;   Advances 32-bit LCG random seed at $7C02/$7C04 and performs a 32-bit unsigned
+;   multiplication, pushing the product onto the Parameter Stack.
+;=========================================================================================
+_Dstar:
+            exx                             ; Save TERSE VM registers in alternate set
+            ld      bc,($7C02)              ; Load low 16 bits of 32-bit random seed
+            ld      hl,$1321                ; Low word of 32-bit LCG multiplier
+            add     hl,bc                   ; Accumulate low word
+            push    hl                      ; Save intermediate low result on stack
+            ld      hl,$2776                ; High word of 32-bit LCG multiplier
+            adc     hl,bc                   ; Accumulate high word
+            ld      de,($7C04)              ; Load high 16 bits of 32-bit random seed
+            add     hl,de
+            ex      (sp),hl
+            add     hl,bc
+            ex      (sp),hl
+            adc     hl,de
+            ex      (sp),hl
+            add     hl,bc
+            ex      (sp),hl
+            adc     hl,de
+            ex      (sp),hl
+            ld      d,e
+            ld      e,b
+            ld      b,c
+            ld      c,$00
+            add     hl,bc
+            ld      ($7C02),hl              ; Store updated low word of random seed
+            pop     hl
+            adc     hl,de
+            ld      ($7C04),hl              ; Store updated high word of random seed
+            exx                             ; Switch to primary register set
+            ld      hl,$0000                ; Clear 32-bit accumulator low word
+            ld      d,h                     ; Clear 32-bit accumulator high word
+            ld      e,l
+            exx                             ; Switch to alternate register set
+            ex      de,hl                   ; Move multiplicand into DE
+            pop     bc                      ; Pop multiplier operand from stack
+            ld      hl,$0000                ; Clear product low word
+L02AF:
+            srl     b                       ; Shift multiplier right 1 bit
+            rr      c
+            jp      nc,L02BB                ; If bit 0 clear, skip addition
+            add     hl,de                   ; Add multiplicand to product low word
+            exx                             ; Switch to primary set for high word add
+            adc     hl,de                   ; Add multiplicand to product high word
+            exx                             ; Switch back to alternate set
+L02BB:
+            ld      a,b                     ; Test if multiplier is zero
+            or      c
+            jp      z,L02CD                 ; If zero, multiplication complete
+            sla     e                       ; Shift multiplicand left 1 bit
+            rl      d
+            exx                             ; Switch to primary set for high word shift
+            rl      e
+            rl      d
+            exx                             ; Switch back to alternate set
+            jp      L02AF                   ; Continue multiplication loop
+L02CD:
+            exx                             ; Switch to primary set
+            push    hl                      ; Push result onto parameter stack
+            jp      (iy)                    ; Return to TERSE inner interpreter
 ;******************************************************************************
 
 			nop
@@ -2519,49 +2324,38 @@ jp   (iy)
 			exx
 			ex   af,af'
 			db   $dd,$08
-;============================================================
-pop  hl			;E1
-ex   af,af'		;08
-add  hl,hl		;29
-add  hl,bc		;09
-inc  sp			;33
-add  hl,bc		;09
-dec  d			;15
-add  hl,bc		;09
-rrca			;0F
-add  hl,bc		;09
-add  hl,sp		;39
-add  hl,bc		;09
-rra			;1F
-add  hl,bc		;09
-pop  af			;F1
-ex   af,af'		;08
-ei			;FB
-ex   af,af'		;08
-ld   bc,$0509		;01 09 05
-add  hl,bc		;09
-add  hl,bc		;09
-add  hl,bc		;09
-ld   d,$00		;16 00
-dec  d			;15
-nop			;00
-ld   de,$1200		;11 00 12
-nop			;00
-inc  de			;13
-nop			;00
-inc  b			;04
-inc  bc			;03
-ld   h,h		;64
-add  hl,bc		;09
-;============================================================
-ld   hl,($7C1C)
-ld   a,(hl)
-ret
-;============================================================
-ld   hl,($7C1C)
-inc  hl
-ld   ($7C1C),hl
-ret
+;=========================================================================================
+; ----> VECT_TBL0941   ADDRESS VECTOR TABLE  ($0941 - $0966)
+;   Table of 19 16-bit address pointers ($08E1 - $0964). Disassembled as Z80 opcodes
+;   in legacy listings, but structured as 16-bit data words (DW).
+;=========================================================================================
+L0941:
+            DW      $08E1, $0929, $0933, $0915
+            DW      $090F, $0939, $091F, $08F1
+            DW      $08FB, $0901, $0905, $0909
+            DW      $0016, $0015, $0011, $0012
+            DW      $0013, $0304, $0964
+
+;=========================================================================================
+; ----> FETCH_7C1C     FETCH BYTE FROM RAM POINTER 7C1C  ($0967 - $096B)
+;   Loads the memory pointer stored at $7C1C into HL and fetches the byte at
+;   that address into register A.
+;=========================================================================================
+_FETCH_7C1C:
+            ld      hl,($7C1C)              ; Load RAM script/stream pointer into HL
+            ld      a,(hl)                  ; Fetch byte from target address
+            ret                             ; Return
+
+;=========================================================================================
+; ----> INC_7C1C       INCREMENT RAM POINTER 7C1C  ($096C - $0973)
+;   Loads the memory pointer stored at $7C1C into HL, increments it by 1,
+;   and writes the updated 16-bit address back to $7C1C.
+;=========================================================================================
+_INC_7C1C:
+            ld      hl,($7C1C)              ; Load RAM script/stream pointer into HL
+            inc     hl                      ; Advance pointer by 1 byte
+            ld      ($7C1C),hl              ; Store updated pointer back to RAM
+            ret
 ;============================================================
 call $0967
 call $096C
