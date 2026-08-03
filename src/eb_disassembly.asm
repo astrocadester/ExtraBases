@@ -916,31 +916,16 @@ L02D3:
             DB      $00, $00, $00, $00, $00     ; $02D3 - $02DA:
             DB      $00, $00, $00, $00, $00
 
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			jr   $031F
-			jr   $0301
-			jr   $0303
-			jr   $0305
-			inc  a
-			inc  a
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   b,$3E
-			ld   a,h
-			ld   h,b
-			ld   h,b
-			ld   a,(hl)
-			ld   a,(hl)
+CHRTBL:
+            DB      $3C, $7E, $66, $66, $66  ; $02DB: Character '0' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $3C  ; $02E0: Character '0' (bytes 6-10)
+
+            DB      $18, $38, $18, $18, $18  ; $02E5: Character '1' (bytes 1-5)
+            DB      $18, $18, $18, $3C, $3C  ; $02EA: Character '1' (bytes 6-10)
+
+            DB      $3C, $7E, $66, $06, $3E  ; $02EF: Character '2' (bytes 1-5)
+            DB      $7C, $60, $60, $7E, $7E  ; $02F4: Character '2' (bytes 6-10)
+
 			inc  a
 			ld   a,(hl)
 			ld   h,(hl)
