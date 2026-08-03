@@ -910,22 +910,19 @@ L02CD:
             exx                             ; Switch to primary set
             push    hl                      ; Push result onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
-;******************************************************************************
+;=========================================================================================
 
 L02D3:
-            DB      $00, $00, $00, $00, $00     ; $02D3 - $02DA:
+            DB      $00, $00, $00, $00, $00  ; $02D3 - $02DA:
             DB      $00, $00, $00, $00, $00
 
 CHRTBL:
             DB      $3C, $7E, $66, $66, $66  ; $02DB: Character '0' (bytes 1-5)
             DB      $66, $66, $66, $7E, $3C  ; $02E0: Character '0' (bytes 6-10)
-
             DB      $18, $38, $18, $18, $18  ; $02E5: Character '1' (bytes 1-5)
             DB      $18, $18, $18, $3C, $3C  ; $02EA: Character '1' (bytes 6-10)
-
             DB      $3C, $7E, $66, $06, $3E  ; $02EF: Character '2' (bytes 1-5)
             DB      $7C, $60, $60, $7E, $7E  ; $02F4: Character '2' (bytes 6-10)
-
             DB      $3C, $7E, $66, $06, $1C  ; $02F9: Character '3' (bytes 1-5)
             DB      $1E, $06, $66, $7E, $3C  ; $02FE: Character '3' (bytes 6-10)
             DB      $66, $66, $66, $66, $7E  ; $0303: Character '4' (bytes 1-5)
@@ -934,7 +931,6 @@ CHRTBL:
             DB      $7E, $06, $66, $7E, $3C  ; $0312: Character '5' (bytes 6-10)
             DB      $3C, $7C, $60, $60, $7C  ; $0317: Character '6' (bytes 1-5)
             DB      $7E, $66, $66, $7E, $3C  ; $031C: Character '6' (bytes 6-10)
-
             DB      $7E, $7E, $06, $0E, $0C  ; $0321: Character '7' (bytes 1-5)
             DB      $1C, $18, $38, $30, $30  ; $0326: Character '7' (bytes 6-10)
             DB      $3C, $7E, $66, $66, $3C  ; $032B: Character '8' (bytes 1-5)
@@ -983,1137 +979,173 @@ CHRTBL:
             DB      $18, $18, $18, $18, $18  ; $0402: Character 'T' (bytes 6-10)
             DB      $66, $66, $66, $66, $66  ; $0407: Character 'U' (bytes 1-5)
             DB      $66, $66, $66, $7E, $3C  ; $040C: Character 'U' (bytes 6-10)
+            DB      $66, $66, $66, $66, $66  ; $0411: Character 'V' (bytes 1-5)
+            DB      $7E, $3C, $3C, $18, $18  ; $0416: Character 'V' (bytes 6-10)
+            DB      $C3, $C3, $C3, $DB, $DB  ; $041B: Character 'W' (bytes 1-5)
+            DB      $DB, $FF, $E7, $C3, $C3  ; $0420: Character 'W' (bytes 6-10)
+            DB      $66, $66, $7E, $3C, $18  ; $0425: Character 'X' (bytes 1-5)
+            DB      $18, $3C, $7E, $66, $66  ; $042A: Character 'X' (bytes 6-10)
+            DB      $66, $66, $7E, $3C, $18  ; $042F: Character 'Y' (bytes 1-5)
+            DB      $18, $18, $18, $18, $18  ; $0434: Character 'Y' (bytes 6-10)
+            DB      $EC, $EC, $EE, $E0, $8A  ; $0439: Character 'Z' (bytes 1-5)
+            DB      $8A, $44, $80, $8C, $CA  ; $043E: Character 'Z' (bytes 6-10)
+            DB      $44, $E0, $8A, $8A, $44  ; $0443: Character ':' (bytes 1-5)
+            DB      $20, $EA, $EC, $E4, $E0  ; $0448: Character ':' (bytes 6-10)
+
+;=========================================================================================
+; SECTION 1: EXTENDED GRAPHICS & SYSTEM SYMBOLS ($044D - $04AC) [96 Bytes]
+;=========================================================================================
+            DB      $EE, $EE, $EC, $48, $44, $AA, $4E, $44, $AC, $42  ; $044D
+            DB      $44, $AA, $EE, $E4, $EA, $EA, $E0, $AE, $80, $AE  ; $0457
+            DB      $C0, $AA, $80, $EA, $E0, $40, $E0, $E0, $A0, $E0  ; $0461
+            DB      $E0, $E0, $E0, $E0, $40, $20, $20, $A0, $80, $80  ; $046B
+            DB      $20, $A0, $A0, $40, $E0, $60, $E0, $C0, $E0, $40  ; $0475
+            DB      $E0, $E0, $40, $80, $20, $20, $20, $A0, $40, $A0  ; $047F
+            DB      $20, $40, $E0, $E0, $20, $C0, $E0, $40, $E0, $E0  ; $0489
+            DB      $AE, $AA, $AE, $A8, $E8, $AE, $A0, $EC, $E0, $AA  ; $0493
+            DB      $A0, $AA, $80, $4A, $A0, $EC, $C0, $4A, $A0, $AA  ; $049D
+            DB      $80, $4E, $E0, $AA, $E0, $00, $00, $01, $02, $00  ; $04A7
 
 
 
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			inc  a
-			jr   $0433
-			jp   $C3C3
-			in   a,($DB)
-			in   a,($FF)
-			rst  $20
-			jp   $66C3
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			jr   $0443
-			inc  a
-			ld   a,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   h,(hl)
-			ld   a,(hl)
-			inc  a
-			jr   $044D
-			jr   $044F
-			jr   $0451
-			call pe,$EEEC
-			ret  po
-			adc  a,d
-			adc  a,d
-			ld   b,h
-			add  a,b
-			adc  a,h
-			jp   z,$E044
-			adc  a,d
-			adc  a,d
-			ld   b,h
-			jr   nz,$0434
-			call pe,$E0E4
-			xor  $EE
-			call pe,$4448
-			xor  d
-			ld   c,(hl)
-			ld   b,h
-			xor  h
-			ld   b,d
-			ld   b,h
-			xor  d
-			xor  $E4
-			jp   pe,$E0EA
-			xor  (hl)
-			add  a,b
-			xor  (hl)
-			ret  nz
-			xor  d
-			add  a,b
-			jp   pe,$40E0
-			ret  po
-			ret  po
-			and  b
-			ret  po
-			ret  po
-			ret  po
-			ret  po
-			ret  po
-			ld   b,b
-			jr   nz,$0492
-			and  b
-			add  a,b
-			add  a,b
-			jr   nz,$0417
-			and  b
-			ld   b,b
-			ret  po
-			ld   h,b
-			ret  po
-			ret  nz
-			ret  po
-			ld   b,b
-			ret  po
-			ret  po
-			ld   b,b
-			add  a,b
-			jr   nz,$04A5
-			jr   nz,$0427
-			ld   b,b
-			and  b
-			jr   nz,$04CB
-			ret  po
-			ret  po
-			jr   nz,$044F
-			ret  po
-			ld   b,b
-			ret  po
-			ret  po
-			xor  (hl)
-			xor  d
-			xor  (hl)
-			xor  b
-			ret  pe
-			xor  (hl)
-			and  b
-			call pe,$AAE0
-			and  b
-			xor  d
-			add  a,b
-			ld   c,d
-			and  b
-			call pe,$4AC0
-			and  b
-			xor  d
-			add  a,b
-			ld   c,(hl)
-			ret  po
-			xor  d
-			ret  po
-			nop
-			nop
-			ld   bc,$0002
-			nop
-			nop
-			nop
-			ld   (bc),a
-			ld   (bc),a
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  m
-			ret  p
-			ret  po
-			ret  nz
-			add  a,b
-			ex   af,af'
-			jr   $04FA
-			ld   a,b
-			ret  m
-			ret  m
-			ld   (hl),b
-			jr   nz,$04CF
-			ld   b,$02
-			inc  c
-			rlca
-			nop
-			rlca
-			nop
-			rrca
-			add  a,b
-			rst  $38
-			add  a,b
-			rrca
-			ret  nz
-			rrca
-			and  b
-			rrca
-			sub  b
-			rrca
-			add  a,b
-			dec  c
-			add  a,b
-			dec  c
-			add  a,b
-			dec  e
-			add  a,b
-			ld   bc,$06C0
-			dec  b
-			ld   (bc),a
-			ld   a,(bc)
-			inc  c
-			nop
-			inc  c
-			nop
-			ld   e,$00
-			cp   $00
-			rra
-			nop
-			ld   e,$80
-			ld   e,$00
-			ld   (de),a
-			nop
-			ld   ($0300),a
-			nop
-			dec  b
-			inc  b
-			ld   (bc),a
-			ex   af,af'
-			ex   af,af'
-			nop
-			inc  e
-			nop
-			cp   $00
-			dec  de
-			nop
-			inc  e
-			nop
-			inc  e
-			nop
-			inc  (hl)
-			nop
-			ld   b,$00
-			inc  b
-			inc  bc
-			ld   (bc),a
-			ld   b,$10
-			nop
-			jr   c,$0517
-			call m,$3800
-			nop
-			jr   c,$051D
-			ld   l,h
-			nop
-			ld   bc,$0207
-			ld   c,$80
-			nop
-			add  a,b
-			nop
-			or   b
-			nop
-			or   b
-			nop
-			ld   a,b
-			nop
-			ld   a,h
-			nop
-			ld   a,d
-			nop
-			ld   a,c
-			nop
-			ld   a,b
-			nop
-			ld   a,b
-			nop
-			ret  m
-			nop
-			ret  c
-			nop
-			sbc  a,b
-			nop
-			inc  e
-			nop
-			ld   bc,$0205
-			dec  bc
-			add  a,b
-			nop
-			or   b
-			nop
-			or   b
-			nop
-			ld   (hl),b
-			nop
-			ld   a,b
-			nop
-			ld   (hl),h
-			nop
-			ld   (hl),b
-			nop
-			ld   (hl),b
-			nop
-			ret  nc
-			nop
-			sub  b
-			nop
-			jr   $0559
-			ld   bc,$0204
-			add  hl,bc
-			add  a,b
-			nop
-			and  b
-			nop
-			ret  p
-			nop
-			ld   l,b
-			nop
-			ld   h,b
-			nop
-			ld   h,b
-			nop
-			ret  po
-			nop
-			and  b
-			nop
-			jr   nc,$056F
-			ld   bc,$0203
-			rlca
-			add  a,b
-			nop
-			and  b
-			nop
-			ret  p
-			nop
-			ld   b,$00
-			ret  po
-			nop
-			and  b
-			nop
-			jr   nc,$0581
-			inc  bc
-			inc  b
-			ld   (bc),a
-			ex   af,af'
-			djnz $0587
-			jr   nc,$0589
-			ld   a,b
-			nop
-			inc  (hl)
-			nop
-			jr   nc,$058F
-			jr   nc,$0591
-			jr   nz,$0593
-			jr   nc,$0595
-			inc  bc
-			inc  bc
-			ld   (bc),a
-			ld   b,$10
-			nop
-			jr   c,$059D
-			ld   (hl),b
-			nop
-			cp   b
-			nop
-			jr   nz,$05A3
-			jr   nc,$05A5
-			ld   b,$07
-			ld   (bc),a
-			ld   c,$06
-			nop
-			ld   b,$00
-			ld   c,$00
-			rra
-			nop
-			rra
-			nop
-			ld   e,$80
-			ld   e,$80
-			ld   c,$00
-			ld   c,$00
-			ld   c,$00
-			ld   c,$00
-			rrca
-			nop
-			inc  c
-			nop
-			ld   c,$00
-			inc  b
-			ld   b,$02
-			inc  c
-			inc  c
-			nop
-			inc  c
-			nop
-			ld   e,$00
-			ccf
-			nop
-			dec  a
-			nop
-			inc  a
-			nop
-			inc  e
-			nop
-			inc  e
-			nop
-			inc  e
-			nop
-			ld   e,$00
-			jr   $05DF
-			inc  e
-			nop
-			inc  b
-			dec  b
-			ld   (bc),a
-			ld   a,(bc)
-			inc  c
-			nop
-			inc  c
-			nop
-			ld   e,$00
-			ccf
-			nop
-			dec  a
-			nop
-			inc  e
-			nop
-			inc  e
-			nop
-			ld   e,$00
-			jr   $05F7
-			inc  e
-			nop
-			ld   b,$07
-			ld   (bc),a
-			dec  c
-			ld   b,$00
-			ld   b,$00
-			ld   e,$00
-			cpl
-			ret  po
-			ld   c,(hl)
-			nop
-			adc  a,(hl)
-			nop
-			ld   c,$00
-			rrca
-			nop
-			rra
-			add  a,b
-			add  hl,de
-			add  a,b
-			ld   sp,hl
-			add  a,b
-			ld   sp,hl
-			add  a,b
-			add  a,b
-			ret  nz
-			ld   a,(bc)
-			dec  b
-			ld   (bc),a
-			ld   a,(bc)
-			inc  c
-			nop
-			inc  c
-			nop
-			ld   e,$00
-			ccf
-			nop
-			ld   e,a
-			add  a,b
-			adc  a,a
-			ld   b,b
-			rlca
-			nop
-			rrca
-			nop
-			add  hl,de
-			nop
-			inc  sp
-			nop
-			inc  b
-			ld   b,$02
-			dec  bc
-			inc  c
-			nop
-			inc  c
-			nop
-			inc  e
-			nop
-			ccf
-			add  a,b
-			ld   e,h
-			nop
-			sbc  a,h
-			nop
-			ld   e,$00
-			rra
-			nop
-			di
-			nop
-			di
-			nop
-			add  a,e
-			add  a,b
-			inc  b
-			dec  b
-			ld   (bc),a
-			add  hl,bc
-			inc  c
-			nop
-			inc  c
-			nop
-			ccf
-			add  a,b
-			ld   e,h
-			nop
-			sbc  a,h
-			nop
-			ld   e,$00
-			rst  $38
-			nop
-			di
-			nop
-			add  a,e
-			add  a,b
-			inc  bc
-			inc  b
-			ld   (bc),a
-			rlca
-			djnz $0665
-			ld   a,h
-			nop
-			or   b
-			nop
-			jr   nc,$066B
-			jr   c,$066D
-			ret  pe
-			nop
-			adc  a,h
-			nop
-			inc  bc
-			inc  bc
-			ld   (bc),a
-			ld   b,$10
-			nop
-			ld   a,h
-			nop
-			or   b
-			nop
-			jr   c,$067D
-			ld   l,b
-			nop
-			ld   c,h
-			nop
-			ld   bc,$0205
-			inc  c
-			ld   h,b
-			nop
-			ld   h,b
-			nop
-			ret  po
-			nop
-			call po,$E400
-			nop
-			ret  m
-			nop
-			ret  po
-			nop
-			ret  po
-			nop
-			ret  po
-			nop
-			ret  po
-			nop
-			ret  po
-			nop
-			ld   (hl),b
-			nop
-			ld   bc,$0205
-			dec  bc
-			ld   h,b
-			nop
-			ld   h,b
-			nop
-			ret  po
-			nop
-			call po,$E400
-			nop
-			ret  m
-			nop
-			ret  po
-			nop
-			ret  po
-			nop
-			ret  po
-			nop
-			ret  po
-			nop
-			ld   (hl),b
-			nop
-			ld   b,$06
-			ld   (bc),a
-			inc  c
-			ld   b,$00
-			ld   b,$00
-			ld   a,a
-			nop
-			adc  a,a
-			nop
-			ld   a,a
-			nop
-			rrca
-			nop
-			ld   c,a
-			nop
-			ld   a,a
-			nop
-			ld   a,a
-			nop
-			ld   b,$00
-			ld   b,$00
-			ld   c,$00
-			rlca
-			ld   b,$02
-			dec  bc
-			inc  c
-			nop
-			inc  c
-			nop
-			rra
-			nop
-			ccf
-			ret  nz
-			ld   e,a
-			and  b
-			adc  a,a
-			add  a,b
-			rlca
-			add  a,b
-			rlca
-			add  a,b
-			inc  c
-			add  a,b
-			jr   $066B
-			ld   sp,$0680
-			dec  b
-			ld   (bc),a
-			dec  bc
-			ld   bc,$0180
-			add  a,b
-			inc  bc
-			add  a,b
-			rlca
-			ret  nz
-			rrca
-			and  b
-			rra
-			djnz $06FC
-			nop
-			cp   $00
-			add  a,(hl)
-			nop
-			ld   b,$00
-			rlca
-			nop
-			dec  b
-			inc  b
-			ld   (bc),a
-			add  hl,bc
-			inc  bc
-			nop
-			inc  bc
-			nop
-			rlca
-			nop
-			rrca
-			add  a,b
-			ld   e,$40
-			call m,$FC20
-			nop
-			adc  a,h
-			nop
-			ld   c,$00
-			inc  bc
-			dec  b
-			ld   (bc),a
-			dec  bc
-			inc  bc
-			nop
-			inc  bc
-			nop
-			rlca
-			nop
-			rrca
-			add  a,b
-			rra
-			ld   b,b
-			ld   a,$20
-			inc  a
-			nop
-			jr   c,$0731
-			inc  a
-			nop
-			jr   nc,$0735
-			jr   c,$0737
-			inc  bc
-			inc  b
-			ld   (bc),a
-			add  hl,bc
-			inc  bc
-			nop
-			inc  bc
-			nop
-			rlca
-			nop
-			rrca
-			add  a,b
-			ld   e,$40
-			inc  a
-			jr   nz,$0780
-			nop
-			jr   nc,$074B
-			jr   c,$074D
-			nop
-			nop
-			ld   (bc),a
-			ld   (bc),a
-			rst  $38
-			rst  $38
-			rst  $38
-			rst  $38
-			nop
-			inc  c
-			ld   (bc),a
-			dec  c
-			nop
-			jr   $075C
-			jr   c,$075E
-			ld   (hl),b
-			nop
-			ret  po
-			ld   bc,$03C0
-			add  a,b
-			rlca
-			nop
-			ld   c,$00
-			inc  e
-			nop
-			jr   c,$076D
-			ld   (hl),b
-			nop
-			ret  po
-			nop
-			ret  nz
-			nop
-			nop
-			ex   af,af'
-			ld   (bc),a
-			add  hl,bc
-			nop
-			ld   b,$00
-			ld   e,$00
-			ld   a,h
-			ld   bc,$07F0
-			ret  nz
-			rra
-			nop
-			ld   a,h
-			nop
-			ret  p
-			nop
-			ret  nz
-			nop
-			nop
-			dec  c
-			ld   (bc),a
-			dec  bc
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			nop
-			nop
-			ld   (bc),a
-			add  hl,bc
-			ret  nz
-			nop
-			ret  p
-			nop
-			ld   a,h
-			nop
-			rra
-			nop
-			rlca
-			ret  nz
-			ld   bc,$00F0
-			ld   a,h
-			nop
-			ld   e,$00
-			ld   b,$00
-			nop
-			ld   (bc),a
-			dec  c
-			ret  nz
-			nop
-			ret  po
-			nop
-			ld   (hl),b
-			nop
-			jr   c,$07C5
-			inc  e
-			nop
-			ld   c,$00
-			rlca
-			nop
-			inc  bc
-			add  a,b
-			ld   bc,$00C0
-			ret  po
-			nop
-			ld   (hl),b
-			nop
-			jr   c,$07D6
-			jr   $07D8
-			nop
-			ld   (bc),a
-			dec  bc
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			ret  nz
-			nop
-			inc  b
-			nop
-			ld   (bc),a
-			rlca
-			cp   $00
-			cp   $00
-			cp   $00
-			cp   $00
-			ld   a,h
-			nop
-			jr   c,$0801
-			djnz $0803
-			inc  b
-			nop
-			ld   (bc),a
-			inc  b
-			ret  m
-			nop
-			ret  m
-			nop
-			ret  m
-			nop
-			ret  m
-			nop
-			inc  b
-			nop
-			ld   (bc),a
-			inc  bc
-			ret  p
-			nop
-			ret  p
-			nop
-			ret  p
-			nop
-			inc  b
-			ld   b,$02
-			inc  c
-			inc  c
-			nop
-			inc  c
-			nop
-			ccf
-			nop
-			ld   a,a
-			add  a,b
-			sbc  a,(hl)
-			ld   b,b
-			sbc  a,(hl)
-			ld   b,b
-			sbc  a,(hl)
-			ld   b,b
-			ld   e,$00
-			ld   (de),a
-			nop
-			ld   (de),a
-			nop
-			ld   (de),a
-			nop
-			inc  sp
-			nop
-			inc  b
-			dec  b
-			ld   (bc),a
-			ld   a,(bc)
-			inc  c
-			nop
-			inc  c
-			nop
-			ccf
-			nop
-			ld   a,a
-			add  a,b
-			sbc  a,(hl)
-			ld   b,b
-			sbc  a,(hl)
-			ld   b,b
-			ld   e,$00
-			ld   (de),a
-			nop
-			ld   (de),a
-			nop
-			inc  sp
-			nop
-			inc  bc
-			inc  b
-			ld   (bc),a
-			ex   af,af'
-			djnz $0853
-			ld   a,h
-			nop
-			cp   d
-			nop
-			cp   d
-			nop
-			jr   c,$085B
-			jr   z,$085D
-			jr   z,$085F
-			ld   l,h
-			nop
-			inc  bc
-			inc  bc
-			ld   (bc),a
-			ld   b,$10
-			nop
-			ld   a,h
-			nop
-			cp   d
-			nop
-			cp   d
-			nop
-			jr   z,$086F
-			ld   l,h
-			nop
-			ld   b,$06
-			ld   (bc),a
-			inc  c
-			rlca
-			nop
-			rlca
-			nop
-			rra
-			ret  nz
-			ccf
-			ret  po
-			ld   c,a
-			sub  b
-			ld   c,a
-			sub  b
-			ld   c,a
-			sub  b
-			rrca
-			add  a,b
-			dec  c
-			add  a,b
-			dec  c
-			add  a,b
-			dec  c
-			add  a,b
-			dec  e
-			ret  nz
-			ld   sp,hl
-			dec  b
-			and  l
-			dec  b
-			cpl
-			ld   b,$C5
-			dec  b
-			ld   c,c
-			ld   b,$E1
-			dec  b
-			ld   e,a
-			ld   b,$81
-			dec  b
-			ld   (hl),c
-			ld   b,$95
-			dec  b
-			db   $ed,$06
-			dec  e
-			rlca
-			rlca
-			rlca
-			scf
-			rlca
-			xor  h
-			inc  b
-			xor  h
-			inc  b
-			or   d
-			inc  b
-			or   d
-			inc  b
-			out  ($06),a
-			out  ($06),a
-			rla
-			ld   b,$17
-			ld   b,$C7
-			inc  b
-			rra
-			dec  b
-			ex   (sp),hl
-			inc  b
-			ccf
-			dec  b
-			ei
-			inc  b
-			ld   e,c
-			dec  b
-			rrca
-			dec  b
-			ld   l,a
-			dec  b
-			or   a
-			ld   b,$1F
-			dec  b
-			rst  $00
-			inc  b
-			rst  $00
-			inc  b
-			ex   (sp),hl
-			inc  b
-			ex   (sp),hl
-			inc  b
-			add  hl,de
-			ex   af,af'
-			add  hl,de
-			ex   af,af'
-			dec  (hl)
-			ex   af,af'
-			dec  (hl)
-			ex   af,af'
-			ld   c,l
-			ex   af,af'
-			ld   c,l
-			ex   af,af'
-			ld   h,c
-			ex   af,af'
-			ld   h,c
-			ex   af,af'
-			ld   (hl),c
-			ex   af,af'
-			ld   (hl),c
-			ex   af,af'
-			add  a,c
-			ld   b,$81
-			ld   b,$9D
-			ld   b,$9D
-			ld   b,$AD
-			ex   af,af'
-			xor  l
-			ex   af,af'
-			xor  l
-			ex   af,af'
-			xor  l
-			ex   af,af'
-			xor  l
-			ex   af,af'
-			call $CD08
-			ex   af,af'
-			pop  de
-			ex   af,af'
-			push hl
-			ex   af,af'
-			push hl
-			ex   af,af'
-			ret
-			ex   af,af'
-			ret
-			ex   af,af'
-			or   c
-			ex   af,af'
-			or   c
-			ex   af,af'
-			or   l
-			ex   af,af'
-			jp   (hl)
-			ex   af,af'
-			jp   (hl)
-			ex   af,af'
-			db   $ed,$08
-			cp   c
-			ex   af,af'
-			cp   c
-			ex   af,af'
-			cp   l
-			ex   af,af'
-			pop  bc
-			ex   af,af'
-			push bc
-			ex   af,af'
-			xor  c
-			ex   af,af'
-			xor  c
-			ex   af,af'
-			xor  c
-			ex   af,af'
-			xor  c
-			ex   af,af'
-			xor  c
-			ex   af,af'
-			adc  a,l
-			ex   af,af'
-			sub  c
-			ex   af,af'
-			sub  l
-			ex   af,af'
-			sbc  a,c
-			ex   af,af'
-			sbc  a,l
-			ex   af,af'
-			and  c
-			ex   af,af'
-			and  c
-			ex   af,af'
-			and  l
-			ex   af,af'
-			push de
-			ex   af,af'
-			push de
-			ex   af,af'
-			exx
-			ex   af,af'
-			db   $dd,$08
+;=========================================================================================
+; SECTION 2 (PART 1): TERSE SPRITE PATTERNS & BITMAPS ($04B1 - $0578) [200 Bytes]
+; Replaces Line 1011 to Line 1030 in eb_disassembly.lst.txt (20 lines total)
+;=========================================================================================
+            DB      $00, $00, $00, $02, $02, $C0, $00, $C0, $00, $F8  ; $04B1 (Line 1011)
+            DB      $F0, $E0, $C0, $80, $08, $18, $38, $78, $F8, $F8  ; $04BB (Line 1012)
+            DB      $70, $20, $07, $06, $02, $0C, $07, $00, $07, $00  ; $04C5 (Line 1013)
+            DB      $0F, $80, $FF, $80, $0F, $C0, $0F, $A0, $0F, $90  ; $04CF (Line 1014)
+            DB      $0F, $80, $0D, $80, $0D, $80, $1D, $80, $01, $C0  ; $04D9 (Line 1015)
+            DB      $06, $05, $02, $0A, $0C, $00, $0C, $00, $1E, $00  ; $04E3 (Line 1016)
+            DB      $FE, $00, $1F, $00, $1E, $80, $1E, $00, $12, $00  ; $04ED (Line 1017)
+            DB      $32, $00, $03, $00, $05, $04, $02, $08, $08, $00  ; $04F7 (Line 1018)
+            DB      $1C, $00, $FE, $00, $1B, $00, $1C, $00, $1C, $00  ; $0501 (Line 1019)
+            DB      $34, $00, $06, $00, $04, $03, $02, $06, $10, $00  ; $050B (Line 1020)
+            DB      $38, $00, $FC, $00, $38, $00, $38, $00, $6C, $00  ; $0515 (Line 1021)
+            DB      $01, $07, $02, $0E, $80, $00, $80, $00, $B0, $00  ; $051F (Line 1022)
+            DB      $B0, $00, $78, $00, $7C, $00, $7A, $00, $79, $00  ; $0529 (Line 1023)
+            DB      $78, $00, $78, $00, $F8, $00, $D8, $00, $98, $00  ; $0533 (Line 1024)
+            DB      $1C, $00, $01, $05, $02, $0B, $80, $00, $B0, $00  ; $053D (Line 1025)
+            DB      $B0, $00, $70, $00, $78, $00, $74, $00, $70, $00  ; $0547 (Line 1026)
+            DB      $70, $00, $D0, $00, $90, $00, $18, $00, $01, $04  ; $0551 (Line 1027)
+            DB      $02, $09, $80, $00, $A0, $00, $F0, $00, $68, $00  ; $055B (Line 1028)
+            DB      $60, $00, $60, $00, $E0, $00, $A0, $00, $30, $00  ; $0565 (Line 1029)
+            DB      $01, $03, $02, $07, $80, $00, $A0, $00, $F0, $00  ; $056F (Line 1030)
+
+;=========================================================================================
+; SECTION 2 (PART 2B): TERSE SPRITE PATTERNS & BITMAPS ($0579 - $0640) [200 Bytes]
+; Replaces Line 1031 to Line 1050 in eb_disassembly.lst.txt (20 lines total)
+;=========================================================================================
+            DB      $06, $00, $E0, $00, $A0, $00, $30, $00, $03, $04  ; $0579 (Line 1031)
+            DB      $02, $08, $10, $00, $30, $00, $78, $00, $34, $00  ; $0583 (Line 1032)
+            DB      $30, $00, $30, $00, $20, $00, $30, $00, $03, $03  ; $058D (Line 1033)
+            DB      $02, $06, $10, $00, $38, $00, $70, $00, $B8, $00  ; $0597 (Line 1034)
+            DB      $20, $00, $30, $00, $06, $07, $02, $0E, $06, $00  ; $05A1 (Line 1035)
+            DB      $06, $00, $0E, $00, $1F, $00, $1F, $00, $1E, $80  ; $05AB (Line 1036)
+            DB      $1E, $80, $0E, $00, $0E, $00, $0E, $00, $0E, $00  ; $05B5 (Line 1037)
+            DB      $0F, $00, $0C, $00, $0E, $00, $04, $06, $02, $0C  ; $05BF (Line 1038)
+            DB      $0C, $00, $0C, $00, $1E, $00, $3F, $00, $3D, $00  ; $05C9 (Line 1039)
+            DB      $3C, $00, $1C, $00, $1C, $00, $1C, $00, $1E, $00  ; $05D3 (Line 1040)
+            DB      $18, $00, $1C, $00, $04, $05, $02, $0A, $0C, $00  ; $05DD (Line 1041)
+            DB      $0C, $00, $1E, $00, $3F, $00, $3D, $00, $1C, $00  ; $05E7 (Line 1042)
+            DB      $1C, $00, $1E, $00, $18, $00, $1C, $00, $06, $07  ; $05F1 (Line 1043)
+            DB      $02, $0D, $06, $00, $06, $00, $1E, $00, $2F, $E0  ; $05FB (Line 1044)
+            DB      $4E, $00, $8E, $00, $0E, $00, $0F, $00, $1F, $80  ; $0605 (Line 1045)
+            DB      $19, $80, $F9, $80, $F9, $80, $80, $C0, $0A, $05  ; $060F (Line 1046)
+            DB      $02, $0A, $0C, $00, $0C, $00, $1E, $00, $3F, $00  ; $0619 (Line 1047)
+            DB      $5F, $80, $8F, $40, $07, $00, $0F, $00, $19, $00  ; $0623 (Line 1048)
+            DB      $33, $00, $04, $06, $02, $0B, $0C, $00, $0C, $00  ; $062D (Line 1049)
+            DB      $1C, $00, $3F, $80, $5C, $00, $9C, $00, $1E, $00  ; $0637 (Line 1050)
+
+;=========================================================================================
+; SECTION 2 (PART 2C): TERSE SPRITE PATTERNS & BITMAPS ($0641 - $0708) [200 Bytes]
+; Replaces Line 1051 to Line 1070 in eb_disassembly.lst.txt (20 lines total)
+;=========================================================================================
+            DB      $1F, $00, $F3, $00, $F3, $00, $83, $80, $04, $05  ; $0641 (Line 1051)
+            DB      $02, $09, $0C, $00, $0C, $00, $3F, $80, $5C, $00  ; $064B (Line 1052)
+            DB      $9C, $00, $1E, $00, $FF, $00, $F3, $00, $83, $80  ; $0655 (Line 1053)
+            DB      $03, $04, $02, $07, $10, $00, $7C, $00, $B0, $00  ; $065F (Line 1054)
+            DB      $30, $00, $38, $00, $E8, $00, $8C, $00, $03, $03  ; $0669 (Line 1055)
+            DB      $02, $06, $10, $00, $7C, $00, $B0, $00, $38, $00  ; $0673 (Line 1056)
+            DB      $68, $00, $4C, $00, $01, $05, $02, $0C, $60, $00  ; $067D (Line 1057)
+            DB      $60, $00, $E0, $00, $E4, $00, $E4, $00, $F8, $00  ; $0687 (Line 1058)
+            DB      $E0, $00, $E0, $00, $E0, $00, $E0, $00, $E0, $00  ; $0691 (Line 1059)
+            DB      $70, $00, $01, $05, $02, $0B, $60, $00, $60, $00  ; $069B (Line 1060)
+            DB      $E0, $00, $E4, $00, $E4, $00, $F8, $00, $E0, $00  ; $06A5 (Line 1061)
+            DB      $E0, $00, $E0, $00, $E0, $00, $70, $00, $06, $06  ; $06AF (Line 1062)
+            DB      $02, $0C, $06, $00, $06, $00, $7F, $00, $8F, $00  ; $06B9 (Line 1063)
+            DB      $7F, $00, $0F, $00, $4F, $00, $7F, $00, $7F, $00  ; $06C3 (Line 1064)
+            DB      $06, $00, $06, $00, $0E, $00, $07, $06, $02, $0B  ; $06CD (Line 1065)
+            DB      $0C, $00, $0C, $00, $1F, $00, $3F, $C0, $5F, $A0  ; $06D7 (Line 1066)
+            DB      $8F, $80, $07, $80, $07, $80, $0C, $80, $18, $80  ; $06E1 (Line 1067)
+            DB      $31, $80, $06, $05, $02, $0B, $01, $80, $01, $80  ; $06EB (Line 1068)
+            DB      $03, $80, $07, $C0, $0F, $A0, $1F, $10, $FE, $00  ; $06F5 (Line 1069)
+            DB      $FE, $00, $86, $00, $06, $00, $07, $00, $05, $04  ; $06FF (Line 1070)
+
+            DB        $02, $09, $03, $00, $03, $00, $07, $00, $0F, $80
+            DB        $1E, $40, $FC, $20, $FC, $00, $8C, $00, $0E, $00
+            DB        $03, $05, $02, $0B, $03, $00, $03, $00, $07, $00
+            DB        $0F, $80, $1F, $40, $3E, $20, $3C, $00, $38, $00
+            DB        $3C, $00, $30, $00, $38, $00, $03, $04, $02, $09
+            DB        $03, $00, $03, $00, $07, $00, $0F, $80, $1E, $40
+            DB        $3C, $20, $38, $00, $30, $00, $38, $00, $00, $00
+            DB        $02, $02, $FF, $FF, $FF, $FF, $00, $0C, $02, $0D
+            DB        $00, $18, $00, $38, $00, $70, $00, $E0, $01, $C0
+            DB        $03, $80, $07, $00, $0E, $00, $1C, $00, $38, $00
+            DB        $70, $00, $E0, $00, $C0, $00, $00, $08, $02, $09
+            DB        $00, $06, $00, $1E, $00, $7C, $01, $F0, $07, $C0
+            DB        $1F, $00, $7C, $00, $F0, $00, $C0, $00, $00, $0D
+            DB        $02, $0B, $C0, $00, $C0, $00, $C0, $00, $C0, $00
+            DB        $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00
+            DB        $C0, $00, $C0, $00, $00, $00, $02, $09, $C0, $00
+            DB        $F0, $00, $7C, $00, $1F, $00, $07, $C0, $01, $F0
+            DB        $00, $7C, $00, $1E, $00, $06, $00, $00, $02, $0D
+            DB        $C0, $00, $E0, $00, $70, $00, $38, $00, $1C, $00
+            DB        $0E, $00, $07, $00, $03, $80, $01, $C0, $00, $E0
+            DB        $00, $70, $00, $38, $00, $18, $00, $00, $02, $0B
+            DB        $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00
+            DB        $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00
+            DB        $C0, $00, $04, $00, $02, $07, $FE, $00, $FE, $00
+            DB        $FE, $00, $FE, $00, $7C, $00, $38, $00, $10, $00
+            DB        $04, $00, $02, $04, $F8, $00, $F8, $00, $F8, $00
+            DB        $F8, $00, $04, $00, $02, $03, $F0, $00, $F0, $00
+            DB        $F0, $00, $04, $06, $02, $0C, $0C, $00, $0C, $00
+            DB        $3F, $00, $7F, $80, $9E, $40, $9E, $40, $9E, $40
+            DB        $1E, $00, $12, $00, $12, $00, $12, $00, $33, $00
+            DB        $04, $05, $02, $0A, $0C, $00, $0C, $00, $3F, $00
+            DB        $7F, $80, $9E, $40, $9E, $40, $1E, $00, $12, $00
+            DB        $12, $00, $33, $00, $03, $04, $02, $08, $10, $00
+            DB        $7C, $00, $BA, $00, $BA, $00, $38, $00, $28, $00
+            DB        $28, $00, $6C, $00, $03, $03, $02, $06, $10, $00
+            DB        $7C, $00, $BA, $00, $BA, $00, $28, $00, $6C, $00
+            DB        $06, $06, $02, $0C, $07, $00, $07, $00, $1F, $C0
+            DB        $3F, $E0, $4F, $90, $4F, $90, $4F, $90, $0F, $80
+
+;=========================================================================================
+; SECTION 3: SYSTEM MOTION, SINE & VECTOR LOOKUP TABLES ($0885 - $0940) [188 Bytes]
+;=========================================================================================
+            DB      $0D, $80, $0D, $80, $0D, $80, $1D, $C0, $F9, $05  ; $0885
+            DB      $A5, $05, $2F, $06, $C5, $05, $49, $06, $E1, $05  ; $088F
+            DB      $5F, $06, $81, $05, $71, $06, $95, $05, $ED, $06  ; $0899
+            DB      $1D, $07, $07, $07, $37, $07, $AC, $04, $AC, $04  ; $08A3
+            DB      $B2, $04, $B2, $04, $D3, $06, $D3, $06, $17, $06  ; $08AD
+            DB      $17, $06, $C7, $04, $1F, $05, $E3, $04, $3F, $05  ; $08B7
+            DB      $FB, $04, $59, $05, $0F, $05, $6F, $05, $B7, $06  ; $08C1
+            DB      $1F, $05, $C7, $04, $C7, $04, $E3, $04, $E3, $04  ; $08CB
+            DB      $19, $08, $19, $08, $35, $08, $35, $08, $4D, $08  ; $08D5
+            DB      $4D, $08, $61, $08, $61, $08, $71, $08, $71, $08  ; $08DF
+            DB      $81, $06, $81, $06, $9D, $06, $9D, $06, $AD, $08  ; $08E9
+            DB      $AD, $08, $AD, $08, $AD, $08, $AD, $08, $CD, $08  ; $08F3
+            DB      $CD, $08, $D1, $08, $E5, $08, $E5, $08, $C9, $08  ; $08FD
+            DB      $C9, $08, $B1, $08, $B1, $08, $B5, $08, $E9, $08  ; $0907
+            DB      $E9, $08, $ED, $08, $B9, $08, $B9, $08, $BD, $08  ; $0911
+            DB      $C1, $08, $C5, $08, $A9, $08, $A9, $08, $A9, $08  ; $091B
+            DB      $A9, $08, $A9, $08, $8D, $08, $91, $08, $95, $08  ; $0925
+            DB      $99, $08, $9D, $08, $A1, $08, $A1, $08, $A5, $08  ; $092F
+            DB      $D5, $08, $D5, $08, $D9, $08                      ; $0939
+            DB      $DD, $08                                          ; $093F
+
 ;=========================================================================================
 ; ----> VECT_TBL0941   ADDRESS VECTOR TABLE  ($0941 - $0966)
 ;   Table of 19 16-bit address pointers ($08E1 - $0964). Disassembled as Z80 opcodes
