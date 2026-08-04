@@ -102,8 +102,7 @@ _LITERAL:
 ;   Reads an 8-bit byte from the TERSE instruction stream, zero-extends
 ;   it to 16 bits, and pushes it onto the parameter stack. (Opcode: $19)
 ;=========================================================================================
-_LITbyte:
-            ld      a,(bc)                  ; Read literal byte from instruction pointer
+ _LITbyte:  ld      a,(bc)                  ; Read literal byte from instruction pointer
             inc     bc                      ; Advance instruction pointer
             ld      l,a
             ld      h,$00                   ; Zero-extend high byte
@@ -115,7 +114,7 @@ _LITbyte:
 ;   Fetches two consecutive 16-bit words from the instruction stream (BC)
 ;   and pushes both onto the Parameter Stack.
 ;===================================================================================================
-            ld      a,(bc)                  ; Read low byte of first literal word
+_DLIT:      ld      a,(bc)                  ; Read low byte of first literal word
             inc     bc                      ; Advance instruction pointer
             ld      l,a
             ld      a,(bc)                  ; Read high byte of first literal word
@@ -129,7 +128,7 @@ _LITbyte:
 ;   Pops a value from the Parameter Stack, reads a 16-bit inline offset from
 ;   the instruction stream, adds them together, and pushes the sum. (Opcode: $0E)
 ;===================================================================================================
-            pop     hl                      ; Pop target value from parameter stack
+ _plusbang: pop     hl                      ; Pop target value from parameter stack
             ld      a,(bc)                  ; Read low byte of inline offset
             inc     bc                      ; Advance instruction pointer
             ld      e,a
@@ -145,7 +144,7 @@ _LITbyte:
 ;   Pops an index from the Parameter Stack, doubles it for 16-bit word alignment,
 ;   and jumps to $0062 to add the inline base address and push the result.
 ;===================================================================================================
-            pop     hl                      ; Pop array index from parameter stack
+_ARRAY:     pop     hl                      ; Pop array index from parameter stack
             add     hl,hl                   ; Double index for 16-bit word offset
             jp      $0062                   ; Jump to add inline base address and push
 
@@ -153,7 +152,7 @@ _LITbyte:
 ; ----> 0              PUSH CONSTANT ZERO  ($0071 - $0076)
 ;   Pushes a 16-bit constant value of 0 onto the Parameter Stack. (Opcode: $0D)
 ;===================================================================================================
-            ld      hl,$0000                ; Load 16-bit constant 0
+_0:         ld      hl,$0000                ; Load 16-bit constant 0
             push    hl                      ; Push 0 onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
@@ -161,7 +160,7 @@ _LITbyte:
 ; ----> 1              PUSH CONSTANT ONE  ($0077 - $007C)
 ;   Pushes a 16-bit constant value of 1 onto the Parameter Stack. (Opcode: $22)
 ;===================================================================================================
-            ld      hl,$0001                ; Load 16-bit constant 1
+_1:         ld      hl,$0001                ; Load 16-bit constant 1
             push    hl                      ; Push 1 onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
