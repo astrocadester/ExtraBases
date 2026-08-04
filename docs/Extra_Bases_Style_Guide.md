@@ -48,3 +48,9 @@ LABEL:    ld      a,(bc)                  ; Fetch LSB of inline literal
 ;   [Detailed breakdown of inputs, stack effects, or execution flow]
 ;=========================================================================================
 ```
+
+---
+
+## 5. Code Block & Output Formatting (CRITICAL)
+* **Markdown Fenced Code Blocks:** **ALL** generated assembly code, disassemblies, or code modifications **MUST** be returned inside a single UTF-8 text Markdown code block using the `assembly` language identifier (e.g., ` ```assembly ... ``` `).
+* **No Raw Text Code:** Never output bare assembly code directly in the conversational body text. Everything intended for assembly files must be wrapped in a code block for clean, one-click copying and pasting.
