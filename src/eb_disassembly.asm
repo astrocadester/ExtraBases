@@ -1204,77 +1204,112 @@ _BRANCH_STREAM:
             ld      ($7C1C),de          ; Store updated branch destination back into $7C1C
             ret                         ; Return to stream interpreter loop
 
-push bc
-ld   a,($7C23)
-or   a
-jp   z,$0998
-dec  a
-ld   ($7C23),a
-jp   nz,$0A12
-call $0967
-call $096C
-or   a
-jp   nz,$09C0
-call $0974
-push hl
-call $0974
-push hl
-call $0974
-push hl
-ld   bc,$09B4
-jp   $0275
-inc  c
-nop
-pop  hl
-pop  de
-add  hl,de
-pop  bc
-out  (c),l
-xor  a
-jp   $0A12
-dec  a
-jp   nz,$09D2
-call $0967
-ld   ($7C23),a
-call $096C
-or   $01
-jp   $0A12
-dec  a
-jp   nz,$09DD
-call $097E
-xor  a
-jp   $0A12
-dec  a
-jp   nz,$09E9
-call $097E
-or   $01
-jp   $0A12
-dec  a
-jp   nz,$0A06
-ld   a,($7C20)
-dec  a
-ld   ($7C20),a
-jp   z,$0A00
-ld   hl,($7C21)
-ld   ($7C1C),hl
-jp   $0A12
-ld   ($7C24),a
-jp   $0A12
-add  a,$04
-ld   c,a
-call $0967
-out  (c),a
-call $096C
-xor  a
-or   a
-jp   z,$0998
-pop  bc
-ret
-;============================================================
-ld   ($7C1C),hl
-ld   ($7C21),hl
-ret
-;============================================================
+;=========================================================================================
+; ----> L0989            CHECK SOUND STREAM DELAY                          ($0989 - $0997)
+;   Checks if the active sound stream frame delay counter ($7C23) is currently non-zero.
+;   Decrements the delay counter if active; otherwise, continues command execution.
+;=========================================================================================
+L0989:      push    bc                  ; Preserve stream pointer
+            ld      a,($7C23)           ; Load active sound stream delay counter
+            or      a                   ; Check if a stream delay is currently active
+            jp      z,$0998             ; If delay timer is zero, fetch next command
+            dec     a                   ; Decrement active delay timer
+            ld      ($7C23),a           ; Store updated delay value back to RAM
+            jp      nz,$0A12            ; If delay still active, exit tick immediately
+
+;=========================================================================================
+; ----> L0998            FETCH AND DECODE SOUND COMMAND                    ($0998 - $09A1)
+;   Fetches the next command byte from the script stream pointer ($7C1C), advances
+;   the pointer, and jumps to check other commands if the command is non-zero.
+;=========================================================================================
+L0998:      call    $0967               ; Fetch next sound command byte from stream pointer
+            call    $096C               ; Advance stream pointer to next byte in RAM
+            or      a                   ; Check if command byte is zero (CMD 0: Port Output)
+            jp      nz,$09C0            ; If non-zero, jump to check other stream commands
+
+;=========================================================================================
+; ----> L09A2            DECODE SOUND PORT OUTPUT COMMAND                  ($09A2 - $09BF)
+;   Processes Command 0 (Sound Port Output) by fetching the port address, Value 1, and
+;   Value 2 from the stream, updating the LCG random seed, and writing the combined
+;   values directly to the hardware sound chip port.
+;=========================================================================================
+            call    $0974               ; Fetch first argument (low byte of port) into HL
+            push    hl                  ; Push port address to stack
+            call    $0974               ; Fetch second argument (Value 1) into HL
+            push    hl                  ; Push Value 1 to stack
+            call    $0974               ; Fetch third argument (Value 2) into HL
+            push    hl                  ; Push Value 2 to stack
+            ld      bc,$09B4            ; Load return hook address ($09B4)
+            jp      $0275               ; Jump to double multiply / LCG routine
+
+L09B4:      inc     c                   ; LCG update math adjustment
+            nop                         ; Padding
+            pop     hl                  ; Pop Value 2 from stack
+            pop     de                  ; Pop Value 1 from stack
+            add     hl,de               ; Combine values (Value 1 + Value 2)
+            pop     bc                  ; Pop Port Address from stack
+            out     (c),l               ; Output combined value to hardware sound port
+            xor     a                   ; Clear accumulator (no delay)
+            jp      $0A12               ; Exit stream parser tick
+
+;=========================================================================================
+; ----> L09C0            DECODE REMAINING SOUND STREAM COMMANDS            ($09C0 - $0A17)
+;   Parses and executes stream commands CMD 1 (Wait/Delay), CMD 2 (Branch), CMD 3 (Wait
+;   with Attribute), CMD 4 (Loop/End Stream), and CMD >= 5 (Direct port register writes).
+;=========================================================================================
+L09C0:      dec     a                   ; Check if command is 1 (CMD 1: Wait/Delay)
+            jp      nz,$09D2            ; If not 1, branch to check next command
+            call    $0967               ; Fetch next byte (delay ticks) from stream into A
+            ld      ($7C23),a           ; Store ticks in active stream delay counter
+            call    $096C               ; Advance stream pointer in RAM
+            or      $01                 ; Set non-zero status in accumulator
+            jp      $0A12               ; Exit stream interpreter tick
+
+L09D2:      dec     a                   ; Check if command is 2 (CMD 2: Stream Branch)
+            jp      nz,$09DD            ; If not 2, branch to check next command
+            call    $097E               ; Fetch 16-bit address and branch stream pointer
+            xor     a                   ; Clear accumulator (continue execution)
+            jp      $0A12               ; Exit stream interpreter tick
+
+L09DD:      dec     a                   ; Check if command is 3 (CMD 3: Wait with Attribute)
+            jp      nz,$09E9            ; If not 3, branch to check next command
+            call    $097E               ; Fetch branch/attribute target from stream
+            or      $01                 ; Set non-zero status in accumulator
+            jp      $0A12               ; Exit stream interpreter tick
+
+L09E9:      dec     a                   ; Check if command is 4 (CMD 4: Loop/End Stream)
+            jp      nz,$0A06            ; If not 4, branch to check next command
+            ld      a,($7C20)           ; Load stream active flag ($7C20)
+            dec     a                   ; Decrement active flag
+            ld      ($7C20),a           ; Store updated active flag back to RAM
+            jp      z,$0A00             ; If active flag is zero, branch to end stream
+            ld      hl,($7C21)          ; Load loop start pointer from $7C21 into HL
+            ld      ($7C1C),hl          ; Loop back: restore stream pointer to $7C1C
+            jp      $0A12               ; Exit stream interpreter tick
+
+L0A00:      ld      ($7C24),a           ; Store zero in stream status ($7C24)
+            jp      $0A12               ; Exit stream interpreter tick
+
+L0A06:      add     a,$04               ; Add port offset ($04) to command byte
+            ld      c,a                 ; Move calculated hardware port address to C
+            call    $0967               ; Fetch next byte (port value) from stream
+            out     (c),a               ; Output value directly to sound chip port in C
+            call    $096C               ; Advance stream pointer in RAM
+            xor     a                   ; Clear accumulator (continue execution)
+            or      a                   ; Test accumulator status
+            jp      z,$0998             ; If zero (no delay), loop immediately to fetch next cmd
+
+L0A12:      pop     bc                  ; Restore BC (stream pointer)
+            ret                         ; Return to interrupt caller
+
+;=========================================================================================
+; ----> L0A18            INITIALIZE SOUND STREAM POINTERS                  ($0A18 - $0A1E)
+;   Subroutine to initialize the active stream pointer ($7C1C) and the loop start
+;   address pointer ($7C21) to the address passed in HL.
+;=========================================================================================
+L0A18:      ld      ($7C1C),hl          ; Store stream pointer stored in HL to $7C1C
+            ld      ($7C21),hl          ; Store loop start address stored in HL to $7C21
+            ret                         ; Return to caller
 ld   a,($7C19)
 and  a
 ret  nz
