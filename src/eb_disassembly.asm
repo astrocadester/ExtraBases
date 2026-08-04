@@ -19,7 +19,7 @@
             nop
             nop
             di                              ; Disable interrupts
-            jp      L0015                   ; Jump over RST $08 vector
+            jp      _WARM_START                   ; Jump over RST $08 vector
             nop
             nop
 
@@ -37,17 +37,17 @@ _ENTER:
 ;=========================================================================================
 ; HARDWARE & TERSE STACK INITIALIZATION ($0015 - $002A)
 ;=========================================================================================
-L0015:
+_WARM_START:
             ld      a,$01
             out     ($08),a                 ; Set High Resolution mode
 
             ld      b,$00                   ; Loop 256 times to clear/init stacks
-L001B:
+_INIT_STACK_LOOP:
             ld      ix,$8000                ; Set Return Stack Pointer (RSP)
             ld      sp,$7F80                ; Set Parameter Stack Pointer (PSP)
-            djnz    L001B
+            djnz    _INIT_STACK_LOOP
 
-            ld      bc,L3E96                ; Set initial TERSE Instruction Pointer
+            ld      bc,_VM_BOOT_STREAM                ; Set initial TERSE Instruction Pointer
             ld      iy,$002B                ; Set TERSE Dispatcher address
 
 ;=========================================================================================
@@ -168,7 +168,7 @@ _1:         ld      hl,$0001                ; Load 16-bit constant 1
 ; ----> DUP            DUPLICATE TOP STACK ITEM  ($007D - $0081)
 ;   Duplicates the top 16-bit value on the Parameter Stack. (Opcode: $08)
 ;===================================================================================================
-            pop     hl                      ; Pop top value from parameter stack
+ _DUP:      pop     hl                      ; Pop top value from parameter stack
             push    hl                      ; Push first copy back onto stack
             push    hl                      ; Push second copy onto stack
             jp      (iy)                    ; Return to TERSE inner interpreter
@@ -176,7 +176,7 @@ _1:         ld      hl,$0001                ; Load 16-bit constant 1
 ; ----> 2DUP           DUPLICATE TOP TWO STACK ITEMS  ($0082 - $0089)
 ;   Duplicates the top two 16-bit values on the Parameter Stack. (Opcode: $06)
 ;===================================================================================================
-            pop     hl                      ; Pop top value from parameter stack
+ _2DUP:     pop     hl                      ; Pop top value from parameter stack
             pop     de                      ; Pop second value from parameter stack
             push    de                      ; Push second value back
             push    hl                      ; Push top value back
@@ -188,14 +188,14 @@ _1:         ld      hl,$0001                ; Load 16-bit constant 1
 ; ----> DROP           DISCARD TOP STACK ITEM  ($008A - $008C)
 ;   Discards the top 16-bit value from the Parameter Stack. (Opcode: $07)
 ;===================================================================================================
-            pop     hl                      ; Pop and discard top value from stack
+_DROP:            pop     hl                      ; Pop and discard top value from stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 
 ;===================================================================================================
 ; ----> SWAP           EXCHANGE TOP TWO STACK ITEMS  ($008D - $0092)
 ;   Exchanges the positions of the top two 16-bit values on the Parameter Stack. (Opcode: $01)
 ;===================================================================================================
-            pop     hl                      ; Pop top value from parameter stack
+_SWAP:      pop     hl                      ; Pop top value from parameter stack
             pop     de                      ; Pop second value from parameter stack
             push    hl                      ; Push top value into second position
             push    de                      ; Push second value into top position
@@ -206,7 +206,7 @@ _1:         ld      hl,$0001                ; Load 16-bit constant 1
 ;   Fetches the 16-bit word stored at the memory address on the Parameter Stack
 ;   and pushes the fetched value back onto the stack. (Opcode: $24)
 ;===================================================================================================
-            pop     hl                      ; Pop target memory address from stack
+_at:        pop     hl                      ; Pop target memory address from stack
             ld      e,(hl)                  ; Read low byte from memory address
             inc     hl                      ; Advance memory pointer
             ld      d,(hl)                  ; Read high byte from memory address
@@ -588,7 +588,7 @@ _LOOP:
 ;   Copies the top 16-bit word from the Return Stack (IX) without popping it
 ;   and pushes the value onto the Parameter Stack. (Opcode: $16)
 ;=========================================================================================
-_Rgt:
+_Rat:
             ld      l,(ix+$00)              ; Read Return Stack top LSB
             ld      h,(ix+$01)              ; Read Return Stack top MSB
             push    hl                      ; Push copied word onto parameter stack
@@ -834,14 +834,14 @@ _NPICK:
             add     hl,sp                   ; Add stack pointer
             add     hl,bc                   ; Multiply count by 2 for word offset
             add     hl,bc
-L0269:
+_NPICK_LOOP:
             ld      d,(hl)                  ; Read high byte from stack
             dec     hl                      ; Decrement stack pointer
             ld      e,(hl)                  ; Read low byte from stack
             push    de                      ; Push copied word onto stack
             dec     hl                      ; Decrement stack pointer
             dec     c                       ; Decrement loop counter
-            jp      p,L0269                 ; Loop until all requested items copied
+            jp      p,_NPICK_LOOP                 ; Loop until all requested items copied
             exx                             ; Restore TERSE VM registers
             jp      (iy)                    ; Return to TERSE inner interpreter
 
@@ -886,271 +886,301 @@ _Dstar:
             ex      de,hl                   ; Move multiplicand into DE
             pop     bc                      ; Pop multiplier operand from stack
             ld      hl,$0000                ; Clear product low word
-L02AF:
+_MULU_LOOP:
             srl     b                       ; Shift multiplier right 1 bit
             rr      c
-            jp      nc,L02BB                ; If bit 0 clear, skip addition
+            jp      nc,_MULU_SKIP                ; If bit 0 clear, skip addition
             add     hl,de                   ; Add multiplicand to product low word
             exx                             ; Switch to primary set for high word add
             adc     hl,de                   ; Add multiplicand to product high word
             exx                             ; Switch back to alternate set
-L02BB:
+_MULU_SKIP:
             ld      a,b                     ; Test if multiplier is zero
             or      c
-            jp      z,L02CD                 ; If zero, multiplication complete
+            jp      z,_MULU_DONE                 ; If zero, multiplication complete
             sla     e                       ; Shift multiplicand left 1 bit
             rl      d
             exx                             ; Switch to primary set for high word shift
             rl      e
             rl      d
             exx                             ; Switch back to alternate set
-            jp      L02AF                   ; Continue multiplication loop
-L02CD:
+            jp      _MULU_LOOP                   ; Continue multiplication loop
+_MULU_DONE:
             exx                             ; Switch to primary set
             push    hl                      ; Push result onto parameter stack
             jp      (iy)                    ; Return to TERSE inner interpreter
 ;=========================================================================================
 
-L02D3:
-            DB      $00, $00, $00, $00, $00  ; $02D3 - $02DA:
+_FONT_SPACE:
+            DB      $00, $00, $00, $00, $00  ; $02D3 - L02DA:
             DB      $00, $00, $00, $00, $00
 
 CHRTBL:
-            DB      $3C, $7E, $66, $66, $66  ; $02DB: Character '0' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $3C  ; $02E0: Character '0' (bytes 6-10)
-            DB      $18, $38, $18, $18, $18  ; $02E5: Character '1' (bytes 1-5)
-            DB      $18, $18, $18, $3C, $3C  ; $02EA: Character '1' (bytes 6-10)
-            DB      $3C, $7E, $66, $06, $3E  ; $02EF: Character '2' (bytes 1-5)
-            DB      $7C, $60, $60, $7E, $7E  ; $02F4: Character '2' (bytes 6-10)
-            DB      $3C, $7E, $66, $06, $1C  ; $02F9: Character '3' (bytes 1-5)
-            DB      $1E, $06, $66, $7E, $3C  ; $02FE: Character '3' (bytes 6-10)
-            DB      $66, $66, $66, $66, $7E  ; $0303: Character '4' (bytes 1-5)
-            DB      $7E, $06, $06, $06, $06  ; $0308: Character '4' (bytes 6-10)
-            DB      $7C, $7C, $60, $60, $7C  ; $030D: Character '5' (bytes 1-5)
-            DB      $7E, $06, $66, $7E, $3C  ; $0312: Character '5' (bytes 6-10)
-            DB      $3C, $7C, $60, $60, $7C  ; $0317: Character '6' (bytes 1-5)
-            DB      $7E, $66, $66, $7E, $3C  ; $031C: Character '6' (bytes 6-10)
-            DB      $7E, $7E, $06, $0E, $0C  ; $0321: Character '7' (bytes 1-5)
-            DB      $1C, $18, $38, $30, $30  ; $0326: Character '7' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $3C  ; $032B: Character '8' (bytes 1-5)
-            DB      $7E, $66, $66, $7E, $3C  ; $0330: Character '8' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $7E  ; $0335: Character '9' (bytes 1-5)
-            DB      $3E, $06, $06, $3E, $3C  ; $033A: Character '9' (bytes 6-10)
-            DB      $18, $3C, $7E, $66, $66  ; $033F: Character 'A' (bytes 1-5)
-            DB      $66, $7E, $7E, $66, $66  ; $0344: Character 'A' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $7C  ; $0349: Character 'B' (bytes 1-5)
-            DB      $7E, $66, $66, $7E, $7C  ; $034E: Character 'B' (bytes 6-10)
-            DB      $3C, $7E, $66, $60, $60  ; $0353: Character 'C' (bytes 1-5)
-            DB      $60, $60, $66, $7E, $3C  ; $0358: Character 'C' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $66  ; $035D: Character 'D' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $7C  ; $0362: Character 'D' (bytes 6-10)
-            DB      $7E, $7E, $60, $60, $7C  ; $0367: Character 'E' (bytes 1-5)
-            DB      $7C, $60, $60, $7E, $7E  ; $036C: Character 'E' (bytes 6-10)
-            DB      $7E, $7E, $60, $60, $7C  ; $0371: Character 'F' (bytes 1-5)
-            DB      $7C, $60, $60, $60, $60  ; $0376: Character 'F' (bytes 6-10)
-            DB      $3C, $7E, $60, $60, $60  ; $037B: Character 'G' (bytes 1-5)
-            DB      $6E, $6E, $66, $7E, $3C  ; $0380: Character 'G' (bytes 6-10)
-            DB      $66, $66, $66, $66, $7E  ; $0385: Character 'H' (bytes 1-5)
-            DB      $7E, $66, $66, $66, $66  ; $038A: Character 'H' (bytes 6-10)
-            DB      $3C, $3C, $18, $18, $18  ; $038F: Character 'I' (bytes 1-5)
-            DB      $18, $18, $18, $3C, $3C  ; $0394: Character 'I' (bytes 6-10)
-            DB      $06, $06, $06, $06, $06  ; $0399: Character 'J' (bytes 1-5)
-            DB      $06, $66, $66, $7E, $3C  ; $039E: Character 'J' (bytes 6-10)
-            DB      $66, $66, $6E, $7C, $78  ; $03A3: Character 'K' (bytes 1-5)
-            DB      $78, $6C, $6E, $66, $66  ; $03A8: Character 'K' (bytes 6-10)
-            DB      $60, $60, $60, $60, $60  ; $03AD: Character 'L' (bytes 1-5)
-            DB      $60, $60, $60, $7E, $7E  ; $03B2: Character 'L' (bytes 6-10)
-            DB      $C3, $E7, $E7, $DB, $DB  ; $03B7: Character 'M' (bytes 1-5)
-            DB      $C3, $C3, $C3, $C3, $C3  ; $03BC: Character 'M' (bytes 6-10)
-            DB      $66, $66, $76, $7E, $7E  ; $03C1: Character 'N' (bytes 1-5)
-            DB      $6E, $66, $66, $66, $66  ; $03C6: Character 'N' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $66  ; $03CB: Character 'O' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $3C  ; $03D0: Character 'O' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $7E  ; $03D5: Character 'P' (bytes 1-5)
-            DB      $7C, $60, $60, $60, $60  ; $03DA: Character 'P' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $66  ; $03DF: Character 'Q' (bytes 1-5)
-            DB      $66, $66, $6E, $64, $3A  ; $03E4: Character 'Q' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $7E  ; $03E9: Character 'R' (bytes 1-5)
-            DB      $7C, $6E, $66, $66, $66  ; $03EE: Character 'R' (bytes 6-10)
-            DB      $3C, $7E, $66, $60, $7C  ; $03F3: Character 'S' (bytes 1-5)
-            DB      $3E, $06, $66, $7E, $3C  ; $03F8: Character 'S' (bytes 6-10)
-            DB      $7E, $7E, $18, $18, $18  ; $03FD: Character 'T' (bytes 1-5)
-            DB      $18, $18, $18, $18, $18  ; $0402: Character 'T' (bytes 6-10)
-            DB      $66, $66, $66, $66, $66  ; $0407: Character 'U' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $3C  ; $040C: Character 'U' (bytes 6-10)
-            DB      $66, $66, $66, $66, $66  ; $0411: Character 'V' (bytes 1-5)
-            DB      $7E, $3C, $3C, $18, $18  ; $0416: Character 'V' (bytes 6-10)
-            DB      $C3, $C3, $C3, $DB, $DB  ; $041B: Character 'W' (bytes 1-5)
-            DB      $DB, $FF, $E7, $C3, $C3  ; $0420: Character 'W' (bytes 6-10)
-            DB      $66, $66, $7E, $3C, $18  ; $0425: Character 'X' (bytes 1-5)
-            DB      $18, $3C, $7E, $66, $66  ; $042A: Character 'X' (bytes 6-10)
-            DB      $66, $66, $7E, $3C, $18  ; $042F: Character 'Y' (bytes 1-5)
-            DB      $18, $18, $18, $18, $18  ; $0434: Character 'Y' (bytes 6-10)
-            DB      $EC, $EC, $EE, $E0, $8A  ; $0439: Character 'Z' (bytes 1-5)
-            DB      $8A, $44, $80, $8C, $CA  ; $043E: Character 'Z' (bytes 6-10)
-            DB      $44, $E0, $8A, $8A, $44  ; $0443: Character ':' (bytes 1-5)
-            DB      $20, $EA, $EC, $E4, $E0  ; $0448: Character ':' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $66  ; L02DB: Character '0' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $3C  ; L02E0: Character '0' (bytes 6-10)
+            DB      $18, $38, $18, $18, $18  ; L02E5: Character '1' (bytes 1-5)
+            DB      $18, $18, $18, $3C, $3C  ; L02EA: Character '1' (bytes 6-10)
+            DB      $3C, $7E, $66, $06, $3E  ; L02EF: Character '2' (bytes 1-5)
+            DB      $7C, $60, $60, $7E, $7E  ; L02F4: Character '2' (bytes 6-10)
+            DB      $3C, $7E, $66, $06, $1C  ; L02F9: Character '3' (bytes 1-5)
+            DB      $1E, $06, $66, $7E, $3C  ; L02FE: Character '3' (bytes 6-10)
+            DB      $66, $66, $66, $66, $7E  ; L0303: Character '4' (bytes 1-5)
+            DB      $7E, $06, $06, $06, $06  ; L0308: Character '4' (bytes 6-10)
+            DB      $7C, $7C, $60, $60, $7C  ; L030D: Character '5' (bytes 1-5)
+            DB      $7E, $06, $66, $7E, $3C  ; L0312: Character '5' (bytes 6-10)
+            DB      $3C, $7C, $60, $60, $7C  ; L0317: Character '6' (bytes 1-5)
+            DB      $7E, $66, $66, $7E, $3C  ; L031C: Character '6' (bytes 6-10)
+            DB      $7E, $7E, $06, $0E, $0C  ; L0321: Character '7' (bytes 1-5)
+            DB      $1C, $18, $38, $30, $30  ; L0326: Character '7' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $3C  ; L032B: Character '8' (bytes 1-5)
+            DB      $7E, $66, $66, $7E, $3C  ; L0330: Character '8' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $7E  ; L0335: Character '9' (bytes 1-5)
+            DB      $3E, $06, $06, $3E, $3C  ; L033A: Character '9' (bytes 6-10)
+            DB      $18, $3C, $7E, $66, $66  ; L033F: Character 'A' (bytes 1-5)
+            DB      $66, $7E, $7E, $66, $66  ; L0344: Character 'A' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $7C  ; L0349: Character 'B' (bytes 1-5)
+            DB      $7E, $66, $66, $7E, $7C  ; L034E: Character 'B' (bytes 6-10)
+            DB      $3C, $7E, $66, $60, $60  ; L0353: Character 'C' (bytes 1-5)
+            DB      $60, $60, $66, $7E, $3C  ; L0358: Character 'C' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $66  ; L035D: Character 'D' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $7C  ; L0362: Character 'D' (bytes 6-10)
+            DB      $7E, $7E, $60, $60, $7C  ; L0367: Character 'E' (bytes 1-5)
+            DB      $7C, $60, $60, $7E, $7E  ; L036C: Character 'E' (bytes 6-10)
+            DB      $7E, $7E, $60, $60, $7C  ; L0371: Character 'F' (bytes 1-5)
+            DB      $7C, $60, $60, $60, $60  ; L0376: Character 'F' (bytes 6-10)
+            DB      $3C, $7E, $60, $60, $60  ; L037B: Character 'G' (bytes 1-5)
+            DB      $6E, $6E, $66, $7E, $3C  ; L0380: Character 'G' (bytes 6-10)
+            DB      $66, $66, $66, $66, $7E  ; L0385: Character 'H' (bytes 1-5)
+            DB      $7E, $66, $66, $66, $66  ; L038A: Character 'H' (bytes 6-10)
+            DB      $3C, $3C, $18, $18, $18  ; L038F: Character 'I' (bytes 1-5)
+            DB      $18, $18, $18, $3C, $3C  ; L0394: Character 'I' (bytes 6-10)
+            DB      $06, $06, $06, $06, $06  ; L0399: Character 'J' (bytes 1-5)
+            DB      $06, $66, $66, $7E, $3C  ; L039E: Character 'J' (bytes 6-10)
+            DB      $66, $66, $6E, $7C, $78  ; L03A3: Character 'K' (bytes 1-5)
+            DB      $78, $6C, $6E, $66, $66  ; L03A8: Character 'K' (bytes 6-10)
+            DB      $60, $60, $60, $60, $60  ; L03AD: Character 'L' (bytes 1-5)
+            DB      $60, $60, $60, $7E, $7E  ; L03B2: Character 'L' (bytes 6-10)
+            DB      $C3, $E7, $E7, $DB, $DB  ; L03B7: Character 'M' (bytes 1-5)
+            DB      $C3, $C3, $C3, $C3, $C3  ; L03BC: Character 'M' (bytes 6-10)
+            DB      $66, $66, $76, $7E, $7E  ; L03C1: Character 'N' (bytes 1-5)
+            DB      $6E, $66, $66, $66, $66  ; L03C6: Character 'N' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $66  ; L03CB: Character 'O' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $3C  ; L03D0: Character 'O' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $7E  ; L03D5: Character 'P' (bytes 1-5)
+            DB      $7C, $60, $60, $60, $60  ; L03DA: Character 'P' (bytes 6-10)
+            DB      $3C, $7E, $66, $66, $66  ; L03DF: Character 'Q' (bytes 1-5)
+            DB      $66, $66, $6E, $64, $3A  ; L03E4: Character 'Q' (bytes 6-10)
+            DB      $7C, $7E, $66, $66, $7E  ; L03E9: Character 'R' (bytes 1-5)
+            DB      $7C, $6E, $66, $66, $66  ; L03EE: Character 'R' (bytes 6-10)
+            DB      $3C, $7E, $66, $60, $7C  ; L03F3: Character 'S' (bytes 1-5)
+            DB      $3E, $06, $66, $7E, $3C  ; L03F8: Character 'S' (bytes 6-10)
+            DB      $7E, $7E, $18, $18, $18  ; L03FD: Character 'T' (bytes 1-5)
+            DB      $18, $18, $18, $18, $18  ; L0402: Character 'T' (bytes 6-10)
+            DB      $66, $66, $66, $66, $66  ; L0407: Character 'U' (bytes 1-5)
+            DB      $66, $66, $66, $7E, $3C  ; L040C: Character 'U' (bytes 6-10)
+            DB      $66, $66, $66, $66, $66  ; L0411: Character 'V' (bytes 1-5)
+            DB      $7E, $3C, $3C, $18, $18  ; L0416: Character 'V' (bytes 6-10)
+            DB      $C3, $C3, $C3, $DB, $DB  ; L041B: Character 'W' (bytes 1-5)
+            DB      $DB, $FF, $E7, $C3, $C3  ; L0420: Character 'W' (bytes 6-10)
+            DB      $66, $66, $7E, $3C, $18  ; L0425: Character 'X' (bytes 1-5)
+            DB      $18, $3C, $7E, $66, $66  ; L042A: Character 'X' (bytes 6-10)
+            DB      $66, $66, $7E, $3C, $18  ; L042F: Character 'Y' (bytes 1-5)
+            DB      $18, $18, $18, $18, $18  ; L0434: Character 'Y' (bytes 6-10)
+            DB      $EC, $EC, $EE, $E0, $8A  ; L0439: Character 'Z' (bytes 1-5)
+            DB      $8A, $44, $80, $8C, $CA  ; L043E: Character 'Z' (bytes 6-10)
+            DB      $44, $E0, $8A, $8A, $44  ; L0443: Character ':' (bytes 1-5)
+            DB      $20, $EA, $EC, $E4, $E0  ; L0448: Character ':' (bytes 6-10)
 
 ;=========================================================================================
-; SECTION 1: EXTENDED GRAPHICS & SYSTEM SYMBOLS ($044D - $04AC) [96 Bytes]
+; ----> SECTION 1        EXTENDED GRAPHICS & SYSTEM SYMBOLS                ($044D - $04B0)
+;   A table of 10 custom 8x10 game-specific font glyphs and system symbols used on the
+;   Mini-Scoreboard and during batting/running play screens.
 ;=========================================================================================
-            DB      $EE, $EE, $EC, $48, $44, $AA, $4E, $44, $AC, $42  ; $044D
-            DB      $44, $AA, $EE, $E4, $EA, $EA, $E0, $AE, $80, $AE  ; $0457
-            DB      $C0, $AA, $80, $EA, $E0, $40, $E0, $E0, $A0, $E0  ; $0461
-            DB      $E0, $E0, $E0, $E0, $40, $20, $20, $A0, $80, $80  ; $046B
-            DB      $20, $A0, $A0, $40, $E0, $60, $E0, $C0, $E0, $40  ; $0475
-            DB      $E0, $E0, $40, $80, $20, $20, $20, $A0, $40, $A0  ; $047F
-            DB      $20, $40, $E0, $E0, $20, $C0, $E0, $40, $E0, $E0  ; $0489
-            DB      $AE, $AA, $AE, $A8, $E8, $AE, $A0, $EC, $E0, $AA  ; $0493
-            DB      $A0, $AA, $80, $4A, $A0, $EC, $C0, $4A, $A0, $AA  ; $049D
-            DB      $80, $4E, $E0, $AA, $E0, $00, $00, $01, $02, $00  ; $04A7
-
-
-
-;=========================================================================================
-; SECTION 2 (PART 1): TERSE SPRITE PATTERNS & BITMAPS ($04B1 - $0578) [200 Bytes]
-; Replaces Line 1011 to Line 1030 in eb_disassembly.lst.txt (20 lines total)
-;=========================================================================================
-            DB      $00, $00, $00, $02, $02, $C0, $00, $C0, $00, $F8  ; $04B1 (Line 1011)
-            DB      $F0, $E0, $C0, $80, $08, $18, $38, $78, $F8, $F8  ; $04BB (Line 1012)
-            DB      $70, $20, $07, $06, $02, $0C, $07, $00, $07, $00  ; $04C5 (Line 1013)
-            DB      $0F, $80, $FF, $80, $0F, $C0, $0F, $A0, $0F, $90  ; $04CF (Line 1014)
-            DB      $0F, $80, $0D, $80, $0D, $80, $1D, $80, $01, $C0  ; $04D9 (Line 1015)
-            DB      $06, $05, $02, $0A, $0C, $00, $0C, $00, $1E, $00  ; $04E3 (Line 1016)
-            DB      $FE, $00, $1F, $00, $1E, $80, $1E, $00, $12, $00  ; $04ED (Line 1017)
-            DB      $32, $00, $03, $00, $05, $04, $02, $08, $08, $00  ; $04F7 (Line 1018)
-            DB      $1C, $00, $FE, $00, $1B, $00, $1C, $00, $1C, $00  ; $0501 (Line 1019)
-            DB      $34, $00, $06, $00, $04, $03, $02, $06, $10, $00  ; $050B (Line 1020)
-            DB      $38, $00, $FC, $00, $38, $00, $38, $00, $6C, $00  ; $0515 (Line 1021)
-            DB      $01, $07, $02, $0E, $80, $00, $80, $00, $B0, $00  ; $051F (Line 1022)
-            DB      $B0, $00, $78, $00, $7C, $00, $7A, $00, $79, $00  ; $0529 (Line 1023)
-            DB      $78, $00, $78, $00, $F8, $00, $D8, $00, $98, $00  ; $0533 (Line 1024)
-            DB      $1C, $00, $01, $05, $02, $0B, $80, $00, $B0, $00  ; $053D (Line 1025)
-            DB      $B0, $00, $70, $00, $78, $00, $74, $00, $70, $00  ; $0547 (Line 1026)
-            DB      $70, $00, $D0, $00, $90, $00, $18, $00, $01, $04  ; $0551 (Line 1027)
-            DB      $02, $09, $80, $00, $A0, $00, $F0, $00, $68, $00  ; $055B (Line 1028)
-            DB      $60, $00, $60, $00, $E0, $00, $A0, $00, $30, $00  ; $0565 (Line 1029)
-            DB      $01, $03, $02, $07, $80, $00, $A0, $00, $F0, $00  ; $056F (Line 1030)
+            db      $EE, $EE, $EC, $48, $44, $AA, $4E, $44, $AC, $42  ; Symbol 1: "1B" (Single / First Base) glyph
+            db      $44, $AA, $EE, $E4, $EA, $EA, $E0, $AE, $80, $AE  ; Symbol 2: "2B" (Double / Second Base) glyph
+            db      $C0, $AA, $80, $EA, $E0, $40, $E0, $E0, $A0, $E0  ; Symbol 3: "3B" (Triple / Third Base) glyph
+            db      $E0, $E0, $E0, $E0, $40, $20, $20, $A0, $80, $80  ; Symbol 4: Slanted Baseball Bat sprite
+            db      $20, $A0, $A0, $40, $E0, $60, $E0, $C0, $E0, $40  ; Symbol 5: Baseball Player (Batter stance)
+            db      $E0, $E0, $40, $80, $20, $20, $20, $A0, $40, $A0  ; Symbol 6: Bat swing / Animation frame
+            db      $20, $40, $E0, $E0, $20, $C0, $E0, $40, $E0, $E0  ; Symbol 7: Baseball Player (Running / Fielder)
+            db      $AE, $AA, $AE, $A8, $E8, $AE, $A0, $EC, $E0, $AA  ; Symbol 8: "HR" (Home Run) scoreboard glyph
+            db      $A0, $AA, $80, $4A, $A0, $EC, $C0, $4A, $A0, $AA  ; Symbol 9: Out / Scoreboard status glyph
+            db      $80, $4E, $E0, $AA, $E0, $00, $00, $01, $02, $00  ; Symbol 10: Baseball Diamond and Foul Lines
 
 ;=========================================================================================
-; SECTION 2 (PART 2B): TERSE SPRITE PATTERNS & BITMAPS ($0579 - $0640) [200 Bytes]
-; Replaces Line 1031 to Line 1050 in eb_disassembly.lst.txt (20 lines total)
+; ----> SECTION 2 (PART 1) TERSE SPRITE PATTERNS & BITMAPS                 ($04B1 - $0578)
+;   Compiled Perspective-Scaled sprite assets for batters and fielders at multiple size
+;   steps, accompanied by their VGER pattern headers defining size and offsets.
 ;=========================================================================================
-            DB      $06, $00, $E0, $00, $A0, $00, $30, $00, $03, $04  ; $0579 (Line 1031)
-            DB      $02, $08, $10, $00, $30, $00, $78, $00, $34, $00  ; $0583 (Line 1032)
-            DB      $30, $00, $30, $00, $20, $00, $30, $00, $03, $03  ; $058D (Line 1033)
-            DB      $02, $06, $10, $00, $38, $00, $70, $00, $B8, $00  ; $0597 (Line 1034)
-            DB      $20, $00, $30, $00, $06, $07, $02, $0E, $06, $00  ; $05A1 (Line 1035)
-            DB      $06, $00, $0E, $00, $1F, $00, $1F, $00, $1E, $80  ; $05AB (Line 1036)
-            DB      $1E, $80, $0E, $00, $0E, $00, $0E, $00, $0E, $00  ; $05B5 (Line 1037)
-            DB      $0F, $00, $0C, $00, $0E, $00, $04, $06, $02, $0C  ; $05BF (Line 1038)
-            DB      $0C, $00, $0C, $00, $1E, $00, $3F, $00, $3D, $00  ; $05C9 (Line 1039)
-            DB      $3C, $00, $1C, $00, $1C, $00, $1C, $00, $1E, $00  ; $05D3 (Line 1040)
-            DB      $18, $00, $1C, $00, $04, $05, $02, $0A, $0C, $00  ; $05DD (Line 1041)
-            DB      $0C, $00, $1E, $00, $3F, $00, $3D, $00, $1C, $00  ; $05E7 (Line 1042)
-            DB      $1C, $00, $1E, $00, $18, $00, $1C, $00, $06, $07  ; $05F1 (Line 1043)
-            DB      $02, $0D, $06, $00, $06, $00, $1E, $00, $2F, $E0  ; $05FB (Line 1044)
-            DB      $4E, $00, $8E, $00, $0E, $00, $0F, $00, $1F, $80  ; $0605 (Line 1045)
-            DB      $19, $80, $F9, $80, $F9, $80, $80, $C0, $0A, $05  ; $060F (Line 1046)
-            DB      $02, $0A, $0C, $00, $0C, $00, $1E, $00, $3F, $00  ; $0619 (Line 1047)
-            DB      $5F, $80, $8F, $40, $07, $00, $0F, $00, $19, $00  ; $0623 (Line 1048)
-            DB      $33, $00, $04, $06, $02, $0B, $0C, $00, $0C, $00  ; $062D (Line 1049)
-            DB      $1C, $00, $3F, $80, $5C, $00, $9C, $00, $1E, $00  ; $0637 (Line 1050)
+            db      $00, $00, $00, $02, $02, $C0, $00, $C0, $00, $F8  ; Marker (3B) + Sprite 1: Ball/Shadow header & rows 1-3
+            db      $F0, $E0, $C0, $80, $08, $18, $38, $78, $F8, $F8  ; Sprite 1 (Ball/Shadow) row 4 + Sprite 2: Bat rows 1-9
+            db      $70, $20, $07, $06, $02, $0C, $07, $00, $07, $00  ; Sprite 2 (Bat) rows 10-12 + Sprite 3: Batter Scale 4 header & rows 1-3
+            db      $0F, $80, $FF, $80, $0F, $C0, $0F, $A0, $0F, $90  ; Sprite 3 (Batter Scale 4) rows 4-8
+            db      $0F, $80, $0D, $80, $0D, $80, $1D, $80, $01, $C0  ; Sprite 3 (Batter Scale 4) rows 9-12 + Sprite 4: Batter Scale 3 header
+            db      $06, $05, $02, $0A, $0C, $00, $0C, $00, $1E, $00  ; Sprite 4 (Batter Scale 3) rows 1-4
+            db      $FE, $00, $1F, $00, $1E, $80, $1E, $00, $12, $00  ; Sprite 4 (Batter Scale 3) rows 5-8 + Sprite 5: Batter Scale 2 header
+            db      $32, $00, $03, $00, $05, $04, $02, $08, $08, $00  ; Sprite 5 (Batter Scale 2) rows 1-3 + Sprite 6: Fielder Scale 4 header
+            db      $1C, $00, $FE, $00, $1B, $00, $1C, $00, $1C, $00  ; Sprite 6 (Fielder Scale 4) rows 1-4
+            db      $34, $00, $06, $00, $04, $03, $02, $06, $10, $00  ; Sprite 6 (Fielder Scale 4) rows 5-7 + Sprite 7: Fielder Scale 3 header
+            db      $38, $00, $FC, $00, $38, $00, $38, $00, $6C, $00  ; Sprite 7 (Fielder Scale 3) rows 1-4
+            db      $01, $07, $02, $0E, $80, $00, $80, $00, $B0, $00  ; Sprite 7 (Fielder Scale 3) rows 5-6 + Sprite 8: Fielder Scale 2 header
+            db      $B0, $00, $78, $00, $7C, $00, $7A, $00, $79, $00  ; Sprite 8 (Fielder Scale 2) rows 1-4
+            db      $78, $00, $78, $00, $F8, $00, $D8, $00, $98, $00  ; Sprite 8 (Fielder Scale 2) rows 5-8 + Sprite 9: Fielder Scale 1 header
+            db      $1C, $00, $01, $05, $02, $0B, $80, $00, $B0, $00  ; Sprite 9 (Fielder Scale 1) rows 1-3 + Sprite 10: Pitcher Scale 4 header
+            db      $B0, $00, $70, $00, $78, $00, $74, $00, $70, $00  ; Sprite 10 (Pitcher Scale 4) rows 1-4
+            db      $70, $00, $D0, $00, $90, $00, $18, $00, $01, $04  ; Sprite 10 (Pitcher Scale 4) rows 5-8 + Sprite 11: Pitcher Scale 3 header
+            db      $02, $09, $80, $00, $A0, $00, $F0, $00, $68, $00  ; Sprite 11 (Pitcher Scale 3) rows 1-4
+            db      $60, $00, $60, $00, $E0, $00, $A0, $00, $30, $00  ; Sprite 11 (Pitcher Scale 3) rows 5-8 + Sprite 12: Pitcher Scale 2 header
+            db      $01, $03, $02, $07, $80, $00, $A0, $00, $F0, $00  ; Sprite 12 (Pitcher Scale 2) rows 1-3
 
 ;=========================================================================================
-; SECTION 2 (PART 2C): TERSE SPRITE PATTERNS & BITMAPS ($0641 - $0708) [200 Bytes]
-; Replaces Line 1051 to Line 1070 in eb_disassembly.lst.txt (20 lines total)
+; ----> SECTION 2 (PART 2B) TERSE SPRITE PATTERNS & BITMAPS                ($0579 - $0640)
+;   Perspective-scaled player animation frames, continuing with the remaining rows of
+;   the tiny pitcher, followed by the complete scaled set of outfielders and base runners
+;   performing running/sliding animation movements.
 ;=========================================================================================
-            DB      $1F, $00, $F3, $00, $F3, $00, $83, $80, $04, $05  ; $0641 (Line 1051)
-            DB      $02, $09, $0C, $00, $0C, $00, $3F, $80, $5C, $00  ; $064B (Line 1052)
-            DB      $9C, $00, $1E, $00, $FF, $00, $F3, $00, $83, $80  ; $0655 (Line 1053)
-            DB      $03, $04, $02, $07, $10, $00, $7C, $00, $B0, $00  ; $065F (Line 1054)
-            DB      $30, $00, $38, $00, $E8, $00, $8C, $00, $03, $03  ; $0669 (Line 1055)
-            DB      $02, $06, $10, $00, $7C, $00, $B0, $00, $38, $00  ; $0673 (Line 1056)
-            DB      $68, $00, $4C, $00, $01, $05, $02, $0C, $60, $00  ; $067D (Line 1057)
-            DB      $60, $00, $E0, $00, $E4, $00, $E4, $00, $F8, $00  ; $0687 (Line 1058)
-            DB      $E0, $00, $E0, $00, $E0, $00, $E0, $00, $E0, $00  ; $0691 (Line 1059)
-            DB      $70, $00, $01, $05, $02, $0B, $60, $00, $60, $00  ; $069B (Line 1060)
-            DB      $E0, $00, $E4, $00, $E4, $00, $F8, $00, $E0, $00  ; $06A5 (Line 1061)
-            DB      $E0, $00, $E0, $00, $E0, $00, $70, $00, $06, $06  ; $06AF (Line 1062)
-            DB      $02, $0C, $06, $00, $06, $00, $7F, $00, $8F, $00  ; $06B9 (Line 1063)
-            DB      $7F, $00, $0F, $00, $4F, $00, $7F, $00, $7F, $00  ; $06C3 (Line 1064)
-            DB      $06, $00, $06, $00, $0E, $00, $07, $06, $02, $0B  ; $06CD (Line 1065)
-            DB      $0C, $00, $0C, $00, $1F, $00, $3F, $C0, $5F, $A0  ; $06D7 (Line 1066)
-            DB      $8F, $80, $07, $80, $07, $80, $0C, $80, $18, $80  ; $06E1 (Line 1067)
-            DB      $31, $80, $06, $05, $02, $0B, $01, $80, $01, $80  ; $06EB (Line 1068)
-            DB      $03, $80, $07, $C0, $0F, $A0, $1F, $10, $FE, $00  ; $06F5 (Line 1069)
-            DB      $FE, $00, $86, $00, $06, $00, $07, $00, $05, $04  ; $06FF (Line 1070)
+            db      $06, $00, $E0, $00, $A0, $00, $30, $00, $03, $04  ; Pitcher Scale 2 (rows 4-7) + Pitcher Scale 1 header
+            db      $02, $08, $10, $00, $30, $00, $78, $00, $34, $00  ; Pitcher Scale 1 (header cont & rows 1-4)
+            db      $30, $00, $30, $00, $20, $00, $30, $00, $03, $03  ; Pitcher Scale 1 (rows 5-8) + Pitcher Scale 0 header
+            db      $02, $06, $10, $00, $38, $00, $70, $00, $B8, $00  ; Pitcher Scale 0 (header cont & rows 1-4)
+            db      $20, $00, $30, $00, $06, $07, $02, $0E, $06, $00  ; Pitcher Scale 0 (rows 5-6) + Fielder Scale 4 header & row 1
+            db      $06, $00, $0E, $00, $1F, $00, $1F, $00, $1E, $80  ; Fielder Scale 4 (rows 2-9)
+            db      $1E, $80, $0E, $00, $0E, $00, $0E, $00, $0E, $00  ; Fielder Scale 4 (rows 10-14)
+            db      $0F, $00, $0C, $00, $0E, $00, $04, $06, $02, $0C  ; Fielder Scale 4 (row 14 cont) + Fielder Scale 3 header
+            db      $0C, $00, $0C, $00, $1E, $00, $3F, $00, $3D, $00  ; Fielder Scale 3 (rows 1-5)
+            db      $3C, $00, $1C, $00, $1C, $00, $1C, $00, $1E, $00  ; Fielder Scale 3 (rows 6-10)
+            db      $18, $00, $1C, $00, $04, $05, $02, $0A, $0C, $00  ; Fielder Scale 3 (rows 11-12) + Fielder Scale 2 header & row 1
+            db      $0C, $00, $1E, $00, $3F, $00, $3D, $00, $1C, $00  ; Fielder Scale 2 (rows 2-6)
+            db      $1C, $00, $1E, $00, $18, $00, $1C, $00, $06, $07  ; Fielder Scale 2 (rows 7-10) + Runner Frame A header
+            db      $02, $0D, $06, $00, $06, $00, $1E, $00, $2F, $E0  ; Runner Frame A (header cont & rows 1-4)
+            db      $4E, $00, $8E, $00, $0E, $00, $0F, $00, $1F, $80  ; Runner Frame A (rows 5-9)
+            db      $19, $80, $F9, $80, $F9, $80, $80, $C0, $0A, $05  ; Runner Frame A (rows 10-13) + Runner Frame B header
+            db      $02, $0A, $0C, $00, $0C, $00, $1E, $00, $3F, $00  ; Runner Frame B (header cont & rows 1-4)
+            db      $5F, $80, $8F, $40, $07, $00, $0F, $00, $19, $00  ; Runner Frame B (rows 5-9)
+            db      $33, $00, $04, $06, $02, $0B, $0C, $00, $0C, $00  ; Runner Frame B (row 10) + Runner Frame C header & row 1
+            db      $1C, $00, $3F, $80, $5C, $00, $9C, $00, $1E, $00  ; Runner Frame C (rows 2-6)
 
-            DB        $02, $09, $03, $00, $03, $00, $07, $00, $0F, $80
-            DB        $1E, $40, $FC, $20, $FC, $00, $8C, $00, $0E, $00
-            DB        $03, $05, $02, $0B, $03, $00, $03, $00, $07, $00
-            DB        $0F, $80, $1F, $40, $3E, $20, $3C, $00, $38, $00
-            DB        $3C, $00, $30, $00, $38, $00, $03, $04, $02, $09
-            DB        $03, $00, $03, $00, $07, $00, $0F, $80, $1E, $40
-            DB        $3C, $20, $38, $00, $30, $00, $38, $00, $00, $00
-            DB        $02, $02, $FF, $FF, $FF, $FF, $00, $0C, $02, $0D
-            DB        $00, $18, $00, $38, $00, $70, $00, $E0, $01, $C0
-            DB        $03, $80, $07, $00, $0E, $00, $1C, $00, $38, $00
-            DB        $70, $00, $E0, $00, $C0, $00, $00, $08, $02, $09
-            DB        $00, $06, $00, $1E, $00, $7C, $01, $F0, $07, $C0
-            DB        $1F, $00, $7C, $00, $F0, $00, $C0, $00, $00, $0D
-            DB        $02, $0B, $C0, $00, $C0, $00, $C0, $00, $C0, $00
-            DB        $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00
-            DB        $C0, $00, $C0, $00, $00, $00, $02, $09, $C0, $00
-            DB        $F0, $00, $7C, $00, $1F, $00, $07, $C0, $01, $F0
-            DB        $00, $7C, $00, $1E, $00, $06, $00, $00, $02, $0D
-            DB        $C0, $00, $E0, $00, $70, $00, $38, $00, $1C, $00
-            DB        $0E, $00, $07, $00, $03, $80, $01, $C0, $00, $E0
-            DB        $00, $70, $00, $38, $00, $18, $00, $00, $02, $0B
-            DB        $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00
-            DB        $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00
-            DB        $C0, $00, $04, $00, $02, $07, $FE, $00, $FE, $00
-            DB        $FE, $00, $FE, $00, $7C, $00, $38, $00, $10, $00
-            DB        $04, $00, $02, $04, $F8, $00, $F8, $00, $F8, $00
-            DB        $F8, $00, $04, $00, $02, $03, $F0, $00, $F0, $00
-            DB        $F0, $00, $04, $06, $02, $0C, $0C, $00, $0C, $00
-            DB        $3F, $00, $7F, $80, $9E, $40, $9E, $40, $9E, $40
-            DB        $1E, $00, $12, $00, $12, $00, $12, $00, $33, $00
-            DB        $04, $05, $02, $0A, $0C, $00, $0C, $00, $3F, $00
-            DB        $7F, $80, $9E, $40, $9E, $40, $1E, $00, $12, $00
-            DB        $12, $00, $33, $00, $03, $04, $02, $08, $10, $00
-            DB        $7C, $00, $BA, $00, $BA, $00, $38, $00, $28, $00
-            DB        $28, $00, $6C, $00, $03, $03, $02, $06, $10, $00
-            DB        $7C, $00, $BA, $00, $BA, $00, $28, $00, $6C, $00
-            DB        $06, $06, $02, $0C, $07, $00, $07, $00, $1F, $C0
-            DB        $3F, $E0, $4F, $90, $4F, $90, $4F, $90, $0F, $80
+;=========================================================================================
+; ----> SECTION 2 (PART 2C) TERSE SPRITE PATTERNS & BITMAPS                ($0641 - $0708)
+;   Perspective-scaled player animation frames, completing the small and tiny runner
+;   animation cycles, followed by the complete scaled set of pitcher frames A and B
+;   at Large, Medium, and Small perspective steps.
+;=========================================================================================
+            db      $1F, $00, $F3, $00, $F3, $00, $83, $80, $04, $05  ; Runner Frame C (Small) data (rows 4-7) + Runner Frame B (Medium) header
+            db      $02, $09, $0C, $00, $0C, $00, $3F, $80, $5C, $00  ; Runner Frame B (Medium) rows 1-4
+            db      $9C, $00, $1E, $00, $FF, $00, $F3, $00, $83, $80  ; Runner Frame B (Medium) rows 5-9
+            db      $03, $04, $02, $07, $10, $00, $7C, $00, $B0, $00  ; Runner Frame C (Small) header & rows 1-3
+            db      $30, $00, $38, $00, $E8, $00, $8C, $00, $03, $03  ; Runner Frame C (Small) rows 4-7 + Runner Frame C (Tiny) header
+            db      $02, $06, $10, $00, $7C, $00, $B0, $00, $38, $00  ; Runner Frame C (Tiny) rows 1-4
+            db      $68, $00, $4C, $00, $01, $05, $02, $0C, $60, $00  ; Runner Frame C (Tiny) rows 5-6 + Pitcher Frame A (Large) header & row 1
+            db      $60, $00, $E0, $00, $E4, $00, $E4, $00, $F8, $00  ; Pitcher Frame A (Large) rows 2-6
+            db      $E0, $00, $E0, $00, $E0, $00, $E0, $00, $E0, $00  ; Pitcher Frame A (Large) rows 7-11
+            db      $70, $00, $01, $05, $02, $0B, $60, $00, $60, $00  ; Pitcher Frame A (Large) row 12 + Pitcher Frame A (Medium) header & rows 1-2
+            db      $E0, $00, $E4, $00, $E4, $00, $F8, $00, $E0, $00  ; Pitcher Frame A (Medium) rows 3-7
+            db      $E0, $00, $E0, $00, $E0, $00, $70, $00, $06, $06  ; Pitcher Frame A (Medium) rows 8-11 + Pitcher Frame B (Large) header (part 1)
+            db      $02, $0C, $06, $00, $06, $00, $7F, $00, $8F, $00  ; Pitcher Frame B (Large) header (part 2) & rows 1-3
+            db      $7F, $00, $0F, $00, $4F, $00, $7F, $00, $7F, $00  ; Pitcher Frame B (Large) rows 4-8
+            db      $06, $00, $06, $00, $0E, $00, $07, $06, $02, $0B  ; Pitcher Frame B (Large) rows 9-11 + Pitcher Frame B (Medium) header
+            db      $0C, $00, $0C, $00, $1F, $00, $3F, $C0, $5F, $A0  ; Pitcher Frame B (Medium) rows 1-4
+            db      $8F, $80, $07, $80, $07, $80, $0C, $80, $18, $80  ; Pitcher Frame B (Medium) rows 5-9
+            db      $31, $80, $06, $05, $02, $0B, $01, $80, $01, $80  ; Pitcher Frame B (Medium) rows 10-11 + Pitcher Frame B (Small) header & row 1
+            db      $03, $80, $07, $C0, $0F, $A0, $1F, $10, $FE, $00  ; Pitcher Frame B (Small) rows 2-6
+            db      $FE, $00, $86, $00, $06, $00, $07, $00, $05, $04  ; Pitcher Frame B (Small) rows 7-11 + Pitcher Frame B (Tiny) header
+
+;=========================================================================================
+; ----> SECTION 2 (PART 2D-A)  PITCHER B TINY & PITCHER C FRAMES           ($0709 - $074E)
+;=========================================================================================
+            db      $02, $09, $03, $00, $03, $00, $07, $00, $0F, $80  ; Pitcher B Tiny (Scale 1) header (part 2) & rows 4-7
+            db      $1E, $40, $FC, $20, $FC, $00, $8C, $00, $0E, $00  ; Pitcher B Tiny (Scale 1) rows 8-9 + Pitcher C Scale 4 header & rows 1-3
+            db      $03, $05, $02, $0B, $03, $00, $03, $00, $07, $00  ; Pitcher C Scale 4 (header cont & rows 1-4)
+            db      $0F, $80, $1F, $40, $3E, $20, $3C, $00, $38, $00  ; Pitcher C Scale 4 (rows 5-9)
+            db      $3C, $00, $30, $00, $38, $00, $03, $04, $02, $09  ; Pitcher C Scale 4 (rows 10-11) + Pitcher C Scale 3 header
+            db      $03, $00, $03, $00, $07, $00, $0F, $80, $1E, $40  ; Pitcher C Scale 3 (header cont & rows 1-4)
+            db      $3C, $20, $38, $00, $30, $00, $38, $00, $00, $00  ; Pitcher C Scale 3 (rows 5-9) + Field Marker header
+;=========================================================================================
+; ----> SECTION 2 (PART 2D-B)  FIELD MARKERS & VECTOR FOUL LINES          ($074F - $07BD)
+;=========================================================================================
+            db      $02, $02, $FF, $FF, $FF, $FF, $00, $0C, $02, $0D  ; Field Marker (header cont & rows 1-2) + Foul Line Right header
+            db      $00, $18, $00, $38, $00, $70, $00, $E0, $01, $C0  ; Foul Line Right (header cont & rows 1-4)
+            db      $03, $80, $07, $00, $0E, $00, $1C, $00, $38, $00  ; Foul Line Right (rows 5-9)
+            db      $70, $00, $E0, $00, $C0, $00, $00, $08, $02, $09  ; Foul Line Right (rows 10-13) + Foul Line Left header
+            db      $00, $06, $00, $1E, $00, $7C, $01, $F0, $07, $C0  ; Foul Line Left (header cont & rows 1-4)
+            db      $1F, $00, $7C, $00, $F0, $00, $C0, $00, $00, $0D  ; Foul Line Left (rows 5-9) + Left Vertical Line header
+            db      $02, $0B, $C0, $00, $C0, $00, $C0, $00, $C0, $00  ; Left Vertical Line (header cont & rows 1-4)
+            db      $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00  ; Left Vertical Line (rows 5-9)
+            db      $C0, $00, $C0, $00, $00, $00, $02, $09, $C0, $00  ; Left Vertical Line (rows 10-11) + Right Foul Line 2 header
+            db      $F0, $00, $7C, $00, $1F, $00, $07, $C0, $01, $F0  ; Right Foul Line 2 (header cont & rows 1-4)
+            db      $00, $7C, $00, $1E, $00, $06, $00, $00, $02, $0D  ; Right Foul Line 2 (rows 5-9) + Left Foul Line 2 header
+
+;=========================================================================================
+; ----> SECTION 2 (PART 2D-C)  BASES, HOME PLATE, & FIELDER C FRAMES       ($07BE - $0884)
+;   Perspective-scaled player and field layout sprites. Includes baseline boundaries,
+;   the home plate glyph, base markers, and the scaled Fielder C animation frames.
+;=========================================================================================
+            db      $C0, $00, $E0, $00, $70, $00, $38, $00, $1C, $00  ; Left Foul Line 2 (header cont & rows 1-4)
+            db      $0E, $00, $07, $00, $03, $80, $01, $C0, $00, $E0  ; Left Foul Line 2 (rows 5-9)
+            db      $00, $70, $00, $38, $00, $18, $00, $00, $02, $0B  ; Left Foul Line 2 (rows 10-13) + Base/Diamond Line header
+            db      $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00  ; Base/Diamond Line (header cont & rows 1-4)
+            db      $C0, $00, $C0, $00, $C0, $00, $C0, $00, $C0, $00  ; Base/Diamond Line (rows 5-9)
+            db      $C0, $00, $04, $00, $02, $07, $FE, $00, $FE, $00  ; Base/Diamond Line (rows 10-11) + Home Plate header & rows 1-2
+            db      $FE, $00, $FE, $00, $7C, $00, $38, $00, $10, $00  ; Home Plate (rows 3-7)
+            db      $04, $00, $02, $04, $F8, $00, $F8, $00, $F8, $00  ; Base Large header & rows 1-3
+            db      $F8, $00, $04, $00, $02, $03, $F0, $00, $F0, $00  ; Base Large row 4 + Base Medium header & rows 1-2
+            db      $F0, $00, $04, $06, $02, $0C, $0C, $00, $0C, $00  ; Base Medium row 3 + Fielder C Scale 4 header & rows 1-2
+            db      $3F, $00, $7F, $80, $9E, $40, $9E, $40, $9E, $40  ; Fielder C Scale 4 (rows 3-7)
+            db      $1E, $00, $12, $00, $12, $00, $12, $00, $33, $00  ; Fielder C Scale 4 (rows 8-12)
+            db      $04, $05, $02, $0A, $0C, $00, $0C, $00, $3F, $00  ; Fielder C Scale 3 header & rows 1-3
+            db      $7F, $80, $9E, $40, $9E, $40, $1E, $00, $12, $00  ; Fielder C Scale 3 (rows 4-8)
+            db      $12, $00, $33, $00, $03, $04, $02, $08, $10, $00  ; Fielder C Scale 3 (rows 9-10) + Fielder C Scale 2 header & row 1
+            db      $7C, $00, $BA, $00, $BA, $00, $38, $00, $28, $00  ; Fielder C Scale 2 (rows 2-6)
+            db      $28, $00, $6C, $00, $03, $03, $02, $06, $10, $00  ; Fielder C Scale 2 (rows 7-8) + Fielder C Scale 1 header & row 1
+            db      $7C, $00, $BA, $00, $BA, $00, $28, $00, $6C, $00  ; Fielder C Scale 1 (rows 2-6)
+            db      $06, $06, $02, $0C, $07, $00, $07, $00, $1F, $C0  ; Fielder D Scale 4 header & rows 1-3
+            db      $3F, $E0, $4F, $90, $4F, $90, $4F, $90, $0F, $80  ; Fielder D Scale 4
 
 ;=========================================================================================
 ; SECTION 3: SYSTEM MOTION, SINE & VECTOR LOOKUP TABLES ($0885 - $0940) [188 Bytes]
 ;=========================================================================================
-            DB      $0D, $80, $0D, $80, $0D, $80, $1D, $C0, $F9, $05  ; $0885
-            DB      $A5, $05, $2F, $06, $C5, $05, $49, $06, $E1, $05  ; $088F
-            DB      $5F, $06, $81, $05, $71, $06, $95, $05, $ED, $06  ; $0899
-            DB      $1D, $07, $07, $07, $37, $07, $AC, $04, $AC, $04  ; $08A3
-            DB      $B2, $04, $B2, $04, $D3, $06, $D3, $06, $17, $06  ; $08AD
-            DB      $17, $06, $C7, $04, $1F, $05, $E3, $04, $3F, $05  ; $08B7
-            DB      $FB, $04, $59, $05, $0F, $05, $6F, $05, $B7, $06  ; $08C1
-            DB      $1F, $05, $C7, $04, $C7, $04, $E3, $04, $E3, $04  ; $08CB
-            DB      $19, $08, $19, $08, $35, $08, $35, $08, $4D, $08  ; $08D5
-            DB      $4D, $08, $61, $08, $61, $08, $71, $08, $71, $08  ; $08DF
-            DB      $81, $06, $81, $06, $9D, $06, $9D, $06, $AD, $08  ; $08E9
-            DB      $AD, $08, $AD, $08, $AD, $08, $AD, $08, $CD, $08  ; $08F3
-            DB      $CD, $08, $D1, $08, $E5, $08, $E5, $08, $C9, $08  ; $08FD
-            DB      $C9, $08, $B1, $08, $B1, $08, $B5, $08, $E9, $08  ; $0907
-            DB      $E9, $08, $ED, $08, $B9, $08, $B9, $08, $BD, $08  ; $0911
-            DB      $C1, $08, $C5, $08, $A9, $08, $A9, $08, $A9, $08  ; $091B
-            DB      $A9, $08, $A9, $08, $8D, $08, $91, $08, $95, $08  ; $0925
-            DB      $99, $08, $9D, $08, $A1, $08, $A1, $08, $A5, $08  ; $092F
-            DB      $D5, $08, $D5, $08, $D9, $08                      ; $0939
-            DB      $DD, $08                                          ; $093F
+
+; --- SYSTEM MOTION & COORDINATE CONVERSION VECTORS ---
+_MOTION_DELTAS:
+            DW      $800D, $800D, $800D, $C01D, $05F9   ; $0885: Motion speeds & RELABS callback
+
+; --- VRAM BLITTER & COORDINATE CALCULATOR ROUTINE POINTERS ---
+_BLIT_UTILS:
+            DW      $05A5, $062F, $05C5, $0649, $05E1   ; $088F: FILL, write (XPAND), norrel, line-skip
+            DW      $065F, $0581, $0671, $0595, $06ED   ; $0899: Destination write, COLOR setup, cocktail flip, FLOOD, unsdiv1
+
+; --- CUSTOM FONT UTILITIES & SCORE RAM VECTORS ---
+_FONT_UTILS:
+            DW      $071D, $0707, $0737, $04AC, $04AC   ; $08A3: Font translation helpers, custom renderer, HS4 RAM vector
+
+; --- GAME SPRITE & PERSPECTIVE SCALING ASSET POINTERS ---
+_SCALE_SPRITES:
+            DW      $04B2, $04B2, $06D3, $06D3, $0617   ; $08AD: Ball/Bat headers, scaling math division, absolute flip
+            DW      $0617, $04C7, $051F, $04E3, $053F   ; $08B7: Flip vector, Batter S4, Fielder S3, Batter S3, Fielder S1
+            DW      $04FB, $0559, $050F, $056F, $06B7   ; $08C1: Batter S2, Pitcher S3, Fielder S4, Pitcher S2, Outfielder run
+            DW      $051F, $04C7, $04C7, $04E3, $04E3   ; $08CB: Fielder S3, Batter S4, Batter S4, Batter S3, Batter S3
+
+; --- AUDIO SEQUENCE & WAVEFORM DATA POINTERS ---
+_AUDIO_TABLES:
+            DW      $0819, $0819, $0835, $0835, $084D   ; $08D5: Audio pitch and wave tables (CHRTBL area)
+            DW      $084D, $0861, $0861, $0871, $0871   ; $08DF: Audio track start blocks
+            DW      $0681, $0681, $069D, $069D, $08AD   ; $08E9: Blitter write hooks & Section 3 word pointers [FIXED $069D]
+            DW      $08AD, $08AD, $08AD, $08AD, $08CD   ; $08F3: Word 20 lookup pointers
+            DW      $08CD, $08D1, $08E5, $08E5, $08C9   ; $08FD: Word 37, 38, and 62 lookup pointers
+            DW      $08C9, $08B1, $08B1, $08B5, $08E9   ; $0907: Word 64, 22, and 24 lookup pointers
+            DW      $08E9, $08ED, $08B9, $08B9, $08BD   ; $0911: Word 69, 71, and 72 lookup pointers
+            DW      $08C1, $08C5, $08A9, $08A9, $08A9   ; $091B: Word 75, 76, and 18 pointers
+            DW      $08A9, $08A9, $088D, $0891, $0895   ; $0925: Word 18, 4, 6, and 8 pointers
+            DW      $0899, $089D, $08A1, $08A1, $08A5   ; $092F: Word 10, 12, 14, and 16 pointers
+            DW      $08D5, $08D5, $08D9, $08DD          ; $0939: Word 90 and 92 pointers
 
 ;=========================================================================================
-; ----> VECT_TBL0941   ADDRESS VECTOR TABLE  ($0941 - $0966)
-;   Table of 19 16-bit address pointers ($08E1 - $0964). Disassembled as Z80 opcodes
-;   in legacy listings, but structured as 16-bit data words (DW).
+; ----> VECT_TB_AUD_VECT_TABLE   ADDRESS VECTOR TABLE  ($0941 - $0966)
+;   Table of 19 16-bit address pointers ($08E1 - $0964).
 ;=========================================================================================
-L0941:
+_AUD_VECT_TABLE:
             DW      $08E1, $0929, $0933, $0915
             DW      $090F, $0939, $091F, $08F1
             DW      $08FB, $0901, $0905, $0909
@@ -1204,11 +1234,11 @@ _BRANCH_STREAM:
             ret                         ; Return to stream interpreter loop
 
 ;=========================================================================================
-; ----> L0989            CHECK SOUND STREAM DELAY                          ($0989 - $0997)
+; ----> _AUD_TICK            CHECK SOUND STREAM DELAY                          ($0989 - $0997)
 ;   Checks if the active sound stream frame delay counter ($7C23) is currently non-zero.
 ;   Decrements the delay counter if active; otherwise, continues command execution.
 ;=========================================================================================
-L0989:      push    bc                  ; Preserve stream pointer
+_AUD_TICK:      push    bc                  ; Preserve stream pointer
             ld      a,($7C23)           ; Load active sound stream delay counter
             or      a                   ; Check if a stream delay is currently active
             jp      z,$0998             ; If delay timer is zero, fetch next command
@@ -1217,11 +1247,11 @@ L0989:      push    bc                  ; Preserve stream pointer
             jp      nz,$0A12            ; If delay still active, exit tick immediately
 
 ;=========================================================================================
-; ----> L0998            FETCH AND DECODE SOUND COMMAND                    ($0998 - $09A1)
+; ----> _AUD_FETCH_CMD            FETCH AND DECODE SOUND COMMAND                    ($0998 - $09A1)
 ;   Fetches the next command byte from the script stream pointer ($7C1C), advances
 ;   the pointer, and jumps to check other commands if the command is non-zero.
 ;=========================================================================================
-L0998:      call    $0967               ; Fetch next sound command byte from stream pointer
+_AUD_FETCH_CMD:      call    $0967               ; Fetch next sound command byte from stream pointer
             call    $096C               ; Advance stream pointer to next byte in RAM
             or      a                   ; Check if command byte is zero (CMD 0: Port Output)
             jp      nz,$09C0            ; If non-zero, jump to check other stream commands
@@ -1241,7 +1271,8 @@ L0998:      call    $0967               ; Fetch next sound command byte from str
             ld      bc,$09B4            ; Load return hook address ($09B4)
             jp      $0275               ; Jump to double multiply / LCG routine
 
-L09B4:      inc     c                   ; LCG update math adjustment
+_AUD_CMD0_RET:
+            inc     c                   ; LCG update math adjustment
             nop                         ; Padding
             pop     hl                  ; Pop Value 2 from stack
             pop     de                  ; Pop Value 1 from stack
@@ -1252,11 +1283,12 @@ L09B4:      inc     c                   ; LCG update math adjustment
             jp      $0A12               ; Exit stream parser tick
 
 ;=========================================================================================
-; ----> L09C0            DECODE REMAINING SOUND STREAM COMMANDS            ($09C0 - $0A17)
+; ----> _AUD_CHECK_CMD1            DECODE REMAINING SOUND STREAM COMMANDS            ($09C0 - $0A17)
 ;   Parses and executes stream commands CMD 1 (Wait/Delay), CMD 2 (Branch), CMD 3 (Wait
 ;   with Attribute), CMD 4 (Loop/End Stream), and CMD >= 5 (Direct port register writes).
 ;=========================================================================================
-L09C0:      dec     a                   ; Check if command is 1 (CMD 1: Wait/Delay)
+_AUD_CHECK_CMD1:
+            dec     a                   ; Check if command is 1 (CMD 1: Wait/Delay)
             jp      nz,$09D2            ; If not 1, branch to check next command
             call    $0967               ; Fetch next byte (delay ticks) from stream into A
             ld      ($7C23),a           ; Store ticks in active stream delay counter
@@ -1264,19 +1296,19 @@ L09C0:      dec     a                   ; Check if command is 1 (CMD 1: Wait/Del
             or      $01                 ; Set non-zero status in accumulator
             jp      $0A12               ; Exit stream interpreter tick
 
-L09D2:      dec     a                   ; Check if command is 2 (CMD 2: Stream Branch)
+_AUD_CHECK_CMD2:      dec     a                   ; Check if command is 2 (CMD 2: Stream Branch)
             jp      nz,$09DD            ; If not 2, branch to check next command
             call    $097E               ; Fetch 16-bit address and branch stream pointer
             xor     a                   ; Clear accumulator (continue execution)
             jp      $0A12               ; Exit stream interpreter tick
 
-L09DD:      dec     a                   ; Check if command is 3 (CMD 3: Wait with Attribute)
+_AUD_CHECK_CMD3:      dec     a                   ; Check if command is 3 (CMD 3: Wait with Attribute)
             jp      nz,$09E9            ; If not 3, branch to check next command
             call    $097E               ; Fetch branch/attribute target from stream
             or      $01                 ; Set non-zero status in accumulator
             jp      $0A12               ; Exit stream interpreter tick
 
-L09E9:      dec     a                   ; Check if command is 4 (CMD 4: Loop/End Stream)
+_AUD_CHECK_CMD4:      dec     a                   ; Check if command is 4 (CMD 4: Loop/End Stream)
             jp      nz,$0A06            ; If not 4, branch to check next command
             ld      a,($7C20)           ; Load stream active flag ($7C20)
             dec     a                   ; Decrement active flag
@@ -1286,10 +1318,10 @@ L09E9:      dec     a                   ; Check if command is 4 (CMD 4: Loop/End
             ld      ($7C1C),hl          ; Loop back: restore stream pointer to $7C1C
             jp      $0A12               ; Exit stream interpreter tick
 
-L0A00:      ld      ($7C24),a           ; Store zero in stream status ($7C24)
+_AUD_STOP_STREAM:      ld      ($7C24),a           ; Store zero in stream status ($7C24)
             jp      $0A12               ; Exit stream interpreter tick
 
-L0A06:      add     a,$04               ; Add port offset ($04) to command byte
+_AUD_DIRECT_PORT:      add     a,$04               ; Add port offset ($04) to command byte
             ld      c,a                 ; Move calculated hardware port address to C
             call    $0967               ; Fetch next byte (port value) from stream
             out     (c),a               ; Output value directly to sound chip port in C
@@ -1298,26 +1330,30 @@ L0A06:      add     a,$04               ; Add port offset ($04) to command byte
             or      a                   ; Test accumulator status
             jp      z,$0998             ; If zero (no delay), loop immediately to fetch next cmd
 
-L0A12:      pop     bc                  ; Restore BC (stream pointer)
+_AUD_TICK_EXIT:      pop     bc                  ; Restore BC (stream pointer)
             ret                         ; Return to interrupt caller
 
 ;=========================================================================================
-; ----> L0A18            INITIALIZE SOUND STREAM POINTERS                  ($0A18 - $0A1E)
+; ----> _AUD_INIT_POINTERS            INITIALIZE SOUND STREAM POINTERS                  ($0A18 - $0A1E)
 ;   Subroutine to initialize the active stream pointer ($7C1C) and the loop start
 ;   address pointer ($7C21) to the address passed in HL.
 ;=========================================================================================
-L0A18:      ld      ($7C1C),hl          ; Store stream pointer stored in HL to $7C1C
+_AUD_INIT_POINTERS:
+            ld      ($7C1C),hl          ; Store stream pointer stored in HL to $7C1C
             ld      ($7C21),hl          ; Store loop start address stored in HL to $7C21
             ret                         ; Return to caller
-ld   a,($7C19)
-and  a
-ret  nz
-call $0A18
-xor  a
-ld   ($7C23),a
-inc  a
-ld   ($7C20),a
-ret
+
+;============================================================
+
+            ld   a,($7C19)
+            and  a
+            ret  nz
+            call $0A18
+            xor  a
+            ld   ($7C23),a
+            inc  a
+            ld   ($7C20),a
+            ret
 ;============================================================
 
 
@@ -11789,7 +11825,7 @@ jp   (iy)
 
 rst  $08		; Mark our spot on the map
 
-L3E96:			db	$19, $C0	; $C0
+_VM_BOOT_STREAM:			db	$19, $C0	; $C0
  			db	$19, $0A	; $0A
 			db	$4B		; Out ($0A),$C0 --> Vertical Blank = 192
 			db	$0D		; $00
