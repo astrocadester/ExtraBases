@@ -1178,20 +1178,32 @@ _INC_7C1C:
             inc     hl                      ; Advance pointer by 1 byte
             ld      ($7C1C),hl              ; Store updated pointer back to RAM
             ret
-;============================================================
-call $0967
-call $096C
-ld   h,$00
-ld   l,a
-ret
-;============================================================
-ld   hl,($7C1C)
-ld   e,(hl)
-inc  hl
-ld   d,(hl)
-ld   ($7C1C),de
-ret
-;============================================================
+
+;=========================================================================================
+; ----> _GET_STREAM_BYTE  FETCH BYTE FROM VM STREAM      ($0974 - $097D)
+;   Fetches the next 8-bit byte from the script stream pointer ($7C1C),
+;   increments the pointer, and returns the byte zero-extended in HL.
+;=========================================================================================
+_GET_STREAM_BYTE:
+            call    $0967               ; Fetch next script byte from stream pointer ($7C1C)
+            call    $096C               ; Advance stream pointer to next byte
+            ld      h,$00               ; Zero-extend high byte of fetched value
+            ld      l,a                 ; Place fetched byte into low byte of HL
+            ret                         ; Return with zero-extended value in HL
+
+;=========================================================================================
+; ----> _BRANCH_STREAM BRANCH STREAM POINTER                               ($097E - $0988)
+;   Fetches a 16-bit destination address from the script stream pointer ($7C1C) and
+;   updates the stream pointer to branch unconditionally to that target address.
+;=========================================================================================
+_BRANCH_STREAM:
+            ld      hl,($7C1C)          ; Load stream pointer stored at $7C1C into HL
+            ld      e,(hl)              ; Fetch branch destination low byte from stream
+            inc     hl                  ; Advance stream pointer to destination high byte
+            ld      d,(hl)              ; Fetch branch destination high byte from stream
+            ld      ($7C1C),de          ; Store updated branch destination back into $7C1C
+            ret                         ; Return to stream interpreter loop
+
 push bc
 ld   a,($7C23)
 or   a
@@ -11742,6 +11754,7 @@ jp   (iy)
 ;******************************************************************************
 
 rst  $08		; Mark our spot on the map
+
 L3E96:			db	$19, $C0	; $C0
  			db	$19, $0A	; $0A
 			db	$4B		; Out ($0A),$C0 --> Vertical Blank = 192
@@ -11948,4 +11961,5 @@ db	$80		; $AC
 
 
 
-		end
+		END         ; It's the end of the world as we know it
+                    ; and I feel fine.
