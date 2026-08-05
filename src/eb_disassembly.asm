@@ -996,17 +996,166 @@ CHRTBL:
 ;   A table of 10 custom 8x10 game-specific font glyphs and system symbols used on the
 ;   Mini-Scoreboard and during batting/running play screens.
 ;=========================================================================================
-            db      $EE, $EE, $EC, $48, $44, $AA, $4E, $44, $AC, $42  ; Symbol 1: "1B" (Single / First Base) glyph
-            db      $44, $AA, $EE, $E4, $EA, $EA, $E0, $AE, $80, $AE  ; Symbol 2: "2B" (Double / Second Base) glyph
-            db      $C0, $AA, $80, $EA, $E0, $40, $E0, $E0, $A0, $E0  ; Symbol 3: "3B" (Triple / Third Base) glyph
-            db      $E0, $E0, $E0, $E0, $40, $20, $20, $A0, $80, $80  ; Symbol 4: Slanted Baseball Bat sprite
-            db      $20, $A0, $A0, $40, $E0, $60, $E0, $C0, $E0, $40  ; Symbol 5: Baseball Player (Batter stance)
-            db      $E0, $E0, $40, $80, $20, $20, $20, $A0, $40, $A0  ; Symbol 6: Bat swing / Animation frame
-            db      $20, $40, $E0, $E0, $20, $C0, $E0, $40, $E0, $E0  ; Symbol 7: Baseball Player (Running / Fielder)
-            db      $AE, $AA, $AE, $A8, $E8, $AE, $A0, $EC, $E0, $AA  ; Symbol 8: "HR" (Home Run) scoreboard glyph
-            db      $A0, $AA, $80, $4A, $A0, $EC, $C0, $4A, $A0, $AA  ; Symbol 9: Out / Scoreboard status glyph
-            db      $80, $4E, $E0, $AA, $E0, $00, $00, $01, $02, $00  ; Symbol 10: Baseball Diamond and Foul Lines
 
+;=========================================================================================
+; ----> SYSTEM_SYM_01    Symbol 1: "1B" (Single / First Base) glyph       ($044D - $0456)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_01:
+            DB      $EE                         ; Line 01: ###.###. (Top boundary segment of digits '1' and 'B')
+            DB      $EE                         ; Line 02: ###.###. (Upper curve of digits '1' and 'B')
+            DB      $EC                         ; Line 03: ###.##.. (Upper loop closure of digit 'B')
+            DB      $48                         ; Line 04: .#..#... (Vertical stem of digit '1' and middle spoke of 'B')
+            DB      $44                         ; Line 05: .#...#.. (Vertical stem of digit '1' and outer spoke of 'B')
+            DB      $AA                         ; Line 06: #.#.#.#. (Center horizontal dividing alignment)
+            DB      $4E                         ; Line 07: .#..###. (Lower vertical stem of '1' and 'B' lower loop)
+            DB      $44                         ; Line 08: .#...#.. (Lower vertical stem of '1' and 'B' lower loop corner)
+            DB      $AC                         ; Line 09: #.#.##.. (Bottom base plate alignment of the scoreboard font)
+            DB      $42                         ; Line 10: .#....#. (Bottom-most anchor pixels for first-base status)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_02    Symbol 2: "2B" (Double / Second Base) glyph      ($0457 - $0460)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_02:
+            DB      $44                         ; Line 01: .#...#.. (Top arch start for digit '2' and letter 'B')
+            DB      $AA                         ; Line 02: #.#.#.#. (Upper shoulder curve alignment)
+            DB      $EE                         ; Line 03: ###.###. (Upper horizontal bar of '2' and 'B' curve)
+            DB      $E4                         ; Line 04: ###..#.. (Upper diagonal segment of '2' and 'B' middle)
+            DB      $EA                         ; Line 05: ###.#.#. (Diagonal transition segment of '2' and 'B' spine)
+            DB      $EA                         ; Line 06: ###.#.#. (Middle cross section of second-base character)
+            DB      $E0                         ; Line 07: ###..... (Lower diagonal slope of '2' and 'B' bottom spacer)
+            DB      $AE                         ; Line 08: #.#.###. (Lower base loop of '2' and 'B' lower curve)
+            DB      $80                         ; Line 09: #....... (Bottom left foot anchor for digit '2')
+            DB      $AE                         ; Line 10: #.#.###. (Bottom baseline alignment for double base graphic)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_03    Symbol 3: "3B" (Triple / Third Base) glyph       ($0461 - $046A)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_03:
+            DB      $C0                         ; Line 01: ##...... (Top left crown segment of digit '3')
+            DB      $AA                         ; Line 02: #.#.#.#. (Upper loop shoulder curve of '3' and 'B')
+            DB      $80                         ; Line 03: #....... (Top-most left vertical spoke of '3')
+            DB      $EA                         ; Line 04: ###.#.#. (Upper loop closure of '3' and 'B' waist)
+            DB      $E0                         ; Line 05: ###..... (Center horizontal bar of '3' and 'B' spacer)
+            DB      $40                         ; Line 06: .#...... (Center vertical stem segment)
+            DB      $E0                         ; Line 07: ###..... (Lower horizontal loop start of '3' and 'B')
+            DB      $E0                         ; Line 08: ###..... (Lower horizontal loop start of '3' and 'B' duplicate)
+            DB      $A0                         ; Line 09: #.#..... (Lower curve bottom-left and right tips)
+            DB      $E0                         ; Line 10: ###..... (Bottom baseplate footer for triple base indicator)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_04    Symbol 4: Slanted Baseball Bat sprite            ($046B - $0474)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_04:
+            DB      $E0                         ; Line 01: ###..... (Thick barrel tip of the slanted baseball bat)
+            DB      $E0                         ; Line 02: ###..... (Thick barrel profile of the slanted baseball bat)
+            DB      $E0                         ; Line 03: ###..... (Main barrel segment showing maximum width)
+            DB      $E0                         ; Line 04: ###..... (Barrel taper transition down to bat handle)
+            DB      $40                         ; Line 05: .#...... (Bat neck showing diagonal pixel step)
+            DB      $20                         ; Line 06: ..#..... (Upper bat handle shaft)
+            DB      $20                         ; Line 07: ..#..... (Lower bat handle shaft near grip tape)
+            DB      $A0                         ; Line 08: #.#..... (Bat handle showing grip wrapping lines)
+            DB      $80                         ; Line 09: #....... (Grip knob base transition)
+            DB      $80                         ; Line 10: #....... (Bottom bat knob cap)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_05    Symbol 5: Baseball Player (Batter stance)        ($0475 - $047E)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_05:
+            DB      $20                         ; Line 01: ..#..... (Batting helmet top)
+            DB      $A0                         ; Line 02: #.#..... (Batter face mask and neck guard)
+            DB      $A0                         ; Line 03: #.#..... (Shoulder pads and upper chest)
+            DB      $40                         ; Line 04: .#...... (Waist and batting jersey belt)
+            DB      $E0                         ; Line 05: ###..... (Hips and back thigh protective pad)
+            DB      $60                         ; Line 06: .##..... (Front thigh and knee bend)
+            DB      $E0                         ; Line 07: ###..... (Lower legs and shin guards)
+            DB      $C0                         ; Line 08: ##...... (Back cleat anchor on the batter box dirt)
+            DB      $E0                         ; Line 09: ###..... (Front cleat anchor and stance base)
+            DB      $40                         ; Line 10: .#...... (Ground shadow projection for batter stance)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_06    Symbol 6: Bat swing / Animation frame            ($047F - $0488)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_06:
+            DB      $E0                         ; Line 01: ###..... (Bat swing motion blur - upper arc)
+            DB      $E0                         ; Line 02: ###..... (Bat swing motion blur - middle arc)
+            DB      $40                         ; Line 03: .#...... (Helmet profile of swinging batter)
+            DB      $80                         ; Line 04: #....... (Swinging batter's left shoulder)
+            DB      $20                         ; Line 05: ..#..... (Torso torso twist during the swing)
+            DB      $20                         ; Line 06: ..#..... (Torso torso twist during the swing part 2)
+            DB      $20                         ; Line 07: ..#..... (Waist rotation profile)
+            DB      $A0                         ; Line 08: #.#..... (Front and rear legs splayed out)
+            DB      $40                         ; Line 09: .#...... (Front leg knee flexion point)
+            DB      $A0                         ; Line 10: #.#..... (Cleats digging into home plate turf)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_07    Symbol 7: Baseball Player (Running / Fielder)    ($0489 - $0492)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_07:
+            DB      $20                         ; Line 01: ..#..... (Fielder cap brim)
+            DB      $40                         ; Line 02: .#...... (Fielder neck and shoulder slope)
+            DB      $E0                         ; Line 03: ###..... (Glove arm outstretched for catch)
+            DB      $E0                         ; Line 04: ###..... (Torso running forward profile)
+            DB      $20                         ; Line 05: ..#..... (Waist and jersey line)
+            DB      $C0                         ; Line 06: ##...... (Thighs splayed in runner stride)
+            DB      $E0                         ; Line 07: ###..... (Stride knee joints)
+            DB      $40                         ; Line 08: .#...... (Back leg trailing calf)
+            DB      $E0                         ; Line 09: ###..... (Cleats striking the baseline)
+            DB      $E0                         ; Line 10: ###..... (Ground shadow under the running fielder)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_08    Symbol 8: "HR" (Home Run) scoreboard glyph        ($0493 - $049C)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_08:
+            DB      $AE                         ; Line 01: #.#.###. (Top boundary strokes of 'H' and 'R')
+            DB      $AA                         ; Line 02: #.#.#.#. (Upper vertical strokes of 'H' and 'R')
+            DB      $AE                         ; Line 03: #.#.###. (Waists / middle bars of 'H' and 'R')
+            DB      $A8                         ; Line 04: #.#.#... (Lower vertical stroke transition point)
+            DB      $E8                         ; Line 05: ###.#... (Lower horizontal connect of 'H' crossbar)
+            DB      $AE                         ; Line 06: #.#.###. (Lower vertical legs of 'H' and diagonal 'R')
+            DB      $A0                         ; Line 07: #.#..... (Outer leg base boundaries)
+            DB      $EC                         ; Line 08: ###.##.. (Foot bar of the 'H' letter)
+            DB      $E0                         ; Line 09: ###..... (Foot bar of the 'R' letter)
+            DB      $AA                         ; Line 10: #.#.#.#. (Bottom baseline of the HR status indicator)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_09    Symbol 9: Out / Scoreboard status glyph          ($049D - $04A6)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_09:
+            DB      $A0                         ; Line 01: #.#..... (Top left and right corners of 'O')
+            DB      $AA                         ; Line 02: #.#.#.#. (Upper curves of 'O' and 'U')
+            DB      $80                         ; Line 03: #....... (Top-most left vertical spoke of 'O')
+            DB      $4A                         ; Line 04: .#..#.#. (Center spokes of letters 'O' and 'U')
+            DB      $A0                         ; Line 05: #.#..... (Lower loop curves of 'O')
+            DB      $EC                         ; Line 06: ###.##.. (Spoke connectors for 'U' and 'T')
+            DB      $C0                         ; Line 07: ##...... (Stem of letter 'T')
+            DB      $4A                         ; Line 08: .#..#.#. (Lower segments of letters 'U' and 'T')
+            DB      $A0                         ; Line 09: #.#..... (Lower vertical stroke bounds)
+            DB      $AA                         ; Line 10: #.#.#.#. (Baseline alignment of the Out indicator)
+
+;=========================================================================================
+; ----> SYSTEM_SYM_10    Symbol 10: Baseball Diamond and Foul Lines       ($04A7 - $04B0)
+;   Width: 1 Byte (8 Pixels), Height: 10 Lines. No Header (Standard Font Glyph).
+;=========================================================================================
+_SYM_10:
+            DB      $80                         ; Line 01: #....... (Second base bag pixel indicator)
+            DB      $4E                         ; Line 02: .#..###. (Baseline pathways from 2nd to 1st/3rd)
+            DB      $E0                         ; Line 03: ###..... (Third base bag pixel indicator)
+            DB      $AA                         ; Line 04: #.#.#.#. (First base bag pixel indicator)
+            DB      $E0                         ; Line 05: ###..... (Home plate turf marker indicator)
+            DB      $00                         ; Line 06: ........ (Foul line extension gap - infield dirt)
+            DB      $00                         ; Line 07: ........ (Foul line extension gap - infield dirt duplicate)
+            DB      $01                         ; Line 08: .......# (Right field foul line boundary pixel)
+            DB      $02                         ; Line 09: ......#. (Left field foul line boundary pixel)
+            DB      $00                         ; Line 10: ........ (Home plate boundary projection footer)
 ;=========================================================================================
 ; ----> SECTION 2 (PART 1) TERSE SPRITE PATTERNS & BITMAPS                 ($04B1 - $0578)
 ;   Compiled Perspective-Scaled sprite assets for batters and fielders at multiple size
