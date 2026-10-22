@@ -36,10 +36,8 @@ if not exist "roms" mkdir "roms"
 
 echo [2/4] Assembling eb_disassembly.asm
 echo       zmac: %ZMAC_BIN%
-pushd src
-"..\%ZMAC_BIN%" -h -o zout\eb_disassembly.hex -x zout\eb_disassembly.lst eb_disassembly.asm
+"%ZMAC_BIN%" -h -o src\zout\eb_disassembly.hex -x src\zout\eb_disassembly.lst src\eb_disassembly.asm
 set ZMAC_ERR=%ERRORLEVEL%
-popd
 
 if %ZMAC_ERR% neq 0 (
     echo ERROR: zmac failed. Review the assembler output above.
@@ -79,6 +77,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command ^
     "    [System.IO.File]::WriteAllBytes((Join-Path $outputDir $romName), $slice);" ^
     "    Write-Host ('  -> Wrote ' + $romName + ' (' + $slice.Length + ' bytes)');" ^
     "}"
+
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: ROM splitting failed.
+    exit /b 1
+)
+
+powershell -NoProfile -Command ^
+    "$expected = @{'m761a'='6483ca1359b675b0dd739605db2a1dbd4b7fb8cb'; 'm761b'='52e571e671fa61b0f9ab397a5947094c24f6c388'; 'm761c'='e41fb9db919039c8a48b4caebf80821a066d7ccf'; 'm761d'='e60c3f4b075f8b811ff6a8637c4aa0b089847a82'};" ^
+    "foreach ($name in $expected.Keys) { if ((Get-FileHash (Join-Path 'roms' $name) -Algorithm SHA1).Hash.ToLowerInvariant() -ne $expected[$name]) { Write-Error ('ROM checksum mismatch: ' + $name); exit 1 } }"
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: ROM verification failed.
+    exit /b 1
+)
 
 echo [4/4] Packaging roms\ebases.zip...
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
