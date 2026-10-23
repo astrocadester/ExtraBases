@@ -13,253 +13,7 @@
 
             ORG     $0000
 
-;=========================================================================================
-; Verified ROM/RAM symbols
-;=========================================================================================
-_BRANCH_TAKEN       EQU     $020B
-RAM_IPNT            EQU     $7C00
-RAM_RND_LOW         EQU     $7C02
-RAM_RND_HIGH        EQU     $7C04
-RAM_PLYR1UP         EQU     $7C0B
-RAM_SCORE1          EQU     $7C0D
-RAM_SCORE2          EQU     $7C0E
-RAM_CREDITS         EQU     $7C11
-RAM_MUSPC           EQU     $7C1C
-RAM_MUSREPEAT       EQU     $7C20
-RAM_MUSSTART        EQU     $7C21
-RAM_NOTETIMER       EQU     $7C23
-RAM_TAKEFIELD       EQU     $7C4A
-RAM_THROWANM        EQU     $7C51
-RAM_OFTOTBL         EQU     $7CA4
-RAM_THROWTIME       EQU     $7CC3
-RAM_SCRTIME         EQU     $7CCC
-RAM_HITTIME         EQU     $7CD2
-RAM_CAUGHT          EQU     $7CD4
-RAM_PITCHTIME       EQU     $7CD9
-VEC_R1              EQU     $7CDA
-VEC_R2              EQU     $7CF9
-VEC_R3              EQU     $7D18
-VEC_R4              EQU     $7D37
-VEC_PT              EQU     $7D56
-VEC_FIRST           EQU     $7D75
-VEC_SECOND          EQU     $7D94
-VEC_SS              EQU     $7DB3
-VEC_THIRD           EQU     $7DD2
-VEC_LF              EQU     $7DF1
-VEC_CF              EQU     $7E10
-VEC_RF              EQU     $7E2F
-VEC_BL              EQU     $7E4E
-_COUNT              EQU     $00E6
-_1plusBat           EQU     $00F2
-_less_than          EQU     $0114
-_greater_than       EQU     $013C
-_BMOVE              EQU     $0168
-_Aquote             EQU     $020E
-_SSTORE             EQU     $0219
-_SBSTORE            EQU     $021D
-_ENDINT             EQU     $0221
-_FILL               EQU     $0253
-_RND                EQU     $0275
-TEXT_CREDITS        EQU     $0439
-TEXT_ISITOR         EQU     $044D
-TEXT_OME            EQU     $045C
-TEXT_INNINGS        EQU     $0466
-TEXT_UP             EQU     $0493
-TEXT_YOU_ARE        EQU     $0498
-NOBOD               EQU     $04AC
-BALLPAT             EQU     $04B2
-UPTRI               EQU     $04BA
-DNTRI               EQU     $04BF
-IMRK                EQU     $04C4
-TUP1M               EQU     $04C7
-TUP2M               EQU     $04E3
-TUP3M               EQU     $04FB
-TUP4M               EQU     $050F
-TUP1F               EQU     $051F
-TUP2F               EQU     $053F
-TUP3F               EQU     $0559
-TUP4F               EQU     $056F
-RUP3M               EQU     $0581
-RUP4M               EQU     $0595
-RUP0M               EQU     $05A5
-RUP1M               EQU     $05C5
-RUP2M               EQU     $05E1
-RUP0B               EQU     $05F9
-ONBASE2             EQU     $0617
-RUP1B               EQU     $062F
-RUP2B               EQU     $0649
-RUP3B               EQU     $065F
-RUP4B               EQU     $0671
-CBUP1               EQU     $0681
-CBUP2               EQU     $069D
-PTMID               EQU     $06B7
-ONBASE1             EQU     $06D3
-FUP1B               EQU     $06ED
-FUP2B               EQU     $0707
-FUP1M               EQU     $071D
-FUP2M               EQU     $0737
-BATMID              EQU     $074D
-BATU45              EQU     $0755
-BATU30              EQU     $0773
-BATU90              EQU     $0789
-BATD30              EQU     $07A3
-BATD45              EQU     $07B9
-BATD90              EQU     $07D7
-HOMEPLATE           EQU     $07F1
-BASEPAT             EQU     $0803
-BASE2PAT            EQU     $080F
-STN1                EQU     $0819
-STN2                EQU     $0835
-STN3                EQU     $084D
-STN4                EQU     $0861
-STNPT               EQU     $0871
-_MOTION_DELTAS      EQU     $0885
-loadpc              EQU     $0A18
-music_gate          EQU     $0A1F
-_BMUSIC             EQU     $0A30
-_EMUSIC             EQU     $0A36
-BALLSCORE           EQU     $0A8E
-COINSCORE           EQU     $0AC4
-FOULSCORE           EQU     $0AE4
-CRACKSCORE          EQU     $0B76
-FENCESCORE          EQU     $0B94
-TAKE_ME             EQU     $0B9B
-SAFESCORE           EQU     $0C7E
-OUTSCORE            EQU     $0CA9
-_VM_0CE7            EQU     $0CE7
-relabs              EQU     $0D08
-reloff              EQU     $0D44
-write               EQU     $0D74
-writep              EQU     $0DF4
-_WRITE              EQU     $0E01
-_WRITR              EQU     $0E19
-cpost               EQU     $0E31
-_3DROP              EQU     $0E85
-_CPOST              EQU     $0E8A
-_SPOST              EQU     $0E8E
-_dpost              EQU     $0E9A
-_NPOST              EQU     $0EBD
-vwrite              EQU     $0ECC
-verase              EQU     $0EF9
-comphl              EQU     $1111
-compde              EQU     $1119
-timedcr             EQU     $1121
-_BONE               EQU     $112E
-_BZERO              EQU     $1132
-_WUPGO              EQU     $1136
-_EX                 EQU     $1149
-indexw              EQU     $114C
-autor1              EQU     $115B
-autor2              EQU     $1166
-autor3              EQU     $1171
-lvrstat             EQU     $117C
-walkover            EQU     $1189
-multhlby4           EQU     $1192
-killof              EQU     $11A5
-wait                EQU     $11B9
-_VM_11C4            EQU     $11C4
-_HOM                EQU     $120A
-_VIS                EQU     $1228
-blerase             EQU     $1246
-_PTAUTOTM           EQU     $125C
-_WUPWRT             EQU     $1268
-_CHGS               EQU     $1277
-_DWAIT              EQU     $1291
-_FLSHTON            EQU     $129B
-flshwup             EQU     $12B0
-_VM_12F5            EQU     $12F5
-_VM_1437            EQU     $1437
-_VM_1441            EQU     $1441
-DUGOUT              EQU     $16C2
-_VM_170E            EQU     $170E
-_VM_1766            EQU     $1766
-_VM_1772            EQU     $1772
-_VM_178A            EQU     $178A
-_VM_1790            EQU     $1790
-_VM_17B9            EQU     $17B9
-_OUTLINE            EQU     $17D7
-_VM_17F3            EQU     $17F3
-_SUP                EQU     $182B
-_VM_183A            EQU     $183A
-_VM_1844            EQU     $1844
-_VM_184E            EQU     $184E
-_FMIRROR            EQU     $185E
-_VM_1885            EQU     $1885
-_VM_18E9            EQU     $18E9
-_VM_18F8            EQU     $18F8
-_VM_1907            EQU     $1907
-_FL                 EQU     $1920
-_RUN3CHK            EQU     $1A8B
-_RUN2CHK1ST         EQU     $1AA9
-_RUN2CHK            EQU     $1AC1
-_RUN2CHK12ND        EQU     $1AD9
-_RUN1CHK2ND         EQU     $1AF7
-_RUN1CHK1ST         EQU     $1B0A
-_HRBY2              EQU     $1B21
-_WHBODDS            EQU     $1B2C
-_2ROT               EQU     $1CA7
-_SSAFE              EQU     $1CAB
-_SFOUL              EQU     $1CBA
-_VM_1CC8            EQU     $1CC8
-_SWALK              EQU     $1D01
-_VM_1D0E            EQU     $1D0E
-_VM_1D4E            EQU     $1D4E
-_VM_1D7B            EQU     $1D7B
-_DOHOMER            EQU     $1DD1
-_SGO                EQU     $1DDB
-_VM_1DF2            EQU     $1DF2
-_FOULTIME           EQU     $1EE1
-_VM_1F3A            EQU     $1F3A
-_STRINGPRC          EQU     $1F66
-_TBALLPITCH         EQU     $2057
-_VM_2887            EQU     $2887
-_VM_2919            EQU     $2919
-_RETPA              EQU     $29F6
-_SETTFPA            EQU     $2A1B
-_STFLD              EQU     $2A77
-_VM_2A7E            EQU     $2A7E
-_VM_2F78            EQU     $2F78
-_DP1CN              EQU     $2FB8
-_DP12CN             EQU     $2FEA
-_DPCN               EQU     $3028
-_VM_3050            EQU     $3050
-_VM_3073            EQU     $3073
-_VM_30A0            EQU     $30A0
-_VM_30F5            EQU     $30F5
-chkscrtime          EQU     $324E
-resetrunners        EQU     $329F
-chkcaught           EQU     $3314
-throwanim           EQU     $3441
-_VM_3501            EQU     $3501
-_VM_351A            EQU     $351A
-_VM_3559            EQU     $3559
-throwball           EQU     $364A
-_INNODDS            EQU     $36B7
-bathit              EQU     $3709
-_VM_3725            EQU     $3725
-ofldtbl             EQU     $3759
-buttonchk           EQU     $376F
-_VM_384C            EQU     $384C
-_CONGR              EQU     $3912
-_VM_3967            EQU     $3967
-_DP1                EQU     $39AD
-_TCNT               EQU     $39C9
-_SPLR12             EQU     $3A33
-_VM_3A56            EQU     $3A56
-_VM_3ABF            EQU     $3ABF
-_VM_3B34            EQU     $3B34
-_VM_3CE1            EQU     $3CE1
-_VM_3D0B            EQU     $3D0B
-_VM_3D5B            EQU     $3D5B
-_VM_3D8C            EQU     $3D8C
-_VM_3DC9            EQU     $3DC9
-_TERSECHK           EQU     $3E11
-_SENTRY             EQU     $3E4E
-sentry_resume       EQU     $3E8F
-_POWERUP            EQU     $3E95
-_VM_BOOT_STREAM     EQU     $3E96
-TOKEN_TABLE         EQU     $3EA7
-
+            INCLUDE "src/extra_bases.inc"
 
 ;=========================================================================================
 ; COLD START ENTRY POINT ($0000 - $0007)
@@ -1179,135 +933,525 @@ _MULU_DONE:
             jp      (iy)                ; Return to TERSE inner interpreter
 ;=========================================================================================
 
-_FONT_SPACE:
-            DB      $00, $00, $00, $00, $00; $02D3 - L02DA:
-            DB      $00, $00, $00, $00, $00
 
-            CHRTBL  :
-            DB      $3C, $7E, $66, $66, $66; L02DB: Character '0' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $3C; L02E0: Character '0' (bytes 6-10)
-            DB      $18, $38, $18, $18, $18; L02E5: Character '1' (bytes 1-5)
-            DB      $18, $18, $18, $3C, $3C; L02EA: Character '1' (bytes 6-10)
-            DB      $3C, $7E, $66, $06, $3E; L02EF: Character '2' (bytes 1-5)
-            DB      $7C, $60, $60, $7E, $7E; L02F4: Character '2' (bytes 6-10)
-            DB      $3C, $7E, $66, $06, $1C; L02F9: Character '3' (bytes 1-5)
-            DB      $1E, $06, $66, $7E, $3C; L02FE: Character '3' (bytes 6-10)
-            DB      $66, $66, $66, $66, $7E; L0303: Character '4' (bytes 1-5)
-            DB      $7E, $06, $06, $06, $06; L0308: Character '4' (bytes 6-10)
-            DB      $7C, $7C, $60, $60, $7C; L030D: Character '5' (bytes 1-5)
-            DB      $7E, $06, $66, $7E, $3C; L0312: Character '5' (bytes 6-10)
-            DB      $3C, $7C, $60, $60, $7C; L0317: Character '6' (bytes 1-5)
-            DB      $7E, $66, $66, $7E, $3C; L031C: Character '6' (bytes 6-10)
-            DB      $7E, $7E, $06, $0E, $0C; L0321: Character '7' (bytes 1-5)
-            DB      $1C, $18, $38, $30, $30; L0326: Character '7' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $3C; L032B: Character '8' (bytes 1-5)
-            DB      $7E, $66, $66, $7E, $3C; L0330: Character '8' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $7E; L0335: Character '9' (bytes 1-5)
-            DB      $3E, $06, $06, $3E, $3C; L033A: Character '9' (bytes 6-10)
-            DB      $18, $3C, $7E, $66, $66; L033F: Character 'A' (bytes 1-5)
-            DB      $66, $7E, $7E, $66, $66; L0344: Character 'A' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $7C; L0349: Character 'B' (bytes 1-5)
-            DB      $7E, $66, $66, $7E, $7C; L034E: Character 'B' (bytes 6-10)
-            DB      $3C, $7E, $66, $60, $60; L0353: Character 'C' (bytes 1-5)
-            DB      $60, $60, $66, $7E, $3C; L0358: Character 'C' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $66; L035D: Character 'D' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $7C; L0362: Character 'D' (bytes 6-10)
-            DB      $7E, $7E, $60, $60, $7C; L0367: Character 'E' (bytes 1-5)
-            DB      $7C, $60, $60, $7E, $7E; L036C: Character 'E' (bytes 6-10)
-            DB      $7E, $7E, $60, $60, $7C; L0371: Character 'F' (bytes 1-5)
-            DB      $7C, $60, $60, $60, $60; L0376: Character 'F' (bytes 6-10)
-            DB      $3C, $7E, $60, $60, $60; L037B: Character 'G' (bytes 1-5)
-            DB      $6E, $6E, $66, $7E, $3C; L0380: Character 'G' (bytes 6-10)
-            DB      $66, $66, $66, $66, $7E; L0385: Character 'H' (bytes 1-5)
-            DB      $7E, $66, $66, $66, $66; L038A: Character 'H' (bytes 6-10)
-            DB      $3C, $3C, $18, $18, $18; L038F: Character 'I' (bytes 1-5)
-            DB      $18, $18, $18, $3C, $3C; L0394: Character 'I' (bytes 6-10)
-            DB      $06, $06, $06, $06, $06; L0399: Character 'J' (bytes 1-5)
-            DB      $06, $66, $66, $7E, $3C; L039E: Character 'J' (bytes 6-10)
-            DB      $66, $66, $6E, $7C, $78; L03A3: Character 'K' (bytes 1-5)
-            DB      $78, $6C, $6E, $66, $66; L03A8: Character 'K' (bytes 6-10)
-            DB      $60, $60, $60, $60, $60; L03AD: Character 'L' (bytes 1-5)
-            DB      $60, $60, $60, $7E, $7E; L03B2: Character 'L' (bytes 6-10)
-            DB      $C3, $E7, $E7, $DB, $DB; L03B7: Character 'M' (bytes 1-5)
-            DB      $C3, $C3, $C3, $C3, $C3; L03BC: Character 'M' (bytes 6-10)
-            DB      $66, $66, $76, $7E, $7E; L03C1: Character 'N' (bytes 1-5)
-            DB      $6E, $66, $66, $66, $66; L03C6: Character 'N' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $66; L03CB: Character 'O' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $3C; L03D0: Character 'O' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $7E; L03D5: Character 'P' (bytes 1-5)
-            DB      $7C, $60, $60, $60, $60; L03DA: Character 'P' (bytes 6-10)
-            DB      $3C, $7E, $66, $66, $66; L03DF: Character 'Q' (bytes 1-5)
-            DB      $66, $66, $6E, $64, $3A; L03E4: Character 'Q' (bytes 6-10)
-            DB      $7C, $7E, $66, $66, $7E; L03E9: Character 'R' (bytes 1-5)
-            DB      $7C, $6E, $66, $66, $66; L03EE: Character 'R' (bytes 6-10)
-            DB      $3C, $7E, $66, $60, $7C; L03F3: Character 'S' (bytes 1-5)
-            DB      $3E, $06, $66, $7E, $3C; L03F8: Character 'S' (bytes 6-10)
-            DB      $7E, $7E, $18, $18, $18; L03FD: Character 'T' (bytes 1-5)
-            DB      $18, $18, $18, $18, $18; L0402: Character 'T' (bytes 6-10)
-            DB      $66, $66, $66, $66, $66; L0407: Character 'U' (bytes 1-5)
-            DB      $66, $66, $66, $7E, $3C; L040C: Character 'U' (bytes 6-10)
-            DB      $66, $66, $66, $66, $66; L0411: Character 'V' (bytes 1-5)
-            DB      $7E, $3C, $3C, $18, $18; L0416: Character 'V' (bytes 6-10)
-            DB      $C3, $C3, $C3, $DB, $DB; L041B: Character 'W' (bytes 1-5)
-            DB      $DB, $FF, $E7, $C3, $C3; L0420: Character 'W' (bytes 6-10)
-            DB      $66, $66, $7E, $3C, $18; L0425: Character 'X' (bytes 1-5)
-            DB      $18, $3C, $7E, $66, $66; L042A: Character 'X' (bytes 6-10)
-            DB      $66, $66, $7E, $3C, $18; L042F: Character 'Y' (bytes 1-5)
-            DB      $18, $18, $18, $18, $18; L0434: Character 'Y' (bytes 6-10)
+;=========================================================================================
+; ----> Large character font ($02D1-$0438)
+;
+; SIZE: 1 byte x 10 rows per glyph; # = set bit, . = clear bit.
+; Rows run top to bottom; pixels run from bit 7 at left to bit 0 at right.
+;=========================================================================================
+
+; Glyph ' ' ($02D1-$02DA)
+_FONT_SPACE:
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+            DB      $00                 ; ........
+
+; Glyph '0' ($02DB-$02E4)
+CHRTBL:
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph '1' ($02E5-$02EE)
+            DB      $18                 ; ...##...
+            DB      $38                 ; ..###...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $3C                 ; ..####..
+            DB      $3C                 ; ..####..
+
+; Glyph '2' ($02EF-$02F8)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $06                 ; .....##.
+            DB      $3E                 ; ..#####.
+            DB      $7C                 ; .#####..
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+
+; Glyph '3' ($02F9-$0302)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $06                 ; .....##.
+            DB      $1C                 ; ...###..
+            DB      $1E                 ; ...####.
+            DB      $06                 ; .....##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph '4' ($0303-$030C)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+
+; Glyph '5' ($030D-$0316)
+            DB      $7C                 ; .#####..
+            DB      $7C                 ; .#####..
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $7C                 ; .#####..
+            DB      $7E                 ; .######.
+            DB      $06                 ; .....##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph '6' ($0317-$0320)
+            DB      $3C                 ; ..####..
+            DB      $7C                 ; .#####..
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $7C                 ; .#####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph '7' ($0321-$032A)
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $06                 ; .....##.
+            DB      $0E                 ; ....###.
+            DB      $0C                 ; ....##..
+            DB      $1C                 ; ...###..
+            DB      $18                 ; ...##...
+            DB      $38                 ; ..###...
+            DB      $30                 ; ..##....
+            DB      $30                 ; ..##....
+
+; Glyph '8' ($032B-$0334)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph '9' ($0335-$033E)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3E                 ; ..#####.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $3E                 ; ..#####.
+            DB      $3C                 ; ..####..
+
+; Glyph 'A' ($033F-$0348)
+            DB      $18                 ; ...##...
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+
+; Glyph 'B' ($0349-$0352)
+            DB      $7C                 ; .#####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7C                 ; .#####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $7C                 ; .#####..
+
+; Glyph 'C' ($0353-$035C)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph 'D' ($035D-$0366)
+            DB      $7C                 ; .#####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $7C                 ; .#####..
+
+; Glyph 'E' ($0367-$0370)
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $7C                 ; .#####..
+            DB      $7C                 ; .#####..
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+
+; Glyph 'F' ($0371-$037A)
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $7C                 ; .#####..
+            DB      $7C                 ; .#####..
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+
+; Glyph 'G' ($037B-$0384)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $6E                 ; .##.###.
+            DB      $6E                 ; .##.###.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph 'H' ($0385-$038E)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+
+; Glyph 'I' ($038F-$0398)
+            DB      $3C                 ; ..####..
+            DB      $3C                 ; ..####..
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $3C                 ; ..####..
+            DB      $3C                 ; ..####..
+
+; Glyph 'J' ($0399-$03A2)
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $06                 ; .....##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph 'K' ($03A3-$03AC)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $6E                 ; .##.###.
+            DB      $7C                 ; .#####..
+            DB      $78                 ; .####...
+            DB      $78                 ; .####...
+            DB      $6C                 ; .##.##..
+            DB      $6E                 ; .##.###.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+
+; Glyph 'L' ($03AD-$03B6)
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+
+; Glyph 'M' ($03B7-$03C0)
+            DB      $C3                 ; ##....##
+            DB      $E7                 ; ###..###
+            DB      $E7                 ; ###..###
+            DB      $DB                 ; ##.##.##
+            DB      $DB                 ; ##.##.##
+            DB      $C3                 ; ##....##
+            DB      $C3                 ; ##....##
+            DB      $C3                 ; ##....##
+            DB      $C3                 ; ##....##
+            DB      $C3                 ; ##....##
+
+; Glyph 'N' ($03C1-$03CA)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $76                 ; .###.##.
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $6E                 ; .##.###.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+
+; Glyph 'O' ($03CB-$03D4)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph 'P' ($03D5-$03DE)
+            DB      $7C                 ; .#####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $7C                 ; .#####..
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+            DB      $60                 ; .##.....
+
+; Glyph 'Q' ($03DF-$03E8)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $6E                 ; .##.###.
+            DB      $64                 ; .##..#..
+            DB      $3A                 ; ..###.#.
+
+; Glyph 'R' ($03E9-$03F2)
+            DB      $7C                 ; .#####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $7C                 ; .#####..
+            DB      $6E                 ; .##.###.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+
+; Glyph 'S' ($03F3-$03FC)
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $60                 ; .##.....
+            DB      $7C                 ; .#####..
+            DB      $3E                 ; ..#####.
+            DB      $06                 ; .....##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph 'T' ($03FD-$0406)
+            DB      $7E                 ; .######.
+            DB      $7E                 ; .######.
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+
+; Glyph 'U' ($0407-$0410)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+
+; Glyph 'V' ($0411-$041A)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+            DB      $3C                 ; ..####..
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+
+; Glyph 'W' ($041B-$0424)
+            DB      $C3                 ; ##....##
+            DB      $C3                 ; ##....##
+            DB      $C3                 ; ##....##
+            DB      $DB                 ; ##.##.##
+            DB      $DB                 ; ##.##.##
+            DB      $DB                 ; ##.##.##
+            DB      $FF                 ; ########
+            DB      $E7                 ; ###..###
+            DB      $C3                 ; ##....##
+            DB      $C3                 ; ##....##
+
+; Glyph 'X' ($0425-$042E)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $3C                 ; ..####..
+            DB      $7E                 ; .######.
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+
+; Glyph 'Y' ($042F-$0438)
+            DB      $66                 ; .##..##.
+            DB      $66                 ; .##..##.
+            DB      $7E                 ; .######.
+            DB      $3C                 ; ..####..
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+            DB      $18                 ; ...##...
+
 ;=========================================================================================
 ; ----> TEXT_CREDITS  CREDITS  ($0439-$044C)
-; SIZE: 4x5
+;
+; SIZE: 4 bytes x 5 rows; # = set bit, . = clear bit.
+; Each preview group contains 4 ROM bits, most significant bit first.
 ;=========================================================================================
-            DB      $EC, $EC, $EE, $E0  ; ###.##..###.##..###.###.###.....
-            DB      $8A, $8A, $44, $80  ; #...#.#.#...#.#..#...#..#.......
-            DB      $8C, $CA, $44, $E0  ; #...##..##..#.#..#...#..###.....
-            DB      $8A, $8A, $44, $20  ; #...#.#.#...#.#..#...#....#.....
-            DB      $EA, $EC, $E4, $E0  ; ###.#.#.###.##..###..#..###.....
+;                                                                  C    R    E    D    I    T    S
+            DB      $EC, $EC, $EE, $E0                          ; ###. ##.. ###. ##.. ###. ###. ###. ....
+            DB      $8A, $8A, $44, $80                          ; #... #.#. #... #.#. .#.. .#.. #... ....
+            DB      $8C, $CA, $44, $E0                          ; #... ##.. ##.. #.#. .#.. .#.. ###. ....
+            DB      $8A, $8A, $44, $20                          ; #... #.#. #... #.#. .#.. .#.. ..#. ....
+            DB      $EA, $EC, $E4, $E0                          ; ###. #.#. ###. ##.. ###. .#.. ###. ....
+
 ;=========================================================================================
-; ----> TEXT_ISITOR  ISITOR; appended after the large V  ($044D-$045B)
-; SIZE: 3x5
+; ----> TEXT_ISITOR  ISITOR; suffix after the large V  ($044D-$045B)
+;
+; SIZE: 3 bytes x 5 rows; # = set bit, . = clear bit.
+; Each preview group contains 4 ROM bits, most significant bit first.
 ;=========================================================================================
-            DB      $EE, $EE, $EC       ; ###.###.###.###.###.##..
-            DB      $48, $44, $AA       ; .#..#....#...#..#.#.#.#.
-            DB      $4E, $44, $AC       ; .#..###..#...#..#.#.##..
-            DB      $42, $44, $AA       ; .#....#..#...#..#.#.#.#.
-            DB      $EE, $E4, $EA       ; ###.###.###..#..###.#.#.
+;                                                                  I    S    I    T    O    R
+            DB      $EE, $EE, $EC                               ; ###. ###. ###. ###. ###. ##..
+            DB      $48, $44, $AA                               ; .#.. #... .#.. .#.. #.#. #.#.
+            DB      $4E, $44, $AC                               ; .#.. ###. .#.. .#.. #.#. ##..
+            DB      $42, $44, $AA                               ; .#.. ..#. .#.. .#.. #.#. #.#.
+            DB      $EE, $E4, $EA                               ; ###. ###. ###. .#.. ###. #.#.
+
 ;=========================================================================================
-; ----> TEXT_OME  OME; appended after the large H  ($045C-$0465)
-; SIZE: 2x5
+; ----> TEXT_OME  OME; suffix after the large H  ($045C-$0465)
+;
+; SIZE: 2 bytes x 5 rows; # = set bit, . = clear bit.
+; Each preview group contains 4 ROM bits, most significant bit first.
 ;=========================================================================================
-            DB      $EA, $E0            ; ###.#.#.###.....
-            DB      $AE, $80            ; #.#.###.#.......
-            DB      $AE, $C0            ; #.#.###.##......
-            DB      $AA, $80            ; #.#.#.#.#.......
-            DB      $EA, $E0            ; ###.#.#.###.....
+;                                                                  O    M    E
+            DB      $EA, $E0                                    ; ###. #.#. ###. ....
+            DB      $AE, $80                                    ; #.#. ###. #... ....
+            DB      $AE, $C0                                    ; #.#. ###. ##.. ....
+            DB      $AA, $80                                    ; #.#. #.#. #... ....
+            DB      $EA, $E0                                    ; ###. #.#. ###. ....
+
 ;=========================================================================================
 ; ----> TEXT_INNINGS  Inning digits 1 through 9  ($0466-$0492)
-; SIZE: 9x5
+;
+; SIZE: 9 bytes x 5 rows; # = set bit, . = clear bit.
+; Each preview group contains 8 ROM bits, most significant bit first.
 ;=========================================================================================
-            DB      $40, $E0, $E0, $A0, $E0, $E0, $E0, $E0, $E0; .#......###.....###.....#.#.....###.....###.....###.....###.....###.....
-            DB      $40, $20, $20, $A0, $80, $80, $20, $A0, $A0; .#........#.......#.....#.#.....#.......#.........#.....#.#.....#.#.....
-            DB      $40, $E0, $60, $E0, $C0, $E0, $40, $E0, $E0; .#......###......##.....###.....##......###......#......###.....###.....
-            DB      $40, $80, $20, $20, $20, $A0, $40, $A0, $20; .#......#.........#.......#.......#.....#.#......#......#.#.......#.....
-            DB      $40, $E0, $E0, $20, $C0, $E0, $40, $E0, $E0; .#......###.....###.......#.....##......###......#......###.....###.....
+;                                                                    1        2        3        4        5        6        7        8        9
+            DB      $40, $E0, $E0, $A0, $E0, $E0, $E0, $E0, $E0 ; .#...... ###..... ###..... #.#..... ###..... ###..... ###..... ###..... ###.....
+            DB      $40, $20, $20, $A0, $80, $80, $20, $A0, $A0 ; .#...... ..#..... ..#..... #.#..... #....... #....... ..#..... #.#..... #.#.....
+            DB      $40, $E0, $60, $E0, $C0, $E0, $40, $E0, $E0 ; .#...... ###..... .##..... ###..... ##...... ###..... .#...... ###..... ###.....
+            DB      $40, $80, $20, $20, $20, $A0, $40, $A0, $20 ; .#...... #....... ..#..... ..#..... ..#..... #.#..... .#...... #.#..... ..#.....
+            DB      $40, $E0, $E0, $20, $C0, $E0, $40, $E0, $E0 ; .#...... ###..... ###..... ..#..... ##...... ###..... .#...... ###..... ###.....
+
 ;=========================================================================================
 ; ----> TEXT_UP  UP  ($0493-$0497)
-; SIZE: 1x5
+;
+; SIZE: 1 byte x 5 rows; # = set bit, . = clear bit.
+; Each preview group contains 4 ROM bits, most significant bit first.
 ;=========================================================================================
-            DB      $AE                 ; #.#.###.
-            DB      $AA                 ; #.#.#.#.
-            DB      $AE                 ; #.#.###.
-            DB      $A8                 ; #.#.#...
-            DB      $E8                 ; ###.#...
+;                                                                  U    P
+            DB      $AE                                         ; #.#. ###.
+            DB      $AA                                         ; #.#. #.#.
+            DB      $AE                                         ; #.#. ###.
+            DB      $A8                                         ; #.#. #...
+            DB      $E8                                         ; ###. #...
+
 ;=========================================================================================
 ; ----> TEXT_YOU_ARE  YOU ARE  ($0498-$04AB)
-; SIZE: 4x5
+;
+; SIZE: 4 bytes x 5 rows; # = set bit, . = clear bit.
+; Each preview group contains 4 ROM bits, most significant bit first.
 ;=========================================================================================
-            DB      $AE, $A0, $EC, $E0  ; #.#.###.#.#.....###.##..###.....
-            DB      $AA, $A0, $AA, $80  ; #.#.#.#.#.#.....#.#.#.#.#.......
-            DB      $4A, $A0, $EC, $C0  ; .#..#.#.#.#.....###.##..##......
-            DB      $4A, $A0, $AA, $80  ; .#..#.#.#.#.....#.#.#.#.#.......
-            DB      $4E, $E0, $AA, $E0  ; .#..###.###.....#.#.#.#.###.....
+;                                                                  Y    O    U         A    R    E
+            DB      $AE, $A0, $EC, $E0                          ; #.#. ###. #.#. .... ###. ##.. ###. ....
+            DB      $AA, $A0, $AA, $80                          ; #.#. #.#. #.#. .... #.#. #.#. #... ....
+            DB      $4A, $A0, $EC, $C0                          ; .#.. #.#. #.#. .... ###. ##.. ##.. ....
+            DB      $4A, $A0, $AA, $80                          ; .#.. #.#. #.#. .... #.#. #.#. #... ....
+            DB      $4E, $E0, $AA, $E0                          ; .#.. ###. ###. .... #.#. #.#. ###. ....
 ;=========================================================================================
 ; ----> NOBOD  TERSE block 107  ($04AC-$04B1)
 ; SIZE: 1x2
@@ -1956,48 +2100,318 @@ _FONT_SPACE:
             DB      $0D, $80            ; ....##.##.......
             DB      $0D, $80            ; ....##.##.......
             DB      $1D, $C0            ; ...###.###......
-            DB      $F9, $05            ; $088D: preserved data boundary
-
-; --- VRAM BLITTER & COORDINATE CALCULATOR ROUTINE POINTERS ---
-_BLIT_UTILS:
-            DW      $05A5, $062F, $05C5, $0649, $05E1; $088F: FILL, write (XPAND), norrel, line-skip
-            DW      $065F, $0581, $0671, $0595, $06ED; $0899: Destination write, COLOR setup, cocktail flip, FLOOD, unsdiv1
-
-; --- CUSTOM FONT UTILITIES & SCORE RAM VECTORS ---
-_FONT_UTILS:
-            DW      $071D, $0707, $0737, $04AC, $04AC; $08A3: Font translation helpers, custom renderer, HS4 RAM vector
-
-; --- GAME SPRITE & PERSPECTIVE SCALING ASSET POINTERS ---
-_SCALE_SPRITES:
-            DW      $04B2, $04B2, $06D3, $06D3, $0617; $08AD: Ball/Bat headers, scaling math division, absolute flip
-            DW      $0617, $04C7, $051F, $04E3, $053F; $08B7: Flip vector, Batter S4, Fielder S3, Batter S3, Fielder S1
-            DW      $04FB, $0559, $050F, $056F, $06B7; $08C1: Batter S2, Pitcher S3, Fielder S4, Pitcher S2, Outfielder run
-            DW      $051F, $04C7, $04C7, $04E3, $04E3; $08CB: Fielder S3, Batter S4, Batter S4, Batter S3, Batter S3
-
-; --- AUDIO SEQUENCE & WAVEFORM DATA POINTERS ---
-_AUDIO_TABLES:
-            DW      $0819, $0819, $0835, $0835, $084D; $08D5: Audio pitch and wave tables (CHRTBL area)
-            DW      $084D, $0861, $0861, $0871, $0871; $08DF: Audio track start blocks
-            DW      $0681, $0681, $069D, $069D, $08AD; $08E9: Blitter write hooks & Section 3 word pointers [FIXED $069D]
-            DW      $08AD, $08AD, $08AD, $08AD, $08CD; $08F3: Word 20 lookup pointers
-            DW      $08CD, $08D1, $08E5, $08E5, $08C9; $08FD: Word 37, 38, and 62 lookup pointers
-            DW      $08C9, $08B1, $08B1, $08B5, $08E9; $0907: Word 64, 22, and 24 lookup pointers
-            DW      $08E9, $08ED, $08B9, $08B9, $08BD; $0911: Word 69, 71, and 72 lookup pointers
-            DW      $08C1, $08C5, $08A9, $08A9, $08A9; $091B: Word 75, 76, and 18 pointers
-            DW      $08A9, $08A9, $088D, $0891, $0895; $0925: Word 18, 4, 6, and 8 pointers
-            DW      $0899, $089D, $08A1, $08A1, $08A5; $092F: Word 10, 12, 14, and 16 pointers
-            DW      $08D5, $08D5, $08D9, $08DD; $0939: Word 90 and 92 pointers
 
 ;=========================================================================================
-; ----> VECT_TB_AUD_VECT_TABLE   ADDRESS VECTOR TABLE  ($0941 - $0966)
-;   Table of 19 16-bit address pointers ($08E1 - $0964).
+; ----> RUNUP0  Animation pointer table ($088D-$0890)
+;
+; TERSE block 186; little-endian pattern addresses.
 ;=========================================================================================
-_AUD_VECT_TABLE:
-            DW      $08E1, $0929, $0933, $0915
-            DW      $090F, $0939, $091F, $08F1
-            DW      $08FB, $0901, $0905, $0909
-            DW      $0016, $0015, $0011, $0012
-            DW      $0013, $0304, $0964
+RUNUP0:
+            DW      RUP0B, RUP0M
+
+;=========================================================================================
+; ----> RUNUP1  Animation pointer table ($0891-$0894)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+RUNUP1:
+            DW      RUP1B, RUP1M
+
+;=========================================================================================
+; ----> RUNUP2  Animation pointer table ($0895-$0898)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+RUNUP2:
+            DW      RUP2B, RUP2M
+
+;=========================================================================================
+; ----> RUNUP3  Animation pointer table ($0899-$089C)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+RUNUP3:
+            DW      RUP3B, RUP3M
+
+;=========================================================================================
+; ----> RUNUP4  Animation pointer table ($089D-$08A0)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+RUNUP4:
+            DW      RUP4B, RUP4M
+
+;=========================================================================================
+; ----> FLDUP1  Animation pointer table ($08A1-$08A4)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+FLDUP1:
+            DW      FUP1B, FUP1M
+
+;=========================================================================================
+; ----> FLDUP2  Animation pointer table ($08A5-$08A8)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+FLDUP2:
+            DW      FUP2B, FUP2M
+
+;=========================================================================================
+; ----> NOBOD0  Animation pointer table ($08A9-$08AC)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+NOBOD0:
+            DW      NOBOD, NOBOD
+
+;=========================================================================================
+; ----> BALL0  Animation pointer table ($08AD-$08B0)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+BALL0:
+            DW      BALLPAT, BALLPAT
+
+;=========================================================================================
+; ----> ONBS1  Animation pointer table ($08B1-$08B4)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+ONBS1:
+            DW      ONBASE1, ONBASE1
+
+;=========================================================================================
+; ----> ONBS2  Animation pointer table ($08B5-$08B8)
+;
+; TERSE block 186; little-endian pattern addresses.
+;=========================================================================================
+ONBS2:
+            DW      ONBASE2, ONBASE2
+
+;=========================================================================================
+; ----> THRWUP1  Animation pointer table ($08B9-$08BC)
+;
+; TERSE block 187; little-endian pattern addresses.
+;=========================================================================================
+THRWUP1:
+            DW      TUP1M, TUP1F
+
+;=========================================================================================
+; ----> THRWUP2  Animation pointer table ($08BD-$08C0)
+;
+; TERSE block 187; little-endian pattern addresses.
+;=========================================================================================
+THRWUP2:
+            DW      TUP2M, TUP2F
+
+;=========================================================================================
+; ----> THRWUP3  Animation pointer table ($08C1-$08C4)
+;
+; TERSE block 187; little-endian pattern addresses.
+;=========================================================================================
+THRWUP3:
+            DW      TUP3M, TUP3F
+
+;=========================================================================================
+; ----> THRWUP4  Animation pointer table ($08C5-$08C8)
+;
+; TERSE block 187; little-endian pattern addresses.
+;=========================================================================================
+THRWUP4:
+            DW      TUP4M, TUP4F
+
+;=========================================================================================
+; ----> PTTHW1  Animation pointer table ($08C9-$08CC)
+;
+; TERSE block 187; little-endian pattern addresses.
+;=========================================================================================
+PTTHW1:
+            DW      PTMID, TUP1F
+
+;=========================================================================================
+; ----> STCB1  Animation pointer table ($08CD-$08D0)
+;
+; TERSE block 187; little-endian pattern addresses.
+;=========================================================================================
+STCB1:
+            DW      TUP1M, TUP1M
+
+;=========================================================================================
+; ----> STCB2  Animation pointer table ($08D1-$08D4)
+;
+; TERSE block 187; little-endian pattern addresses.
+;=========================================================================================
+STCB2:
+            DW      TUP2M, TUP2M
+
+;=========================================================================================
+; ----> STND1  Animation pointer table ($08D5-$08D8)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+STND1:
+            DW      STN1, STN1
+
+;=========================================================================================
+; ----> STND2  Animation pointer table ($08D9-$08DC)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+STND2:
+            DW      STN2, STN2
+
+;=========================================================================================
+; ----> STND3  Animation pointer table ($08DD-$08E0)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+STND3:
+            DW      STN3, STN3
+
+;=========================================================================================
+; ----> STND4  Animation pointer table ($08E1-$08E4)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+STND4:
+            DW      STN4, STN4
+
+;=========================================================================================
+; ----> STPT1  Animation pointer table ($08E5-$08E8)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+STPT1:
+            DW      STNPT, STNPT
+
+;=========================================================================================
+; ----> CVRBUP1  Animation pointer table ($08E9-$08EC)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+CVRBUP1:
+            DW      CBUP1, CBUP1
+
+;=========================================================================================
+; ----> CVRBUP2  Animation pointer table ($08ED-$08F0)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+CVRBUP2:
+            DW      CBUP2, CBUP2
+
+;=========================================================================================
+; ----> BALLM  Animation pointer table ($08F1-$08FA)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+BALLM:
+            DW      BALL0, BALL0, BALL0, BALL0, BALL0
+
+;=========================================================================================
+; ----> STCB  Animation pointer table ($08FB-$0900)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+STCB:
+            DW      STCB1, STCB1, STCB2
+
+;=========================================================================================
+; ----> STNDPT  Animation pointer table ($0901-$0904)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+STNDPT:
+            DW      STPT1, STPT1
+
+;=========================================================================================
+; ----> PTPT  Animation pointer table ($0905-$0908)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+PTPT:
+            DW      PTTHW1, PTTHW1
+
+;=========================================================================================
+; ----> ONBASE  Animation pointer table ($0909-$090E)
+;
+; TERSE block 188; little-endian pattern and animation table addresses.
+;=========================================================================================
+ONBASE:
+            DW      ONBS1, ONBS1, ONBS2
+
+;=========================================================================================
+; ----> CVRBUP  Animation pointer table ($090F-$0914)
+;
+; TERSE block 189; animation sequence and perspective table addresses.
+;=========================================================================================
+CVRBUP:
+            DW      CVRBUP1, CVRBUP1, CVRBUP2
+
+;=========================================================================================
+; ----> THRWUP  Animation pointer table ($0915-$091E)
+;
+; TERSE block 189; animation sequence and perspective table addresses.
+;=========================================================================================
+THRWUP:
+            DW      THRWUP1, THRWUP1, THRWUP2, THRWUP3, THRWUP4
+
+;=========================================================================================
+; ----> NOBODY  Animation pointer table ($091F-$0928)
+;
+; TERSE block 189; animation sequence and perspective table addresses.
+;=========================================================================================
+NOBODY:
+            DW      NOBOD0, NOBOD0, NOBOD0, NOBOD0, NOBOD0
+
+;=========================================================================================
+; ----> RUNUP  Animation pointer table ($0929-$0932)
+;
+; TERSE block 189; animation sequence and perspective table addresses.
+;=========================================================================================
+RUNUP:
+            DW      RUNUP0, RUNUP1, RUNUP2, RUNUP3, RUNUP4
+
+;=========================================================================================
+; ----> FLDUP  Animation pointer table ($0933-$0938)
+;
+; TERSE block 189; animation sequence and perspective table addresses.
+;=========================================================================================
+FLDUP:
+            DW      FLDUP1, FLDUP1, FLDUP2
+
+;=========================================================================================
+; ----> STNDS  Animation pointer table ($0939-$0942)
+;
+; TERSE block 189; animation sequence and perspective table addresses.
+;=========================================================================================
+STNDS:
+            DW      STND1, STND1, STND2, STND3, STND4
+
+;=========================================================================================
+; ----> PATTERNS  Animation pointer table ($0943-$0958)
+;
+; TERSE block 189; animation sequence and perspective table addresses.
+;=========================================================================================
+PATTERNS:
+            DW      RUNUP, FLDUP, THRWUP, CVRBUP, STNDS, NOBODY, BALLM, STCB, STNDPT, PTPT, ONBASE
+
+;=========================================================================================
+; ----> ENDMUSIC  Music shutdown stream ($0959-$0966)
+;
+; Zero both volume registers and all three tone periods, then terminate playback.
+;=========================================================================================
+ENDMUSIC:
+            DB      $16, $00            ; A/B volumes = 0
+            DB      $15, $00            ; Noise/C volumes = 0
+            DB      $11, $00            ; Tone A period = 0
+            DB      $12, $00            ; Tone B period = 0
+            DB      $13, $00            ; Tone C period = 0
+            DB      $04                 ; End/repeat command
+ENDMUSIC_HOLD:
+            DB      $03                 ; Branch and yield
+            DW      ENDMUSIC_HOLD       ; Stay silent between ticks
 
 ;=========================================================================================
 ; ----> FETCH_7C1C     FETCH BYTE FROM RAM POINTER 7C1C  ($0967 - $096B)
@@ -2191,7 +2605,7 @@ _AUD_INIT_POINTERS:
 ;=========================================================================================
 ; ----> _EMUSIC  Native entry $0A36
 ;=========================================================================================
-            ld      hl,$0959
+            ld      hl,ENDMUSIC
             call    loadpc
             ld      a,$01
             ld      (RAM_NOTETIMER),a
@@ -2851,7 +3265,11 @@ _AUD_INIT_POINTERS:
             ret
 
 ;=========================================================================================
-; ----> verase  Native entry $0EF9
+; ----> verase  Erase the saved vector image ($0EF9-$0F1F)
+;
+; IX selects the vector. Skip the pattern hotspot and erase at its saved address.
+; A nonzero byte at $7C0A clears vertical flip and toggles horizontal mirror.
+; Both return paths end before the playaction data at $0F20.
 ;=========================================================================================
             ld      b,$08
             ld      c,(ix+$00)
@@ -2872,404 +3290,449 @@ _AUD_INIT_POINTERS:
             xor     $40
             ld      (ix+$00),a
             ret
-            ex      af,af'
-            add     hl,bc
-            rlca
-            dec     b
-            jr      z,$0F2B
-            djnz    $0F28
-            nop
-            nop
-            nop
-            rlca
-            jr      z,$0F33
-            jr      nz,$0F30
-            nop
-            nop
-            nop
-            rlca
-            ld      a,(bc)
-            ld      b,$28
-            inc     b
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            jr      z,$0F40
-            ld      c,$60
-            nop
-            nop
-            ld      (bc),a
-            ld      (bc),a
-            ld      l,b
-            inc     bc
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            ld      l,b
-            nop
-            ld      a,(bc)
-            nop
-            nop
-            nop
-            db      $fd,$03
-            ld      l,b
-            inc     bc
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            jr      z,$0F60
-            dec     c
-            ret     po
-            rst     $38
-            nop
-            inc     bc
-            inc     bc
-            jr      z,$0F6B
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            ld      l,b
-            nop
-            ld      a,(bc)
-            or      b
-            nop
-            nop
-            cp      $04
-            jr      z,$0F7B
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            ld      l,b
-            nop
-            ld      (de),a
-            nop
-            nop
-            nop
-            rst     $38
-            jr      z,$0F8F
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            jr      z,$0F8F
-            ld      (de),a
-            nop
-            nop
-            nop
-            ld      bc,$0828
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            jr      z,$0FA7
-            ld      (de),a
-            nop
-            nop
-            nop
-            nop
-            jr      z,$0FAD
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            jr      z,$0FAF
-            dec     b
-            nop
-            nop
-            nop
-            nop
-            ld      c,$68
-            ld      (bc),a
-            dec     b
-            nop
-            nop
-            nop
-            nop
-            ld      c,$28
-            nop
-            ld      d,$60
-            nop
-            jr      nz,$0FC4
-            jr      z,$0FC5
-            ld      (bc),a
-            ld      b,b
-            nop
-            nop
-            ld      bc,$0E0B
-            ld      l,b
-            nop
-            ld      (de),a
-            add     a,b
-            nop
-            djnz    $0FD0
-            ld      l,b
-            ld      bc,$4002
-            nop
-            add     a,b
-            rst     $38
-            dec     bc
-            ld      c,$68
-            ld      bc,$0012
-            nop
-            nop
-            rst     $38
-            ld      l,b
-            nop
-            dec     b
-            nop
-            ld      bc,$0000
-            inc     b
-            jr      z,$0FEF
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            ld      l,b
-            ld      bc,$400A
-            nop
-            ret     nc
-            rst     $38
-            dec     bc
-            jr      z,$0FFD
-            ld      a,(bc)
-            ld      b,b
-            nop
-            add     a,b
-            nop
-            dec     bc
-            ld      l,b
-            nop
-            ld      (de),a
-            ld      b,b
-            nop
-            nop
-            rst     $38
-            ld      c,$28
-            ld      bc,$C012
-            rst     $38
-            add     a,b
-            nop
-            ld      l,b
-            nop
-            ld      c,$C0
-            nop
-            nop
-            cp      $04
-            jr      z,$101E
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            ld      l,b
-            ld      bc,$0010
-            nop
-            add     a,b
-            rst     $38
-            ld      c,$68
-            ld      bc,$800C
-            nop
-            add     a,b
-            rst     $38
-            dec     bc
-            jr      z,$1034
-            inc     c
-            add     a,b
-            nop
-            add     a,b
-            ld      bc,$280B
-            nop
-            inc     c
-            ret     nz
-            rst     $38
-            nop
-            ld      bc,$680E
-            ld      bc,$A00B
-            nop
-            jr      nz,$1047
-            dec     bc
-            jr      z,$104C
-            inc     c
-            nop
-            nop
-            add     a,b
-            nop
-            dec     bc
-            jr      z,$1054
-            ld      (de),a
-            nop
-            nop
-            add     a,b
-            nop
-            ld      c,$68
-            ld      bc,$C012
-            rst     $38
-            add     a,b
-            rst     $38
-            jr      z,$1062
-            inc     de
-            sub     b
-            nop
-            nop
-            ld      (bc),a
-            ld      (bc),a
-            ld      l,b
-            inc     bc
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            ld      l,b
-            ld      bc,$300A
-            nop
-            ret     nz
-            rst     $38
-            dec     c
-            jr      z,$107B
-            dec     bc
-            ret     nz
-            rst     $38
-            ld      b,b
-            ld      bc,$280D
-            ld      bc,$0018
-            nop
-            nop
-            ld      bc,$280E
-            nop
-            dec     d
-            nop
-            nop
-            add     a,b
-            inc     b
-            ld      (bc),a
-            ld      l,b
-            inc     bc
-            nop
-            nop
-            nop
-            nop
-            nop
-            inc     c
-            ld      l,b
-            nop
-            djnz    $101C
-            rst     $38
-            ret     po
-            rst     $38
-            ld      c,$28
-            nop
-            djnz    $1024
-            nop
-            jr      nz,$10A7
-            ld      c,$28
-            ld      b,$50
-            nop
-            inc     bc
-            nop
-            nop
-            jr      z,$10B7
-            add     a,b
-            nop
-            ld      bc,$0000
-            jr      z,$10BE
-            dec     (hl)
-            nop
-            ld      bc,$0000
-            jr      z,$10C5
-            ld      d,b
-            nop
-            inc     bc
-            nop
-            nop
-            jr      z,$10CC
-            ld      (de),a
-            nop
-            inc     bc
-            nop
-            nop
-            jr      z,$10D3
-            ld      d,b
-            nop
-            ld      bc,$0000
-            jr      z,$10DA
-            ld      (de),a
-            nop
-            inc     bc
-            nop
-            nop
-            jr      z,$10E1
-            add     hl,bc
-            nop
-            ld      (bc),a
-            nop
-            ld      bc,$0628
-            ld      d,b
-            nop
-            ld      (bc),a
-            nop
-            nop
-            jr      z,$10EF
-            ld      a,(de)
-            nop
-            ld      (bc),a
-            ret     p
-            rst     $38
-            jr      z,$10F6
-            add     hl,bc
-            nop
-            ld      (bc),a
-            nop
-            rst     $38
-            jr      z,$10FD
-            ld      d,b
-            nop
-            ld      (bc),a
-            nop
-            nop
-            jr      z,$1104
-            ld      a,(de)
-            nop
-            ld      (bc),a
-            ret     po
-            rst     $38
-            jr      z,$110B
-            add     hl,bc
-            nop
-            ld      (bc),a
-            ld      h,b
-            nop
-            jr      z,$1112
-            ld      d,b
-            nop
-            ld      (bc),a
-            nop
-            nop
+
+;=========================================================================================
+; ----> Playaction data ($0F20-$1110)
+;
+; OPCODECHK treats bytes $02-$0E as commands and dispatches through OPTBL.
+; PACTLOAD reads seven-byte actions: magic, animation index, update count, dy, dx.
+; dy and dx are signed 16-bit little-endian fixed-point increments.
+;=========================================================================================
+
+;=========================================================================================
+; ----> RUNBPA ($0F20-$0F20)
+;
+; TERSE block 226.
+;=========================================================================================
+RUNBPA:
+            DB      $08                 ; $0F20: Move runner to destination
+
+;=========================================================================================
+; ----> OFFFPA ($0F21-$0F21)
+;
+; TERSE block 226.
+;=========================================================================================
+OFFFPA:
+            DB      $09                 ; $0F21: Move outfielder to destination
+
+;=========================================================================================
+; ----> TFPA ($0F22-$0F22)
+;
+; TERSE block 226.
+;=========================================================================================
+TFPA:
+            DB      $07                 ; $0F22: Move to field destination
+
+;=========================================================================================
+; ----> OFTBLPA ($0F23-$0F23)
+;
+; TERSE block 226.
+;=========================================================================================
+OFTBLPA:
+            DB      $05                 ; $0F23: Use outfielder trackball action
+
+;=========================================================================================
+; ----> TFPA1 ($0F24-$0F2B)
+;
+; TERSE block 226.
+;=========================================================================================
+TFPA1:
+            DB      $28, $05, $10, $00, $00, $00, $00 ; $0F24: NBD, updates=16, dy=0, dx=0
+            DB      $07                 ; $0F2B: Move to field destination
+
+;=========================================================================================
+; ----> TFPA2 ($0F2C-$0F33)
+;
+; TERSE block 226.
+;=========================================================================================
+TFPA2:
+            DB      $28, $05, $20, $00, $00, $00, $00 ; $0F2C: NBD, updates=32, dy=0, dx=0
+            DB      $07                 ; $0F33: Move to field destination
+
+;=========================================================================================
+; ----> THWBLPA ($0F34-$0F34)
+;
+; TERSE block 226.
+;=========================================================================================
+THWBLPA:
+            DB      $0A                 ; $0F34: Move ball to destination
+
+;=========================================================================================
+; ----> PITCHBLPA ($0F35-$0F35)
+;
+; TERSE block 226.
+;=========================================================================================
+PITCHBLPA:
+            DB      $06                 ; $0F35: Use ball trackball action
+
+;=========================================================================================
+; ----> NOACTPA ($0F36-$0F3D)
+;
+; ROM playaction records.
+;=========================================================================================
+NOACTPA:
+            DB      $28, $04, $00, $00, $00, $00, $00 ; $0F36: STND, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0F3D: Deactivate vector
+
+;=========================================================================================
+; ----> HL1ST ($0F3E-$0F4D)
+;
+; TERSE block 226.
+;=========================================================================================
+HL1ST:
+            DB      $28, $00, $0E, $60, $00, $00, $02 ; $0F3E: RRUN, updates=14, dy=96, dx=512
+            DB      $02                 ; $0F45: Record first-base fielder
+            DB      $68, $03, $00, $00, $00, $00, $00 ; $0F46: LCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0F4D: Deactivate vector
+
+;=========================================================================================
+; ----> HL2ND ($0F4E-$0F5D)
+;
+; TERSE block 226.
+;=========================================================================================
+HL2ND:
+            DB      $68, $00, $0A, $00, $00, $00, $FD ; $0F4E: LRUN, updates=10, dy=0, dx=-768
+            DB      $03                 ; $0F55: Record second-base fielder
+            DB      $68, $03, $00, $00, $00, $00, $00 ; $0F56: LCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0F5D: Deactivate vector
+
+;=========================================================================================
+; ----> HRSS ($0F5E-$0F6D)
+;
+; TERSE block 226.
+;=========================================================================================
+HRSS:
+            DB      $28, $00, $0D, $E0, $FF, $00, $03 ; $0F5E: RRUN, updates=13, dy=-32, dx=768
+            DB      $03                 ; $0F65: Record second-base fielder
+            DB      $28, $03, $00, $00, $00, $00, $00 ; $0F66: RCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0F6D: Deactivate vector
+
+;=========================================================================================
+; ----> HR3RD ($0F6E-$0F7D)
+;
+; TERSE block 226.
+;=========================================================================================
+HR3RD:
+            DB      $68, $00, $0A, $B0, $00, $00, $FE ; $0F6E: LRUN, updates=10, dy=176, dx=-512
+            DB      $04                 ; $0F75: Record third-base fielder
+            DB      $28, $03, $00, $00, $00, $00, $00 ; $0F76: RCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0F7D: Deactivate vector
+
+;=========================================================================================
+; ----> HLPT ($0F7E-$0F8C)
+;
+; TERSE block 226.
+;=========================================================================================
+HLPT:
+            DB      $68, $00, $12, $00, $00, $00, $FF ; $0F7E: LRUN, updates=18, dy=0, dx=-256
+            DB      $28, $08, $00, $00, $00, $00, $00 ; $0F85: STPT, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0F8C: Deactivate vector
+
+;=========================================================================================
+; ----> HRPT ($0F8D-$0F9B)
+;
+; TERSE block 226.
+;=========================================================================================
+HRPT:
+            DB      $28, $00, $12, $00, $00, $00, $01 ; $0F8D: RRUN, updates=18, dy=0, dx=256
+            DB      $28, $08, $00, $00, $00, $00, $00 ; $0F94: STPT, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0F9B: Deactivate vector
+
+;=========================================================================================
+; ----> PITCHPA ($0F9C-$0FAA)
+;
+; TERSE block 227.
+;=========================================================================================
+PITCHPA:
+            DB      $28, $09, $12, $00, $00, $00, $00 ; $0F9C: PTTHW, updates=18, dy=0, dx=0
+            DB      $28, $08, $00, $00, $00, $00, $00 ; $0FA3: STPT, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0FAA: Deactivate vector
+
+;=========================================================================================
+; ----> RTHWPA ($0FAB-$0FB2)
+;
+; TERSE block 227.
+;=========================================================================================
+RTHWPA:
+            DB      $28, $02, $05, $00, $00, $00, $00 ; $0FAB: RTRW, updates=5, dy=0, dx=0
+            DB      $0E                 ; $0FB2: Select NOACTPA
+
+;=========================================================================================
+; ----> LTHWPA ($0FB3-$0FBA)
+;
+; TERSE block 227.
+;=========================================================================================
+LTHWPA:
+            DB      $68, $02, $05, $00, $00, $00, $00 ; $0FB3: LTRW, updates=5, dy=0, dx=0
+            DB      $0E                 ; $0FBA: Select NOACTPA
+
+;=========================================================================================
+; ----> FBLR1ST ($0FBB-$0FCA)
+;
+; TERSE block 227.
+;=========================================================================================
+FBLR1ST:
+            DB      $28, $00, $16, $60, $00, $20, $02 ; $0FBB: RRUN, updates=22, dy=96, dx=544
+            DB      $28, $01, $02, $40, $00, $00, $01 ; $0FC2: RFLD, updates=2, dy=64, dx=256
+            DB      $0B                 ; $0FC9: Start throw animation
+            DB      $0E                 ; $0FCA: Select NOACTPA
+
+;=========================================================================================
+; ----> FBLL3RD ($0FCB-$0FDA)
+;
+; TERSE block 227.
+;=========================================================================================
+FBLL3RD:
+            DB      $68, $00, $12, $80, $00, $10, $FE ; $0FCB: LRUN, updates=18, dy=128, dx=-496
+            DB      $68, $01, $02, $40, $00, $80, $FF ; $0FD2: LFLD, updates=2, dy=64, dx=-128
+            DB      $0B                 ; $0FD9: Start throw animation
+            DB      $0E                 ; $0FDA: Select NOACTPA
+
+;=========================================================================================
+; ----> HLL3RD ($0FDB-$0FF1)
+;
+; TERSE block 227.
+;=========================================================================================
+HLL3RD:
+            DB      $68, $01, $12, $00, $00, $00, $FF ; $0FDB: LFLD, updates=18, dy=0, dx=-256
+            DB      $68, $00, $05, $00, $01, $00, $00 ; $0FE2: LRUN, updates=5, dy=256, dx=0
+            DB      $04                 ; $0FE9: Record third-base fielder
+            DB      $28, $03, $00, $00, $00, $00, $00 ; $0FEA: RCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $0FF1: Deactivate vector
+
+;=========================================================================================
+; ----> F3RDR3RD ($0FF2-$0FF9)
+;
+; TERSE block 227.
+;=========================================================================================
+F3RDR3RD:
+            DB      $68, $01, $0A, $40, $00, $D0, $FF ; $0FF2: LFLD, updates=10, dy=64, dx=-48
+            DB      $0B                 ; $0FF9: Start throw animation
+
+;=========================================================================================
+; ----> F3RDL3RD ($0FFA-$1001)
+;
+; TERSE block 227.
+;=========================================================================================
+F3RDL3RD:
+            DB      $28, $01, $0A, $40, $00, $80, $00 ; $0FFA: RFLD, updates=10, dy=64, dx=128
+            DB      $0B                 ; $1001: Start throw animation
+
+;=========================================================================================
+; ----> F3RDLSS ($1002-$1009)
+;
+; TERSE block 227.
+;=========================================================================================
+F3RDLSS:
+            DB      $68, $00, $12, $40, $00, $00, $FF ; $1002: LRUN, updates=18, dy=64, dx=-256
+            DB      $0E                 ; $1009: Select NOACTPA
+
+;=========================================================================================
+; ----> HL3RD ($100A-$1020)
+;
+; TERSE block 227.
+;=========================================================================================
+HL3RD:
+            DB      $28, $01, $12, $C0, $FF, $80, $00 ; $100A: RFLD, updates=18, dy=-64, dx=128
+            DB      $68, $00, $0E, $C0, $00, $00, $FE ; $1011: LRUN, updates=14, dy=192, dx=-512
+            DB      $04                 ; $1018: Record third-base fielder
+            DB      $28, $03, $00, $00, $00, $00, $00 ; $1019: RCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $1020: Deactivate vector
+
+;=========================================================================================
+; ----> HLSS ($1021-$1028)
+;
+; TERSE block 228.
+;=========================================================================================
+HLSS:
+            DB      $68, $01, $10, $00, $00, $80, $FF ; $1021: LFLD, updates=16, dy=0, dx=-128
+            DB      $0E                 ; $1028: Select NOACTPA
+
+;=========================================================================================
+; ----> FSSRSS ($1029-$1030)
+;
+; TERSE block 228.
+;=========================================================================================
+FSSRSS:
+            DB      $68, $01, $0C, $80, $00, $80, $FF ; $1029: LFLD, updates=12, dy=128, dx=-128
+            DB      $0B                 ; $1030: Start throw animation
+
+;=========================================================================================
+; ----> FSSLSS ($1031-$1038)
+;
+; TERSE block 228.
+;=========================================================================================
+FSSLSS:
+            DB      $28, $01, $0C, $80, $00, $80, $01 ; $1031: RFLD, updates=12, dy=128, dx=384
+            DB      $0B                 ; $1038: Start throw animation
+
+;=========================================================================================
+; ----> HMSS ($1039-$1040)
+;
+; TERSE block 228.
+;=========================================================================================
+HMSS:
+            DB      $28, $00, $0C, $C0, $FF, $00, $01 ; $1039: RRUN, updates=12, dy=-64, dx=256
+            DB      $0E                 ; $1040: Select NOACTPA
+
+;=========================================================================================
+; ----> F2NDR2ND ($1041-$1048)
+;
+; TERSE block 228.
+;=========================================================================================
+F2NDR2ND:
+            DB      $68, $01, $0B, $A0, $00, $20, $FF ; $1041: LFLD, updates=11, dy=160, dx=-224
+            DB      $0B                 ; $1048: Start throw animation
+
+;=========================================================================================
+; ----> F2NDL2ND ($1049-$1050)
+;
+; TERSE block 228.
+;=========================================================================================
+F2NDL2ND:
+            DB      $28, $01, $0C, $00, $00, $80, $00 ; $1049: RFLD, updates=12, dy=0, dx=128
+            DB      $0B                 ; $1050: Start throw animation
+
+;=========================================================================================
+; ----> HR2ND ($1051-$1058)
+;
+; TERSE block 228.
+;=========================================================================================
+HR2ND:
+            DB      $28, $01, $12, $00, $00, $80, $00 ; $1051: RFLD, updates=18, dy=0, dx=128
+            DB      $0E                 ; $1058: Select NOACTPA
+
+;=========================================================================================
+; ----> HR1ST ($1059-$106F)
+;
+; TERSE block 228.
+;=========================================================================================
+HR1ST:
+            DB      $68, $01, $12, $C0, $FF, $80, $FF ; $1059: LFLD, updates=18, dy=-64, dx=-128
+            DB      $28, $00, $13, $90, $00, $00, $02 ; $1060: RRUN, updates=19, dy=144, dx=512
+            DB      $02                 ; $1067: Record first-base fielder
+            DB      $68, $03, $00, $00, $00, $00, $00 ; $1068: LCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $106F: Deactivate vector
+
+;=========================================================================================
+; ----> F1STR1ST ($1070-$1077)
+;
+; TERSE block 228.
+;=========================================================================================
+F1STR1ST:
+            DB      $68, $01, $0A, $30, $00, $C0, $FF ; $1070: LFLD, updates=10, dy=48, dx=-64
+            DB      $0D                 ; $1077: Wait for first-base throw
+
+;=========================================================================================
+; ----> F1STL1ST ($1078-$107F)
+;
+; TERSE block 228.
+;=========================================================================================
+F1STL1ST:
+            DB      $28, $01, $0B, $C0, $FF, $40, $01 ; $1078: RFLD, updates=11, dy=-64, dx=320
+            DB      $0D                 ; $107F: Wait for first-base throw
+
+;=========================================================================================
+; ----> HRL1ST ($1080-$1087)
+;
+; TERSE block 228.
+;=========================================================================================
+HRL1ST:
+            DB      $28, $01, $18, $00, $00, $00, $01 ; $1080: RFLD, updates=24, dy=0, dx=256
+            DB      $0E                 ; $1087: Select NOACTPA
+
+;=========================================================================================
+; ----> F1STPT ($1088-$1097)
+;
+; TERSE block 228.
+;=========================================================================================
+F1STPT:
+            DB      $28, $00, $15, $00, $00, $80, $04 ; $1088: RRUN, updates=21, dy=0, dx=1152
+            DB      $02                 ; $108F: Record first-base fielder
+            DB      $68, $03, $00, $00, $00, $00, $00 ; $1090: LCB, updates=0, dy=0, dx=0
+            DB      $0C                 ; $1097: Deactivate vector
+
+;=========================================================================================
+; ----> HLOUTSSPA ($1098-$109F)
+;
+; TERSE block 228.
+;=========================================================================================
+HLOUTSSPA:
+            DB      $68, $00, $10, $80, $FF, $E0, $FF ; $1098: LRUN, updates=16, dy=-128, dx=-32
+            DB      $0E                 ; $109F: Select NOACTPA
+
+;=========================================================================================
+; ----> HROUT2NDPA ($10A0-$10A7)
+;
+; TERSE block 228.
+;=========================================================================================
+HROUT2NDPA:
+            DB      $28, $00, $10, $80, $00, $20, $00 ; $10A0: RRUN, updates=16, dy=128, dx=32
+            DB      $0E                 ; $10A7: Select NOACTPA
+
+;=========================================================================================
+; ----> PFB ($10A8-$10AE)
+;
+; TERSE block 229.
+;=========================================================================================
+PFB:
+            DB      $28, $06, $50, $00, $03, $00, $00 ; $10A8: BAL, updates=80, dy=768, dx=0
+
+;=========================================================================================
+; ----> PSB ($10AF-$10B5)
+;
+; TERSE block 229.
+;=========================================================================================
+PSB:
+            DB      $28, $06, $80, $00, $01, $00, $00 ; $10AF: BAL, updates=128, dy=256, dx=0
+
+;=========================================================================================
+; ----> PSU ($10B6-$10C3)
+;
+; TERSE block 229.
+;=========================================================================================
+PSU:
+            DB      $28, $06, $35, $00, $01, $00, $00 ; $10B6: BAL, updates=53, dy=256, dx=0
+            DB      $28, $06, $50, $00, $03, $00, $00 ; $10BD: BAL, updates=80, dy=768, dx=0
+
+;=========================================================================================
+; ----> PSD ($10C4-$10D1)
+;
+; TERSE block 229.
+;=========================================================================================
+PSD:
+            DB      $28, $06, $12, $00, $03, $00, $00 ; $10C4: BAL, updates=18, dy=768, dx=0
+            DB      $28, $06, $50, $00, $01, $00, $00 ; $10CB: BAL, updates=80, dy=256, dx=0
+
+;=========================================================================================
+; ----> PCO ($10D2-$10E6)
+;
+; TERSE block 229.
+;=========================================================================================
+PCO:
+            DB      $28, $06, $12, $00, $03, $00, $00 ; $10D2: BAL, updates=18, dy=768, dx=0
+            DB      $28, $06, $09, $00, $02, $00, $01 ; $10D9: BAL, updates=9, dy=512, dx=256
+            DB      $28, $06, $50, $00, $02, $00, $00 ; $10E0: BAL, updates=80, dy=512, dx=0
+
+;=========================================================================================
+; ----> PICI ($10E7-$10FB)
+;
+; TERSE block 229.
+;=========================================================================================
+PICI:
+            DB      $28, $06, $1A, $00, $02, $F0, $FF ; $10E7: BAL, updates=26, dy=512, dx=-16
+            DB      $28, $06, $09, $00, $02, $00, $FF ; $10EE: BAL, updates=9, dy=512, dx=-256
+            DB      $28, $06, $50, $00, $02, $00, $00 ; $10F5: BAL, updates=80, dy=512, dx=0
+
+;=========================================================================================
+; ----> PICO ($10FC-$1110)
+;
+; TERSE block 229.
+;=========================================================================================
+PICO:
+            DB      $28, $06, $1A, $00, $02, $E0, $FF ; $10FC: BAL, updates=26, dy=512, dx=-32
+            DB      $28, $06, $09, $00, $02, $60, $00 ; $1103: BAL, updates=9, dy=512, dx=96
+            DB      $28, $06, $50, $00, $02, $00, $00 ; $110A: BAL, updates=80, dy=512, dx=0
 
 ;=========================================================================================
 ; ----> comphl  Native entry $1111
@@ -3734,7 +4197,7 @@ _AUD_INIT_POINTERS:
             pop     af
             pop     af
             ld      a,$05
-            ld      ($7CA5),a
+            ld      (RAM_SAMEDLT),a
             jr      $13B6
             ld      a,h
             cp      d
@@ -5650,7 +6113,7 @@ _AUD_INIT_POINTERS:
             DB      $06                 ; Inline byte
             DB      $14                 ; $1E0D: +
             DB      $1B                 ; $1E0E: literal16
-            DW      $0F21               ; Inline cell
+            DW      OFFFPA               ; Inline cell
             DB      $65                 ; $1E11: _SSTORE
             DB      $19                 ; $1E12: literal8
             DB      $11                 ; Inline byte
@@ -5696,7 +6159,7 @@ _AUD_INIT_POINTERS:
             DB      $06                 ; Inline byte
             DB      $14                 ; $1E40: +
             DB      $1B                 ; $1E41: literal16
-            DW      $0F21               ; Inline cell
+            DW      OFFFPA               ; Inline cell
             DB      $65                 ; $1E44: _SSTORE
             DB      $19                 ; $1E45: literal8
             DB      $11                 ; Inline byte
@@ -6849,24 +7312,36 @@ _AUD_INIT_POINTERS:
             inc     d
             jr      $2466
             inc     bc
-            add     a,b
-            ld      a,$00
-            ld      h,c
-            nop
-            jr      z,$2467
-            ld      b,a
-            ret     nz
-            ld      de,$6300
-            nop
-            jr      z,$246F
-            and     (hl)
+
+;=========================================================================================
+; ----> BSRTBL  Base destination coordinates ($2460-$246F)
+;
+; Four little-endian (Y, X) fixed-point pairs; TERSE block 190.
+;=========================================================================================
+BSRTBL:
+            DW      $3E80, $6100         ; First base: Y, X
+            DW      $2800, $4700         ; Second base: Y, X
+            DW      $11C0, $6300         ; Third base: Y, X
+            DW      $2800, $A600         ; Home: Y, X
             res     7,(ix+$11)
             ld      a,$01
-            ld      ($7CA5),a
+            ld      (RAM_SAMEDLT),a
             ret
-            ld      hl,$0F36
-            ld      ($7C8C),hl
+
+;=========================================================================================
+; ----> STOP_ACTION  Native entry $247A
+;
+; Select the standing action at NOACTPA through the shared action pointer.
+;=========================================================================================
+            ld      hl,NOACTPA
+            ld      (RAM_VECTPC),hl
             ret
+
+;=========================================================================================
+; ----> THWANMSET  Native entry $2481
+;
+; Save the throwing vector, erase the ball, and schedule throw animation.
+;=========================================================================================
             push    ix
             pop     hl
             ld      ($7C4F),hl
@@ -6874,19 +7349,43 @@ _AUD_INIT_POINTERS:
             ld      a,$01
             ld      ($7CC5),a
             ld      (RAM_THROWANM),a
-            jr      $247A
+            jr      STOP_ACTION
+
+;=========================================================================================
+; ----> ON1ST  Native entry $2494
+;
+; Save IX as the first-base fielder.
+;=========================================================================================
             push    ix
             pop     hl
             ld      ($7CC6),hl
             ret
+
+;=========================================================================================
+; ----> ON2ND  Native entry $249B
+;
+; Save IX as the second-base fielder.
+;=========================================================================================
             push    ix
             pop     hl
             ld      ($7CC8),hl
             ret
+
+;=========================================================================================
+; ----> ON3RD  Native entry $24A2
+;
+; Save IX as the third-base fielder.
+;=========================================================================================
             push    ix
             pop     hl
             ld      ($7CCA),hl
             ret
+
+;=========================================================================================
+; ----> BLDST  Native entry $24A9
+;
+; Calculate ball movement toward its destination.
+;=========================================================================================
             ld      a,($7E6B)
             call    $13B7
             call    $1315
@@ -6959,8 +7458,14 @@ _AUD_INIT_POINTERS:
             ld      ($7C5D),hl
             ld      ($7C5F),de
             ld      hl,$7C5A
-            ld      ($7C8C),hl
+            ld      (RAM_VECTPC),hl
             ret
+
+;=========================================================================================
+; ----> FLDDST  Native entry $2556
+;
+; Calculate fielder movement toward the field destination.
+;=========================================================================================
             ld      a,$04
             call    $13B7
             call    $1315
@@ -6997,8 +7502,14 @@ _AUD_INIT_POINTERS:
             ld      ($7C6D),hl
             ld      ($7C6F),de
             ld      hl,$7C6A
-            ld      ($7C8C),hl
+            ld      (RAM_VECTPC),hl
             ret
+
+;=========================================================================================
+; ----> OFFFDST  Native entry $25B5
+;
+; Calculate outfielder movement toward the field destination.
+;=========================================================================================
             bit     5,(ix+$11)
             jr      z,$25C0
             ld      a,$20
@@ -7048,8 +7559,14 @@ _AUD_INIT_POINTERS:
             ld      ($7C87),de
             ld      ($7C85),hl
             ld      hl,$7C82
-            ld      ($7C8C),hl
+            ld      (RAM_VECTPC),hl
             ret
+
+;=========================================================================================
+; ----> RUNDST  Native entry $262F
+;
+; Update runner movement, base occupancy, and arrival state.
+;=========================================================================================
             ld      b,(ix+$12)
             ld      a,($7CAB)
             and     a
@@ -7126,7 +7643,7 @@ _AUD_INIT_POINTERS:
             jr      $2735
             ld      a,b
             push    bc
-            ld      hl,$2460
+            ld      hl,BSRTBL
             sla     a
             call    indexw
             push    de
@@ -7191,16 +7708,28 @@ _AUD_INIT_POINTERS:
             ld      ($7C67),de
             pop     af
             ld      hl,$7C62
-            ld      ($7C8C),hl
+            ld      (RAM_VECTPC),hl
             ret
+
+;=========================================================================================
+; ----> OFMOTION  Native entry $2761
+;
+; Select the outfielder trackball action in RAM.
+;=========================================================================================
             ld      a,($7C73)
             cp      $04
             jr      nz,$276C
             res     7,(ix+$11)
             ld      hl,$7C72
-            ld      ($7C8C),hl
+            ld      (RAM_VECTPC),hl
             ret
-            call    $2481
+
+;=========================================================================================
+; ----> WAITTHRW  Native entry $2773
+;
+; Start throw setup and schedule the first-base wait timer.
+;=========================================================================================
+            call    THWANMSET
             ld      a,($7C3C)
             cp      $05
             ret     z
@@ -7208,62 +7737,81 @@ _AUD_INIT_POINTERS:
             ld      (RAM_THROWANM),a
             ld      a,$20
             ld      ($7C9E),a
-            jp      $247A
+            jp      STOP_ACTION
+
+;=========================================================================================
+; ----> BLMOTION  Native entry $2788
+;
+; Select the ball trackball action in RAM.
+;=========================================================================================
             ld      hl,$7C7A
-            ld      ($7C8C),hl
+            ld      (RAM_VECTPC),hl
             ret
-            sub     h
-            inc     h
-            sbc     a,e
-            inc     h
-            and     d
-            inc     h
-            ld      h,c
-            daa
-            adc     a,b
-            daa
-            ld      d,(hl)
-            dec     h
-            cpl
-            ld      h,$B5
-            dec     h
-            xor     c
-            inc     h
-            add     a,c
-            inc     h
-            ld      (hl),b
-            inc     h
-            ld      (hl),e
-            daa
-            ld      a,d
-            inc     h
+
+;=========================================================================================
+; ----> OPTBL  Playaction command dispatch ($278F-$27A8)
+;
+; Thirteen little-endian native entry addresses, indexed by command minus $02.
+;=========================================================================================
+OPTBL:
+            DW      ON1ST                ; $02
+            DW      ON2ND                ; $03
+            DW      ON3RD                ; $04
+            DW      OFMOTION             ; $05
+            DW      BLMOTION             ; $06
+            DW      FLDDST               ; $07
+            DW      RUNDST               ; $08
+            DW      OFFFDST              ; $09
+            DW      BLDST                ; $0A
+            DW      THWANMSET            ; $0B
+            DW      DEACTIVATE           ; $0C
+            DW      WAITTHRW             ; $0D
+            DW      STOP_ACTION          ; $0E
+
+;=========================================================================================
+; ----> OPCODECHK  Native entry $27A9
+;
+; Dispatch one playaction command below $28 through OPTBL.
+;=========================================================================================
             ld      a,(hl)
             cp      $28
             jr      nc,$27C3
             dec     a
             dec     a
             inc     hl
-            ld      ($7C8C),hl
-            ld      hl,$278F
+            ld      (RAM_VECTPC),hl
+            ld      hl,OPTBL
             call    indexw
             ld      hl,$27C0
             push    hl
             ex      de,hl
             jp      (hl)
-            ld      hl,($7C8C)
+            ld      hl,(RAM_VECTPC)
             ret
+
+;=========================================================================================
+; ----> LOADANM  Native entry $27C4
+;
+; Load magic and animation selection from the action record.
+;=========================================================================================
             ld      a,(hl)
             ld      (ix+$00),a
             inc     hl
             ld      a,(hl)
             push    hl
-            ld      hl,$0943
+            ld      hl,PATTERNS
             call    indexw
             ld      (ix+$03),d
             ld      (ix+$02),e
             pop     hl
             inc     hl
             ret
+
+;=========================================================================================
+; ----> ANMSEQLOAD  Native entry $27DA
+;
+; Select the animation sequence for the vector perspective.
+;=========================================================================================
             ld      h,(ix+$03)
             ld      l,(ix+$02)
             ld      a,(ix+$15)
@@ -7271,23 +7819,29 @@ _AUD_INIT_POINTERS:
             ld      (ix+$05),d
             ld      (ix+$04),e
             ret
+
+;=========================================================================================
+; ----> PACTLOAD  Native entry $27ED
+;
+; Load action timing and signed dy/dx increments into the vector.
+;=========================================================================================
             ld      h,(ix+$07)
             ld      l,(ix+$06)
-            call    $27A9
-            ld      a,($7CA5)
+            call    OPCODECHK
+            ld      a,(RAM_SAMEDLT)
             and     a
             jr      z,$2809
             inc     hl
             inc     hl
             xor     a
-            ld      ($7CA5),a
+            ld      (RAM_SAMEDLT),a
             inc     hl
             inc     hl
             inc     hl
             inc     hl
             inc     hl
             jr      $2825
-            call    $27C4
+            call    LOADANM
             ld      a,(hl)
             ld      (ix+$08),a
             inc     hl
@@ -7306,6 +7860,12 @@ _AUD_INIT_POINTERS:
             ld      (ix+$07),h
             ld      (ix+$06),l
             ret
+
+;=========================================================================================
+; ----> PATFETCH  Native entry $282C
+;
+; Advance the animation phase and store the selected bitmap pointer.
+;=========================================================================================
             ld      hl,$0503
             ld      a,($7CD3)
             and     a
@@ -7330,21 +7890,27 @@ _AUD_INIT_POINTERS:
             ld      (ix+$14),d
             ld      (ix+$13),e
             ret
+
+;=========================================================================================
+; ----> PLAYACT  Native entry $2861
+;
+; Update action timing, select the perspective sequence, and fetch its bitmap.
+;=========================================================================================
             push    bc
             push    ix
-            ld      ix,($7C93)
+            ld      ix,(RAM_VECTIX)
             ld      a,(ix+$08)
             and     a
             jr      nz,$2873
-            call    $27ED
+            call    PACTLOAD
             jr      $287D
             cp      $FF
             jr      nz,$2879
             jr      $287D
             dec     a
             ld      (ix+$08),a
-            call    $27DA
-            call    $282C
+            call    ANMSEQLOAD
+            call    PATFETCH
             pop     ix
             pop     bc
             ret
@@ -7673,7 +8239,7 @@ _AUD_INIT_POINTERS:
             DB      $06                 ; Inline byte
             DB      $14                 ; $2A04: +
             DB      $1B                 ; $2A05: literal16
-            DW      $0F22               ; Inline cell
+            DW      TFPA               ; Inline cell
             DB      $65                 ; $2A08: _SSTORE
             DB      $19                 ; $2A09: literal8
             DB      $11                 ; Inline byte
@@ -7699,63 +8265,63 @@ _AUD_INIT_POINTERS:
 ;=========================================================================================
             rst     $08                 ; Enter the inline TERSE thread
             DB      $1B                 ; $2A1C: literal16
-            DW      $0F2C               ; Inline cell
+            DW      TFPA2               ; Inline cell
             DB      $19                 ; $2A1F: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A21: inline base addition
             DW      VEC_PT              ; Inline cell
             DB      $02                 ; $2A24: !
             DB      $1B                 ; $2A25: literal16
-            DW      $0F24               ; Inline cell
+            DW      TFPA1               ; Inline cell
             DB      $19                 ; $2A28: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A2A: inline base addition
             DW      VEC_FIRST           ; Inline cell
             DB      $02                 ; $2A2D: !
             DB      $1B                 ; $2A2E: literal16
-            DW      $0F24               ; Inline cell
+            DW      TFPA1               ; Inline cell
             DB      $19                 ; $2A31: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A33: inline base addition
             DW      VEC_SECOND          ; Inline cell
             DB      $02                 ; $2A36: !
             DB      $1B                 ; $2A37: literal16
-            DW      $0F24               ; Inline cell
+            DW      TFPA1               ; Inline cell
             DB      $19                 ; $2A3A: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A3C: inline base addition
             DW      VEC_THIRD           ; Inline cell
             DB      $02                 ; $2A3F: !
             DB      $1B                 ; $2A40: literal16
-            DW      $0F24               ; Inline cell
+            DW      TFPA1               ; Inline cell
             DB      $19                 ; $2A43: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A45: inline base addition
             DW      VEC_SS              ; Inline cell
             DB      $02                 ; $2A48: !
             DB      $1B                 ; $2A49: literal16
-            DW      $0F20               ; Inline cell
+            DW      RUNBPA               ; Inline cell
             DB      $19                 ; $2A4C: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A4E: inline base addition
             DW      VEC_R1              ; Inline cell
             DB      $02                 ; $2A51: !
             DB      $1B                 ; $2A52: literal16
-            DW      $0F20               ; Inline cell
+            DW      RUNBPA               ; Inline cell
             DB      $19                 ; $2A55: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A57: inline base addition
             DW      VEC_R2              ; Inline cell
             DB      $02                 ; $2A5A: !
             DB      $1B                 ; $2A5B: literal16
-            DW      $0F20               ; Inline cell
+            DW      RUNBPA               ; Inline cell
             DB      $19                 ; $2A5E: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A60: inline base addition
             DW      VEC_R3              ; Inline cell
             DB      $02                 ; $2A63: !
             DB      $1B                 ; $2A64: literal16
-            DW      $0F20               ; Inline cell
+            DW      RUNBPA               ; Inline cell
             DB      $19                 ; $2A67: literal8
             DB      $06                 ; Inline byte
             DB      $0E                 ; $2A69: inline base addition
@@ -8121,7 +8687,7 @@ _AUD_INIT_POINTERS:
             ld      ($7E67),hl
             ld      hl,($7D65)
             ld      ($7E69),hl
-            ld      hl,$0F34
+            ld      hl,THWBLPA
             ld      ($7E54),hl
             xor     a
             ld      ($7E56),a
@@ -8269,7 +8835,7 @@ _AUD_INIT_POINTERS:
             ld      ($7CBE),a
             call    verase
             ld      ($7C93),ix
-            call    $2861
+            call    PLAYACT
             call    $2B63
             call    $2B2A
             call    vwrite
@@ -8296,7 +8862,7 @@ _AUD_INIT_POINTERS:
             ld      ($7CBE),a
             call    verase
             ld      ($7C93),ix
-            call    $2861
+            call    PLAYACT
             call    $2B63
             call    vwrite
             call    $2CD4
@@ -8905,7 +9471,7 @@ _AUD_INIT_POINTERS:
             ld      ($7D29),a
             ld      ($7D29),a
             ld      ($7D48),a
-            ld      hl,$0F20
+            ld      hl,RUNBPA
             ld      ($7D3D),hl
             pop     af
             dec     a
@@ -8964,7 +9530,7 @@ _AUD_INIT_POINTERS:
             ld      a,(iy+$12)
             cp      c
             jr      nz,$33B1
-            ld      hl,$0F21
+            ld      hl,OFFFPA
             xor     a
             ld      (iy+$12),a
             ld      (iy+$07),h
@@ -9125,9 +9691,9 @@ _AUD_INIT_POINTERS:
             ld      a,(ix+$0c)
             cp      d
             jr      nc,$34E2
-            ld      hl,$0FAB
+            ld      hl,RTHWPA
             jr      $34E5
-            ld      hl,$0FB3
+            ld      hl,LTHWPA
             ld      (ix+$07),h
             ld      (ix+$06),l
             set     7,(ix+$11)
@@ -9417,7 +9983,7 @@ _AUD_INIT_POINTERS:
             add     a,a
             nop
             di
-            ld      hl,$0F35
+            ld      hl,PITCHBLPA
             ld      a,$01
             ld      ($7C58),a
             ld      ($7CB3),a
@@ -9430,7 +9996,7 @@ _AUD_INIT_POINTERS:
             ex      de,hl
             jr      $36A2
             ld      ($7C5A),hl
-            ld      hl,$0F34
+            ld      hl,THWBLPA
             ld      ($7E54),hl
             ld      hl,$7E5F
             set     7,(hl)
@@ -9572,7 +10138,7 @@ _AUD_INIT_POINTERS:
 ;=========================================================================================
 ; ----> ofldtbl  Native entry $3759
 ;=========================================================================================
-            ld      hl,$0F23
+            ld      hl,OFTBLPA
             xor     a
             ld      (RAM_OFTOTBL),a
             di
@@ -9645,7 +10211,7 @@ _AUD_INIT_POINTERS:
             ld      ($7CB1),a
             ld      ($7CB2),a
             ld      ($7CB0),a
-            ld      hl,$0F9C
+            ld      hl,PITCHPA
             ld      ($7D5C),hl
             ld      ($7CD8),a
             ld      ($7D5E),a

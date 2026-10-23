@@ -2,6 +2,28 @@
 
 The 16 KB image is mapped at `$0000–$3FFF`. Addresses identify the released ROM bytes.
 
+## Animation and playaction data
+
+| Range | Contents |
+| --- | --- |
+| `$02D1–$0438` | Large character font; 36 ten-row glyphs |
+| `$0439–$04AB` | Six small-text bitmaps |
+| `$088D–$0942` | Animation sequences and perspective pointer tables |
+| `$0943–$0958` | `PATTERNS`; 11 animation-family pointers |
+| `$0959–$0966` | `ENDMUSIC`; silence and termination commands |
+| `$0EF9–$0F1F` | `verase`; saved-vector erase routine |
+| `$0F20–$1110` | 46 playaction tables; 64 actions and 49 commands |
+| `$2460–$246F` | `BSRTBL`; four base destination coordinate pairs |
+| `$278F–$27A8` | `OPTBL`; 13 native command-handler pointers |
+| `$27A9–$27C3` | `OPCODECHK`; command dispatch |
+| `$27C4–$27D9` | `LOADANM`; magic and animation family selection |
+| `$27DA–$27EC` | `ANMSEQLOAD`; perspective selection |
+| `$27ED–$282B` | `PACTLOAD`; timing, velocity, and next action pointer |
+| `$282C–$2860` | `PATFETCH`; animation phase and bitmap selection |
+| `$2861–$2886` | `PLAYACT`; vector animation update pipeline |
+
+The [vector animation and playaction reference](extra_bases_playactions.md) lists each table, record format, and command target.
+
 ## Interpreter and native entries
 
 | Address | Symbol |

@@ -10,3 +10,4 @@ fi
 mkdir -p src/zout
 "$zmac_bin" -o src/zout/eb_disassembly.bin -x src/zout/eb_disassembly.lst src/eb_disassembly.asm
 python3 tools/verify_roms.py src/zout/eb_disassembly.bin
+python3 tools/verify_graphics.py
