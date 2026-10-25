@@ -1,0 +1,25 @@
+name: Reverse-engineer original TERSE gameplay graph
+on:
+  push:
+    branches: [codex/baseball-gameplay-native-lineage]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  terse-source-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate original source gameplay and music dependencies
+        run: python3 tools/trace_gameplay_terse.py
+      - name: Export extracted source-level graph
+        uses: actions/upload-artifact@v4
+        with:
+          name: extra-bases-original-terse-gameplay-graph
+          path: docs/terse-baseball-gameplay-graph.json
+          if-no-files-found: error
