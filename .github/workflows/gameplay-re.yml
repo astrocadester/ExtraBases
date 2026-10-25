@@ -6,7 +6,7 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   terse-source-evidence:
     runs-on: ubuntu-latest
@@ -19,6 +19,17 @@ jobs:
         run: python3 tools/trace_gameplay_terse.py
       - name: Recover authentic 1980 target TERSE developer vocabulary
         run: python3 tools/recover_terse_vocabulary.py
+      - name: Publish verified source-level RE artifacts to PR
+        if: github.ref == 'refs/heads/codex/baseball-gameplay-native-lineage'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/terse-baseball-gameplay-graph.json docs/recovered-terse-original-vocabulary.json docs/recovered-terse-original-vocabulary.md
+          if ! git diff --cached --quiet; then
+            git commit -m "re: generated original TERSE developer vocabulary and gameplay graph [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
       - name: Export extracted source-level graph
         uses: actions/upload-artifact@v4
         with:
