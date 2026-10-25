@@ -21,6 +21,13 @@ RAM_SCRTIME         EQU     $7CCC
 RAM_HITTIME         EQU     $7CD2
 RAM_CAUGHT          EQU     $7CD4
 RAM_PITCHTIME       EQU     $7CD9
+; Historical 8080 baseball crosswalk (1978 Extra Inning ROM ei.b):
+; genuine source used XP1..XP5, XPL/XPC/XPR and relative ball locations
+; XBP*=XP*-4, YBP*=YP*+3. Those formula-derived coordinates reappear
+; byte-for-byte in the 1977 Double Play and 1978 Extra Inning ROMs.
+; Extra Bases uses its distinct 1980 Z80/TERSE 31-byte vector layout:
+; these VEC_* addresses and the target board's coordinate system govern.
+; See docs/dna-8080-historical-source-crosswalk.md.
 VEC_R1              EQU     $7CDA
 VEC_R2              EQU     $7CF9
 VEC_R3              EQU     $7D18
