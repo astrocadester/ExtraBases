@@ -15,7 +15,7 @@ OUT=ROOT/"docs"/"terse-baseball-gameplay-graph.json"
 
 def blocks(text):
     result={}
-    for m in re.finditer(r"\+[-]+Block\s+(\d+)[-]+\+",text):
+    for m in re.finditer(r"\+[-]+Block\s+(\d+)[-]+",text):
         number=int(m.group(1))
         begin=m.end()
         following=re.search(r"\+[-]+Block\s+\d+[-]+\+",text[begin:])
