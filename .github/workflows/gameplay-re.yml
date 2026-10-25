@@ -17,9 +17,14 @@ jobs:
           python-version: '3.11'
       - name: Validate original source gameplay and music dependencies
         run: python3 tools/trace_gameplay_terse.py
+      - name: Recover authentic 1980 target TERSE developer vocabulary
+        run: python3 tools/recover_terse_vocabulary.py
       - name: Export extracted source-level graph
         uses: actions/upload-artifact@v4
         with:
           name: extra-bases-original-terse-gameplay-graph
-          path: docs/terse-baseball-gameplay-graph.json
+          path: |
+            docs/terse-baseball-gameplay-graph.json
+            docs/recovered-terse-original-vocabulary.json
+            docs/recovered-terse-original-vocabulary.md
           if-no-files-found: error
