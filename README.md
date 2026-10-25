@@ -15,6 +15,10 @@ Extra Bases runs on the DNA Astrocade arcade hardware. Its Z80 program combines 
 | [RAM and I/O](#ram-and-io) | The framebuffer, off-screen workspace, 31-byte vector records, interpreter registers, cabinet inputs, and trackball ports are mapped. |
 | [Source reference](src/terse/README.md) | The block-by-block TERSE annotation includes an alphabetical word dictionary and comment-style bitmap grids. |
 
+## Historical DNA baseball-source comparison
+
+The [1978 historical EQU crosswalk](docs/dna-8080-historical-source-crosswalk.md) compares genuine 8080-era player, base and ball-position formulas with Extra Bases' documented 1980 Z80/TERSE state model. The game's own `VEC_*` positions and `BALLPAT` / `BASEPAT` source remain authoritative for the later hardware.
+
 ## Project layout
 
 | Path | Contents |
