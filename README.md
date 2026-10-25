@@ -25,7 +25,7 @@ The [1978 historical EQU crosswalk](docs/dna-8080-historical-source-crosswalk.md
 | --- | --- |
 | `src/eb_disassembly.asm` | Z80 source, decoded TERSE streams, and data tables |
 | `src/extra_bases.inc` | ROM and RAM equates included by the disassembly |
-| `src/terse/extra-bases.terse` | TERSE source blocks |
+| `src/terse/extra-bases-11-20-79.terse` | TERSE source blocks |
 | `src/terse/README.md` | TERSE annotations and word dictionary |
 | `build.sh` | Linux assembly, ROM verification, and packaging |
 | `build.bat` | Windows assembly, ROM verification, and packaging |
@@ -176,4 +176,6 @@ Cabinet and DIP inputs use the sound/I/O read ports. Port `$13` returns the sele
 - [MAME Astrocade driver](https://github.com/mamedev/mame/blob/master/src/mame/bally/astrocde.cpp)
 - [zmac 1.3 Windows distribution](https://ballyalley.com/ml/ml_tools/Zmac13_win32.zip)
 
-[Native gameplay RE: 8080-to-Z80 score and sound comparison](docs/dna-8080-gameplay-score-audio-lineage.md).
+## Extra Bases Final source
+
+The preserved dated listing is `src/terse/extra-bases-11-20-79.terse`. The native reconstruction is `src/terse/extra-bases-final.terse`; see [native build compatibility and ROM comparison](docs/extra-bases-final-native.md).
