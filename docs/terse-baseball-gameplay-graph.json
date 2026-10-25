@@ -1,0 +1,510 @@
+{
+  "source": "src/terse/extra-bases.terse",
+  "architecture": "1980 Z80 native/TERSE source, not 8080 bytecode",
+  "scanned_blocks": 217,
+  "critical_source": [
+    {
+      "block": 114,
+      "symbols": [
+        "CHKSCRTIME",
+        "PLAYON",
+        "VLENGTH",
+        "SCRTIME"
+      ],
+      "source_lines": [
+        {
+          "line": 0,
+          "source": "( BB sentry definitions CHKSCRTIME , BASETABLE )"
+        },
+        {
+          "line": 1,
+          "source": "305 LOAD ( stings )"
+        },
+        {
+          "line": 2,
+          "source": "BASE@ HEX"
+        },
+        {
+          "line": 3,
+          "source": "LABLE BASETABLE 6000 , 4000 , 4400 , 2800 , 6000 , 1000 ,"
+        },
+        {
+          "line": 4,
+          "source": " AA00 , 2800 , ( base coor )"
+        },
+        {
+          "line": 5,
+          "source": "CODE CHKSCRTIME ( score process ) DI,"
+        },
+        {
+          "line": 6,
+          "source": " X PUSHX, HITOF LDA, A ANA, 0<>, IF, PLAYON LHLD, H PUSH,"
+        },
+        {
+          "line": 7,
+          "source": " X POPX, ( player play is on ) VMAGIC R4 D LXI, E A MOV,"
+        },
+        {
+          "line": 8,
+          "source": " L CMP, ( r4? ) <>, IF, DBLFLAG LDA, A ANA, 0=, IF,"
+        },
+        {
+          "line": 9,
+          "source": " VLENGTH D LXI, D DAD, PLAYON SHLD, THEN, THEN,"
+        },
+        {
+          "line": 10,
+          "source": " ELSE, VMAGIC R1 X LXIX, ( infield hit ) THEN,"
+        },
+        {
+          "line": 11,
+          "source": " A XRA, A VWBASE X STX, SCRTIME STA, X POPX, EI,"
+        },
+        {
+          "line": 12,
+          "source": " PLYR1UP LDA, A ANA, 0<>, IF, SCORE1 H LXI, 1 D MVI,"
+        },
+        {
+          "line": 13,
+          "source": " ELSE, SCORE2 H LXI, 2 D MVI, THEN,"
+        },
+        {
+          "line": 14,
+          "source": " M A MOV, 1 ADI, DAA, A M MOV, D A MOV, SCORESHOW STA, RET,"
+        },
+        {
+          "line": 15,
+          "source": "-->"
+        }
+      ]
+    },
+    {
+      "block": 134,
+      "symbols": [
+        "BALLSCORE",
+        "COINSCORE"
+      ],
+      "source_lines": [
+        {
+          "line": 0,
+          "source": "( BASEBALL SCORES 4-3, 10-6, 5-4, etc. ) BASE @ HEX"
+        },
+        {
+          "line": 1,
+          "source": "BTABLE STRIKESCORE"
+        },
+        {
+          "line": 2,
+          "source": "23 MASTER AB ABVOLS 0B MCVOLS 0 VIBS 1 #E2 CNOTE #F2 BTONE #C2"
+        },
+        {
+          "line": 3,
+          "source": "ATONE 1 #G2 CNOTE #FS2 BTONE 1 #A2 CNOTE #AS2 BTONE 1 #C3 CNOTE"
+        },
+        {
+          "line": 4,
+          "source": "#CS3 BTONE 1 #DS3 CNOTE #F3 BTONE 1 #F3 CNOTE #FS3 BTONE 1 #G2"
+        },
+        {
+          "line": 5,
+          "source": "CNOTE #GS3 BTONE 08 #B3 CNOTE #C4 BTONE QUIET"
+        },
+        {
+          "line": 6,
+          "source": "BTABLE BALLSCORE"
+        },
+        {
+          "line": 7,
+          "source": "28 MASTER AB ABVOLS 0A MCVOLS 0 VIBS 2 #G2 #F2 #D2 NOTES"
+        },
+        {
+          "line": 8,
+          "source": "2 #G2 #E2 #C2 NOTES 2 #G2 #D2 #B1 NOTES 5 #G2 #C2 #A1 NOTES"
+        },
+        {
+          "line": 9,
+          "source": "QUIET"
+        },
+        {
+          "line": 10,
+          "source": "BTABLE COINSCORE"
+        },
+        {
+          "line": 11,
+          "source": "23 MASTER FF ABVOLS 2F MCVOLS E8 NOISE 52 VIBS"
+        },
+        {
+          "line": 12,
+          "source": "12 #C2 #D2 #E2 NOTES ( 6 #B1 ANOTE 6 #A1 BNOTE ) QUIET"
+        },
+        {
+          "line": 13,
+          "source": "-->"
+        },
+        {
+          "line": 14,
+          "source": ""
+        },
+        {
+          "line": 15,
+          "source": ""
+        }
+      ]
+    },
+    {
+      "block": 140,
+      "symbols": [
+        "SAFESCORE",
+        "OUTSCORE"
+      ],
+      "source_lines": [
+        {
+          "line": 0,
+          "source": "( SAFE , OUT , ) HEX"
+        },
+        {
+          "line": 1,
+          "source": "BTABLE SAFESCORE"
+        },
+        {
+          "line": 2,
+          "source": "34 MASTER AB ABVOLS 0B MCVOLS 0 VIBS 5 #C2 #E2 #G2"
+        },
+        {
+          "line": 3,
+          "source": "NOTES 5 #G2 #D3 #B2 NOTES 5 #A2 #D2 #C3 NOTES"
+        },
+        {
+          "line": 4,
+          "source": "12 #B2 #D3 #G3 NOTES 0 CHEERSSCORE LDPCC"
+        },
+        {
+          "line": 5,
+          "source": "BTABLE OUTSCORE"
+        },
+        {
+          "line": 6,
+          "source": "23 MASTER AB ABVOLS 0B MCVOLS 0 VIBS 5 #G2 #D2 #F2"
+        },
+        {
+          "line": 7,
+          "source": "NOTES 5 #E2 #B1 #D2 NOTES 5 #B1 #GS1 #F1 NOTES"
+        },
+        {
+          "line": 8,
+          "source": " 5 #E1 #F1 #B0 NOTES"
+        },
+        {
+          "line": 9,
+          "source": "12 #G0 #F1 #A1 NOTES QUIET"
+        },
+        {
+          "line": 10,
+          "source": "BASE ! ;S"
+        },
+        {
+          "line": 11,
+          "source": ""
+        },
+        {
+          "line": 12,
+          "source": ""
+        },
+        {
+          "line": 13,
+          "source": ""
+        },
+        {
+          "line": 14,
+          "source": ""
+        },
+        {
+          "line": 15,
+          "source": ""
+        }
+      ]
+    },
+    {
+      "block": 141,
+      "symbols": [
+        "MUSPC",
+        "MUSIC"
+      ],
+      "source_lines": [
+        {
+          "line": 0,
+          "source": "( MUSIC PROCESSOR COMMANDS ) BASE@ HEX"
+        },
+        {
+          "line": 1,
+          "source": "0 VARIABLE MUSPC { : MASTER } 10 B, B, { ; } { : ATONE } 11 B,"
+        },
+        {
+          "line": 2,
+          "source": "B, { ; } { : BTONE } 12 B, B, { ; } { : CTONE } 13 B, B, { ; }"
+        },
+        {
+          "line": 3,
+          "source": "{ : VIBS } 14 B, B, { ; } { : ABVOLS } 16 B, B, { ; }"
+        },
+        {
+          "line": 4,
+          "source": "{ : MCVOLS } 15 B, B, { ; } { : NOISE } 17 B, B, { ; }"
+        },
+        {
+          "line": 5,
+          "source": "{ : DURATION } 1 B, B, { ; }"
+        },
+        {
+          "line": 6,
+          "source": "{ : LDPC } 3 B, , { ; } { : QUIT } 4 B, HERE LDPC { ; }"
+        },
+        {
+          "line": 7,
+          "source": "{ : LDPCC } 2 B, , { ; } { : QUIET } 0 ABVOLS"
+        },
+        {
+          "line": 8,
+          "source": "0 MCVOLS 0 ATONE 0 BTONE 0 CTONE QUIT { ; }"
+        },
+        {
+          "line": 9,
+          "source": "{ : ANOTE } ATONE DURATION { ; } { : BNOTE } BTONE DURATION"
+        },
+        {
+          "line": 10,
+          "source": "{ ; } { : CNOTE } CTONE DURATION { ; }"
+        },
+        {
+          "line": 11,
+          "source": "{ : RDRNDNTE } 0 B, B, B, B, { ; }"
+        },
+        {
+          "line": 12,
+          "source": "{ : RRRNDNTE } 0 B, B, 0 B, B, { ; }"
+        },
+        {
+          "line": 13,
+          "source": "{ : RNDNTE } 0 B, B, 0 B, FF B, { ; }"
+        },
+        {
+          "line": 14,
+          "source": "{ : NOTES } ATONE BTONE CNOTE { ; }"
+        },
+        {
+          "line": 15,
+          "source": "BTABLE ENDMUSIC QUIET -->"
+        }
+      ]
+    },
+    {
+      "block": 143,
+      "symbols": [
+        "MUSCPU",
+        "NOTETIMER",
+        "PROCESS"
+      ],
+      "source_lines": [
+        {
+          "line": 0,
+          "source": "( MUSIC PROCESSOR IN ASSEMBLY )"
+        },
+        {
+          "line": 1,
+          "source": "0 BV MULTIPLE 0 V STARTPC 0 BV NOTETIMER 0 BV PRIORITY"
+        },
+        {
+          "line": 2,
+          "source": "SUBR FETCH MUSPC LHLD, M A MOV, RET,"
+        },
+        {
+          "line": 3,
+          "source": "SUBR INCPC MUSPC LHLD, H INX, MUSPC SHLD, RET,"
+        },
+        {
+          "line": 4,
+          "source": "SUBR HLOAD FETCH CALL, INCPC CALL, 0 H MVI, A L MOV, RET,"
+        },
+        {
+          "line": 5,
+          "source": "SUBR PCJUMP MUSPC LHLD, M E MOV, H INX, M D MOV,"
+        },
+        {
+          "line": 6,
+          "source": "MUSPC SDED, RET,"
+        },
+        {
+          "line": 7,
+          "source": "( MUSIC PROCESSOR IN CODE )"
+        },
+        {
+          "line": 8,
+          "source": "FORWARD PROCESS FORWARD M1CASE FORWARD M2CASE FORWARD M3CASE"
+        },
+        {
+          "line": 9,
+          "source": "FORWARD M4CASE FORWARD PORTOUT FORWARD MULTDN FORWARD MUSEND"
+        },
+        {
+          "line": 10,
+          "source": "CODE MUSCPU <ASSEMBLE"
+        },
+        {
+          "line": 11,
+          "source": "B PUSH, NOTETIMER LDA, A ORA, PROCESS JZ,"
+        },
+        {
+          "line": 12,
+          "source": "A DCR, NOTETIMER STA, MUSEND JNZ,"
+        },
+        {
+          "line": 13,
+          "source": "LABEL PROCESS FETCH CALL, INCPC CALL, A ORA,"
+        },
+        {
+          "line": 14,
+          "source": "M1CASE JNZ, HLOAD CALL, H PUSH, HLOAD CALL,"
+        },
+        {
+          "line": 15,
+          "source": "H PUSH, HLOAD CALL, H PUSH, DOVERB RND -->"
+        }
+      ]
+    }
+  ],
+  "symbol_block_index": {
+    "CODE": [
+      10,
+      87,
+      88,
+      89,
+      114,
+      115,
+      116,
+      119,
+      122,
+      124,
+      125,
+      132,
+      143,
+      145,
+      159,
+      167,
+      177,
+      179,
+      180,
+      190,
+      191,
+      192,
+      194,
+      195,
+      196,
+      199,
+      200,
+      201,
+      202,
+      203,
+      207,
+      208,
+      230,
+      232,
+      233,
+      234,
+      236,
+      237,
+      238,
+      239,
+      244,
+      245,
+      246,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      257,
+      258,
+      259,
+      262,
+      270,
+      271,
+      276,
+      291,
+      292,
+      293,
+      294,
+      295,
+      304
+    ],
+    "CHKSCRTIME": [
+      114,
+      132
+    ],
+    "SCRTIME": [
+      114,
+      132,
+      152,
+      198
+    ],
+    "PLAYON": [
+      114,
+      116,
+      117,
+      119,
+      149,
+      162,
+      167,
+      263
+    ],
+    "BTABLE": [
+      123,
+      134,
+      135,
+      136,
+      138,
+      140,
+      141,
+      154,
+      270,
+      280,
+      296,
+      299
+    ],
+    "STRIKESCORE": [
+      134,
+      146
+    ],
+    "BALLSCORE": [
+      134,
+      146
+    ],
+    "COINSCORE": [
+      134,
+      146
+    ],
+    "FOULSCORE": [
+      135,
+      146
+    ],
+    "OUTSCORE": [
+      140,
+      146
+    ],
+    "MUSPC": [
+      141,
+      143,
+      144,
+      145
+    ],
+    "MUSCPU": [
+      143,
+      268
+    ],
+    "NOTETIMER": [
+      143,
+      144,
+      145
+    ]
+  }
+}
