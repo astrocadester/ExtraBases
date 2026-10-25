@@ -1,0 +1,924 @@
+{
+  "source": "src/terse/extra-bases.terse",
+  "source_blocks": 217,
+  "declarations": 130,
+  "unique_words": 126,
+  "by_kind": {
+    "CODE": 106,
+    "BTABLE": 22,
+    "VARIABLE": 2
+  },
+  "entries": [
+    {
+      "kind": "CODE",
+      "name": "DUP",
+      "block": 87,
+      "line": 1,
+      "source": "07D ROMHERE ! CODE DUP"
+    },
+    {
+      "kind": "CODE",
+      "name": "DROP",
+      "block": 87,
+      "line": 3,
+      "source": "08A ROMHERE ! CODE DROP"
+    },
+    {
+      "kind": "CODE",
+      "name": "SWAP",
+      "block": 87,
+      "line": 4,
+      "source": "08D ROMHERE ! CODE SWAP"
+    },
+    {
+      "kind": "CODE",
+      "name": "B",
+      "block": 87,
+      "line": 6,
+      "source": "09A ROMHERE ! CODE B@"
+    },
+    {
+      "kind": "CODE",
+      "name": "B",
+      "block": 87,
+      "line": 8,
+      "source": "0A8 ROMHERE ! CODE B!"
+    },
+    {
+      "kind": "CODE",
+      "name": "ZERO",
+      "block": 87,
+      "line": 9,
+      "source": "0AD ROMHERE ! CODE ZERO"
+    },
+    {
+      "kind": "CODE",
+      "name": "B",
+      "block": 88,
+      "line": 4,
+      "source": "0E6 ROMHERE ! CODE B@+7"
+    },
+    {
+      "kind": "CODE",
+      "name": "AND",
+      "block": 88,
+      "line": 12,
+      "source": "0147 ROMHERE ! CODE AND"
+    },
+    {
+      "kind": "CODE",
+      "name": "OR",
+      "block": 88,
+      "line": 13,
+      "source": "0152 ROMHERE ! CODE OR"
+    },
+    {
+      "kind": "CODE",
+      "name": "XOR",
+      "block": 88,
+      "line": 14,
+      "source": "015D ROMHERE ! CODE XOR"
+    },
+    {
+      "kind": "CODE",
+      "name": "BMOVE",
+      "block": 89,
+      "line": 1,
+      "source": "0168 ROMHERE ! CODE BMOVE"
+    },
+    {
+      "kind": "CODE",
+      "name": "R",
+      "block": 89,
+      "line": 2,
+      "source": "01BF ROMHERE ! CODE R@"
+    },
+    {
+      "kind": "CODE",
+      "name": "OVER",
+      "block": 89,
+      "line": 3,
+      "source": "01C8 ROMHERE ! CODE OVER"
+    },
+    {
+      "kind": "CODE",
+      "name": "SWAB",
+      "block": 89,
+      "line": 4,
+      "source": "01CF ROMHERE ! CODE SWAB"
+    },
+    {
+      "kind": "CODE",
+      "name": "OUTP",
+      "block": 89,
+      "line": 5,
+      "source": "01D6 ROMHERE ! CODE OUTP"
+    },
+    {
+      "kind": "CODE",
+      "name": "INP",
+      "block": 89,
+      "line": 6,
+      "source": "01DE ROMHERE ! CODE INP"
+    },
+    {
+      "kind": "CODE",
+      "name": "ROT",
+      "block": 89,
+      "line": 7,
+      "source": "01E8 ROMHERE ! CODE ROT"
+    },
+    {
+      "kind": "CODE",
+      "name": "PICK",
+      "block": 89,
+      "line": 8,
+      "source": "01EF ROMHERE ! CODE PICK"
+    },
+    {
+      "kind": "CODE",
+      "name": "DI",
+      "block": 89,
+      "line": 9,
+      "source": "0243 ROMHERE ! CODE DI"
+    },
+    {
+      "kind": "CODE",
+      "name": "EI",
+      "block": 89,
+      "line": 10,
+      "source": "0246 ROMHERE ! CODE EI"
+    },
+    {
+      "kind": "CODE",
+      "name": "SWABN",
+      "block": 89,
+      "line": 11,
+      "source": "0249 ROMHERE ! CODE SWABN"
+    },
+    {
+      "kind": "CODE",
+      "name": "NPICK",
+      "block": 89,
+      "line": 12,
+      "source": "0260 ROMHERE ! CODE NPICK"
+    },
+    {
+      "kind": "CODE",
+      "name": "CHKSCRTIME",
+      "block": 114,
+      "line": 5,
+      "source": "CODE CHKSCRTIME ( score process ) DI,"
+    },
+    {
+      "kind": "CODE",
+      "name": "RESETRUNNERS",
+      "block": 115,
+      "line": 2,
+      "source": "CODE RESETRUNNERS ( reset runners to order of on base )"
+    },
+    {
+      "kind": "CODE",
+      "name": "CHKCAUGHT",
+      "block": 116,
+      "line": 2,
+      "source": "CODE CHKCAUGHT ( caught set in interrupt )"
+    },
+    {
+      "kind": "CODE",
+      "name": "THROWANIM",
+      "block": 119,
+      "line": 3,
+      "source": "CODE THROWANIM ( sets up BLDST and player anim )"
+    },
+    {
+      "kind": "CODE",
+      "name": "THROWBALL",
+      "block": 122,
+      "line": 5,
+      "source": "CODE THROWBALL FLDCLR LDA, A ANA, RNZ, ( finish scoring first )"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "IODTBL",
+      "block": 123,
+      "line": 7,
+      "source": "BTABLE IODTBL ( inning odds table )"
+    },
+    {
+      "kind": "CODE",
+      "name": "BATHIT",
+      "block": 124,
+      "line": 1,
+      "source": "CODE BATHIT ( he hit it time to get em running )"
+    },
+    {
+      "kind": "CODE",
+      "name": "STARTMUSIC",
+      "block": 124,
+      "line": 6,
+      "source": "CODE STARTMUSIC A XRA, STMUSIC STA,"
+    },
+    {
+      "kind": "CODE",
+      "name": "OFLDTBL",
+      "block": 124,
+      "line": 12,
+      "source": "CODE OFLDTBL OFTBLPA H LXI, A XRA, OFTOTBL STA,"
+    },
+    {
+      "kind": "CODE",
+      "name": "BUTTONCHK",
+      "block": 125,
+      "line": 1,
+      "source": "CODE BUTTONCHK ( reads buttons for swing run & pitch it )"
+    },
+    {
+      "kind": "CODE",
+      "name": "SENTRY",
+      "block": 132,
+      "line": 4,
+      "source": "CODE SENTRY ( game loop ) B PUSH,"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "STRIKESCORE",
+      "block": 134,
+      "line": 1,
+      "source": "BTABLE STRIKESCORE"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "BALLSCORE",
+      "block": 134,
+      "line": 6,
+      "source": "BTABLE BALLSCORE"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "COINSCORE",
+      "block": 134,
+      "line": 10,
+      "source": "BTABLE COINSCORE"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "FOULSCORE",
+      "block": 135,
+      "line": 0,
+      "source": "( FOUL,CHEERS,BAT CRACK ) HEX BTABLE FOULSCORE 0 VIBS"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "CHEERSSCORE",
+      "block": 135,
+      "line": 5,
+      "source": "( CROWD CHEER ) BTABLE CHEERSSCORE 35 MASTER 33 NOISE"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "CRACKSCORE",
+      "block": 135,
+      "line": 11,
+      "source": "BTABLE CRACKSCORE 50 MASTER 3D NOISE"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "FENCESCORE",
+      "block": 135,
+      "line": 14,
+      "source": "BTABLE FENCESCORE 48 MASTER 38 NOISE 4 CRACKSCORE LDPCC"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "TAKE-ME",
+      "block": 136,
+      "line": 3,
+      "source": "{ : ^ } EF ABVOLS 0F MCVOLS { ; } BTABLE TAKE-ME CMAJOR 0 VIBS"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "SIRENSCORE",
+      "block": 138,
+      "line": 1,
+      "source": "BTABLE SIRENSCORE AB ABVOLS 0B MCVOLS"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "CANNONSCORE",
+      "block": 138,
+      "line": 7,
+      "source": "( HOMER CONT. ) BTABLE CANNONSCORE"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "SAFESCORE",
+      "block": 140,
+      "line": 1,
+      "source": "BTABLE SAFESCORE"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "OUTSCORE",
+      "block": 140,
+      "line": 5,
+      "source": "BTABLE OUTSCORE"
+    },
+    {
+      "kind": "VARIABLE",
+      "name": "MUSPC",
+      "block": 141,
+      "line": 1,
+      "source": "0 VARIABLE MUSPC { : MASTER } 10 B, B, { ; } { : ATONE } 11 B,"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "ENDMUSIC",
+      "block": 141,
+      "line": 15,
+      "source": "BTABLE ENDMUSIC QUIET -->"
+    },
+    {
+      "kind": "CODE",
+      "name": "MUSCPU",
+      "block": 143,
+      "line": 10,
+      "source": "CODE MUSCPU <ASSEMBLE"
+    },
+    {
+      "kind": "CODE",
+      "name": "BMUSIC",
+      "block": 145,
+      "line": 2,
+      "source": "CODE BMUSIC PRIORITY LDA, H POP, A ORA, 0=, IF, loadpc CALL,"
+    },
+    {
+      "kind": "CODE",
+      "name": "EMUSIC",
+      "block": 145,
+      "line": 4,
+      "source": "CODE EMUSIC 0 ENDMUSIC H LXI, loadpc CALL, 1 A MVI, NOTETIMER"
+    },
+    {
+      "kind": "CODE",
+      "name": "PMUSIC",
+      "block": 145,
+      "line": 6,
+      "source": "CODE PMUSIC H POP, loadpc CALL, 1 A MVI, MULTIPLE STA,"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "HMHTBL",
+      "block": 154,
+      "line": 9,
+      "source": "BTABLE HMHTBL ( fence = 1 homer = 2 normal = 0 )"
+    },
+    {
+      "kind": "CODE",
+      "name": "HOMERCHK",
+      "block": 159,
+      "line": 1,
+      "source": "CODE HOMERCHK ( chk for homer or fence hit )"
+    },
+    {
+      "kind": "CODE",
+      "name": "HITRUN",
+      "block": 167,
+      "line": 2,
+      "source": "CODE HITRUN ( activate proper runners and set trwbase )"
+    },
+    {
+      "kind": "CODE",
+      "name": "TBALLPITCH",
+      "block": 177,
+      "line": 1,
+      "source": "CODE TBALLPITCH ( loads pitch velocities )"
+    },
+    {
+      "kind": "CODE",
+      "name": "CLRBLST",
+      "block": 179,
+      "line": 13,
+      "source": "CODE CLRBLST 30 A MVI, BALLS STA, STRIKES STA, NEXT"
+    },
+    {
+      "kind": "CODE",
+      "name": "BALLERASE",
+      "block": 180,
+      "line": 1,
+      "source": "CODE BALLERASE B PUSH, Y PUSHX, BLERASE CALL,"
+    },
+    {
+      "kind": "CODE",
+      "name": "DEACTIVATE",
+      "block": 190,
+      "line": 4,
+      "source": "CODE DEACTIVATE ( reset active bit in status )"
+    },
+    {
+      "kind": "CODE",
+      "name": "THWANMSET",
+      "block": 191,
+      "line": 1,
+      "source": "CODE THWANMSET ( set up throw animation )"
+    },
+    {
+      "kind": "CODE",
+      "name": "ON1ST",
+      "block": 191,
+      "line": 5,
+      "source": "CODE ON1ST X PUSHX, H POP, FLDON1ST SHLD, RET,"
+    },
+    {
+      "kind": "CODE",
+      "name": "ON2ND",
+      "block": 191,
+      "line": 6,
+      "source": "CODE ON2ND X PUSHX, H POP, FLDON2ND SHLD, RET,"
+    },
+    {
+      "kind": "CODE",
+      "name": "ON3RD",
+      "block": 191,
+      "line": 7,
+      "source": "CODE ON3RD X PUSHX, H POP, FLDON3RD SHLD, RET,"
+    },
+    {
+      "kind": "CODE",
+      "name": "BLDST",
+      "block": 192,
+      "line": 1,
+      "source": "CODE BLDST ( ball thrown or hit )"
+    },
+    {
+      "kind": "CODE",
+      "name": "FLDDST",
+      "block": 194,
+      "line": 1,
+      "source": "CODE FLDDST ( fielders take position logic )"
+    },
+    {
+      "kind": "CODE",
+      "name": "OFFFDST",
+      "block": 195,
+      "line": 2,
+      "source": "CODE OFFFDST ( all player off field control ) <ASSEMBLE"
+    },
+    {
+      "kind": "CODE",
+      "name": "RUNDST",
+      "block": 196,
+      "line": 3,
+      "source": "CODE RUNDST ( runner base running control ) <ASSEMBLE"
+    },
+    {
+      "kind": "CODE",
+      "name": "OFMOTION",
+      "block": 199,
+      "line": 1,
+      "source": "CODE OFMOTION ( set pc for ram pa table -tractor ball )"
+    },
+    {
+      "kind": "CODE",
+      "name": "WAITTHRW",
+      "block": 199,
+      "line": 5,
+      "source": "CODE WAITTHRW ( sets flag for 1stbaseman to wait throw )"
+    },
+    {
+      "kind": "CODE",
+      "name": "BLMOTION",
+      "block": 199,
+      "line": 8,
+      "source": "CODE BLMOTION ( set pc for ram pa table -tractor ball )"
+    },
+    {
+      "kind": "CODE",
+      "name": "OPCODECHK",
+      "block": 200,
+      "line": 2,
+      "source": "CODE OPCODECHK ( called by plyactupdate ) <ASSEMBLE"
+    },
+    {
+      "kind": "CODE",
+      "name": "LOADANM",
+      "block": 200,
+      "line": 9,
+      "source": "CODE LOADANM ( loads magic & anm HL-top of playact table )"
+    },
+    {
+      "kind": "CODE",
+      "name": "ANMSEQLOAD",
+      "block": 201,
+      "line": 1,
+      "source": "CODE ANMSEQLOAD ( finds proper anm seq by per=# )"
+    },
+    {
+      "kind": "CODE",
+      "name": "PACTLOAD",
+      "block": 201,
+      "line": 6,
+      "source": "CODE PACTLOAD ( loads vect from plyact )"
+    },
+    {
+      "kind": "CODE",
+      "name": "PATFETCH",
+      "block": 202,
+      "line": 1,
+      "source": "CODE PATFETCH ( loads actual pattern IX-vector )"
+    },
+    {
+      "kind": "CODE",
+      "name": "PLAYACT",
+      "block": 203,
+      "line": 1,
+      "source": "CODE PLAYACT ( called in intterupt does update prc )"
+    },
+    {
+      "kind": "CODE",
+      "name": "FMIRROR",
+      "block": 207,
+      "line": 7,
+      "source": "CODE FMIRROR B PUSH, 0C A MVI, XPAND OUT,"
+    },
+    {
+      "kind": "CODE",
+      "name": "INFIELD",
+      "block": 208,
+      "line": 2,
+      "source": "CODE INFIELD B PUSH, X PUSHX,"
+    },
+    {
+      "kind": "CODE",
+      "name": "DSTCALC",
+      "block": 230,
+      "line": 3,
+      "source": "CODE DSTCALC ( calc deltas to destination )"
+    },
+    {
+      "kind": "CODE",
+      "name": "DSTLD",
+      "block": 232,
+      "line": 1,
+      "source": "CODE DSTLD"
+    },
+    {
+      "kind": "CODE",
+      "name": "COMPHL",
+      "block": 233,
+      "line": 2,
+      "source": "CODE COMPHL ( compliments HL )"
+    },
+    {
+      "kind": "CODE",
+      "name": "COMPDE",
+      "block": 233,
+      "line": 4,
+      "source": "CODE COMPDE H PUSH, XCHG, ' COMPHL CALL, XCHG, H POP, RET,"
+    },
+    {
+      "kind": "CODE",
+      "name": "EX",
+      "block": 234,
+      "line": 1,
+      "source": "CODE EX C9 B, NEXT"
+    },
+    {
+      "kind": "CODE",
+      "name": "DIVHLBY4",
+      "block": 234,
+      "line": 2,
+      "source": "CODE DIVHLBY4 ( divide HL by 4 )"
+    },
+    {
+      "kind": "CODE",
+      "name": "INDEXW",
+      "block": 234,
+      "line": 7,
+      "source": "CODE INDEXW ( call routine A- disp HL- table add )"
+    },
+    {
+      "kind": "CODE",
+      "name": "MULTHLBY4",
+      "block": 236,
+      "line": 1,
+      "source": "CODE MULTHLBY4"
+    },
+    {
+      "kind": "CODE",
+      "name": "KILLOF",
+      "block": 236,
+      "line": 4,
+      "source": "CODE KILLOF ( stop outfield tractor ball control )"
+    },
+    {
+      "kind": "CODE",
+      "name": "WAIT",
+      "block": 236,
+      "line": 7,
+      "source": "CODE WAIT ( given A wait period stop every thing )"
+    },
+    {
+      "kind": "CODE",
+      "name": "SETACT",
+      "block": 237,
+      "line": 1,
+      "source": "CODE SETACT ( sets avtive bit in status )"
+    },
+    {
+      "kind": "CODE",
+      "name": "INFLDACT",
+      "block": 237,
+      "line": 5,
+      "source": "CODE INFLDACT ( set infielders active )"
+    },
+    {
+      "kind": "CODE",
+      "name": "OUTFLDACT",
+      "block": 237,
+      "line": 7,
+      "source": "CODE OUTFLDACT ( sets outfielders active )"
+    },
+    {
+      "kind": "CODE",
+      "name": "ALLFLDACT",
+      "block": 237,
+      "line": 9,
+      "source": "CODE ALLFLDACT ( sets all fielders active )"
+    },
+    {
+      "kind": "CODE",
+      "name": "PTAUTOTM",
+      "block": 238,
+      "line": 4,
+      "source": "CODE PTAUTOTM ( pitch auto timer )"
+    },
+    {
+      "kind": "CODE",
+      "name": "FLSHOFF",
+      "block": 239,
+      "line": 10,
+      "source": "CODE FLSHOFF B PUSH, A XRA, FLSHON STA, DI, FLSHWUP CALL,"
+    },
+    {
+      "kind": "CODE",
+      "name": "WRITE",
+      "block": 244,
+      "line": 5,
+      "source": "CODE WRITE ( write with X Y sizes ; pattern with no header )"
+    },
+    {
+      "kind": "CODE",
+      "name": "WRITR",
+      "block": 245,
+      "line": 1,
+      "source": "CODE WRITR ( write with a relative pattern )"
+    },
+    {
+      "kind": "CODE",
+      "name": "CPOST",
+      "block": 246,
+      "line": 4,
+      "source": "CODE cpost ( post an ascii-character on the screen ; see opt. )"
+    },
+    {
+      "kind": "CODE",
+      "name": "BCD",
+      "block": 250,
+      "line": 1,
+      "source": "CODE BCD+ ( binary to decimal arithmatic )"
+    },
+    {
+      "kind": "CODE",
+      "name": "VWRITE",
+      "block": 251,
+      "line": 1,
+      "source": "CODE VWRITE ( does reloff relabs patbrd from vector IX )"
+    },
+    {
+      "kind": "CODE",
+      "name": "VERASE",
+      "block": 252,
+      "line": 1,
+      "source": "CODE VERASE ( does pattern board erase from vector IX )"
+    },
+    {
+      "kind": "CODE",
+      "name": "CHKGROUNDER",
+      "block": 253,
+      "line": 5,
+      "source": "CODE CHKGROUNDER ( if grounder adjust ball direction )"
+    },
+    {
+      "kind": "CODE",
+      "name": "TIMER",
+      "block": 254,
+      "line": 1,
+      "source": "CODE TIMER ( interrupt timer routine )"
+    },
+    {
+      "kind": "CODE",
+      "name": "PERSPECTIVE",
+      "block": 255,
+      "line": 3,
+      "source": "CODE PERSPECTIVE ( pattern size determined by y )"
+    },
+    {
+      "kind": "CODE",
+      "name": "VECTOR",
+      "block": 257,
+      "line": 1,
+      "source": "CODE VECTOR ( vectors and limit checks )"
+    },
+    {
+      "kind": "CODE",
+      "name": "BATHITCHK",
+      "block": 258,
+      "line": 4,
+      "source": "CODE BATHITCHK ( check window for hit )"
+    },
+    {
+      "kind": "CODE",
+      "name": "BATWRITE",
+      "block": 259,
+      "line": 3,
+      "source": "CODE BATWRITE ( xor bat from swingtype )"
+    },
+    {
+      "kind": "CODE",
+      "name": "BATSWING",
+      "block": 259,
+      "line": 9,
+      "source": "CODE BATSWING ( swings bat if appropriate )"
+    },
+    {
+      "kind": "CODE",
+      "name": "BLPOSCHK",
+      "block": 262,
+      "line": 1,
+      "source": "CODE BLPOSCHK"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "FIELD",
+      "block": 270,
+      "line": 6,
+      "source": "BTABLE FIELD"
+    },
+    {
+      "kind": "CODE",
+      "name": "CNLINE",
+      "block": 270,
+      "line": 10,
+      "source": "CODE cnline ( calls vector line write )"
+    },
+    {
+      "kind": "CODE",
+      "name": "STRTLINE",
+      "block": 271,
+      "line": 1,
+      "source": "CODE strtline ( given X Y sets up start of line )"
+    },
+    {
+      "kind": "CODE",
+      "name": "COUNT",
+      "block": 276,
+      "line": 2,
+      "source": "ROMHERE @ 0E6 ROMHERE ! CODE COUNT ROMHERE !"
+    },
+    {
+      "kind": "CODE",
+      "name": "DO",
+      "block": 276,
+      "line": 5,
+      "source": "ROMHERE @ 0176 ROMHERE ! CODE DO"
+    },
+    {
+      "kind": "CODE",
+      "name": "LOOP",
+      "block": 276,
+      "line": 6,
+      "source": "0191 ROMHERE ! CODE LOOP"
+    },
+    {
+      "kind": "CODE",
+      "name": "I",
+      "block": 276,
+      "line": 7,
+      "source": "01BF ROMHERE ! CODE I"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "PXT0",
+      "block": 280,
+      "line": 4,
+      "source": "BTABLE PXT0 0 , 0 ,"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "PXT1",
+      "block": 280,
+      "line": 5,
+      "source": "BTABLE PXT1 80 B, 20 B, 8 B, 2 B, ( fixed white index 2 )"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "MASK",
+      "block": 280,
+      "line": 8,
+      "source": "BTABLE MASK 3F B, 0CF B, 0F3 B, 0FC B,"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "PXT3",
+      "block": 280,
+      "line": 9,
+      "source": "BTABLE PXT3 0C0 B, 30 B, 0C B, 3 B,"
+    },
+    {
+      "kind": "VARIABLE",
+      "name": "IPNT",
+      "block": 291,
+      "line": 2,
+      "source": "0 VARIABLE IPNT"
+    },
+    {
+      "kind": "CODE",
+      "name": "IEX",
+      "block": 291,
+      "line": 11,
+      "source": "CODE IEX PSW POP, B POP, D POP, H POP, EXX, EXAF,"
+    },
+    {
+      "kind": "CODE",
+      "name": "ISTART",
+      "block": 292,
+      "line": 1,
+      "source": "CODE ISTART DI, H POP, IPNT SHLD, 8 A MVI, INMOD OUT,"
+    },
+    {
+      "kind": "CODE",
+      "name": "DI",
+      "block": 292,
+      "line": 4,
+      "source": "ROMHERE @ HEX 0243 ROMHERE ! CODE DI"
+    },
+    {
+      "kind": "CODE",
+      "name": "EI",
+      "block": 292,
+      "line": 5,
+      "source": "0246 ROMHERE ! CODE EI 0249 ROMHERE ! CODE SWAN"
+    },
+    {
+      "kind": "CODE",
+      "name": "SWAN",
+      "block": 292,
+      "line": 5,
+      "source": "0246 ROMHERE ! CODE EI 0249 ROMHERE ! CODE SWAN"
+    },
+    {
+      "kind": "CODE",
+      "name": "FILL",
+      "block": 293,
+      "line": 4,
+      "source": "ROMHERE @ HEX 0253 ROMHERE ! CODE FILL ROMHERE !"
+    },
+    {
+      "kind": "CODE",
+      "name": "NDUP",
+      "block": 294,
+      "line": 1,
+      "source": "ROMHERE @ HEX 0260 ROMHERE ! CODE NDUP ROMHERE !"
+    },
+    {
+      "kind": "CODE",
+      "name": "RND",
+      "block": 295,
+      "line": 2,
+      "source": "ROMHERE @ 0275 ROMHERE ! CODE RND ROMHERE !"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "CHARACTERS",
+      "block": 296,
+      "line": 1,
+      "source": "BTABLE characters ( FILL IN CHARACTER TABLES )"
+    },
+    {
+      "kind": "BTABLE",
+      "name": "SMALLFONT",
+      "block": 299,
+      "line": 1,
+      "source": "BTABLE smallfont 00 B, 00 B, ( SPACE )"
+    },
+    {
+      "kind": "CODE",
+      "name": "EIDI",
+      "block": 304,
+      "line": 6,
+      "source": "CODE EIDI EI, DI, NEXT"
+    }
+  ],
+  "status": "Original TERSE developer word names, not inferred 8080 mnemonic names."
+}
