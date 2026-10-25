@@ -18,7 +18,7 @@ def blocks(text):
     for m in re.finditer(r"\+[-]+Block\s+(\d+)[-]+",text):
         number=int(m.group(1))
         begin=m.end()
-        following=re.search(r"\+[-]+Block\s+\d+[-]+\+",text[begin:])
+        following=re.search(r"\+[-]+Block\s+\d+[-]+",text[begin:])
         stop=begin+following.start() if following else len(text)
         lines={}
         for match in re.finditer(r"^\s*(\d{1,2})\|(.*)$",text[begin:stop],re.M):
