@@ -175,3 +175,5 @@ Cabinet and DIP inputs use the sound/I/O read ports. Port `$13` returns the sele
 - [Z80 coding style](docs/Z80_Coding_Style_Guidelines.md)
 - [MAME Astrocade driver](https://github.com/mamedev/mame/blob/master/src/mame/bally/astrocde.cpp)
 - [zmac 1.3 Windows distribution](https://ballyalley.com/ml/ml_tools/Zmac13_win32.zip)
+
+[Native gameplay RE: 8080-to-Z80 score and sound comparison](docs/dna-8080-gameplay-score-audio-lineage.md).
