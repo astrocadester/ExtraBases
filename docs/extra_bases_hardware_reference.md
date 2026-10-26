@@ -1,41 +1,8 @@
 # Extra Bases Hardware Reference Guide
 
-~~~text
-     SYSTEM MEMORY MAP                     HARDWARE ROM SOCKETS
-┌─────────────────────────┐ $FFFF      ┌─────────────────────────┐ $FFFF
-│     NOT ADDRESSABLE     │            │     NOT ADDRESSABLE     │
-│    (NO DECODE LOGIC)    │            │    (NO DECODE LOGIC)    │
-└─────────────────────────┘ $8000      └─────────────────────────┘ $8000
-┌─────────────────────────┐ $7FFF      ┌─────────────────────────┐ $7FFF
-│ Parameter & Return Stks │            │                         │
-│ (PSP SP=$7F80/RSP=IX)   │            │                         │
-└─────────────────────────┘ $7F00      │                         │
-┌─────────────────────────┐ $7EFF      │     RAM Board x 2       │
-│   System Variables &    │            │   (A082-91356-C000)     │
-│  Game State (Overlaps)  │            │ (16x MK4027 DRAM ICs)   │
-└─────────────────────────┘ $7C00      │                         │
-┌─────────────────────────┐ $7BFF      │                         │
-│  Viewable SCREEN RAM    │            │                         │
-│  (320x204 Framebuffer)  │            │                         │
-└─────────────────────────┘ $4000      └─────────────────────────┘ $4000
-┌─────────────────────────┐ $3FFF      ┌─────────────────────────┐ $3FFF
-│  Sound Data, Char GFX   │            │        Socket X7        │
-│  & Opcode Jump Table    │            │        ROM m761d        │
-└─────────────────────────┘ $3000      └─────────────────────────┘ $3000
-┌─────────────────────────┐ $2FFF      ┌─────────────────────────┐ $2FFF
-│ TERSE Word Definitions  │            │        Socket X5        │
-│ & Game Jump Tables      │            │        ROM m761c        │
-└─────────────────────────┘ $2000      └─────────────────────────┘ $2000
-┌─────────────────────────┐ $1FFF      ┌─────────────────────────┐ $1FFF
-│ Main Game Loop, Player  │            │        Socket X3        │
-│ & Ball Control Logic    │            │        ROM m761b        │
-└─────────────────────────┘ $1000      └─────────────────────────┘ $1000
-┌─────────────────────────┐ $0FFF      ┌─────────────────────────┐ $0FFF
-│ Boot Entry, Interrupts  │            │        Socket X1        │
-│ & Inner Interpreter     │            │        ROM m761a        │
-└─────────────────────────┘ $0000      └─────────────────────────┘ $0000
-~~~
----
+![Extra Bases Z80 CPU memory map](../images/extra-bases-memory-map.png)
+
+The [memory and I/O reference](extra_bases_memory_map.md) records the CPU decode, shared framebuffer/workspace, vector records, and hardware ports. Program ROM reads occupy `$0000–$3FFF`; writes to those addresses enter the Function Generator. Shared RAM occupies `$4000–$7FFF`.
 
 ## Hardware
 
@@ -49,7 +16,7 @@
 
 ### Dynamic RAM Board
 * **Board Number:** `A082-91356-C000`
-* **Overview:** Provides the system's entire 16 KB workspace using 16× MK4027 Dynamic RAM (DRAM) ICs mapped to address space `$4000–$7FFF`. This single memory board accommodates the 320×204 viewable bitmapped screen buffer (`$4000–$7FBF`), off-screen system flags and interrupt vectors (`$7C00–$7EFF`), as well as the TERSE interpreter's parameter and return stacks (`$7F00–$7FFF`).
+* **Overview:** The RAM boards provide the 16 KB shared memory block at `$4000–$7FFF`. The `$C0` vertical display setting uses `$4000–$7BFF` for the 320×192 framebuffer. Off-screen RAM at `$7C00–$7FFF` holds interpreter state, game state, vector records, drawing workspace, and the parameter/control stacks.
 
 ### Audio Amplifier Board
 * **Board Number:** `A082-90903-A000`

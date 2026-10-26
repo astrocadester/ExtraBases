@@ -1,99 +1,67 @@
 @echo off
 setlocal
-
 cd /d "%~dp0"
 
-:: -----------------------------------------------------------------------------
-:: Pre-flight Checks & Dependency Resolution
-:: -----------------------------------------------------------------------------
-
-:: Resolve zmac executable path
+rem Extra Bases ROM build — zmac v1.3; no Python.
 if defined ZMAC (
-    if exist "%ZMAC%" (
-        set "ZMAC_BIN=%ZMAC%"
-    ) else (
-        where "%ZMAC%" >nul 2>&1 && set "ZMAC_BIN=%ZMAC%" || (echo ERROR: ZMAC not found & pause & exit /b 1)
-    )
+    set "ZMAC_BIN=%ZMAC%"
 ) else if exist "tools\zmac.exe" (
     set "ZMAC_BIN=tools\zmac.exe"
 ) else (
-    where zmac >nul 2>&1 && set "ZMAC_BIN=zmac" || (echo ERROR: zmac not found & pause & exit /b 1)
+    set "ZMAC_BIN=zmac"
 )
-
-:: -----------------------------------------------------------------------------
-:: Build Execution
-:: -----------------------------------------------------------------------------
+where "%ZMAC_BIN%" >nul 2>&1
+if errorlevel 1 if not exist "%ZMAC_BIN%" (
+    echo ERROR: zmac v1.3 not found. Set ZMAC or install tools\zmac.exe.
+    exit /b 1
+)
+if not exist "src\eb_disassembly.asm" (
+    echo ERROR: Missing src\eb_disassembly.asm
+    exit /b 1
+)
 
 echo Extra Bases ROM build
-echo   source: src\eb_disassembly.asm
-echo   output: roms
-echo.
-
-echo [1/4] Preparing clean build environment...
-if exist "src\zout" rmdir /s /q "src\zout"
-mkdir "src\zout"
+echo [1/4] Prepare output
+if not exist "src\zout" mkdir "src\zout"
 if not exist "roms" mkdir "roms"
+del /q "src\zout\eb_disassembly.cim" "src\zout\eb_disassembly.lst" "roms\ebases.zip" >nul 2>&1
+for %%F in (m761a m761b m761c m761d) do if exist "roms\%%F" del /q "roms\%%F"
 
-echo [2/4] Assembling eb_disassembly.asm
-echo       zmac: %ZMAC_BIN%
-pushd src
-"..\%ZMAC_BIN%" -h -o zout\eb_disassembly.hex -x zout\eb_disassembly.lst eb_disassembly.asm
-set ZMAC_ERR=%ERRORLEVEL%
-popd
-
-if %ZMAC_ERR% neq 0 (
-    echo ERROR: zmac failed. Review the assembler output above.
-    pause
-    exit /b %ZMAC_ERR%
+echo [2/4] Assemble Z80 source (zmac v1.3)
+"%ZMAC_BIN%" -o "src\zout\eb_disassembly.cim" -x "src\zout\eb_disassembly.lst" "src\eb_disassembly.asm"
+if errorlevel 1 (
+    echo ERROR: Assembly failed.
+    exit /b 1
+)
+if not exist "src\zout\eb_disassembly.cim" (
+    echo ERROR: No binary image produced.
+    exit /b 1
 )
 
-echo [3/4] Splitting image into Extra Bases ROMs...
+echo [3/4] Split and verify 4 KB ROMs
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-    "$inputFile = 'src\zout\eb_disassembly.hex';" ^
-    "$outputDir = 'roms';" ^
-    "if (-not (Test-Path $inputFile)) { Write-Error 'Input HEX file missing.'; exit 1 };" ^
-    "$memory = [byte[]]::new(0x4000);" ^
-    "for ($i = 0; $i -lt 0x4000; $i++) { $memory[$i] = 0xFF };" ^
-    "$hexLines = Get-Content $inputFile;" ^
-    "foreach ($line in $hexLines) {" ^
-    "    if (-not $line.StartsWith(':')) { continue };" ^
-    "    $byteCount = [Convert]::ToByte($line.Substring(1, 2), 16);" ^
-    "    $address   = [Convert]::ToUInt16($line.Substring(3, 4), 16);" ^
-    "    $recordType= [Convert]::ToByte($line.Substring(7, 2), 16);" ^
-    "    if ($recordType -eq 0) {" ^
-    "        for ($i = 0; $i -lt $byteCount; $i++) {" ^
-    "            $dataByte = [Convert]::ToByte($line.Substring(9 + ($i * 2), 2), 16);" ^
-    "            $targetAddr = $address + $i;" ^
-    "            if ($targetAddr -lt 0x4000) { $memory[$targetAddr] = $dataByte };" ^
-    "        }" ^
-    "    }" ^
-    "};" ^
-    "$romMap = [ordered]@{" ^
-    "    'm761a' = 0x0000..0x0FFF;" ^
-    "    'm761b' = 0x1000..0x1FFF;" ^
-    "    'm761c' = 0x2000..0x2FFF;" ^
-    "    'm761d' = 0x3000..0x3FFF;" ^
-    "};" ^
-    "foreach ($romName in $romMap.Keys) {" ^
-    "    $slice = $memory[$romMap[$romName]];" ^
-    "    [System.IO.File]::WriteAllBytes((Join-Path $outputDir $romName), $slice);" ^
-    "    Write-Host ('  -> Wrote ' + $romName + ' (' + $slice.Length + ' bytes)');" ^
-    "}"
-
-echo [4/4] Packaging roms\ebases.zip...
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-    "$filesToZip = [System.Collections.Generic.List[string]]::new();" ^
-    "@('m761a', 'm761b', 'm761c', 'm761d') | ForEach-Object { $filesToZip.Add((Join-Path 'roms' $_)) };" ^
-    "Compress-Archive -Path $filesToZip -DestinationPath 'roms\ebases.zip' -Force"
-
-if %ERRORLEVEL% neq 0 (
-    echo ERROR: Packaging failed.
-    pause
-    exit /b %ERRORLEVEL%
+    "$ErrorActionPreference='Stop';" ^
+    "$bytes=[IO.File]::ReadAllBytes('src\zout\eb_disassembly.cim');" ^
+    "if($bytes.Length -lt 16384){throw 'Binary image must contain at least 16384 bytes'};" ^
+    "$names=@('m761a','m761b','m761c','m761d');" ^
+    "$sha=@('6483ca1359b675b0dd739605db2a1dbd4b7fb8cb','52e571e671fa61b0f9ab397a5947094c24f6c388','e41fb9db919039c8a48b4caebf80821a066d7ccf','e60c3f4b075f8b811ff6a8637c4aa0b089847a82');" ^
+    "for($i=0;$i -lt 4;$i++){ $part=[byte[]]::new(4096);[Array]::Copy($bytes,$i*4096,$part,0,4096);$file=Join-Path 'roms' $names[$i];[IO.File]::WriteAllBytes($file,$part);$actual=(Get-FileHash $file -Algorithm SHA1).Hash.ToLowerInvariant();if($actual -ne $sha[$i]){throw ($names[$i]+' SHA1 mismatch: '+$actual)};Write-Host ($names[$i]+' OK '+$actual) }"
+if errorlevel 1 (
+    echo ERROR: ROM splitting or verification failed.
+    exit /b 1
 )
 
-echo.
-echo =======================================================================
-echo  BUILD SUCCESSFUL!
-echo =======================================================================
-pause
+echo [4/4] Package roms\ebases.zip
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "$ErrorActionPreference='Stop';" ^
+    "Compress-Archive -LiteralPath @('roms\m761a','roms\m761b','roms\m761c','roms\m761d') -DestinationPath 'roms\ebases.zip' -Force"
+if errorlevel 1 (
+    echo ERROR: ZIP packaging failed.
+    exit /b 1
+)
+if not exist "roms\ebases.zip" (
+    echo ERROR: ROM ZIP was not created.
+    exit /b 1
+)
+echo Build complete: roms\ebases.zip
+exit /b 0

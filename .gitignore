@@ -38,3 +38,9 @@ Thumbs.db
 
 
 
+
+# ROM verification and memory-map source
+!tools/verify_roms.py
+!tools/render_memory_map.py
+__pycache__/
+!tools/verify_graphics.py
