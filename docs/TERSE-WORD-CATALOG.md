@@ -1,6 +1,15 @@
-<p align="right"><code>v20261123-0007</code></p>
+<p align="right"><code>v20261123-0008</code></p>
 
 # Extra Bases — TERSE Word Catalog
+
+## Catalog index
+
+- [TERSE runtime and inherited words](#terse-runtime-and-inherited-words-38) (38)
+- [Extra Bases colon definitions](#extra-bases-colon-definitions-201) (201)
+- [Extra Bases native CODE words](#extra-bases-native-code-words-85) (85)
+- [Native SUBR helpers](#native-subr-helpers-47) (47)
+- [Host and cross-compiler definitions](#host-and-cross-compiler-definitions-2) (2)
+- [Implementations](#implementations)
 
 ## TERSE runtime and inherited words (38)
 
