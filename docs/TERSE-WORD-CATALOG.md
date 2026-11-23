@@ -965,7 +965,7 @@ Source-level compiler/TERSE definition shown below.
 Uses ABVOLS and MCVOLS to compose game logic.
 
 ```text
-: ^ } EF ABVOLS 0F MCVOLS { ;
+{ : ^ } EF ABVOLS 0F MCVOLS { ; }
 ```
 
 **Calls:** `ABVOLS`, `MCVOLS`.
@@ -980,7 +980,7 @@ Uses ABVOLS and MCVOLS to compose game logic.
 Mark the start of interrupt data.
 
 ```text
-: <INTERRUPTS } DATA HERE { ;
+{ : <INTERRUPTS } DATA HERE { ; }
 ```
 
 **Calls:** `HERE`.
@@ -995,7 +995,7 @@ Mark the start of interrupt data.
 Emit the music volume command.
 
 ```text
-: ABVOLS } 16 B, B, { ;
+{ : ABVOLS } 16 B, B, { ; }
 ```
 
 **Used by:** `CMAJOR`, `QUIET`, `REST`, `^`.
@@ -1010,7 +1010,7 @@ Emit the music volume command.
 Emit a playaction record.
 
 ```text
-: ACT, } , B, , , { ;
+{ : ACT, } , B, , , { ; }
 ```
 
 **Used by:** `BACT,`, `LCB,`, `RCB,`, `STP,`.
@@ -1025,7 +1025,7 @@ Emit a playaction record.
 Emit a channel A note followed by its duration.
 
 ```text
-: ANOTE } ATONE DURATION { ;
+{ : ANOTE } ATONE DURATION { ; }
 ```
 
 **Calls:** `ATONE`, `DURATION`.
@@ -1040,7 +1040,8 @@ Emit a channel A note followed by its duration.
 Emit tone setting for channel A.
 
 ```text
-: ATONE } 11 B,
+{ : ATONE } 11 B,
+B, { ; }
 ```
 
 **Used by:** `ANOTE`, `NOTES`, `QUIET`.
@@ -1055,7 +1056,7 @@ Emit tone setting for channel A.
 Emit a ball-action record.
 
 ```text
-: BACT, } BAL ACT, { ;
+{ : BACT, } BAL ACT, { ; }
 ```
 
 **Calls:** `ACT,`.
@@ -1091,7 +1092,7 @@ CLRBLST ELSE MBALL DOSBALL THEN SBO ;
 Emit the ball destination command.
 
 ```text
-: BLDST, } OPBLDST B, { ;
+{ : BLDST, } OPBLDST B, { ; }
 ```
 
 [Source block 225, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -1104,7 +1105,7 @@ Emit the ball destination command.
 Emit the ball motion command.
 
 ```text
-: BLMOT, } OPBLMOT B, { ;
+{ : BLMOT, } OPBLMOT B, { ; }
 ```
 
 [Source block 225, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -1117,7 +1118,8 @@ Emit the ball motion command.
 Emit a channel B note followed by its duration.
 
 ```text
-: BNOTE } BTONE DURATION
+{ : BNOTE } BTONE DURATION
+{ ; }
 ```
 
 **Calls:** `BTONE`, `DURATION`.
@@ -1149,7 +1151,7 @@ Store byte value 1.
 Emit tone setting for channel B.
 
 ```text
-: BTONE } 12 B, B, { ;
+{ : BTONE } 12 B, B, { ; }
 ```
 
 **Used by:** `BNOTE`, `NOTES`, `QUIET`.
@@ -1164,7 +1166,7 @@ Emit tone setting for channel B.
 Define a named byte variable.
 
 ```text
-: BV } BVARIABLE { ;
+{ : BV } BVARIABLE { ; }
 ```
 
 **Used by:** `BV=`.
@@ -1179,7 +1181,7 @@ Define a named byte variable.
 Uses BV to compose game logic.
 
 ```text
-: BV= } 0 BVARIABLE { ;
+{ : BV= } 0 BVARIABLE { ; }
 ```
 
 **Calls:** `BV`.
@@ -1211,7 +1213,7 @@ Store byte value 0.
 Uses CONSTANT to compose game logic.
 
 ```text
-: C= } CONSTANT { ;
+{ : C= } CONSTANT { ; }
 ```
 
 **Calls:** `CONSTANT`.
@@ -1282,7 +1284,7 @@ CHKGMCNT posts the appropriate prompt around a timed wait and returns the curren
 Initialize the C-major sound pattern.
 
 ```text
-: CMAJOR } 1C MASTER 0 NOISE EF ABVOLS 0F MCVOLS { ;
+{ : CMAJOR } 1C MASTER 0 NOISE EF ABVOLS 0F MCVOLS { ; }
 ```
 
 **Calls:** `MASTER`, `NOISE`, `ABVOLS`, `MCVOLS`.
@@ -1315,7 +1317,7 @@ YIN ! XIN ! cnline ;
 Emit a channel C note followed by its duration.
 
 ```text
-: CNOTE } CTONE DURATION { ;
+{ : CNOTE } CTONE DURATION { ; }
 ```
 
 **Calls:** `CTONE`, `DURATION`.
@@ -1396,7 +1398,7 @@ CHKFLSHSTAY ELSE DROP THEN THEN EI ;
 Emit tone setting for channel C.
 
 ```text
-: CTONE } 13 B, B, { ;
+{ : CTONE } 13 B, B, { ; }
 ```
 
 **Used by:** `CNOTE`, `QUIET`.
@@ -1411,7 +1413,7 @@ Emit tone setting for channel C.
 Emit vector-deactivation command.
 
 ```text
-: DEACT, } 0C B, { ;
+{ : DEACT, } 0C B, { ; }
 ```
 
 **Used by:** `LCB,`, `LK,`, `RCB,`, `STP,`.
@@ -1674,7 +1676,7 @@ SWAP BFFF AND SWAP ELSE DROP 20 THEN cpost ;
 DTC selects decimal and invokes the host editor.
 
 ```text
-: DTC } DECIMAL EDIT { ;
+{ : DTC } DECIMAL EDIT { ; }
 ```
 
 **Calls:** `DECIMAL`.
@@ -1689,7 +1691,7 @@ DTC selects decimal and invokes the host editor.
 Emit a note-duration command.
 
 ```text
-: DURATION } 1 B, B, { ;
+{ : DURATION } 1 B, B, { ; }
 ```
 
 **Used by:** `ANOTE`, `BNOTE`, `CNOTE`, `REST`.
@@ -1721,7 +1723,7 @@ DWAIT runs nested loops with interrupts enabled and disables them on return;
 Declare a forward word with the game's source shorthand.
 
 ```text
-: F= } FORWARD { ;
+{ : F= } FORWARD { ; }
 ```
 
 [Source block 304, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304)
@@ -1901,7 +1903,7 @@ F00 SUP
 Emit the fielder destination command.
 
 ```text
-: FLDDST, } 7 B, { ;
+{ : FLDDST, } 7 B, { ; }
 ```
 
 [Source block 225, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -1982,7 +1984,7 @@ ELSE 1+B! SBO THEN ;
 Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells.
 
 ```text
-: FOWR } FORWARD { ;
+{ : FOWR } FORWARD { ; }
 ```
 
 [Source block 280, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-280)
@@ -2218,7 +2220,7 @@ Uses BONE to compose game logic.
 Emit the target's indexed immediate reference.
 
 ```text
-: I' } 0CD B, ]'[ { 2+ } , B, { ;
+{ : I' } 0CD B, ]'[ { 2+ } , B, { ; }
 ```
 
 [Source block 291, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291)
@@ -2229,10 +2231,10 @@ Emit the target's indexed immediate reference.
 ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets.
 
 ```text
-: ICODE } CODE { [ } ASM { ] } NEXT XTHL, D PUSH, B PUSH,
+{ : ICODE } CODE { [ } ASM { ] } NEXT XTHL, D PUSH, B PUSH,
 PSW PUSH, M A MOV, INLIN OUT, H INX, IPNT SHLD,
 EXX, EXAF, H PUSH, D PUSH, B PUSH, PSW PUSH,
-ASM { ;
+ASM { ; }
 ```
 
 **Calls:** `ASM`.
@@ -2247,7 +2249,7 @@ ASM { ;
 INEXT emits a jump to IEX;
 
 ```text
-: INEXT } { LIT [ } ' IEX { , } ASM { ] } JMP, { ;
+{ : INEXT } { LIT [ } ' IEX { , } ASM { ] } JMP, { ; }
 ```
 
 **Calls:** `LIT`, `IEX`, `ASM`.
@@ -2377,7 +2379,7 @@ INSWAIT enables interrupts, loops until its count expires or any masked active-l
 Emit the interrupt-vector dispatch jump.
 
 ```text
-: INTERRUPTS> } { [ } ASM { ] } JMP, { ;
+{ : INTERRUPTS> } { [ } ASM { ] } JMP, { ; }
 ```
 
 **Calls:** `ASM`.
@@ -2428,7 +2430,7 @@ Display the V15 instruction message.
 Provide the original source's label-definition alias.
 
 ```text
-: LABLE } DATA { ;
+{ : LABLE } DATA { ; }
 ```
 
 [Source block 304, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304)
@@ -2441,7 +2443,7 @@ Provide the original source's label-definition alias.
 Uses ACT, and DEACT, to compose game logic.
 
 ```text
-: LCB, } 0 0 0 LCB ACT, DEACT, { ;
+{ : LCB, } 0 0 0 LCB ACT, DEACT, { ; }
 ```
 
 **Calls:** `ACT,`, `DEACT,`.
@@ -2472,7 +2474,7 @@ VPLAYACTPC 1ST ! VPLAYACTPC PT ! ;
 Emit/load the music program-counter value.
 
 ```text
-: LDPC } 3 B, , { ;
+{ : LDPC } 3 B, , { ; }
 ```
 
 **Used by:** `QUIT`.
@@ -2487,7 +2489,7 @@ Emit/load the music program-counter value.
 Emit/load a music program-counter command.
 
 ```text
-: LDPCC } 2 B, , { ;
+{ : LDPCC } 2 B, , { ; }
 ```
 
 [Source block 141, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
@@ -2500,7 +2502,7 @@ Emit/load a music program-counter command.
 Uses BACT, and DEACT, to compose game logic.
 
 ```text
-: LK, } 0 0 0 BACT, DEACT, { ;
+{ : LK, } 0 0 0 BACT, DEACT, { ; }
 ```
 
 **Calls:** `BACT,`, `DEACT,`.
@@ -2546,7 +2548,7 @@ NBD RUNPA ! STND OFPA ! NBD TBLPA ! BAL THWPA ! ;
 Define the game's master music stream.
 
 ```text
-: MASTER } 10 B, B, { ;
+{ : MASTER } 10 B, B, { ; }
 ```
 
 **Used by:** `CMAJOR`.
@@ -2612,7 +2614,7 @@ Uses BMUSIC to compose game logic.
 Emit music-channel volume values.
 
 ```text
-: MCVOLS } 15 B, B, { ;
+{ : MCVOLS } 15 B, B, { ; }
 ```
 
 **Used by:** `CMAJOR`, `QUIET`, `REST`, `^`.
@@ -2782,7 +2784,7 @@ Uses BMUSIC to compose game logic.
 Emit a noise/sound command.
 
 ```text
-: NOISE } 17 B, B, { ;
+{ : NOISE } 17 B, B, { ; }
 ```
 
 **Used by:** `CMAJOR`.
@@ -2797,7 +2799,7 @@ Emit a noise/sound command.
 Uses ATONE and BTONE to compose game logic.
 
 ```text
-: NOTES } ATONE BTONE CNOTE { ;
+{ : NOTES } ATONE BTONE CNOTE { ; }
 ```
 
 **Calls:** `ATONE`, `BTONE`, `CNOTE`.
@@ -2833,7 +2835,7 @@ OVER + SWAP DO I B@ SWAN dpost I B@ dpost LOOP
 Emit the outfielder destination command.
 
 ```text
-: OFFDST, } 9 B, { ;
+{ : OFFDST, } 9 B, { ; }
 ```
 
 [Source block 225, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -2846,7 +2848,7 @@ Emit the outfielder destination command.
 Emit the outfield motion command.
 
 ```text
-: OFMOT, } 5 B, { ;
+{ : OFMOT, } 5 B, { ; }
 ```
 
 [Source block 225, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -2859,7 +2861,7 @@ Emit the outfield motion command.
 Emit the first-base playaction command.
 
 ```text
-: ON1ST, } 2 B, { ;
+{ : ON1ST, } 2 B, { ; }
 ```
 
 [Source block 225, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -2872,7 +2874,7 @@ Emit the first-base playaction command.
 Emit the second-base playaction command.
 
 ```text
-: ON2ND, } 3 B, { ;
+{ : ON2ND, } 3 B, { ; }
 ```
 
 [Source block 225, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -2885,7 +2887,7 @@ Emit the second-base playaction command.
 Emit the third-base playaction command.
 
 ```text
-: ON3RD, } 4 B, { ;
+{ : ON3RD, } 4 B, { ; }
 ```
 
 [Source block 225, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -3080,8 +3082,8 @@ Emit zero/white pixel patterns and define PX1/PX0 to select them.
 Uses ABVOLS and MCVOLS to compose game logic.
 
 ```text
-: QUIET } 0 ABVOLS
-0 MCVOLS 0 ATONE 0 BTONE 0 CTONE QUIT { ;
+{ : QUIET } 0 ABVOLS
+0 MCVOLS 0 ATONE 0 BTONE 0 CTONE QUIT { ; }
 ```
 
 **Calls:** `ABVOLS`, `MCVOLS`, `ATONE`, `BTONE`, `CTONE`, `QUIT`.
@@ -3096,7 +3098,7 @@ Uses ABVOLS and MCVOLS to compose game logic.
 Uses HERE and LDPC to compose game logic.
 
 ```text
-: QUIT } 4 B, HERE LDPC { ;
+{ : QUIT } 4 B, HERE LDPC { ; }
 ```
 
 **Calls:** `HERE`, `LDPC`.
@@ -3113,7 +3115,7 @@ Uses HERE and LDPC to compose game logic.
 Uses ACT, and DEACT, to compose game logic.
 
 ```text
-: RCB, } 0 0 0 RCB ACT, DEACT, { ;
+{ : RCB, } 0 0 0 RCB ACT, DEACT, { ; }
 ```
 
 **Calls:** `ACT,`, `DEACT,`.
@@ -3128,7 +3130,7 @@ Uses ACT, and DEACT, to compose game logic.
 Emit a randomized note with a rest interval.
 
 ```text
-: RDRNDNTE } 0 B, B, B, B, { ;
+{ : RDRNDNTE } 0 B, B, B, B, { ; }
 ```
 
 [Source block 141, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
@@ -3175,7 +3177,7 @@ DROP ;
 Insert a silent music interval.
 
 ```text
-: REST } 0 ABVOLS 0 MCVOLS 0A DURATION { ;
+{ : REST } 0 ABVOLS 0 MCVOLS 0A DURATION { ; }
 ```
 
 **Calls:** `ABVOLS`, `MCVOLS`, `DURATION`.
@@ -3190,7 +3192,7 @@ Insert a silent music interval.
 Emit a resting playaction record.
 
 ```text
-: REST, } NBD , B, 0 , 0 , { ;
+{ : REST, } NBD , B, 0 , 0 , { ; }
 ```
 
 [Source block 225, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -3222,7 +3224,7 @@ B@ 80 OR F7 AND SB! VLENGTH + LOOP DROP ;
 Emit a randomized musical note.
 
 ```text
-: RNDNTE } 0 B, B, 0 B, FF B, { ;
+{ : RNDNTE } 0 B, B, 0 B, FF B, { ; }
 ```
 
 [Source block 141, line 13](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
@@ -3235,7 +3237,7 @@ Emit a randomized musical note.
 Emit a sequence of randomized notes.
 
 ```text
-: RRRNDNTE } 0 B, B, 0 B, B, { ;
+{ : RRRNDNTE } 0 B, B, 0 B, B, { ; }
 ```
 
 [Source block 141, line 12](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
@@ -3344,7 +3346,7 @@ THEN ;
 Emit the runner destination command.
 
 ```text
-: RUNDST, } 8 B, { ;
+{ : RUNDST, } 8 B, { ; }
 ```
 
 [Source block 225, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -3850,7 +3852,7 @@ STFLD installs RETPA and TAKEFIELD.
 Emit a standing-action record.
 
 ```text
-: STP, } 0 0 0 STND ACT, DEACT, { ;
+{ : STP, } 0 0 0 STND ACT, DEACT, { ; }
 ```
 
 **Calls:** `ACT,`, `DEACT,`.
@@ -4169,7 +4171,7 @@ HITYET BONE MYAH S10 ;
 Emit the throw command.
 
 ```text
-: THW, } 0B B, { ;
+{ : THW, } 0B B, { ; }
 ```
 
 [Source block 225, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -4203,7 +4205,7 @@ DROP DI ;
 Uses VARIABLE to compose game logic.
 
 ```text
-: V } VARIABLE { ;
+{ : V } VARIABLE { ; }
 ```
 
 **Calls:** `VARIABLE`.
@@ -4220,7 +4222,7 @@ Uses VARIABLE to compose game logic.
 Uses V and VARIABLE to compose game logic.
 
 ```text
-: V= } 0 VARIABLE { ;
+{ : V= } 0 VARIABLE { ; }
 ```
 
 **Calls:** `V`, `VARIABLE`.
@@ -4235,7 +4237,7 @@ Uses V and VARIABLE to compose game logic.
 Emit a vibrato setting.
 
 ```text
-: VIBS } 14 B, B, { ;
+{ : VIBS } 14 B, B, { ; }
 ```
 
 [Source block 141, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
@@ -4292,7 +4294,7 @@ THEN THEN THEN DROP THEN ;
 Emit the wait-for-throw command.
 
 ```text
-: WTHW, } 0D B, { ;
+{ : WTHW, } 0D B, { ; }
 ```
 
 [Source block 225, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
@@ -7305,7 +7307,7 @@ SUBR writep ( software write with pattern size on pattern )
 Set the number base.
 
 ```text
-: BASE! } BASE ! { ;
+{ : BASE! } BASE ! { ; }
 ```
 
 [Source block 102, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-102)
@@ -7318,7 +7320,7 @@ Set the number base.
 Fetch the current number base.
 
 ```text
-: BASE@ } BASE @ { ;
+{ : BASE@ } BASE @ { ; }
 ```
 
 [Source block 102, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-102)
