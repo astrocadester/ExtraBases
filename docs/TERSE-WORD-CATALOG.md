@@ -4,397 +4,397 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 
 ## TERSE runtime and inherited words (34)
 
-| Word / stack | Function |
-| --- | --- |
-| <a href="#---shared">-</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;difference&nbsp;)</code> | Subtract the top value from the preceding value. |
-| <a href="#--shared">!</a><br><code>(&nbsp;value&nbsp;address&nbsp;--&nbsp;)</code> | Store one 16-bit cell. |
-| <a href="#--shared-1">@</a><br><code>(&nbsp;address&nbsp;--&nbsp;value&nbsp;)</code> | Fetch one 16-bit cell. |
-| <a href="#--shared-2">*</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;product&nbsp;)</code> | Multiply two stack values. |
-| <a href="#--shared-3">/</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;quotient&nbsp;)</code> | Divide the preceding stack value by the top value. |
-| <a href="#--shared-4">+</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;sum&nbsp;)</code> | Add two stack values. |
-| <a href="#--shared-5">&lt;</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code> | Compare whether the preceding value is less than the top value. |
-| <a href="#--shared-6">=</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code> | Compare two values for equality. |
-| <a href="#--shared-7">&gt;</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code> | Compare whether the preceding value is greater than the top value. |
-| <a href="#0--shared">0=</a><br><code>(&nbsp;n&nbsp;--&nbsp;flag&nbsp;)</code> | Return a condition indicating zero. |
-| <a href="#2dup--shared">2DUP</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;b&nbsp;)</code> | Duplicate the top two stack cells. |
-| <a href="#and--shared">AND</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code> | Bitwise AND of two values. |
-| <a href="#array--shared">ARRAY</a><br><code>(&nbsp;size&nbsp;--&nbsp;)</code> | Allocate/name an indexed cell array from a the size. |
-| <a href="#b--shared">B!</a><br><code>(&nbsp;byte&nbsp;address&nbsp;--&nbsp;)</code> | Store one byte. |
-| <a href="#b--shared-1">B@</a><br><code>(&nbsp;address&nbsp;--&nbsp;byte&nbsp;)</code> | Fetch one byte. |
-| <a href="#barray--shared">BARRAY</a><br><code>(&nbsp;size&nbsp;--&nbsp;)</code> | Allocate/name an indexed byte array from a the size. |
-| <a href="#begin--shared">BEGIN</a><br><code>(&nbsp;--&nbsp;)</code> | Immediate XC wrapper that records a loop's object address. |
-| <a href="#code--shared">CODE</a><br><code>(&nbsp;--&nbsp;)</code> | Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry. |
-| <a href="#constant--shared">CONSTANT</a><br><code>(&nbsp;value&nbsp;--&nbsp;)</code> | Define a constant from a value. |
-| <a href="#decimal--shared">DECIMAL</a><br><code>(&nbsp;--&nbsp;)</code> | Select radix ten for parsing subsequent source numbers. |
-| <a href="#drop--shared">DROP</a><br><code>(&nbsp;x&nbsp;--&nbsp;)</code> | Discard the top stack cell. |
-| <a href="#dup--shared">DUP</a><br><code>(&nbsp;x&nbsp;--&nbsp;x&nbsp;x&nbsp;)</code> | Duplicate the top stack cell. |
-| <a href="#else--shared">ELSE</a><br><code>(&nbsp;--&nbsp;)</code> | Immediate XC wrapper that emits an unconditional branch and resolves the preceding conditional branch. |
-| <a href="#end--shared">END</a><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code> | Immediate XC wrapper emitting a conditional back-branch; game loops repeat until the condition becomes true. |
-| <a href="#hex--shared">HEX</a><br><code>(&nbsp;--&nbsp;)</code> | Select radix sixteen for parsing subsequent source numbers. |
-| <a href="#if--shared">IF</a><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code> | Immediate XC wrapper that emits a conditional target branch through XC-IF. |
-| <a href="#lit--shared">LIT</a><br><code>(&nbsp;--&nbsp;value;&nbsp;inline&nbsp;cell&nbsp;)</code> | Compiler literal mechanism used by INEXT's host macro. |
-| <a href="#or--shared">OR</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code> | Bitwise inclusive OR of two values. |
-| <a href="#over--shared">OVER</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;)</code> | Copy the second stack cell to the top. |
-| <a href="#rot--shared">ROT</a><br><code>(&nbsp;a&nbsp;b&nbsp;c&nbsp;--&nbsp;b&nbsp;c&nbsp;a&nbsp;)</code> | Rotate the top three stack cells. |
-| <a href="#swap--shared">SWAP</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;b&nbsp;a&nbsp;)</code> | Exchange the top two stack cells. |
-| <a href="#then--shared">THEN</a><br><code>(&nbsp;--&nbsp;)</code> | Immediate XC wrapper that resolves a saved target branch destination. |
-| <a href="#variable--shared">VARIABLE</a><br><code>(&nbsp;--&nbsp;)</code> | Allocate/name a cell variable with the initial value in this dialect. |
-| <a href="#xor--shared">XOR</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code> | Bitwise exclusive OR of two values. |
+| Word / stack | | Function |
+| --- | :---: | --- |
+| <strong>-</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;difference&nbsp;)</code> | <a href="#---shared" title="View implementation">📄</a> | Subtract the top value from the preceding value. |
+| <strong>!</strong><br><code>(&nbsp;value&nbsp;address&nbsp;--&nbsp;)</code> | <a href="#--shared" title="View implementation">📄</a> | Store one 16-bit cell. |
+| <strong>@</strong><br><code>(&nbsp;address&nbsp;--&nbsp;value&nbsp;)</code> | <a href="#--shared-1" title="View implementation">📄</a> | Fetch one 16-bit cell. |
+| <strong>*</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;product&nbsp;)</code> | <a href="#--shared-2" title="View implementation">📄</a> | Multiply two stack values. |
+| <strong>/</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;quotient&nbsp;)</code> | <a href="#--shared-3" title="View implementation">📄</a> | Divide the preceding stack value by the top value. |
+| <strong>+</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;sum&nbsp;)</code> | <a href="#--shared-4" title="View implementation">📄</a> | Add two stack values. |
+| <strong>&lt;</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code> | <a href="#--shared-5" title="View implementation">📄</a> | Compare whether the preceding value is less than the top value. |
+| <strong>=</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code> | <a href="#--shared-6" title="View implementation">📄</a> | Compare two values for equality. |
+| <strong>&gt;</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code> | <a href="#--shared-7" title="View implementation">📄</a> | Compare whether the preceding value is greater than the top value. |
+| <strong>0=</strong><br><code>(&nbsp;n&nbsp;--&nbsp;flag&nbsp;)</code> | <a href="#0--shared" title="View implementation">📄</a> | Return a condition indicating zero. |
+| <strong>2DUP</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;b&nbsp;)</code> | <a href="#2dup--shared" title="View implementation">📄</a> | Duplicate the top two stack cells. |
+| <strong>AND</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code> | <a href="#and--shared" title="View implementation">📄</a> | Bitwise AND of two values. |
+| <strong>ARRAY</strong><br><code>(&nbsp;size&nbsp;--&nbsp;)</code> | <a href="#array--shared" title="View implementation">📄</a> | Allocate/name an indexed cell array from a the size. |
+| <strong>B!</strong><br><code>(&nbsp;byte&nbsp;address&nbsp;--&nbsp;)</code> | <a href="#b--shared" title="View implementation">📄</a> | Store one byte. |
+| <strong>B@</strong><br><code>(&nbsp;address&nbsp;--&nbsp;byte&nbsp;)</code> | <a href="#b--shared-1" title="View implementation">📄</a> | Fetch one byte. |
+| <strong>BARRAY</strong><br><code>(&nbsp;size&nbsp;--&nbsp;)</code> | <a href="#barray--shared" title="View implementation">📄</a> | Allocate/name an indexed byte array from a the size. |
+| <strong>BEGIN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#begin--shared" title="View implementation">📄</a> | Immediate XC wrapper that records a loop's object address. |
+| <strong>CODE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#code--shared" title="View implementation">📄</a> | Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry. |
+| <strong>CONSTANT</strong><br><code>(&nbsp;value&nbsp;--&nbsp;)</code> | <a href="#constant--shared" title="View implementation">📄</a> | Define a constant from a value. |
+| <strong>DECIMAL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#decimal--shared" title="View implementation">📄</a> | Select radix ten for parsing subsequent source numbers. |
+| <strong>DROP</strong><br><code>(&nbsp;x&nbsp;--&nbsp;)</code> | <a href="#drop--shared" title="View implementation">📄</a> | Discard the top stack cell. |
+| <strong>DUP</strong><br><code>(&nbsp;x&nbsp;--&nbsp;x&nbsp;x&nbsp;)</code> | <a href="#dup--shared" title="View implementation">📄</a> | Duplicate the top stack cell. |
+| <strong>ELSE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#else--shared" title="View implementation">📄</a> | Immediate XC wrapper that emits an unconditional branch and resolves the preceding conditional branch. |
+| <strong>END</strong><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code> | <a href="#end--shared" title="View implementation">📄</a> | Immediate XC wrapper emitting a conditional back-branch; game loops repeat until the condition becomes true. |
+| <strong>HEX</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hex--shared" title="View implementation">📄</a> | Select radix sixteen for parsing subsequent source numbers. |
+| <strong>IF</strong><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code> | <a href="#if--shared" title="View implementation">📄</a> | Immediate XC wrapper that emits a conditional target branch through XC-IF. |
+| <strong>LIT</strong><br><code>(&nbsp;--&nbsp;value;&nbsp;inline&nbsp;cell&nbsp;)</code> | <a href="#lit--shared" title="View implementation">📄</a> | Compiler literal mechanism used by INEXT's host macro. |
+| <strong>OR</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code> | <a href="#or--shared" title="View implementation">📄</a> | Bitwise inclusive OR of two values. |
+| <strong>OVER</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;)</code> | <a href="#over--shared" title="View implementation">📄</a> | Copy the second stack cell to the top. |
+| <strong>ROT</strong><br><code>(&nbsp;a&nbsp;b&nbsp;c&nbsp;--&nbsp;b&nbsp;c&nbsp;a&nbsp;)</code> | <a href="#rot--shared" title="View implementation">📄</a> | Rotate the top three stack cells. |
+| <strong>SWAP</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;b&nbsp;a&nbsp;)</code> | <a href="#swap--shared" title="View implementation">📄</a> | Exchange the top two stack cells. |
+| <strong>THEN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#then--shared" title="View implementation">📄</a> | Immediate XC wrapper that resolves a saved target branch destination. |
+| <strong>VARIABLE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#variable--shared" title="View implementation">📄</a> | Allocate/name a cell variable with the initial value in this dialect. |
+| <strong>XOR</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code> | <a href="#xor--shared" title="View implementation">📄</a> | Bitwise exclusive OR of two values. |
 
 ## Extra Bases colon definitions (201)
 
-| Word / stack | Function |
-| --- | --- |
-| <a href="#--terse">]'[</a><br><code>(&nbsp;--&nbsp;)</code> | Source-level compiler/TERSE definition shown below. |
-| <a href="#--terse-1">^</a><br><code>(&nbsp;--&nbsp;)</code> | Uses ABVOLS and MCVOLS to compose game logic. |
-| <a href="#interrupts--terse">&lt;INTERRUPTS</a><br><code>(&nbsp;--&nbsp;)</code> | Mark the start of interrupt data. |
-| <a href="#abvols--terse">ABVOLS</a><br><code>(&nbsp;volume&nbsp;--&nbsp;)</code> | Emit the music volume command. |
-| <a href="#act--terse">ACT,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a playaction record. |
-| <a href="#anote--terse">ANOTE</a><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code> | Emit a channel A note followed by its duration. |
-| <a href="#atone--terse">ATONE</a><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code> | Emit tone setting for channel A. |
-| <a href="#bact--terse">BACT,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a ball-action record. |
-| <a href="#balltime--terse">BALLTIME</a><br><code>(&nbsp;--&nbsp;)</code> | Balls process. |
-| <a href="#bldst--terse">BLDST,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the ball destination command. |
-| <a href="#blmot--terse">BLMOT,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the ball motion command. |
-| <a href="#bnote--terse">BNOTE</a><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code> | Emit a channel B note followed by its duration. |
-| <a href="#bone--terse">BONE</a><br><code>(&nbsp;address&nbsp;--&nbsp;)</code> | Store byte value 1. |
-| <a href="#btone--terse">BTONE</a><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code> | Emit tone setting for channel B. |
-| <a href="#bv--terse">BV</a><br><code>(&nbsp;--&nbsp;)</code> | Define a named byte variable. |
-| <a href="#bv--terse-1">BV=</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BV to compose game logic. |
-| <a href="#bzero--terse">BZERO</a><br><code>(&nbsp;address&nbsp;--&nbsp;)</code> | Store byte value 0. |
-| <a href="#c--terse">C=</a><br><code>(&nbsp;value&nbsp;--&nbsp;)</code> | Uses CONSTANT to compose game logic. |
-| <a href="#chgs--terse">CHGS</a><br><code>(&nbsp;--&nbsp;)</code> | CHGS posts CHANGE SIDES; |
-| <a href="#chkflshstay--terse">CHKFLSHSTAY</a><br><code>(&nbsp;--&nbsp;)</code> | When isccp turn off check for wupwrt. |
-| <a href="#chkgmcnt--terse">CHKGMCNT</a><br><code>(&nbsp;--&nbsp;credits&nbsp;)</code> | CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte. |
-| <a href="#cmajor--terse">CMAJOR</a><br><code>(&nbsp;--&nbsp;)</code> | Initialize the C-major sound pattern. |
-| <a href="#cnline--terse">CNLINE</a><br><code>(&nbsp;--&nbsp;)</code> | CNLINE saves a new XIN/YIN endpoint and calls cnline from the current line state. |
-| <a href="#cnote--terse">CNOTE</a><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code> | Emit a channel C note followed by its duration. |
-| <a href="#congr--terse">CONGR</a><br><code>(&nbsp;--&nbsp;)</code> | Display the congratulatory prompt. |
-| <a href="#cpost--terse">CPOST</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;char&nbsp;--&nbsp;)</code> | Draw one character at the specified position. |
-| <a href="#credarrow--terse">CREDARROW</a><br><code>(&nbsp;--&nbsp;)</code> | Update last inning arrow. |
-| <a href="#ctone--terse">CTONE</a><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code> | Emit tone setting for channel C. |
-| <a href="#deact--terse">DEACT,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit vector-deactivation command. |
-| <a href="#dline--terse">DLINE</a><br><code>(&nbsp;x1&nbsp;y1&nbsp;x2&nbsp;y2&nbsp;--&nbsp;)</code> | Draw a line , given X Y start coor X Y ending coor. |
-| <a href="#dochgs--terse">DOCHGS</a><br><code>(&nbsp;--&nbsp;)</code> | DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER; |
-| <a href="#doehomer--terse">DOEHOMER</a><br><code>(&nbsp;--&nbsp;)</code> | DOEHOMER only posts the text. |
-| <a href="#dogover--terse">DOGOVER</a><br><code>(&nbsp;--&nbsp;)</code> | Do game over. |
-| <a href="#dohomer--terse">DOHOMER</a><br><code>(&nbsp;--&nbsp;)</code> | DOHOMER erases the ball, displays HOMER, resets counts and clears the event timer; |
-| <a href="#dosafe--terse">DOSAFE</a><br><code>(&nbsp;--&nbsp;)</code> | DOSAFE combines music/text. |
-| <a href="#dosball--terse">DOSBALL</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. |
-| <a href="#dosout--terse">DOSOUT</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. |
-| <a href="#dosstrike--terse">DOSSTRIKE</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. |
-| <a href="#dp1--terse">DP1</a><br><code>(&nbsp;--&nbsp;)</code> | Display the one-coin deposit prompt. |
-| <a href="#dp12cn--terse">DP12CN</a><br><code>(&nbsp;--&nbsp;)</code> | Uses B@ and SPOST to compose game logic. |
-| <a href="#dp1cn--terse">DP1CN</a><br><code>(&nbsp;--&nbsp;)</code> | Uses SPOST to compose game logic. |
-| <a href="#dpcn--terse">DPCN</a><br><code>(&nbsp;--&nbsp;)</code> | Wait for next coin. |
-| <a href="#dpost--terse">dpost</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;nibble&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code> | dpost isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit. |
-| <a href="#dtc--terse">DTC</a><br><code>(&nbsp;--&nbsp;)</code> | DTC selects decimal and invokes the host editor. |
-| <a href="#duration--terse">DURATION</a><br><code>(&nbsp;duration&nbsp;--&nbsp;)</code> | Emit a note-duration command. |
-| <a href="#dwait--terse">DWAIT</a><br><code>(&nbsp;limit&nbsp;--&nbsp;)</code> | DWAIT runs nested loops with interrupts enabled and disables them on return; |
-| <a href="#f--terse">F=</a><br><code>(&nbsp;--&nbsp;)</code> | Declare a forward word with the game's source shorthand. |
-| <a href="#f1stls--terse">F1STLS</a><br><code>(&nbsp;--&nbsp;)</code> | Select the first-base left-side action. |
-| <a href="#f1strs--terse">F1STRS</a><br><code>(&nbsp;--&nbsp;)</code> | Select the first-base right-side action. |
-| <a href="#f2ndls--terse">F2NDLS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#f2ndrs--terse">F2NDRS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#f3rdls--terse">F3RDLS</a><br><code>(&nbsp;--&nbsp;)</code> | Select the third-base left-side action. |
-| <a href="#f3rdrs--terse">F3RDRS</a><br><code>(&nbsp;--&nbsp;)</code> | Select the third-base right-side action. |
-| <a href="#fblls--terse">FBLLS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#fblrs--terse">FBLRS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#fieldwrt--terse">FIELDWRT</a><br><code>(&nbsp;--&nbsp;)</code> | Write field outline. |
-| <a href="#fl--terse">FL</a><br><code>(&nbsp;--&nbsp;)</code> | Set up all of background. |
-| <a href="#flddst--terse">FLDDST,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the fielder destination command. |
-| <a href="#flfill--terse">FLFILL</a><br><code>(&nbsp;--&nbsp;)</code> | FLFILL fills the background while allowing interrupts; |
-| <a href="#flshme--terse">FLSHME</a><br><code>(&nbsp;--&nbsp;)</code> | FLSHME executes only a nonzero address whose top two bits are clear; |
-| <a href="#flshton--terse">FLSHTON</a><br><code>(&nbsp;--&nbsp;)</code> | FLSHTON saves a callback and starts its timer. |
-| <a href="#foultime--terse">FOULTIME</a><br><code>(&nbsp;--&nbsp;)</code> | Foulball process. |
-| <a href="#fowr--terse">FOWR</a><br><code>(&nbsp;--&nbsp;)</code> | Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells. |
-| <a href="#fssls--terse">FSSLS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#fssrs--terse">FSSRS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#getf--terse">GETF</a><br><code>(&nbsp;--&nbsp;index&nbsp;field-byte&nbsp;)</code> | GETF fetches FIELD bytes sequentially; |
-| <a href="#grndraction--terse">GRNDRACTION</a><br><code>—</code> | Given sectnm set up infield action. |
-| <a href="#grndrhit--terse">GRNDRHIT</a><br><code>—</code> | Grounder. |
-| <a href="#hitdst--terse">HITDST</a><br><code>(&nbsp;--&nbsp;)</code> | Chooses hit location. |
-| <a href="#hlls--terse">HLLS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#hls--terse">HLS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#hms--terse">HMS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#hom--terse">HOM</a><br><code>(&nbsp;--&nbsp;)</code> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; |
-| <a href="#hrby2--terse">HRBY2</a><br><code>(&nbsp;--&nbsp;)</code> | HRBY2 halves HRAT. |
-| <a href="#hrls--terse">HRLS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#hrs--terse">HRS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BONE to compose game logic. |
-| <a href="#i--terse">I'</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the target's indexed immediate reference. |
-| <a href="#icode--terse">ICODE</a><br><code>—</code> | ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets. |
-| <a href="#inext--terse">INEXT</a><br><code>(&nbsp;--&nbsp;)</code> | INEXT emits a jump to IEX; |
-| <a href="#inlog--terse">INLOG</a><br><code>(&nbsp;--&nbsp;)</code> | Infield master logic. |
-| <a href="#innodds--terse">INNODDS</a><br><code>(&nbsp;--&nbsp;)</code> | INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state; |
-| <a href="#inscn--terse">INSCN</a><br><code>(&nbsp;--&nbsp;)</code> | Insert coin call. |
-| <a href="#instrc--terse">INSTRC</a><br><code>(&nbsp;--&nbsp;)</code> | Instructions. |
-| <a href="#inswait--terse">INSWAIT</a><br><code>(&nbsp;count&nbsp;--&nbsp;)</code> | INSWAIT enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return. |
-| <a href="#interrupts--terse-1">INTERRUPTS&gt;</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the interrupt-vector dispatch jump. |
-| <a href="#inthighres--terse">INTHIGHRES</a><br><code>(&nbsp;--&nbsp;)</code> | Intialize screen for commercial mode. |
-| <a href="#iscn--terse">ISCN</a><br><code>(&nbsp;--&nbsp;)</code> | Display the V15 instruction message. |
-| <a href="#lable--terse">LABLE</a><br><code>(&nbsp;--&nbsp;)</code> | Provide the original source's label-definition alias. |
-| <a href="#lcb--terse">LCB,</a><br><code>(&nbsp;--&nbsp;)</code> | Uses ACT, and DEACT, to compose game logic. |
-| <a href="#ldinfldpa--terse">LDINFLDPA</a><br><code>(&nbsp;--&nbsp;)</code> | LDINFLDPA consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain. |
-| <a href="#ldpc--terse">LDPC</a><br><code>(&nbsp;--&nbsp;)</code> | Emit/load the music program-counter value. |
-| <a href="#ldpcc--terse">LDPCC</a><br><code>(&nbsp;--&nbsp;)</code> | Emit/load a music program-counter command. |
-| <a href="#lk--terse">LK,</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BACT, and DEACT, to compose game logic. |
-| <a href="#lsettfcoor--terse">LSETTFCOOR</a><br><code>(&nbsp;--&nbsp;)</code> | Set take field coor & status -active , xpand. |
-| <a href="#master--terse">MASTER</a><br><code>(&nbsp;--&nbsp;)</code> | Define the game's master music stream. |
-| <a href="#mball--terse">MBALL</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#mcannon--terse">MCANNON</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#mcoin--terse">MCOIN</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#mcvols--terse">MCVOLS</a><br><code>(&nbsp;volume&nbsp;--&nbsp;)</code> | Emit music-channel volume values. |
-| <a href="#mfence--terse">MFENCE</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#mfoul--terse">MFOUL</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#mhit--terse">MHIT</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#mlinn--terse">MLINN</a><br><code>(&nbsp;--&nbsp;)</code> | Mark last inning. |
-| <a href="#mopeners--terse">MOPENERS</a><br><code>(&nbsp;--&nbsp;)</code> | Uses PMUSIC to compose game logic. |
-| <a href="#mout--terse">MOUT</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#msafe--terse">MSAFE</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#mstrike--terse">MSTRIKE</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#myah--terse">MYAH</a><br><code>(&nbsp;--&nbsp;)</code> | Uses BMUSIC to compose game logic. |
-| <a href="#noise--terse">NOISE</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a noise/sound command. |
-| <a href="#notes--terse">NOTES</a><br><code>(&nbsp;--&nbsp;)</code> | Uses ATONE and BTONE to compose game logic. |
-| <a href="#npost--terse">NPOST</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;address&nbsp;length&nbsp;--&nbsp;)</code> | Post a bcd number on the screen ; see options. |
-| <a href="#offdst--terse">OFFDST,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the outfielder destination command. |
-| <a href="#ofmot--terse">OFMOT,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the outfield motion command. |
-| <a href="#on1st--terse">ON1ST,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the first-base playaction command. |
-| <a href="#on2nd--terse">ON2ND,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the second-base playaction command. |
-| <a href="#on3rd--terse">ON3RD,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the third-base playaction command. |
-| <a href="#outfldhit--terse">OUTFLDHIT</a><br><code>(&nbsp;--&nbsp;)</code> | Fly ball. |
-| <a href="#outline--terse">OUTLINE</a><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code> | Creates rectanguler outline. |
-| <a href="#outtime--terse">OUTTIME</a><br><code>(&nbsp;--&nbsp;)</code> | Out prc. |
-| <a href="#plrchk--terse">PLRCHK</a><br><code>(&nbsp;--&nbsp;)</code> | PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL; |
-| <a href="#plrselect--terse">PLRSELECT</a><br><code>(&nbsp;--&nbsp;)</code> | Select singel player or 2 player. |
-| <a href="#ppost--terse">PPOST</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code> | Draw a counted string and keep drawing coordinates. |
-| <a href="#pup--terse">PUP</a><br><code>(&nbsp;--&nbsp;)</code> | Power up routine. |
-| <a href="#px0--terse">PX0</a><br><code>(&nbsp;--&nbsp;)</code> | Emit zero/white pixel patterns and define PX1/PX0 to select them. |
-| <a href="#px1--terse">PX1</a><br><code>(&nbsp;--&nbsp;)</code> | Emit zero/white pixel patterns and define PX1/PX0 to select them. |
-| <a href="#quiet--terse">QUIET</a><br><code>(&nbsp;--&nbsp;)</code> | Uses ABVOLS and MCVOLS to compose game logic. |
-| <a href="#quit--terse">QUIT</a><br><code>(&nbsp;--&nbsp;)</code> | Uses HERE and LDPC to compose game logic. |
-| <a href="#rcb--terse">RCB,</a><br><code>(&nbsp;--&nbsp;)</code> | Uses ACT, and DEACT, to compose game logic. |
-| <a href="#rdrndnte--terse">RDRNDNTE</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a randomized note with a rest interval. |
-| <a href="#recline--terse">RECLINE</a><br><code>—</code> | RECLINE derives one horizontal row from retained rectangle arguments. |
-| <a href="#rectan--terse">RECTAN</a><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code> | In X, Y, X length, Y length, pxtype set. |
-| <a href="#rest--terse">REST</a><br><code>(&nbsp;duration&nbsp;--&nbsp;)</code> | Insert a silent music interval. |
-| <a href="#rest--terse-1">REST,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a resting playaction record. |
-| <a href="#retpa--terse">RETPA</a><br><code>(&nbsp;--&nbsp;)</code> | Return to position pa. |
-| <a href="#rndnte--terse">RNDNTE</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a randomized musical note. |
-| <a href="#rrrndnte--terse">RRRNDNTE</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a sequence of randomized notes. |
-| <a href="#run1chk1st--terse">RUN1CHK1ST</a><br><code>—</code> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
-| <a href="#run1chk2nd--terse">RUN1CHK2ND</a><br><code>—</code> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
-| <a href="#run2chk--terse">RUN2CHK</a><br><code>—</code> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
-| <a href="#run2chk12nd--terse">RUN2CHK12ND</a><br><code>—</code> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
-| <a href="#run2chk1st--terse">RUN2CHK1ST</a><br><code>—</code> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
-| <a href="#run3chk--terse">RUN3CHK</a><br><code>—</code> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
-| <a href="#rundst--terse">RUNDST,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the runner destination command. |
-| <a href="#s--terse">S!</a><br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code> | Store cell with address-first arguments. |
-| <a href="#s10--terse">S10</a><br><code>(&nbsp;--&nbsp;)</code> | S10 starts INTERRUPTS0 through ISTART; |
-| <a href="#s11--terse">S11</a><br><code>(&nbsp;--&nbsp;)</code> | S11 starts INTERRUPTS1. |
-| <a href="#sb--terse">SB!</a><br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code> | Store byte with address-first arguments. |
-| <a href="#sball1--terse">SBALL1</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the BALL 1 message. |
-| <a href="#sball2--terse">SBALL2</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the BALL 2 message. |
-| <a href="#sball3--terse">SBALL3</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the BALL 3 message. |
-| <a href="#sbo--terse">SBO</a><br><code>(&nbsp;--&nbsp;)</code> | SBO posts the three $30-based count characters at their fixed positions. |
-| <a href="#scoreme--terse">SCOREME</a><br><code>(&nbsp;--&nbsp;)</code> | Plop scores up. |
-| <a href="#screrase--terse">SCRERASE</a><br><code>(&nbsp;--&nbsp;)</code> | Erase entire screen. |
-| <a href="#scrs--terse">SCRS</a><br><code>(&nbsp;--&nbsp;)</code> | SCRS clears two score rectangles and draws zero score characters. |
-| <a href="#setfdst--terse">SETFDST</a><br><code>(&nbsp;--&nbsp;)</code> | Set up fielder destination values. |
-| <a href="#settf--terse">SETTF</a><br><code>(&nbsp;--&nbsp;)</code> | SETTF performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading. |
-| <a href="#settfpa--terse">SETTFPA</a><br><code>(&nbsp;--&nbsp;)</code> | Take field pa. |
-| <a href="#sfoul--terse">SFOUL</a><br><code>(&nbsp;--&nbsp;)</code> | Uses ROT and SPOST to compose game logic. |
-| <a href="#sgo--terse">SGO</a><br><code>(&nbsp;--&nbsp;)</code> | Uses SPOST to compose game logic. |
-| <a href="#shomer--terse">SHOMER</a><br><code>(&nbsp;--&nbsp;)</code> | Uses ROT and SPOST to compose game logic. |
-| <a href="#sorry--terse">SORRY</a><br><code>(&nbsp;--&nbsp;)</code> | Display the losing-player prompt. |
-| <a href="#sout1--terse">SOUT1</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the 1 OUT message. |
-| <a href="#sout2--terse">SOUT2</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the 2 OUT message. |
-| <a href="#sout3--terse">SOUT3</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the 3 OUT message. |
-| <a href="#splr--terse">SPLR</a><br><code>(&nbsp;--&nbsp;)</code> | SPLR12/SPLR display available player choices; |
-| <a href="#splr12--terse">SPLR12</a><br><code>(&nbsp;--&nbsp;)</code> | SPLR12/SPLR display available player choices; |
-| <a href="#spost--terse">SPOST</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;)</code> | Draw a string. |
-| <a href="#ssafe--terse">SSAFE</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | SSAFE also redraws counts with SBO. |
-| <a href="#sstrike1--terse">SSTRIKE1</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the STRIKE 1 message. |
-| <a href="#sstrike2--terse">SSTRIKE2</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Draw the STRIKE 2 message. |
-| <a href="#stfld--terse">STFLD</a><br><code>(&nbsp;--&nbsp;)</code> | STFLD installs RETPA and TAKEFIELD. |
-| <a href="#stp--terse">STP,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit a standing-action record. |
-| <a href="#striketime--terse">STRIKETIME</a><br><code>(&nbsp;--&nbsp;)</code> | Strike process. |
-| <a href="#stringgo--terse">STRINGGO</a><br><code>(&nbsp;string&nbsp;erase-flag&nbsp;--&nbsp;)</code> | Given string , stringerase. |
-| <a href="#stringprc--terse">STRINGPRC</a><br><code>(&nbsp;--&nbsp;)</code> | String display. |
-| <a href="#strtball--terse">STRTBALL</a><br><code>(&nbsp;--&nbsp;)</code> | STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music. |
-| <a href="#sup--terse">SUP</a><br><code>(&nbsp;--&nbsp;)</code> | SUP posts UP. |
-| <a href="#sw-30--terse">SW-30</a><br><code>—</code> | X=1. |
-| <a href="#sw-45--terse">SW-45</a><br><code>—</code> | X=1. |
-| <a href="#sw-90--terse">SW-90</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code> | SW-90 ignores direction/random inputs and returns the far-right foul sector. |
-| <a href="#sw30--terse">SW+30</a><br><code>—</code> | X=1. |
-| <a href="#sw45--terse">SW+45</a><br><code>—</code> | X=1. |
-| <a href="#sw90--terse">SW+90</a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code> | SW+90 always returns foul-left after dropping its inputs. |
-| <a href="#sw0--terse">SW0</a><br><code>—</code> | X=1. |
-| <a href="#swalk--terse">SWALK</a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | Uses ROT and SPOST to compose game logic. |
-| <a href="#tcnt--terse">TCNT</a><br><code>(&nbsp;--&nbsp;)</code> | TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. |
-| <a href="#tersechk--terse">TERSECHK</a><br><code>(&nbsp;--&nbsp;)</code> | Look at terse routine flags. |
-| <a href="#tf--terse">TF</a><br><code>(&nbsp;--&nbsp;)</code> | Take the field. |
-| <a href="#thw--terse">THW,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the throw command. |
-| <a href="#twait--terse">TWAIT</a><br><code>(&nbsp;count&nbsp;--&nbsp;)</code> | Terse wait period. |
-| <a href="#v--terse">V</a><br><code>(&nbsp;--&nbsp;)</code> | Uses VARIABLE to compose game logic. |
-| <a href="#v--terse-1">V=</a><br><code>(&nbsp;--&nbsp;)</code> | Uses V and VARIABLE to compose game logic. |
-| <a href="#vibs--terse">VIBS</a><br><code>(&nbsp;value&nbsp;--&nbsp;)</code> | Emit a vibrato setting. |
-| <a href="#vis--terse">VIS</a><br><code>(&nbsp;--&nbsp;)</code> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; |
-| <a href="#whbodds--terse">WHBODDS</a><br><code>(&nbsp;--&nbsp;)</code> | Sets who is on base calculates play odds. |
-| <a href="#wthw--terse">WTHW,</a><br><code>(&nbsp;--&nbsp;)</code> | Emit the wait-for-throw command. |
-| <a href="#wupgo--terse">WUPGO</a><br><code>(&nbsp;--&nbsp;)</code> | WUPGO activates WHOSUP with runner/automatic-forward flags; |
-| <a href="#wupton--terse">WUPTON</a><br><code>(&nbsp;--&nbsp;)</code> | WUPTON installs WUPWRT. |
-| <a href="#wupwrt--terse">WUPWRT</a><br><code>(&nbsp;--&nbsp;)</code> | Write whos up for flash. |
-| <a href="#you1st--terse">YOU1ST</a><br><code>(&nbsp;--&nbsp;)</code> | YOU1ST posts the greeting/extra-inning challenge, then continues to 306. |
-| <a href="#zeroram--terse">ZERORAM</a><br><code>(&nbsp;--&nbsp;)</code> | ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT. |
+| Word / stack | | Function |
+| --- | :---: | --- |
+| <strong>]'[</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#--terse" title="View implementation">📄</a> | Source-level compiler/TERSE definition shown below. |
+| <strong>^</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#--terse-1" title="View implementation">📄</a> | Uses ABVOLS and MCVOLS to compose game logic. |
+| <strong>&lt;INTERRUPTS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#interrupts--terse" title="View implementation">📄</a> | Mark the start of interrupt data. |
+| <strong>ABVOLS</strong><br><code>(&nbsp;volume&nbsp;--&nbsp;)</code> | <a href="#abvols--terse" title="View implementation">📄</a> | Emit the music volume command. |
+| <strong>ACT,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#act--terse" title="View implementation">📄</a> | Emit a playaction record. |
+| <strong>ANOTE</strong><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code> | <a href="#anote--terse" title="View implementation">📄</a> | Emit a channel A note followed by its duration. |
+| <strong>ATONE</strong><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code> | <a href="#atone--terse" title="View implementation">📄</a> | Emit tone setting for channel A. |
+| <strong>BACT,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#bact--terse" title="View implementation">📄</a> | Emit a ball-action record. |
+| <strong>BALLTIME</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#balltime--terse" title="View implementation">📄</a> | Balls process. |
+| <strong>BLDST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#bldst--terse" title="View implementation">📄</a> | Emit the ball destination command. |
+| <strong>BLMOT,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#blmot--terse" title="View implementation">📄</a> | Emit the ball motion command. |
+| <strong>BNOTE</strong><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code> | <a href="#bnote--terse" title="View implementation">📄</a> | Emit a channel B note followed by its duration. |
+| <strong>BONE</strong><br><code>(&nbsp;address&nbsp;--&nbsp;)</code> | <a href="#bone--terse" title="View implementation">📄</a> | Store byte value 1. |
+| <strong>BTONE</strong><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code> | <a href="#btone--terse" title="View implementation">📄</a> | Emit tone setting for channel B. |
+| <strong>BV</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#bv--terse" title="View implementation">📄</a> | Define a named byte variable. |
+| <strong>BV=</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#bv--terse-1" title="View implementation">📄</a> | Uses BV to compose game logic. |
+| <strong>BZERO</strong><br><code>(&nbsp;address&nbsp;--&nbsp;)</code> | <a href="#bzero--terse" title="View implementation">📄</a> | Store byte value 0. |
+| <strong>C=</strong><br><code>(&nbsp;value&nbsp;--&nbsp;)</code> | <a href="#c--terse" title="View implementation">📄</a> | Uses CONSTANT to compose game logic. |
+| <strong>CHGS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chgs--terse" title="View implementation">📄</a> | CHGS posts CHANGE SIDES; |
+| <strong>CHKFLSHSTAY</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkflshstay--terse" title="View implementation">📄</a> | When isccp turn off check for wupwrt. |
+| <strong>CHKGMCNT</strong><br><code>(&nbsp;--&nbsp;credits&nbsp;)</code> | <a href="#chkgmcnt--terse" title="View implementation">📄</a> | CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte. |
+| <strong>CMAJOR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#cmajor--terse" title="View implementation">📄</a> | Initialize the C-major sound pattern. |
+| <strong>CNLINE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#cnline--terse" title="View implementation">📄</a> | CNLINE saves a new XIN/YIN endpoint and calls cnline from the current line state. |
+| <strong>CNOTE</strong><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code> | <a href="#cnote--terse" title="View implementation">📄</a> | Emit a channel C note followed by its duration. |
+| <strong>CONGR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#congr--terse" title="View implementation">📄</a> | Display the congratulatory prompt. |
+| <strong>CPOST</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;char&nbsp;--&nbsp;)</code> | <a href="#cpost--terse" title="View implementation">📄</a> | Draw one character at the specified position. |
+| <strong>CREDARROW</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#credarrow--terse" title="View implementation">📄</a> | Update last inning arrow. |
+| <strong>CTONE</strong><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code> | <a href="#ctone--terse" title="View implementation">📄</a> | Emit tone setting for channel C. |
+| <strong>DEACT,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#deact--terse" title="View implementation">📄</a> | Emit vector-deactivation command. |
+| <strong>DLINE</strong><br><code>(&nbsp;x1&nbsp;y1&nbsp;x2&nbsp;y2&nbsp;--&nbsp;)</code> | <a href="#dline--terse" title="View implementation">📄</a> | Draw a line , given X Y start coor X Y ending coor. |
+| <strong>DOCHGS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dochgs--terse" title="View implementation">📄</a> | DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER; |
+| <strong>DOEHOMER</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#doehomer--terse" title="View implementation">📄</a> | DOEHOMER only posts the text. |
+| <strong>DOGOVER</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dogover--terse" title="View implementation">📄</a> | Do game over. |
+| <strong>DOHOMER</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dohomer--terse" title="View implementation">📄</a> | DOHOMER erases the ball, displays HOMER, resets counts and clears the event timer; |
+| <strong>DOSAFE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dosafe--terse" title="View implementation">📄</a> | DOSAFE combines music/text. |
+| <strong>DOSBALL</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#dosball--terse" title="View implementation">📄</a> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. |
+| <strong>DOSOUT</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#dosout--terse" title="View implementation">📄</a> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. |
+| <strong>DOSSTRIKE</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#dosstrike--terse" title="View implementation">📄</a> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. |
+| <strong>DP1</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dp1--terse" title="View implementation">📄</a> | Display the one-coin deposit prompt. |
+| <strong>DP12CN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dp12cn--terse" title="View implementation">📄</a> | Uses B@ and SPOST to compose game logic. |
+| <strong>DP1CN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dp1cn--terse" title="View implementation">📄</a> | Uses SPOST to compose game logic. |
+| <strong>DPCN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dpcn--terse" title="View implementation">📄</a> | Wait for next coin. |
+| <strong>dpost</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;nibble&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code> | <a href="#dpost--terse" title="View implementation">📄</a> | dpost isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit. |
+| <strong>DTC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dtc--terse" title="View implementation">📄</a> | DTC selects decimal and invokes the host editor. |
+| <strong>DURATION</strong><br><code>(&nbsp;duration&nbsp;--&nbsp;)</code> | <a href="#duration--terse" title="View implementation">📄</a> | Emit a note-duration command. |
+| <strong>DWAIT</strong><br><code>(&nbsp;limit&nbsp;--&nbsp;)</code> | <a href="#dwait--terse" title="View implementation">📄</a> | DWAIT runs nested loops with interrupts enabled and disables them on return; |
+| <strong>F=</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#f--terse" title="View implementation">📄</a> | Declare a forward word with the game's source shorthand. |
+| <strong>F1STLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#f1stls--terse" title="View implementation">📄</a> | Select the first-base left-side action. |
+| <strong>F1STRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#f1strs--terse" title="View implementation">📄</a> | Select the first-base right-side action. |
+| <strong>F2NDLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#f2ndls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>F2NDRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#f2ndrs--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>F3RDLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#f3rdls--terse" title="View implementation">📄</a> | Select the third-base left-side action. |
+| <strong>F3RDRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#f3rdrs--terse" title="View implementation">📄</a> | Select the third-base right-side action. |
+| <strong>FBLLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fblls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>FBLRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fblrs--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>FIELDWRT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fieldwrt--terse" title="View implementation">📄</a> | Write field outline. |
+| <strong>FL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fl--terse" title="View implementation">📄</a> | Set up all of background. |
+| <strong>FLDDST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flddst--terse" title="View implementation">📄</a> | Emit the fielder destination command. |
+| <strong>FLFILL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flfill--terse" title="View implementation">📄</a> | FLFILL fills the background while allowing interrupts; |
+| <strong>FLSHME</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flshme--terse" title="View implementation">📄</a> | FLSHME executes only a nonzero address whose top two bits are clear; |
+| <strong>FLSHTON</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flshton--terse" title="View implementation">📄</a> | FLSHTON saves a callback and starts its timer. |
+| <strong>FOULTIME</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#foultime--terse" title="View implementation">📄</a> | Foulball process. |
+| <strong>FOWR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fowr--terse" title="View implementation">📄</a> | Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells. |
+| <strong>FSSLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fssls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>FSSRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fssrs--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>GETF</strong><br><code>(&nbsp;--&nbsp;index&nbsp;field-byte&nbsp;)</code> | <a href="#getf--terse" title="View implementation">📄</a> | GETF fetches FIELD bytes sequentially; |
+| <strong>GRNDRACTION</strong><br><code>—</code> | <a href="#grndraction--terse" title="View implementation">📄</a> | Given sectnm set up infield action. |
+| <strong>GRNDRHIT</strong><br><code>—</code> | <a href="#grndrhit--terse" title="View implementation">📄</a> | Grounder. |
+| <strong>HITDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hitdst--terse" title="View implementation">📄</a> | Chooses hit location. |
+| <strong>HLLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hlls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>HLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>HMS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hms--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>HOM</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hom--terse" title="View implementation">📄</a> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; |
+| <strong>HRBY2</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hrby2--terse" title="View implementation">📄</a> | HRBY2 halves HRAT. |
+| <strong>HRLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hrls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>HRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hrs--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
+| <strong>I'</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#i--terse" title="View implementation">📄</a> | Emit the target's indexed immediate reference. |
+| <strong>ICODE</strong><br><code>—</code> | <a href="#icode--terse" title="View implementation">📄</a> | ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets. |
+| <strong>INEXT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#inext--terse" title="View implementation">📄</a> | INEXT emits a jump to IEX; |
+| <strong>INLOG</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#inlog--terse" title="View implementation">📄</a> | Infield master logic. |
+| <strong>INNODDS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#innodds--terse" title="View implementation">📄</a> | INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state; |
+| <strong>INSCN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#inscn--terse" title="View implementation">📄</a> | Insert coin call. |
+| <strong>INSTRC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#instrc--terse" title="View implementation">📄</a> | Instructions. |
+| <strong>INSWAIT</strong><br><code>(&nbsp;count&nbsp;--&nbsp;)</code> | <a href="#inswait--terse" title="View implementation">📄</a> | INSWAIT enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return. |
+| <strong>INTERRUPTS&gt;</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#interrupts--terse-1" title="View implementation">📄</a> | Emit the interrupt-vector dispatch jump. |
+| <strong>INTHIGHRES</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#inthighres--terse" title="View implementation">📄</a> | Intialize screen for commercial mode. |
+| <strong>ISCN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#iscn--terse" title="View implementation">📄</a> | Display the V15 instruction message. |
+| <strong>LABLE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#lable--terse" title="View implementation">📄</a> | Provide the original source's label-definition alias. |
+| <strong>LCB,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#lcb--terse" title="View implementation">📄</a> | Uses ACT, and DEACT, to compose game logic. |
+| <strong>LDINFLDPA</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ldinfldpa--terse" title="View implementation">📄</a> | LDINFLDPA consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain. |
+| <strong>LDPC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ldpc--terse" title="View implementation">📄</a> | Emit/load the music program-counter value. |
+| <strong>LDPCC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ldpcc--terse" title="View implementation">📄</a> | Emit/load a music program-counter command. |
+| <strong>LK,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#lk--terse" title="View implementation">📄</a> | Uses BACT, and DEACT, to compose game logic. |
+| <strong>LSETTFCOOR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#lsettfcoor--terse" title="View implementation">📄</a> | Set take field coor & status -active , xpand. |
+| <strong>MASTER</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#master--terse" title="View implementation">📄</a> | Define the game's master music stream. |
+| <strong>MBALL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mball--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MCANNON</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mcannon--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MCOIN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mcoin--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MCVOLS</strong><br><code>(&nbsp;volume&nbsp;--&nbsp;)</code> | <a href="#mcvols--terse" title="View implementation">📄</a> | Emit music-channel volume values. |
+| <strong>MFENCE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mfence--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MFOUL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mfoul--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MHIT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mhit--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MLINN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mlinn--terse" title="View implementation">📄</a> | Mark last inning. |
+| <strong>MOPENERS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mopeners--terse" title="View implementation">📄</a> | Uses PMUSIC to compose game logic. |
+| <strong>MOUT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mout--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MSAFE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#msafe--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MSTRIKE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#mstrike--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>MYAH</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#myah--terse" title="View implementation">📄</a> | Uses BMUSIC to compose game logic. |
+| <strong>NOISE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#noise--terse" title="View implementation">📄</a> | Emit a noise/sound command. |
+| <strong>NOTES</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#notes--terse" title="View implementation">📄</a> | Uses ATONE and BTONE to compose game logic. |
+| <strong>NPOST</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;address&nbsp;length&nbsp;--&nbsp;)</code> | <a href="#npost--terse" title="View implementation">📄</a> | Post a bcd number on the screen ; see options. |
+| <strong>OFFDST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#offdst--terse" title="View implementation">📄</a> | Emit the outfielder destination command. |
+| <strong>OFMOT,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ofmot--terse" title="View implementation">📄</a> | Emit the outfield motion command. |
+| <strong>ON1ST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#on1st--terse" title="View implementation">📄</a> | Emit the first-base playaction command. |
+| <strong>ON2ND,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#on2nd--terse" title="View implementation">📄</a> | Emit the second-base playaction command. |
+| <strong>ON3RD,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#on3rd--terse" title="View implementation">📄</a> | Emit the third-base playaction command. |
+| <strong>OUTFLDHIT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#outfldhit--terse" title="View implementation">📄</a> | Fly ball. |
+| <strong>OUTLINE</strong><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code> | <a href="#outline--terse" title="View implementation">📄</a> | Creates rectanguler outline. |
+| <strong>OUTTIME</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#outtime--terse" title="View implementation">📄</a> | Out prc. |
+| <strong>PLRCHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#plrchk--terse" title="View implementation">📄</a> | PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL; |
+| <strong>PLRSELECT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#plrselect--terse" title="View implementation">📄</a> | Select singel player or 2 player. |
+| <strong>PPOST</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code> | <a href="#ppost--terse" title="View implementation">📄</a> | Draw a counted string and keep drawing coordinates. |
+| <strong>PUP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#pup--terse" title="View implementation">📄</a> | Power up routine. |
+| <strong>PX0</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#px0--terse" title="View implementation">📄</a> | Emit zero/white pixel patterns and define PX1/PX0 to select them. |
+| <strong>PX1</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#px1--terse" title="View implementation">📄</a> | Emit zero/white pixel patterns and define PX1/PX0 to select them. |
+| <strong>QUIET</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#quiet--terse" title="View implementation">📄</a> | Uses ABVOLS and MCVOLS to compose game logic. |
+| <strong>QUIT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#quit--terse" title="View implementation">📄</a> | Uses HERE and LDPC to compose game logic. |
+| <strong>RCB,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rcb--terse" title="View implementation">📄</a> | Uses ACT, and DEACT, to compose game logic. |
+| <strong>RDRNDNTE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rdrndnte--terse" title="View implementation">📄</a> | Emit a randomized note with a rest interval. |
+| <strong>RECLINE</strong><br><code>—</code> | <a href="#recline--terse" title="View implementation">📄</a> | RECLINE derives one horizontal row from retained rectangle arguments. |
+| <strong>RECTAN</strong><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code> | <a href="#rectan--terse" title="View implementation">📄</a> | In X, Y, X length, Y length, pxtype set. |
+| <strong>REST</strong><br><code>(&nbsp;duration&nbsp;--&nbsp;)</code> | <a href="#rest--terse" title="View implementation">📄</a> | Insert a silent music interval. |
+| <strong>REST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rest--terse-1" title="View implementation">📄</a> | Emit a resting playaction record. |
+| <strong>RETPA</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#retpa--terse" title="View implementation">📄</a> | Return to position pa. |
+| <strong>RNDNTE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rndnte--terse" title="View implementation">📄</a> | Emit a randomized musical note. |
+| <strong>RRRNDNTE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rrrndnte--terse" title="View implementation">📄</a> | Emit a sequence of randomized notes. |
+| <strong>RUN1CHK1ST</strong><br><code>—</code> | <a href="#run1chk1st--terse" title="View implementation">📄</a> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
+| <strong>RUN1CHK2ND</strong><br><code>—</code> | <a href="#run1chk2nd--terse" title="View implementation">📄</a> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
+| <strong>RUN2CHK</strong><br><code>—</code> | <a href="#run2chk--terse" title="View implementation">📄</a> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
+| <strong>RUN2CHK12ND</strong><br><code>—</code> | <a href="#run2chk12nd--terse" title="View implementation">📄</a> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
+| <strong>RUN2CHK1ST</strong><br><code>—</code> | <a href="#run2chk1st--terse" title="View implementation">📄</a> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
+| <strong>RUN3CHK</strong><br><code>—</code> | <a href="#run3chk--terse" title="View implementation">📄</a> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
+| <strong>RUNDST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rundst--terse" title="View implementation">📄</a> | Emit the runner destination command. |
+| <strong>S!</strong><br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code> | <a href="#s--terse" title="View implementation">📄</a> | Store cell with address-first arguments. |
+| <strong>S10</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#s10--terse" title="View implementation">📄</a> | S10 starts INTERRUPTS0 through ISTART; |
+| <strong>S11</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#s11--terse" title="View implementation">📄</a> | S11 starts INTERRUPTS1. |
+| <strong>SB!</strong><br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code> | <a href="#sb--terse" title="View implementation">📄</a> | Store byte with address-first arguments. |
+| <strong>SBALL1</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sball1--terse" title="View implementation">📄</a> | Draw the BALL 1 message. |
+| <strong>SBALL2</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sball2--terse" title="View implementation">📄</a> | Draw the BALL 2 message. |
+| <strong>SBALL3</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sball3--terse" title="View implementation">📄</a> | Draw the BALL 3 message. |
+| <strong>SBO</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#sbo--terse" title="View implementation">📄</a> | SBO posts the three $30-based count characters at their fixed positions. |
+| <strong>SCOREME</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#scoreme--terse" title="View implementation">📄</a> | Plop scores up. |
+| <strong>SCRERASE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#screrase--terse" title="View implementation">📄</a> | Erase entire screen. |
+| <strong>SCRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#scrs--terse" title="View implementation">📄</a> | SCRS clears two score rectangles and draws zero score characters. |
+| <strong>SETFDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#setfdst--terse" title="View implementation">📄</a> | Set up fielder destination values. |
+| <strong>SETTF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#settf--terse" title="View implementation">📄</a> | SETTF performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading. |
+| <strong>SETTFPA</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#settfpa--terse" title="View implementation">📄</a> | Take field pa. |
+| <strong>SFOUL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#sfoul--terse" title="View implementation">📄</a> | Uses ROT and SPOST to compose game logic. |
+| <strong>SGO</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#sgo--terse" title="View implementation">📄</a> | Uses SPOST to compose game logic. |
+| <strong>SHOMER</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#shomer--terse" title="View implementation">📄</a> | Uses ROT and SPOST to compose game logic. |
+| <strong>SORRY</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#sorry--terse" title="View implementation">📄</a> | Display the losing-player prompt. |
+| <strong>SOUT1</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sout1--terse" title="View implementation">📄</a> | Draw the 1 OUT message. |
+| <strong>SOUT2</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sout2--terse" title="View implementation">📄</a> | Draw the 2 OUT message. |
+| <strong>SOUT3</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sout3--terse" title="View implementation">📄</a> | Draw the 3 OUT message. |
+| <strong>SPLR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#splr--terse" title="View implementation">📄</a> | SPLR12/SPLR display available player choices; |
+| <strong>SPLR12</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#splr12--terse" title="View implementation">📄</a> | SPLR12/SPLR display available player choices; |
+| <strong>SPOST</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;)</code> | <a href="#spost--terse" title="View implementation">📄</a> | Draw a string. |
+| <strong>SSAFE</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#ssafe--terse" title="View implementation">📄</a> | SSAFE also redraws counts with SBO. |
+| <strong>SSTRIKE1</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sstrike1--terse" title="View implementation">📄</a> | Draw the STRIKE 1 message. |
+| <strong>SSTRIKE2</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#sstrike2--terse" title="View implementation">📄</a> | Draw the STRIKE 2 message. |
+| <strong>STFLD</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#stfld--terse" title="View implementation">📄</a> | STFLD installs RETPA and TAKEFIELD. |
+| <strong>STP,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#stp--terse" title="View implementation">📄</a> | Emit a standing-action record. |
+| <strong>STRIKETIME</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#striketime--terse" title="View implementation">📄</a> | Strike process. |
+| <strong>STRINGGO</strong><br><code>(&nbsp;string&nbsp;erase-flag&nbsp;--&nbsp;)</code> | <a href="#stringgo--terse" title="View implementation">📄</a> | Given string , stringerase. |
+| <strong>STRINGPRC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#stringprc--terse" title="View implementation">📄</a> | String display. |
+| <strong>STRTBALL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#strtball--terse" title="View implementation">📄</a> | STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music. |
+| <strong>SUP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#sup--terse" title="View implementation">📄</a> | SUP posts UP. |
+| <strong>SW-30</strong><br><code>—</code> | <a href="#sw-30--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SW-45</strong><br><code>—</code> | <a href="#sw-45--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SW-90</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code> | <a href="#sw-90--terse" title="View implementation">📄</a> | SW-90 ignores direction/random inputs and returns the far-right foul sector. |
+| <strong>SW+30</strong><br><code>—</code> | <a href="#sw30--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SW+45</strong><br><code>—</code> | <a href="#sw45--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SW+90</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code> | <a href="#sw90--terse" title="View implementation">📄</a> | SW+90 always returns foul-left after dropping its inputs. |
+| <strong>SW0</strong><br><code>—</code> | <a href="#sw0--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SWALK</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#swalk--terse" title="View implementation">📄</a> | Uses ROT and SPOST to compose game logic. |
+| <strong>TCNT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tcnt--terse" title="View implementation">📄</a> | TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. |
+| <strong>TERSECHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tersechk--terse" title="View implementation">📄</a> | Look at terse routine flags. |
+| <strong>TF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tf--terse" title="View implementation">📄</a> | Take the field. |
+| <strong>THW,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#thw--terse" title="View implementation">📄</a> | Emit the throw command. |
+| <strong>TWAIT</strong><br><code>(&nbsp;count&nbsp;--&nbsp;)</code> | <a href="#twait--terse" title="View implementation">📄</a> | Terse wait period. |
+| <strong>V</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#v--terse" title="View implementation">📄</a> | Uses VARIABLE to compose game logic. |
+| <strong>V=</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#v--terse-1" title="View implementation">📄</a> | Uses V and VARIABLE to compose game logic. |
+| <strong>VIBS</strong><br><code>(&nbsp;value&nbsp;--&nbsp;)</code> | <a href="#vibs--terse" title="View implementation">📄</a> | Emit a vibrato setting. |
+| <strong>VIS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#vis--terse" title="View implementation">📄</a> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; |
+| <strong>WHBODDS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#whbodds--terse" title="View implementation">📄</a> | Sets who is on base calculates play odds. |
+| <strong>WTHW,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#wthw--terse" title="View implementation">📄</a> | Emit the wait-for-throw command. |
+| <strong>WUPGO</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#wupgo--terse" title="View implementation">📄</a> | WUPGO activates WHOSUP with runner/automatic-forward flags; |
+| <strong>WUPTON</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#wupton--terse" title="View implementation">📄</a> | WUPTON installs WUPWRT. |
+| <strong>WUPWRT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#wupwrt--terse" title="View implementation">📄</a> | Write whos up for flash. |
+| <strong>YOU1ST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#you1st--terse" title="View implementation">📄</a> | YOU1ST posts the greeting/extra-inning challenge, then continues to 306. |
+| <strong>ZERORAM</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#zeroram--terse" title="View implementation">📄</a> | ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT. |
 
 ## Extra Bases native CODE words (85)
 
-| Word / stack | Function |
-| --- | --- |
-| <a href="#loop--native-code">+LOOP</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses LOOP to process game state. |
-| <a href="#allfldact--native-code">ALLFLDACT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Sets all fielders active. |
-| <a href="#anmseqload--native-code">ANMSEQLOAD</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Finds proper anm seq by per=#. |
-| <a href="#ballerase--native-code">BALLERASE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | BALLERASE preserves BC/IY around native BLERASE and returns to TERSE. |
-| <a href="#bathit--native-code">BATHIT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | He hit it time to get em running. |
-| <a href="#bathitchk--native-code">BATHITCHK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Check window for hit. |
-| <a href="#batswing--native-code">BATSWING</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Swings bat if appropriate. |
-| <a href="#batwrite--native-code">BATWRITE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Xor bat from swingtype. |
-| <a href="#bcd--native-code">BCD+</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Binary to decimal arithmatic. |
-| <a href="#bldst--native-code">BLDST</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Ball thrown or hit. |
-| <a href="#blmotion--native-code">BLMOTION</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Set pc for ram pa table -tractor ball. |
-| <a href="#blposchk--native-code">BLPOSCHK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | BLPOSCHK branches on HITYET. |
-| <a href="#bmusic--native-code">BMUSIC</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | BMUSIC consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay. |
-| <a href="#buttonchk--native-code">BUTTONCHK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Reads buttons for swing run & pitch it. |
-| <a href="#chkcaught--native-code">CHKCAUGHT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Caught set in interrupt. |
-| <a href="#chkgrounder--native-code">CHKGROUNDER</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | If grounder adjust ball direction. |
-| <a href="#chkscrtime--native-code">CHKSCRTIME</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Score process. |
-| <a href="#clrblst--native-code">CLRBLST</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | CLRBLST resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading. |
-| <a href="#cnline--native-code">cnline</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Calls vector line write. |
-| <a href="#compde--native-code">COMPDE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | COMPDE applies the same operation to DE while preserving HL. |
-| <a href="#comphl--native-code">COMPHL</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Compliments HL. |
-| <a href="#count--native-code">COUNT</a><br><code>(&nbsp;address&nbsp;--&nbsp;address+1&nbsp;length&nbsp;)</code> | Fetch the address and length of a counted string. |
-| <a href="#cpost--native-code">cpost</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Post an ascii-character on the screen ; see opt. |
-| <a href="#deactivate--native-code">DEACTIVATE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Reset active bit in status. |
-| <a href="#di--native-code">DI</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Disable interrupts. |
-| <a href="#divhlby4--native-code">DIVHLBY4</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Divide HL by 4. |
-| <a href="#do--native-code">DO</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Enter a counted loop. |
-| <a href="#dstcalc--native-code">DSTCALC</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Calc deltas to destination. |
-| <a href="#dstld--native-code">DSTLD</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | DSTLD reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively. |
-| <a href="#ei--native-code">EI</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses SWAN to process game state. |
-| <a href="#eidi--native-code">EIDI</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers. |
-| <a href="#emusic--native-code">EMUSIC</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | EMUSIC selects ENDMUSIC and initializes timing/repetition to one; |
-| <a href="#ex--native-code">EX</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. |
-| <a href="#fill--native-code">FILL</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Fill a memory/screen range. |
-| <a href="#flddst--native-code">FLDDST</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Fielders take position logic. |
-| <a href="#flshoff--native-code">FLSHOFF</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | FLSHOFF disables flashing and services cleanup under DI. |
-| <a href="#fmirror--native-code">FMIRROR</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. |
-| <a href="#hitrun--native-code">HITRUN</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Activate proper runners and set trwbase. |
-| <a href="#homerchk--native-code">HOMERCHK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Chk for homer or fence hit. |
-| <a href="#i--native-code">I</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Native game routine; source body below. |
-| <a href="#iex--native-code">IEX</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | IEX restores saved registers, enables interrupts and returns. |
-| <a href="#indexw--native-code">INDEXW</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Call routine A- disp HL- table add. |
-| <a href="#infield--native-code">INFIELD</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses IFSPAN to process game state. |
-| <a href="#infldact--native-code">INFLDACT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Set infielders active. |
-| <a href="#istart--native-code">ISTART</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | ISTART disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT. |
-| <a href="#killof--native-code">KILLOF</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Stop outfield tractor ball control. |
-| <a href="#loadanm--native-code">LOADANM</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Loads magic & anm HL-top of playact table. |
-| <a href="#loop--native-code-1">LOOP</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Advance or terminate a counted loop. |
-| <a href="#multhlby4--native-code">MULTHLBY4</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. |
-| <a href="#muscpu--native-code">MUSCPU</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Declare cross-screen dispatch labels and begin assembling MUSCPU. |
-| <a href="#ndup--native-code">NDUP</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses ARRAY to process game state. |
-| <a href="#offfdst--native-code">OFFFDST</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | All player off field control. |
-| <a href="#ofldtbl--native-code">OFLDTBL</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; |
-| <a href="#ofmotion--native-code">OFMOTION</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Set pc for ram pa table -tractor ball. |
-| <a href="#on1st--native-code">ON1ST</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
-| <a href="#on2nd--native-code">ON2ND</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
-| <a href="#on3rd--native-code">ON3RD</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
-| <a href="#opcodechk--native-code">OPCODECHK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Called by plyactupdate. |
-| <a href="#outfldact--native-code">OUTFLDACT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Sets outfielders active. |
-| <a href="#pactload--native-code">PACTLOAD</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Loads vect from plyact. |
-| <a href="#patfetch--native-code">PATFETCH</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Loads actual pattern IX-vector. |
-| <a href="#perspective--native-code">PERSPECTIVE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Pattern size determined by y. |
-| <a href="#playact--native-code">PLAYACT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Called in intterupt does update prc. |
-| <a href="#pmusic--native-code">PMUSIC</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | PMUSIC installs a stream unconditionally and sets priority, repeat count and note timer. |
-| <a href="#ptautotm--native-code">PTAUTOTM</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Pitch auto timer. |
-| <a href="#resetrunners--native-code">RESETRUNNERS</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Reset runners to order of on base. |
-| <a href="#rnd--native-code">RND</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Generate a random number. |
-| <a href="#rundst--native-code">RUNDST</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Runner base running control. |
-| <a href="#sentry--native-code">SENTRY</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Game loop. |
-| <a href="#setact--native-code">SETACT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Sets avtive bit in status. |
-| <a href="#startmusic--native-code">STARTMUSIC</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | STARTMUSIC clears its request. |
-| <a href="#strtline--native-code">strtline</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Given X Y sets up start of line. |
-| <a href="#swan--native-code">SWAN</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Transfer interrupt/screen execution state. |
-| <a href="#tballpitch--native-code">TBALLPITCH</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Loads pitch velocities. |
-| <a href="#throwanim--native-code">THROWANIM</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Sets up BLDST and player anim. |
-| <a href="#throwball--native-code">THROWBALL</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Finish scoring first. |
-| <a href="#thwanmset--native-code">THWANMSET</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Set up throw animation. |
-| <a href="#timer--native-code">TIMER</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Interrupt timer routine. |
-| <a href="#vector--native-code">VECTOR</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Vectors and limit checks. |
-| <a href="#verase--native-code">VERASE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Does pattern board erase from vector IX. |
-| <a href="#vwrite--native-code">VWRITE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Does reloff relabs patbrd from vector IX. |
-| <a href="#wait--native-code">WAIT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Given A wait period stop every thing. |
-| <a href="#waitthrw--native-code">WAITTHRW</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Sets flag for 1stbaseman to wait throw. |
-| <a href="#write--native-code">WRITE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Write with X Y sizes ; pattern with no header. |
-| <a href="#writr--native-code">WRITR</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Write with a relative pattern. |
+| Word / stack | | Function |
+| --- | :---: | --- |
+| <strong>+LOOP</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#loop--native-code" title="View implementation">📄</a> | Uses LOOP to process game state. |
+| <strong>ALLFLDACT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#allfldact--native-code" title="View implementation">📄</a> | Sets all fielders active. |
+| <strong>ANMSEQLOAD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#anmseqload--native-code" title="View implementation">📄</a> | Finds proper anm seq by per=#. |
+| <strong>BALLERASE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ballerase--native-code" title="View implementation">📄</a> | BALLERASE preserves BC/IY around native BLERASE and returns to TERSE. |
+| <strong>BATHIT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#bathit--native-code" title="View implementation">📄</a> | He hit it time to get em running. |
+| <strong>BATHITCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#bathitchk--native-code" title="View implementation">📄</a> | Check window for hit. |
+| <strong>BATSWING</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#batswing--native-code" title="View implementation">📄</a> | Swings bat if appropriate. |
+| <strong>BATWRITE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#batwrite--native-code" title="View implementation">📄</a> | Xor bat from swingtype. |
+| <strong>BCD+</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#bcd--native-code" title="View implementation">📄</a> | Binary to decimal arithmatic. |
+| <strong>BLDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#bldst--native-code" title="View implementation">📄</a> | Ball thrown or hit. |
+| <strong>BLMOTION</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#blmotion--native-code" title="View implementation">📄</a> | Set pc for ram pa table -tractor ball. |
+| <strong>BLPOSCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#blposchk--native-code" title="View implementation">📄</a> | BLPOSCHK branches on HITYET. |
+| <strong>BMUSIC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#bmusic--native-code" title="View implementation">📄</a> | BMUSIC consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay. |
+| <strong>BUTTONCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#buttonchk--native-code" title="View implementation">📄</a> | Reads buttons for swing run & pitch it. |
+| <strong>CHKCAUGHT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkcaught--native-code" title="View implementation">📄</a> | Caught set in interrupt. |
+| <strong>CHKGROUNDER</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkgrounder--native-code" title="View implementation">📄</a> | If grounder adjust ball direction. |
+| <strong>CHKSCRTIME</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkscrtime--native-code" title="View implementation">📄</a> | Score process. |
+| <strong>CLRBLST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#clrblst--native-code" title="View implementation">📄</a> | CLRBLST resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading. |
+| <strong>cnline</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#cnline--native-code" title="View implementation">📄</a> | Calls vector line write. |
+| <strong>COMPDE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#compde--native-code" title="View implementation">📄</a> | COMPDE applies the same operation to DE while preserving HL. |
+| <strong>COMPHL</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#comphl--native-code" title="View implementation">📄</a> | Compliments HL. |
+| <strong>COUNT</strong><br><code>(&nbsp;address&nbsp;--&nbsp;address+1&nbsp;length&nbsp;)</code> | <a href="#count--native-code" title="View implementation">📄</a> | Fetch the address and length of a counted string. |
+| <strong>cpost</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#cpost--native-code" title="View implementation">📄</a> | Post an ascii-character on the screen ; see opt. |
+| <strong>DEACTIVATE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#deactivate--native-code" title="View implementation">📄</a> | Reset active bit in status. |
+| <strong>DI</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#di--native-code" title="View implementation">📄</a> | Disable interrupts. |
+| <strong>DIVHLBY4</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#divhlby4--native-code" title="View implementation">📄</a> | Divide HL by 4. |
+| <strong>DO</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#do--native-code" title="View implementation">📄</a> | Enter a counted loop. |
+| <strong>DSTCALC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#dstcalc--native-code" title="View implementation">📄</a> | Calc deltas to destination. |
+| <strong>DSTLD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#dstld--native-code" title="View implementation">📄</a> | DSTLD reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively. |
+| <strong>EI</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ei--native-code" title="View implementation">📄</a> | Uses SWAN to process game state. |
+| <strong>EIDI</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#eidi--native-code" title="View implementation">📄</a> | EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers. |
+| <strong>EMUSIC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#emusic--native-code" title="View implementation">📄</a> | EMUSIC selects ENDMUSIC and initializes timing/repetition to one; |
+| <strong>EX</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ex--native-code" title="View implementation">📄</a> | EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. |
+| <strong>FILL</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fill--native-code" title="View implementation">📄</a> | Fill a memory/screen range. |
+| <strong>FLDDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#flddst--native-code" title="View implementation">📄</a> | Fielders take position logic. |
+| <strong>FLSHOFF</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#flshoff--native-code" title="View implementation">📄</a> | FLSHOFF disables flashing and services cleanup under DI. |
+| <strong>FMIRROR</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fmirror--native-code" title="View implementation">📄</a> | FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. |
+| <strong>HITRUN</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#hitrun--native-code" title="View implementation">📄</a> | Activate proper runners and set trwbase. |
+| <strong>HOMERCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#homerchk--native-code" title="View implementation">📄</a> | Chk for homer or fence hit. |
+| <strong>I</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#i--native-code" title="View implementation">📄</a> | Native game routine; source body below. |
+| <strong>IEX</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#iex--native-code" title="View implementation">📄</a> | IEX restores saved registers, enables interrupts and returns. |
+| <strong>INDEXW</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#indexw--native-code" title="View implementation">📄</a> | Call routine A- disp HL- table add. |
+| <strong>INFIELD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#infield--native-code" title="View implementation">📄</a> | Uses IFSPAN to process game state. |
+| <strong>INFLDACT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#infldact--native-code" title="View implementation">📄</a> | Set infielders active. |
+| <strong>ISTART</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#istart--native-code" title="View implementation">📄</a> | ISTART disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT. |
+| <strong>KILLOF</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#killof--native-code" title="View implementation">📄</a> | Stop outfield tractor ball control. |
+| <strong>LOADANM</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#loadanm--native-code" title="View implementation">📄</a> | Loads magic & anm HL-top of playact table. |
+| <strong>LOOP</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#loop--native-code-1" title="View implementation">📄</a> | Advance or terminate a counted loop. |
+| <strong>MULTHLBY4</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#multhlby4--native-code" title="View implementation">📄</a> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. |
+| <strong>MUSCPU</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#muscpu--native-code" title="View implementation">📄</a> | Declare cross-screen dispatch labels and begin assembling MUSCPU. |
+| <strong>NDUP</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ndup--native-code" title="View implementation">📄</a> | Uses ARRAY to process game state. |
+| <strong>OFFFDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#offfdst--native-code" title="View implementation">📄</a> | All player off field control. |
+| <strong>OFLDTBL</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ofldtbl--native-code" title="View implementation">📄</a> | OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; |
+| <strong>OFMOTION</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ofmotion--native-code" title="View implementation">📄</a> | Set pc for ram pa table -tractor ball. |
+| <strong>ON1ST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#on1st--native-code" title="View implementation">📄</a> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
+| <strong>ON2ND</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#on2nd--native-code" title="View implementation">📄</a> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
+| <strong>ON3RD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#on3rd--native-code" title="View implementation">📄</a> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
+| <strong>OPCODECHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#opcodechk--native-code" title="View implementation">📄</a> | Called by plyactupdate. |
+| <strong>OUTFLDACT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#outfldact--native-code" title="View implementation">📄</a> | Sets outfielders active. |
+| <strong>PACTLOAD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#pactload--native-code" title="View implementation">📄</a> | Loads vect from plyact. |
+| <strong>PATFETCH</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#patfetch--native-code" title="View implementation">📄</a> | Loads actual pattern IX-vector. |
+| <strong>PERSPECTIVE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#perspective--native-code" title="View implementation">📄</a> | Pattern size determined by y. |
+| <strong>PLAYACT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#playact--native-code" title="View implementation">📄</a> | Called in intterupt does update prc. |
+| <strong>PMUSIC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#pmusic--native-code" title="View implementation">📄</a> | PMUSIC installs a stream unconditionally and sets priority, repeat count and note timer. |
+| <strong>PTAUTOTM</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ptautotm--native-code" title="View implementation">📄</a> | Pitch auto timer. |
+| <strong>RESETRUNNERS</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#resetrunners--native-code" title="View implementation">📄</a> | Reset runners to order of on base. |
+| <strong>RND</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#rnd--native-code" title="View implementation">📄</a> | Generate a random number. |
+| <strong>RUNDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#rundst--native-code" title="View implementation">📄</a> | Runner base running control. |
+| <strong>SENTRY</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#sentry--native-code" title="View implementation">📄</a> | Game loop. |
+| <strong>SETACT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#setact--native-code" title="View implementation">📄</a> | Sets avtive bit in status. |
+| <strong>STARTMUSIC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#startmusic--native-code" title="View implementation">📄</a> | STARTMUSIC clears its request. |
+| <strong>strtline</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#strtline--native-code" title="View implementation">📄</a> | Given X Y sets up start of line. |
+| <strong>SWAN</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#swan--native-code" title="View implementation">📄</a> | Transfer interrupt/screen execution state. |
+| <strong>TBALLPITCH</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#tballpitch--native-code" title="View implementation">📄</a> | Loads pitch velocities. |
+| <strong>THROWANIM</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#throwanim--native-code" title="View implementation">📄</a> | Sets up BLDST and player anim. |
+| <strong>THROWBALL</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#throwball--native-code" title="View implementation">📄</a> | Finish scoring first. |
+| <strong>THWANMSET</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#thwanmset--native-code" title="View implementation">📄</a> | Set up throw animation. |
+| <strong>TIMER</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#timer--native-code" title="View implementation">📄</a> | Interrupt timer routine. |
+| <strong>VECTOR</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#vector--native-code" title="View implementation">📄</a> | Vectors and limit checks. |
+| <strong>VERASE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#verase--native-code" title="View implementation">📄</a> | Does pattern board erase from vector IX. |
+| <strong>VWRITE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#vwrite--native-code" title="View implementation">📄</a> | Does reloff relabs patbrd from vector IX. |
+| <strong>WAIT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#wait--native-code" title="View implementation">📄</a> | Given A wait period stop every thing. |
+| <strong>WAITTHRW</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#waitthrw--native-code" title="View implementation">📄</a> | Sets flag for 1stbaseman to wait throw. |
+| <strong>WRITE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#write--native-code" title="View implementation">📄</a> | Write with X Y sizes ; pattern with no header. |
+| <strong>WRITR</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#writr--native-code" title="View implementation">📄</a> | Write with a relative pattern. |
 
 ## Native SUBR helpers (47)
 
-| Word / stack | Function |
-| --- | --- |
-| <a href="#autor1--native-subr">AUTOR1</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners. |
-| <a href="#autor2--native-subr">AUTOR2</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Run second-runner automation logic. |
-| <a href="#autor3--native-subr">AUTOR3</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Run third-runner automation logic. |
-| <a href="#blerase--native-subr">BLERASE</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Erases ball. |
-| <a href="#chkatbs--native-subr">CHKATBS</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Check if active player at base in- A vstatus. |
-| <a href="#chkcoin1--native-subr">CHKCOIN1</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Chk door 1 for coin drop. |
-| <a href="#chkcoin2--native-subr">CHKCOIN2</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Chk door 2 for coin drop. |
-| <a href="#cmpof--native-subr">CMPOF</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Calculates proper deltas and patterns. |
-| <a href="#colorband--native-subr">COLORBAND</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled. |
-| <a href="#debounce--native-subr">debounce</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Debounce input transitions. |
-| <a href="#fetch--native-subr">FETCH</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
-| <a href="#flshwup--native-subr">FLSHWUP</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Handle flash callback. |
-| <a href="#fnbb--native-subr">FNBB</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Native game routine; source body below. |
-| <a href="#fontunpack--native-subr">FONTUNPACK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | FONTUNPACK reads two packed bytes and starts a five-row unpack loop. |
-| <a href="#fro1--native-subr">FRO1</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses AUTOR1 to process game state. |
-| <a href="#fro12--native-subr">FRO12</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses AUTOR1 and AUTOR2 to process game state. |
-| <a href="#fro123--native-subr">FRO123</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses AUTOR1 and AUTOR2 to process game state. |
-| <a href="#fro13--native-subr">FRO13</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Uses AUTOR2 to process game state. |
-| <a href="#fro2--native-subr">FRO2</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Native game routine; source body below. |
-| <a href="#fro23--native-subr">FRO23</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Native game routine; source body below. |
-| <a href="#fro3--native-subr">FRO3</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Native game routine; source body below. |
-| <a href="#hload--native-subr">HLOAD</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
-| <a href="#ifspan--native-subr">IFSPAN</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | IFSPAN preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value. |
-| <a href="#incpc--native-subr">INCPC</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
-| <a href="#loadpc--native-subr">loadpc</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | loadpc installs MUSPC and STARTPC. |
-| <a href="#lvrstat--native-subr">LVRSTAT</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Load vstat for all runners in- A value. |
-| <a href="#nbb--native-subr">NBB</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | NBB is the empty-bases no-op. |
-| <a href="#ofblchk--native-subr">OFBLCHK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Chk for catch or close when cmsw. |
-| <a href="#pcjump--native-subr">PCJUMP</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
-| <a href="#relabs--native-subr">relabs</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Relative X Y to magic address conversion. |
-| <a href="#reloff--native-subr">reloff</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Compute relative offset of x , y of pattern. |
-| <a href="#ro1--native-subr">RO1</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. |
-| <a href="#ro12--native-subr">RO12</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | RO12 activates both forced runners, selecting a double-play or ordinary target; |
-| <a href="#ro123--native-subr">RO123</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. |
-| <a href="#ro13--native-subr">RO13</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | RO13 handles first-and-third occupancy and may branch through SETDBLPLAY. |
-| <a href="#ro2--native-subr">RO2</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. |
-| <a href="#ro23--native-subr">RO23</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. |
-| <a href="#ro3--native-subr">RO3</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. |
-| <a href="#setdblplay--native-subr">SETDBLPLAY</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Sets up double play HL-guy on 1st. |
-| <a href="#takeoff--native-subr">TAKEOFF</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Turn proper runners on. |
-| <a href="#tballprc--native-subr">TBALLPRC</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Pitch or control outfield. |
-| <a href="#tblvel--native-subr">TBLVEL</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Tractorball vel HL-# add. D-max vel. |
-| <a href="#timedcr--native-subr">TIMEDCR</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | HL-timer add if goes to zero return 1 else 0. |
-| <a href="#toofck--native-subr">TOOFCK</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Time out outfield check. |
-| <a href="#walkover--native-subr">WALKOVER</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Walked runner at base. |
-| <a href="#write--native-subr">write</a><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | Software write with x y size. |
-| <a href="#writep--native-subr">writep</a><br><code>(&nbsp;IY=patadr&nbsp;BC=ex/mag+shf&nbsp;HL=scradr&nbsp;---&nbsp;)</code> | Software write with pattern size on pattern. |
+| Word / stack | | Function |
+| --- | :---: | --- |
+| <strong>AUTOR1</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#autor1--native-subr" title="View implementation">📄</a> | AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners. |
+| <strong>AUTOR2</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#autor2--native-subr" title="View implementation">📄</a> | Run second-runner automation logic. |
+| <strong>AUTOR3</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#autor3--native-subr" title="View implementation">📄</a> | Run third-runner automation logic. |
+| <strong>BLERASE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#blerase--native-subr" title="View implementation">📄</a> | Erases ball. |
+| <strong>CHKATBS</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkatbs--native-subr" title="View implementation">📄</a> | Check if active player at base in- A vstatus. |
+| <strong>CHKCOIN1</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkcoin1--native-subr" title="View implementation">📄</a> | Chk door 1 for coin drop. |
+| <strong>CHKCOIN2</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkcoin2--native-subr" title="View implementation">📄</a> | Chk door 2 for coin drop. |
+| <strong>CMPOF</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#cmpof--native-subr" title="View implementation">📄</a> | Calculates proper deltas and patterns. |
+| <strong>COLORBAND</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#colorband--native-subr" title="View implementation">📄</a> | COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled. |
+| <strong>debounce</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#debounce--native-subr" title="View implementation">📄</a> | Debounce input transitions. |
+| <strong>FETCH</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fetch--native-subr" title="View implementation">📄</a> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
+| <strong>FLSHWUP</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#flshwup--native-subr" title="View implementation">📄</a> | Handle flash callback. |
+| <strong>FNBB</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fnbb--native-subr" title="View implementation">📄</a> | Native game routine; source body below. |
+| <strong>FONTUNPACK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fontunpack--native-subr" title="View implementation">📄</a> | FONTUNPACK reads two packed bytes and starts a five-row unpack loop. |
+| <strong>FRO1</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fro1--native-subr" title="View implementation">📄</a> | Uses AUTOR1 to process game state. |
+| <strong>FRO12</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fro12--native-subr" title="View implementation">📄</a> | Uses AUTOR1 and AUTOR2 to process game state. |
+| <strong>FRO123</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fro123--native-subr" title="View implementation">📄</a> | Uses AUTOR1 and AUTOR2 to process game state. |
+| <strong>FRO13</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fro13--native-subr" title="View implementation">📄</a> | Uses AUTOR2 to process game state. |
+| <strong>FRO2</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fro2--native-subr" title="View implementation">📄</a> | Native game routine; source body below. |
+| <strong>FRO23</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fro23--native-subr" title="View implementation">📄</a> | Native game routine; source body below. |
+| <strong>FRO3</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#fro3--native-subr" title="View implementation">📄</a> | Native game routine; source body below. |
+| <strong>HLOAD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#hload--native-subr" title="View implementation">📄</a> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
+| <strong>IFSPAN</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ifspan--native-subr" title="View implementation">📄</a> | IFSPAN preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value. |
+| <strong>INCPC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#incpc--native-subr" title="View implementation">📄</a> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
+| <strong>loadpc</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#loadpc--native-subr" title="View implementation">📄</a> | loadpc installs MUSPC and STARTPC. |
+| <strong>LVRSTAT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#lvrstat--native-subr" title="View implementation">📄</a> | Load vstat for all runners in- A value. |
+| <strong>NBB</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#nbb--native-subr" title="View implementation">📄</a> | NBB is the empty-bases no-op. |
+| <strong>OFBLCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ofblchk--native-subr" title="View implementation">📄</a> | Chk for catch or close when cmsw. |
+| <strong>PCJUMP</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#pcjump--native-subr" title="View implementation">📄</a> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
+| <strong>relabs</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#relabs--native-subr" title="View implementation">📄</a> | Relative X Y to magic address conversion. |
+| <strong>reloff</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#reloff--native-subr" title="View implementation">📄</a> | Compute relative offset of x , y of pattern. |
+| <strong>RO1</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ro1--native-subr" title="View implementation">📄</a> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. |
+| <strong>RO12</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ro12--native-subr" title="View implementation">📄</a> | RO12 activates both forced runners, selecting a double-play or ordinary target; |
+| <strong>RO123</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ro123--native-subr" title="View implementation">📄</a> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. |
+| <strong>RO13</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ro13--native-subr" title="View implementation">📄</a> | RO13 handles first-and-third occupancy and may branch through SETDBLPLAY. |
+| <strong>RO2</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ro2--native-subr" title="View implementation">📄</a> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. |
+| <strong>RO23</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ro23--native-subr" title="View implementation">📄</a> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. |
+| <strong>RO3</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ro3--native-subr" title="View implementation">📄</a> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. |
+| <strong>SETDBLPLAY</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#setdblplay--native-subr" title="View implementation">📄</a> | Sets up double play HL-guy on 1st. |
+| <strong>TAKEOFF</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#takeoff--native-subr" title="View implementation">📄</a> | Turn proper runners on. |
+| <strong>TBALLPRC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#tballprc--native-subr" title="View implementation">📄</a> | Pitch or control outfield. |
+| <strong>TBLVEL</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#tblvel--native-subr" title="View implementation">📄</a> | Tractorball vel HL-# add. D-max vel. |
+| <strong>TIMEDCR</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#timedcr--native-subr" title="View implementation">📄</a> | HL-timer add if goes to zero return 1 else 0. |
+| <strong>TOOFCK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#toofck--native-subr" title="View implementation">📄</a> | Time out outfield check. |
+| <strong>WALKOVER</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#walkover--native-subr" title="View implementation">📄</a> | Walked runner at base. |
+| <strong>write</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#write--native-subr" title="View implementation">📄</a> | Software write with x y size. |
+| <strong>writep</strong><br><code>(&nbsp;IY=patadr&nbsp;BC=ex/mag+shf&nbsp;HL=scradr&nbsp;---&nbsp;)</code> | <a href="#writep--native-subr" title="View implementation">📄</a> | Software write with pattern size on pattern. |
 
 ## Host and cross-compiler definitions (2)
 
-| Word / stack | Function |
-| --- | --- |
-| <a href="#base--terse">BASE!</a><br><code>(&nbsp;base&nbsp;--&nbsp;)</code> | Set the number base. |
-| <a href="#base--terse-1">BASE@</a><br><code>(&nbsp;--&nbsp;base&nbsp;)</code> | Fetch the current number base. |
+| Word / stack | | Function |
+| --- | :---: | --- |
+| <strong>BASE!</strong><br><code>(&nbsp;base&nbsp;--&nbsp;)</code> | <a href="#base--terse" title="View implementation">📄</a> | Set the number base. |
+| <strong>BASE@</strong><br><code>(&nbsp;--&nbsp;base&nbsp;)</code> | <a href="#base--terse-1" title="View implementation">📄</a> | Fetch the current number base. |
 
 ## Implementations
 
