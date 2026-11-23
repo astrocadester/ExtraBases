@@ -400,7 +400,6 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 
 ### `-` — shared
 
-
 `( a b -- difference )`
 
 Subtract the top value from the preceding value.
@@ -418,7 +417,6 @@ _minus:
 [Source block 87, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-87)
 
 ### `!` — shared
-
 
 `( value address -- )`
 
@@ -438,7 +436,6 @@ _bang:
 
 ### `@` — shared
 
-
 `( address -- value )`
 
 Fetch one 16-bit cell.
@@ -457,24 +454,33 @@ _at:
 
 ### `*` — shared
 
-
 `( a b -- product )`
 
 Multiply two stack values.
+
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+I 0400 * + 0400 UNPROT BMOVE PROT LOOP DROP R> + ;
+```
 
 [Source block 87, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-87)
 
 ### `/` — shared
 
-
 `( a b -- quotient )`
 
 Divide the preceding stack value by the top value.
 
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+TBALLDX 100 / H MVI, D M MOV, -->
+```
+
 [Source block 86, line 13](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-86)
 
 ### `+` — shared
-
 
 `( a b -- sum )`
 
@@ -493,7 +499,6 @@ _plus:
 
 ### `<` — shared
 
-
 `( a b -- flag )`
 
 Compare whether the preceding value is less than the top value.
@@ -505,7 +510,6 @@ _less:
 [Source block 88, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-88)
 
 ### `=` — shared
-
 
 `( a b -- flag )`
 
@@ -528,7 +532,6 @@ _equal:
 
 ### `>` — shared
 
-
 `( a b -- flag )`
 
 Compare whether the preceding value is greater than the top value.
@@ -540,7 +543,6 @@ _gt:
 [Source block 88, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-88)
 
 ### `0=` — shared
-
 
 `( n -- flag )`
 
@@ -555,7 +557,6 @@ _zeroequal:
 [Source block 88, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-88)
 
 ### `2DUP` — shared
-
 
 `( a b -- a b a b )`
 
@@ -575,7 +576,6 @@ _2DUP:
 [Source block 87, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-87)
 
 ### `AND` — shared
-
 
 `( a b -- result )`
 
@@ -601,7 +601,6 @@ _AND:
 
 ### `ARRAY` — shared
 
-
 `( size -- )`
 
 Allocate/name an indexed cell array from a the size.
@@ -618,7 +617,6 @@ _ARRAY:
 [Source block 152, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-152)
 
 ### `B!` — shared
-
 
 `( byte address -- )`
 
@@ -637,7 +635,6 @@ _Bbang:
 [Source block 87, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-87)
 
 ### `B@` — shared
-
 
 `( address -- byte )`
 
@@ -658,15 +655,19 @@ _Bat:
 
 ### `BARRAY` — shared
 
-
 `( size -- )`
 
 Allocate/name an indexed byte array from a the size.
 
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+VLENGTH BARRAY BL
+```
+
 [Source block 102, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-102)
 
 ### `BEGIN` — shared
-
 
 `( -- )`
 
@@ -682,19 +683,29 @@ Immediate XC wrapper that records a loop's object address.
 
 ### `CODE` — shared
 
-
 `( -- )`
 
 Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry.
+
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+CODE CHKSCRTIME ( score process ) DI,
+```
 
 [Source block 149, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-149)
 
 ### `CONSTANT` — shared
 
-
 `( value -- )`
 
 Define a constant from a value.
+
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+28 CONSTANT RRUN 68 CONSTANT LRUN
+```
 
 **Used by:** `C=`.
 
@@ -702,17 +713,21 @@ Define a constant from a value.
 
 ### `DECIMAL` — shared
 
-
 `( -- )`
 
 Select radix ten for parsing subsequent source numbers.
+
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+XCBEG DECIMAL xcsys xc ASM .OPS
+```
 
 **Used by:** `DTC`, `FMIRROR`, `HITRUN`.
 
 [Source block 89, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-89)
 
 ### `DROP` — shared
-
 
 `( x -- )`
 
@@ -729,7 +744,6 @@ _DROP:
 [Source block 87, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-87)
 
 ### `DUP` — shared
-
 
 `( x -- x x )`
 
@@ -749,7 +763,6 @@ _DUP:
 
 ### `ELSE` — shared
 
-
 `( -- )`
 
 Immediate XC wrapper that emits an unconditional branch and resolves the preceding conditional branch.
@@ -761,7 +774,6 @@ Immediate XC wrapper that emits an unconditional branch and resolves the precedi
 [Source block 100, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-100)
 
 ### `END` — shared
-
 
 `( flag -- )`
 
@@ -777,15 +789,19 @@ Immediate XC wrapper emitting a conditional back-branch; game loops repeat until
 
 ### `HEX` — shared
 
-
 `( -- )`
 
 Select radix sixteen for parsing subsequent source numbers.
 
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+HEX 0 ROMSTART ! 7F80 PSTACK !
+```
+
 [Source block 152, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-152)
 
 ### `IF` — shared
-
 
 `( flag -- )`
 
@@ -799,17 +815,21 @@ Immediate XC wrapper that emits a conditional target branch through XC-IF.
 
 ### `LIT` — shared
 
-
 `( -- value; inline cell )`
 
 Compiler literal mechanism used by INEXT's host macro.
+
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+{ : INEXT } { LIT [ } ' IEX { , } ASM { ] } JMP, { ; }
+```
 
 **Used by:** `INEXT`.
 
 [Source block 229, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-229)
 
 ### `OR` — shared
-
 
 `( a b -- result )`
 
@@ -835,7 +855,6 @@ _OR:
 
 ### `OVER` — shared
 
-
 `( a b -- a b a )`
 
 Copy the second stack cell to the top.
@@ -855,7 +874,6 @@ _OVER:
 [Source block 89, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-89)
 
 ### `ROT` — shared
-
 
 `( a b c -- b c a )`
 
@@ -877,7 +895,6 @@ _ROT:
 
 ### `SWAP` — shared
 
-
 `( a b -- b a )`
 
 Exchange the top two stack cells.
@@ -897,7 +914,6 @@ _SWAP:
 
 ### `THEN` — shared
 
-
 `( -- )`
 
 Immediate XC wrapper that resolves a saved target branch destination.
@@ -910,17 +926,21 @@ Immediate XC wrapper that resolves a saved target branch destination.
 
 ### `VARIABLE` — shared
 
-
 `( -- )`
 
 Allocate/name a cell variable with the initial value in this dialect.
+
+**Extra Bases source use:** The source below demonstrates this host/development word. Its own host implementation is not included in the supplied Extra Bases source screens.
+
+```terse
+0 VARIABLE MUSPC { : MASTER } 10 B, B, { ; } { : ATONE } 11 B,
+```
 
 **Used by:** `V`, `V=`.
 
 [Source block 147, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-147)
 
 ### `XOR` — shared
-
 
 `( a b -- result )`
 
@@ -946,7 +966,6 @@ _XOR:
 
 ### `]'[` — TERSE
 
-
 `( -- )`
 
 Source-level compiler/TERSE definition shown below.
@@ -958,7 +977,6 @@ Source-level compiler/TERSE definition shown below.
 [Source block 291, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291)
 
 ### `^` — TERSE
-
 
 `( -- )`
 
@@ -974,7 +992,6 @@ Uses ABVOLS and MCVOLS to compose game logic.
 
 ### `<INTERRUPTS` — TERSE
 
-
 `( -- )`
 
 Mark the start of interrupt data.
@@ -988,7 +1005,6 @@ Mark the start of interrupt data.
 [Source block 291, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291)
 
 ### `ABVOLS` — TERSE
-
 
 `( volume -- )`
 
@@ -1004,7 +1020,6 @@ Emit the music volume command.
 
 ### `ACT,` — TERSE
 
-
 `( -- )`
 
 Emit a playaction record.
@@ -1019,7 +1034,6 @@ Emit a playaction record.
 
 ### `ANOTE` — TERSE
 
-
 `( duration tone -- )`
 
 Emit a channel A note followed by its duration.
@@ -1033,7 +1047,6 @@ Emit a channel A note followed by its duration.
 [Source block 141, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `ATONE` — TERSE
-
 
 `( tone -- )`
 
@@ -1050,7 +1063,6 @@ B, { ; }
 
 ### `BACT,` — TERSE
 
-
 `( -- )`
 
 Emit a ball-action record.
@@ -1066,7 +1078,6 @@ Emit a ball-action record.
 [Source block 229, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-229)
 
 ### `BALLTIME` — TERSE
-
 
 `( -- )`
 
@@ -1086,7 +1097,6 @@ CLRBLST ELSE MBALL DOSBALL THEN SBO ;
 
 ### `BLDST,` — TERSE
 
-
 `( -- )`
 
 Emit the ball destination command.
@@ -1099,7 +1109,6 @@ Emit the ball destination command.
 
 ### `BLMOT,` — TERSE
 
-
 `( -- )`
 
 Emit the ball motion command.
@@ -1111,7 +1120,6 @@ Emit the ball motion command.
 [Source block 225, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `BNOTE` — TERSE
-
 
 `( duration tone -- )`
 
@@ -1127,7 +1135,6 @@ Emit a channel B note followed by its duration.
 [Source block 141, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `BONE` — TERSE
-
 
 `( address -- )`
 
@@ -1145,7 +1152,6 @@ Store byte value 1.
 
 ### `BTONE` — TERSE
 
-
 `( tone -- )`
 
 Emit tone setting for channel B.
@@ -1159,7 +1165,6 @@ Emit tone setting for channel B.
 [Source block 141, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `BV` — TERSE
-
 
 `( -- )`
 
@@ -1175,7 +1180,6 @@ Define a named byte variable.
 
 ### `BV=` — TERSE
 
-
 `( -- )`
 
 Uses BV to compose game logic.
@@ -1189,7 +1193,6 @@ Uses BV to compose game logic.
 [Source block 304, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304)
 
 ### `BZERO` — TERSE
-
 
 `( address -- )`
 
@@ -1207,7 +1210,6 @@ Store byte value 0.
 
 ### `C=` — TERSE
 
-
 `( value -- )`
 
 Uses CONSTANT to compose game logic.
@@ -1221,7 +1223,6 @@ Uses CONSTANT to compose game logic.
 [Source block 304, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304)
 
 ### `CHGS` — TERSE
-
 
 `( -- )`
 
@@ -1238,7 +1239,6 @@ CHGS posts CHANGE SIDES;
 [Source block 238, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-238)
 
 ### `CHKFLSHSTAY` — TERSE
-
 
 `( -- )`
 
@@ -1261,7 +1261,6 @@ DOWUP BZERO THEN ;
 
 ### `CHKGMCNT` — TERSE
 
-
 `( -- credits )`
 
 CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte.
@@ -1278,7 +1277,6 @@ CHKGMCNT posts the appropriate prompt around a timed wait and returns the curren
 
 ### `CMAJOR` — TERSE
 
-
 `( -- )`
 
 Initialize the C-major sound pattern.
@@ -1292,7 +1290,6 @@ Initialize the C-major sound pattern.
 [Source block 136, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-136)
 
 ### `CNLINE` — TERSE
-
 
 `( -- )`
 
@@ -1311,7 +1308,6 @@ YIN ! XIN ! cnline ;
 
 ### `CNOTE` — TERSE
 
-
 `( duration tone -- )`
 
 Emit a channel C note followed by its duration.
@@ -1327,7 +1323,6 @@ Emit a channel C note followed by its duration.
 [Source block 141, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `CONGR` — TERSE
-
 
 `( -- )`
 
@@ -1345,7 +1340,6 @@ SPOST 0E00 2800 828 A" LETS PLAY AGAIN I WILL BUY" SPOST ;
 [Source block 127, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-127)
 
 ### `CPOST` — TERSE
-
 
 `( x y options char -- )`
 
@@ -1365,7 +1359,6 @@ cpost 3DROP ;
 [Source block 248, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-248)
 
 ### `CREDARROW` — TERSE
-
 
 `( -- )`
 
@@ -1392,7 +1385,6 @@ CHKFLSHSTAY ELSE DROP THEN THEN EI ;
 
 ### `CTONE` — TERSE
 
-
 `( tone -- )`
 
 Emit tone setting for channel C.
@@ -1407,7 +1399,6 @@ Emit tone setting for channel C.
 
 ### `DEACT,` — TERSE
 
-
 `( -- )`
 
 Emit vector-deactivation command.
@@ -1421,7 +1412,6 @@ Emit vector-deactivation command.
 [Source block 225, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `DLINE` — TERSE
-
 
 `( x1 y1 x2 y2 -- )`
 
@@ -1441,7 +1431,6 @@ SWAB ( set y for relabs ) strtline cnline ;
 
 ### `DOCHGS` — TERSE
 
-
 `( -- )`
 
 DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER;
@@ -1458,7 +1447,6 @@ DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER;
 
 ### `DOEHOMER` — TERSE
 
-
 `( -- )`
 
 DOEHOMER only posts the text.
@@ -1472,7 +1460,6 @@ DOEHOMER only posts the text.
 [Source block 180, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-180)
 
 ### `DOGOVER` — TERSE
-
 
 `( -- )`
 
@@ -1496,7 +1483,6 @@ FLSHOFF DROP 0 PLYR1UP BZERO ( plyr1up 0 ) EIDI ;
 
 ### `DOHOMER` — TERSE
 
-
 `( -- )`
 
 DOHOMER erases the ball, displays HOMER, resets counts and clears the event timer;
@@ -1511,7 +1497,6 @@ DOHOMER erases the ball, displays HOMER, resets counts and clears the event time
 
 ### `DOSAFE` — TERSE
 
-
 `( -- )`
 
 DOSAFE combines music/text.
@@ -1525,7 +1510,6 @@ DOSAFE combines music/text.
 [Source block 183, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-183)
 
 ### `DOSBALL` — TERSE
-
 
 `( x y options -- )`
 
@@ -1544,7 +1528,6 @@ ELSE SBALL3 THEN THEN ;
 
 ### `DOSOUT` — TERSE
 
-
 `( x y options -- )`
 
 DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.
@@ -1562,7 +1545,6 @@ ELSE SOUT3 THEN THEN ;
 
 ### `DOSSTRIKE` — TERSE
 
-
 `( x y options -- )`
 
 DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.
@@ -1579,7 +1561,6 @@ DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the
 
 ### `DP1` — TERSE
 
-
 `( -- )`
 
 Display the one-coin deposit prompt.
@@ -1595,7 +1576,6 @@ Display the one-coin deposit prompt.
 [Source block 127, line 13](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-127)
 
 ### `DP12CN` — TERSE
-
 
 `( -- )`
 
@@ -1615,7 +1595,6 @@ ELSE DP1CN THEN ;
 
 ### `DP1CN` — TERSE
 
-
 `( -- )`
 
 Uses SPOST to compose game logic.
@@ -1632,7 +1611,6 @@ SPOST ;
 [Source block 305, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-305)
 
 ### `DPCN` — TERSE
-
 
 `( -- )`
 
@@ -1652,7 +1630,6 @@ GAMEOVER BZERO ELSE LINN BZERO UPCRED BONE THEN CREDITS 1+B! ;
 
 ### `dpost` — TERSE
 
-
 `( x y options nibble -- x y options )`
 
 dpost isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit.
@@ -1670,7 +1647,6 @@ SWAP BFFF AND SWAP ELSE DROP 20 THEN cpost ;
 
 ### `DTC` — TERSE
 
-
 `( -- )`
 
 DTC selects decimal and invokes the host editor.
@@ -1685,7 +1661,6 @@ DTC selects decimal and invokes the host editor.
 
 ### `DURATION` — TERSE
 
-
 `( duration -- )`
 
 Emit a note-duration command.
@@ -1699,7 +1674,6 @@ Emit a note-duration command.
 [Source block 141, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `DWAIT` — TERSE
-
 
 `( limit -- )`
 
@@ -1717,7 +1691,6 @@ DWAIT runs nested loops with interrupts enabled and disables them on return;
 
 ### `F=` — TERSE
 
-
 `( -- )`
 
 Declare a forward word with the game's source shorthand.
@@ -1729,7 +1702,6 @@ Declare a forward word with the game's source shorthand.
 [Source block 304, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304)
 
 ### `F1STLS` — TERSE
-
 
 `( -- )`
 
@@ -1743,7 +1715,6 @@ Select the first-base left-side action.
 
 ### `F1STRS` — TERSE
 
-
 `( -- )`
 
 Select the first-base right-side action.
@@ -1755,7 +1726,6 @@ Select the first-base right-side action.
 [Source block 156, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-156)
 
 ### `F2NDLS` — TERSE
-
 
 `( -- )`
 
@@ -1771,7 +1741,6 @@ Uses BONE to compose game logic.
 
 ### `F2NDRS` — TERSE
 
-
 `( -- )`
 
 Uses BONE to compose game logic.
@@ -1786,7 +1755,6 @@ Uses BONE to compose game logic.
 
 ### `F3RDLS` — TERSE
 
-
 `( -- )`
 
 Select the third-base left-side action.
@@ -1799,7 +1767,6 @@ Select the third-base left-side action.
 
 ### `F3RDRS` — TERSE
 
-
 `( -- )`
 
 Select the third-base right-side action.
@@ -1811,7 +1778,6 @@ Select the third-base right-side action.
 [Source block 155, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-155)
 
 ### `FBLLS` — TERSE
-
 
 `( -- )`
 
@@ -1828,7 +1794,6 @@ Uses BONE to compose game logic.
 
 ### `FBLRS` — TERSE
 
-
 `( -- )`
 
 Uses BONE to compose game logic.
@@ -1843,7 +1808,6 @@ FBLR1ST NOACTPA 0 ;
 [Source block 156, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-156)
 
 ### `FIELDWRT` — TERSE
-
 
 `( -- )`
 
@@ -1862,7 +1826,6 @@ FINDEX BZERO GETF GETF GETF GETF DLINE
 [Source block 273, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-273)
 
 ### `FL` — TERSE
-
 
 `( -- )`
 
@@ -1897,7 +1860,6 @@ F00 SUP
 
 ### `FLDDST,` — TERSE
 
-
 `( -- )`
 
 Emit the fielder destination command.
@@ -1909,7 +1871,6 @@ Emit the fielder destination command.
 [Source block 225, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `FLFILL` — TERSE
-
 
 `( -- )`
 
@@ -1927,7 +1888,6 @@ FLFILL fills the background while allowing interrupts;
 
 ### `FLSHME` — TERSE
 
-
 `( -- )`
 
 FLSHME executes only a nonzero address whose top two bits are clear;
@@ -1943,7 +1903,6 @@ FLSHME executes only a nonzero address whose top two bits are clear;
 [Source block 239, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-239)
 
 ### `FLSHTON` — TERSE
-
 
 `( -- )`
 
@@ -1961,7 +1920,6 @@ FLSHTON saves a callback and starts its timer.
 
 ### `FOULTIME` — TERSE
 
-
 `( -- )`
 
 Foulball process.
@@ -1978,7 +1936,6 @@ ELSE 1+B! SBO THEN ;
 
 ### `FOWR` — TERSE
 
-
 `( -- )`
 
 Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells.
@@ -1990,7 +1947,6 @@ Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bi
 [Source block 280, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-280)
 
 ### `FSSLS` — TERSE
-
 
 `( -- )`
 
@@ -2006,7 +1962,6 @@ Uses BONE to compose game logic.
 
 ### `FSSRS` — TERSE
 
-
 `( -- )`
 
 Uses BONE to compose game logic.
@@ -2020,7 +1975,6 @@ Uses BONE to compose game logic.
 [Source block 155, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-155)
 
 ### `GETF` — TERSE
-
 
 `( -- index field-byte )`
 
@@ -2037,7 +1991,6 @@ GETF fetches FIELD bytes sequentially;
 [Source block 273, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-273)
 
 ### `GRNDRACTION` — TERSE
-
 
 Given sectnm set up infield action.
 
@@ -2059,7 +2012,6 @@ HRSS HR3RD LDINFLDPA THEN ;
 [Source block 157, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-157)
 
 ### `GRNDRHIT` — TERSE
-
 
 Grounder.
 
@@ -2086,7 +2038,6 @@ VDSTY BL ! THEN HITDST ;
 
 ### `HITDST` — TERSE
 
-
 `( -- )`
 
 Chooses hit location.
@@ -2105,7 +2056,6 @@ BAL THWPA ! 2800 VX BL ! AD00 VY BL ! ;
 
 ### `HLLS` — TERSE
 
-
 `( -- )`
 
 Uses BONE to compose game logic.
@@ -2119,7 +2069,6 @@ Uses BONE to compose game logic.
 [Source block 155, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-155)
 
 ### `HLS` — TERSE
-
 
 `( -- )`
 
@@ -2135,7 +2084,6 @@ Uses BONE to compose game logic.
 
 ### `HMS` — TERSE
 
-
 `( -- )`
 
 Uses BONE to compose game logic.
@@ -2149,7 +2097,6 @@ Uses BONE to compose game logic.
 [Source block 155, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-155)
 
 ### `HOM` — TERSE
-
 
 `( -- )`
 
@@ -2167,7 +2114,6 @@ HOM and VIS draw HOME/VISITOR using a large initial character and the remaining 
 
 ### `HRBY2` — TERSE
 
-
 `( -- )`
 
 HRBY2 halves HRAT.
@@ -2184,7 +2130,6 @@ HRBY2 halves HRAT.
 
 ### `HRLS` — TERSE
 
-
 `( -- )`
 
 Uses BONE to compose game logic.
@@ -2198,7 +2143,6 @@ Uses BONE to compose game logic.
 [Source block 156, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-156)
 
 ### `HRS` — TERSE
-
 
 `( -- )`
 
@@ -2214,7 +2158,6 @@ Uses BONE to compose game logic.
 
 ### `I'` — TERSE
 
-
 `( -- )`
 
 Emit the target's indexed immediate reference.
@@ -2226,7 +2169,6 @@ Emit the target's indexed immediate reference.
 [Source block 291, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291)
 
 ### `ICODE` — TERSE
-
 
 ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets.
 
@@ -2243,7 +2185,6 @@ ASM { ; }
 
 ### `INEXT` — TERSE
 
-
 `( -- )`
 
 INEXT emits a jump to IEX;
@@ -2257,7 +2198,6 @@ INEXT emits a jump to IEX;
 [Source block 291, line 13](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291)
 
 ### `INLOG` — TERSE
-
 
 `( -- )`
 
@@ -2282,7 +2222,6 @@ ELSE GRNDRHIT THEN ALLFLDACT ;
 
 ### `INNODDS` — TERSE
 
-
 `( -- )`
 
 INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state;
@@ -2300,7 +2239,6 @@ THEN ELSE 1 - IODTBL B@ THEN THEN IODDS B! ;
 [Source block 123, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-123)
 
 ### `INSCN` — TERSE
-
 
 `( -- )`
 
@@ -2324,7 +2262,6 @@ THEN 2880 4C00 BASE2PAT 428 WRITR ;
 [Source block 127, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-127)
 
 ### `INSTRC` — TERSE
-
 
 `( -- )`
 
@@ -2354,7 +2291,6 @@ FLFILL 6000 2800 828 A" PRESS ANY BUTTON TO START GAME" SPOST
 
 ### `INSWAIT` — TERSE
 
-
 `( count -- )`
 
 INSWAIT enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return.
@@ -2373,7 +2309,6 @@ INSWAIT enables interrupts, loops until its count expires or any masked active-l
 
 ### `INTERRUPTS>` — TERSE
 
-
 `( -- )`
 
 Emit the interrupt-vector dispatch jump.
@@ -2387,7 +2322,6 @@ Emit the interrupt-vector dispatch jump.
 [Source block 291, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291)
 
 ### `INTHIGHRES` — TERSE
-
 
 `( -- )`
 
@@ -2407,7 +2341,6 @@ Intialize screen for commercial mode.
 
 ### `ISCN` — TERSE
 
-
 `( -- )`
 
 Display the V15 instruction message.
@@ -2424,7 +2357,6 @@ Display the V15 instruction message.
 
 ### `LABLE` — TERSE
 
-
 `( -- )`
 
 Provide the original source's label-definition alias.
@@ -2436,7 +2368,6 @@ Provide the original source's label-definition alias.
 [Source block 304, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304)
 
 ### `LCB,` — TERSE
-
 
 `( -- )`
 
@@ -2451,7 +2382,6 @@ Uses ACT, and DEACT, to compose game logic.
 [Source block 225, line 13](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `LDINFLDPA` — TERSE
-
 
 `( -- )`
 
@@ -2468,7 +2398,6 @@ VPLAYACTPC 1ST ! VPLAYACTPC PT ! ;
 
 ### `LDPC` — TERSE
 
-
 `( -- )`
 
 Emit/load the music program-counter value.
@@ -2483,7 +2412,6 @@ Emit/load the music program-counter value.
 
 ### `LDPCC` — TERSE
 
-
 `( -- )`
 
 Emit/load a music program-counter command.
@@ -2495,7 +2423,6 @@ Emit/load a music program-counter command.
 [Source block 141, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `LK,` — TERSE
-
 
 `( -- )`
 
@@ -2510,7 +2437,6 @@ Uses BACT, and DEACT, to compose game logic.
 [Source block 229, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-229)
 
 ### `LSETTFCOOR` — TERSE
-
 
 `( -- )`
 
@@ -2542,7 +2468,6 @@ NBD RUNPA ! STND OFPA ! NBD TBLPA ! BAL THWPA ! ;
 
 ### `MASTER` — TERSE
 
-
 `( -- )`
 
 Define the game's master music stream.
@@ -2556,7 +2481,6 @@ Define the game's master music stream.
 [Source block 141, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `MBALL` — TERSE
-
 
 `( -- )`
 
@@ -2574,7 +2498,6 @@ Uses BMUSIC to compose game logic.
 
 ### `MCANNON` — TERSE
 
-
 `( -- )`
 
 Uses BMUSIC to compose game logic.
@@ -2590,7 +2513,6 @@ Uses BMUSIC to compose game logic.
 [Source block 146, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-146)
 
 ### `MCOIN` — TERSE
-
 
 `( -- )`
 
@@ -2608,7 +2530,6 @@ Uses BMUSIC to compose game logic.
 
 ### `MCVOLS` — TERSE
 
-
 `( volume -- )`
 
 Emit music-channel volume values.
@@ -2622,7 +2543,6 @@ Emit music-channel volume values.
 [Source block 141, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `MFENCE` — TERSE
-
 
 `( -- )`
 
@@ -2640,7 +2560,6 @@ Uses BMUSIC to compose game logic.
 
 ### `MFOUL` — TERSE
 
-
 `( -- )`
 
 Uses BMUSIC to compose game logic.
@@ -2657,7 +2576,6 @@ Uses BMUSIC to compose game logic.
 
 ### `MHIT` — TERSE
 
-
 `( -- )`
 
 Uses BMUSIC to compose game logic.
@@ -2673,7 +2591,6 @@ Uses BMUSIC to compose game logic.
 [Source block 146, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-146)
 
 ### `MLINN` — TERSE
-
 
 `( -- )`
 
@@ -2693,7 +2610,6 @@ THEN A500 IMRK 301 828 WRITE ELSE DROP DROP THEN EI ;
 
 ### `MOPENERS` — TERSE
 
-
 `( -- )`
 
 Uses PMUSIC to compose game logic.
@@ -2709,7 +2625,6 @@ Uses PMUSIC to compose game logic.
 [Source block 146, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-146)
 
 ### `MOUT` — TERSE
-
 
 `( -- )`
 
@@ -2727,7 +2642,6 @@ Uses BMUSIC to compose game logic.
 
 ### `MSAFE` — TERSE
 
-
 `( -- )`
 
 Uses BMUSIC to compose game logic.
@@ -2743,7 +2657,6 @@ Uses BMUSIC to compose game logic.
 [Source block 146, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-146)
 
 ### `MSTRIKE` — TERSE
-
 
 `( -- )`
 
@@ -2761,7 +2674,6 @@ Uses BMUSIC to compose game logic.
 
 ### `MYAH` — TERSE
 
-
 `( -- )`
 
 Uses BMUSIC to compose game logic.
@@ -2778,7 +2690,6 @@ Uses BMUSIC to compose game logic.
 
 ### `NOISE` — TERSE
 
-
 `( -- )`
 
 Emit a noise/sound command.
@@ -2793,7 +2704,6 @@ Emit a noise/sound command.
 
 ### `NOTES` — TERSE
 
-
 `( -- )`
 
 Uses ATONE and BTONE to compose game logic.
@@ -2807,7 +2717,6 @@ Uses ATONE and BTONE to compose game logic.
 [Source block 141, line 14](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `NPOST` — TERSE
-
 
 `( x y options address length -- )`
 
@@ -2829,7 +2738,6 @@ OVER + SWAP DO I B@ SWAN dpost I B@ dpost LOOP
 
 ### `OFFDST,` — TERSE
 
-
 `( -- )`
 
 Emit the outfielder destination command.
@@ -2841,7 +2749,6 @@ Emit the outfielder destination command.
 [Source block 225, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `OFMOT,` — TERSE
-
 
 `( -- )`
 
@@ -2855,7 +2762,6 @@ Emit the outfield motion command.
 
 ### `ON1ST,` — TERSE
 
-
 `( -- )`
 
 Emit the first-base playaction command.
@@ -2867,7 +2773,6 @@ Emit the first-base playaction command.
 [Source block 225, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `ON2ND,` — TERSE
-
 
 `( -- )`
 
@@ -2881,7 +2786,6 @@ Emit the second-base playaction command.
 
 ### `ON3RD,` — TERSE
 
-
 `( -- )`
 
 Emit the third-base playaction command.
@@ -2893,7 +2797,6 @@ Emit the third-base playaction command.
 [Source block 225, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `OUTFLDHIT` — TERSE
-
 
 `( -- )`
 
@@ -2917,7 +2820,6 @@ HL2ND HLOUTSSPA ELSE HROUT2NDPA HRSS THEN HR3RD LDINFLDPA ;
 
 ### `OUTLINE` — TERSE
 
-
 `( x y width height -- )`
 
 Creates rectanguler outline.
@@ -2936,7 +2838,6 @@ Creates rectanguler outline.
 [Source block 272, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-272)
 
 ### `OUTTIME` — TERSE
-
 
 `( -- )`
 
@@ -2966,7 +2867,6 @@ ELSE MOUT THEN CLRBLST SBO DOSOUT ;
 
 ### `PLRCHK` — TERSE
 
-
 `( -- )`
 
 PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL;
@@ -2986,7 +2886,6 @@ CNSW12 BONE THEN STRTBALL THEN THEN THEN ;
 
 ### `PLRSELECT` — TERSE
 
-
 `( -- )`
 
 Select singel player or 2 player.
@@ -3004,7 +2903,6 @@ SPLR SELECT BZERO MLINN ;
 [Source block 131, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-131)
 
 ### `PPOST` — TERSE
-
 
 `( x y options string -- x y options )`
 
@@ -3027,7 +2925,6 @@ COUNT OVER + SWAP DO I B@ cpost LOOP ;
 
 ### `PUP` — TERSE
 
-
 `( -- )`
 
 Power up routine.
@@ -3046,7 +2943,6 @@ DI FL SGO EI GAMEOVER BONE TF SENTRY ;
 
 ### `PX0` — TERSE
 
-
 `( -- )`
 
 Emit zero/white pixel patterns and define PX1/PX0 to select them.
@@ -3060,7 +2956,6 @@ Emit zero/white pixel patterns and define PX1/PX0 to select them.
 [Source block 280, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-280)
 
 ### `PX1` — TERSE
-
 
 `( -- )`
 
@@ -3076,7 +2971,6 @@ Emit zero/white pixel patterns and define PX1/PX0 to select them.
 
 ### `QUIET` — TERSE
 
-
 `( -- )`
 
 Uses ABVOLS and MCVOLS to compose game logic.
@@ -3091,7 +2985,6 @@ Uses ABVOLS and MCVOLS to compose game logic.
 [Source block 141, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `QUIT` — TERSE
-
 
 `( -- )`
 
@@ -3109,7 +3002,6 @@ Uses HERE and LDPC to compose game logic.
 
 ### `RCB,` — TERSE
 
-
 `( -- )`
 
 Uses ACT, and DEACT, to compose game logic.
@@ -3124,7 +3016,6 @@ Uses ACT, and DEACT, to compose game logic.
 
 ### `RDRNDNTE` — TERSE
 
-
 `( -- )`
 
 Emit a randomized note with a rest interval.
@@ -3136,7 +3027,6 @@ Emit a randomized note with a rest interval.
 [Source block 141, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `RECLINE` — TERSE
-
 
 RECLINE derives one horizontal row from retained rectangle arguments.
 
@@ -3151,7 +3041,6 @@ RECLINE derives one horizontal row from retained rectangle arguments.
 [Source block 272, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-272)
 
 ### `RECTAN` — TERSE
-
 
 `( x y width height -- )`
 
@@ -3171,7 +3060,6 @@ DROP ;
 
 ### `REST` — TERSE
 
-
 `( duration -- )`
 
 Insert a silent music interval.
@@ -3186,7 +3074,6 @@ Insert a silent music interval.
 
 ### `REST,` — TERSE
 
-
 `( -- )`
 
 Emit a resting playaction record.
@@ -3198,7 +3085,6 @@ Emit a resting playaction record.
 [Source block 225, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `RETPA` — TERSE
-
 
 `( -- )`
 
@@ -3218,7 +3104,6 @@ B@ 80 OR F7 AND SB! VLENGTH + LOOP DROP ;
 
 ### `RNDNTE` — TERSE
 
-
 `( -- )`
 
 Emit a randomized musical note.
@@ -3231,7 +3116,6 @@ Emit a randomized musical note.
 
 ### `RRRNDNTE` — TERSE
 
-
 `( -- )`
 
 Emit a sequence of randomized notes.
@@ -3243,7 +3127,6 @@ Emit a sequence of randomized notes.
 [Source block 141, line 12](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `RUN1CHK1ST` — TERSE
-
 
 RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy;
 
@@ -3260,7 +3143,6 @@ ELSE RUN1CHK2ND THEN ;
 
 ### `RUN1CHK2ND` — TERSE
 
-
 RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy;
 
 ```text
@@ -3275,7 +3157,6 @@ ELSE RUN2CHK THEN ;
 [Source block 168, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-168)
 
 ### `RUN2CHK` — TERSE
-
 
 RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address.
 
@@ -3292,7 +3173,6 @@ ELSE RUN2CHK1ST THEN ;
 
 ### `RUN2CHK12ND` — TERSE
 
-
 RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy;
 
 ```text
@@ -3307,7 +3187,6 @@ ELSE 4 VMAGIC R3 THEN ;
 [Source block 168, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-168)
 
 ### `RUN2CHK1ST` — TERSE
-
 
 RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address.
 
@@ -3324,7 +3203,6 @@ ELSE RUN3CHK THEN ;
 
 ### `RUN3CHK` — TERSE
 
-
 RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address.
 
 ```text
@@ -3340,7 +3218,6 @@ THEN ;
 
 ### `RUNDST,` — TERSE
 
-
 `( -- )`
 
 Emit the runner destination command.
@@ -3352,7 +3229,6 @@ Emit the runner destination command.
 [Source block 225, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `S!` — TERSE
-
 
 `( address value -- )`
 
@@ -3370,7 +3246,6 @@ Store cell with address-first arguments.
 
 ### `S10` — TERSE
 
-
 `( -- )`
 
 S10 starts INTERRUPTS0 through ISTART;
@@ -3386,7 +3261,6 @@ S10 starts INTERRUPTS0 through ISTART;
 [Source block 289, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-289)
 
 ### `S11` — TERSE
-
 
 `( -- )`
 
@@ -3404,7 +3278,6 @@ S11 starts INTERRUPTS1.
 
 ### `SB!` — TERSE
 
-
 `( address value -- )`
 
 Store byte with address-first arguments.
@@ -3420,7 +3293,6 @@ Store byte with address-first arguments.
 [Source block 304, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304)
 
 ### `SBALL1` — TERSE
-
 
 `( x y options -- )`
 
@@ -3438,7 +3310,6 @@ Draw the BALL 1 message.
 
 ### `SBALL2` — TERSE
 
-
 `( x y options -- )`
 
 Draw the BALL 2 message.
@@ -3455,7 +3326,6 @@ Draw the BALL 2 message.
 
 ### `SBALL3` — TERSE
 
-
 `( x y options -- )`
 
 Draw the BALL 3 message.
@@ -3471,7 +3341,6 @@ Draw the BALL 3 message.
 [Source block 179, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-179)
 
 ### `SBO` — TERSE
-
 
 `( -- )`
 
@@ -3490,7 +3359,6 @@ CPOST 4700 B000 308 OUTS B@ CPOST ;
 
 ### `SCOREME` — TERSE
 
-
 `( -- )`
 
 Plop scores up.
@@ -3507,7 +3375,6 @@ HOMERUN B@ IF MCANNON ELSE MYAH THEN ;
 [Source block 183, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-183)
 
 ### `SCRERASE` — TERSE
-
 
 `( -- )`
 
@@ -3526,7 +3393,6 @@ Erase entire screen.
 
 ### `SCRS` — TERSE
 
-
 `( -- )`
 
 SCRS clears two score rectangles and draws zero score characters.
@@ -3543,7 +3409,6 @@ B00 8C00 308 30 CPOST 4500 8C00 308 30 CPOST ;
 [Source block 273, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-273)
 
 ### `SETFDST` — TERSE
-
 
 `( -- )`
 
@@ -3565,7 +3430,6 @@ Set up fielder destination values.
 
 ### `SETTF` — TERSE
 
-
 `( -- )`
 
 SETTF performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading.
@@ -3579,7 +3443,6 @@ SETTF performs coordinate/action initialization under DI/EI, then restores the c
 [Source block 214, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-214)
 
 ### `SETTFPA` — TERSE
-
 
 `( -- )`
 
@@ -3601,7 +3464,6 @@ TBLPA VPLAYACTPC BL ! ;
 
 ### `SFOUL` — TERSE
 
-
 `( -- )`
 
 Uses ROT and SPOST to compose game logic.
@@ -3617,7 +3479,6 @@ Uses ROT and SPOST to compose game logic.
 [Source block 178, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-178)
 
 ### `SGO` — TERSE
-
 
 `( -- )`
 
@@ -3635,7 +3496,6 @@ Uses SPOST to compose game logic.
 
 ### `SHOMER` — TERSE
 
-
 `( -- )`
 
 Uses ROT and SPOST to compose game logic.
@@ -3651,7 +3511,6 @@ Uses ROT and SPOST to compose game logic.
 [Source block 179, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-179)
 
 ### `SORRY` — TERSE
-
 
 `( -- )`
 
@@ -3669,7 +3528,6 @@ Display the losing-player prompt.
 
 ### `SOUT1` — TERSE
 
-
 `( x y options -- )`
 
 Draw the 1 OUT message.
@@ -3685,7 +3543,6 @@ Draw the 1 OUT message.
 [Source block 178, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-178)
 
 ### `SOUT2` — TERSE
-
 
 `( x y options -- )`
 
@@ -3703,7 +3560,6 @@ Draw the 2 OUT message.
 
 ### `SOUT3` — TERSE
 
-
 `( x y options -- )`
 
 Draw the 3 OUT message.
@@ -3719,7 +3575,6 @@ Draw the 3 OUT message.
 [Source block 178, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-178)
 
 ### `SPLR` — TERSE
-
 
 `( -- )`
 
@@ -3740,7 +3595,6 @@ SPOST STRT1 BONE THEN ELSE SPLR12 THEN ;
 
 ### `SPLR12` — TERSE
 
-
 `( -- )`
 
 SPLR12/SPLR display available player choices;
@@ -3756,7 +3610,6 @@ SPLR12/SPLR display available player choices;
 [Source block 128, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-128)
 
 ### `SPOST` — TERSE
-
 
 `( x y options string -- )`
 
@@ -3778,7 +3631,6 @@ PPOST 3DROP ;
 
 ### `SSAFE` — TERSE
 
-
 `( x y options -- )`
 
 SSAFE also redraws counts with SBO.
@@ -3794,7 +3646,6 @@ SSAFE also redraws counts with SBO.
 [Source block 178, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-178)
 
 ### `SSTRIKE1` — TERSE
-
 
 `( x y options -- )`
 
@@ -3812,7 +3663,6 @@ Draw the STRIKE 1 message.
 
 ### `SSTRIKE2` — TERSE
 
-
 `( x y options -- )`
 
 Draw the STRIKE 2 message.
@@ -3828,7 +3678,6 @@ Draw the STRIKE 2 message.
 [Source block 178, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-178)
 
 ### `STFLD` — TERSE
-
 
 `( -- )`
 
@@ -3846,7 +3695,6 @@ STFLD installs RETPA and TAKEFIELD.
 
 ### `STP,` — TERSE
 
-
 `( -- )`
 
 Emit a standing-action record.
@@ -3860,7 +3708,6 @@ Emit a standing-action record.
 [Source block 225, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `STRIKETIME` — TERSE
-
 
 `( -- )`
 
@@ -3877,7 +3724,6 @@ ELSE MSTRIKE DOSSTRIKE THEN SBO ;
 [Source block 182, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-182)
 
 ### `STRINGGO` — TERSE
-
 
 `( string erase-flag -- )`
 
@@ -3899,7 +3745,6 @@ DROP DROP ;
 
 ### `STRINGPRC` — TERSE
 
-
 `( -- )`
 
 String display.
@@ -3918,7 +3763,6 @@ THEN STRINGERASE BZERO ;
 [Source block 184, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-184)
 
 ### `STRTBALL` — TERSE
-
 
 `( -- )`
 
@@ -3940,7 +3784,6 @@ CMPLR B@ IF YOU1ST 50 DWAIT YOU1ST THEN
 
 ### `SUP` — TERSE
 
-
 `( -- )`
 
 SUP posts UP.
@@ -3957,7 +3800,6 @@ SUP posts UP.
 
 ### `SW-30` — TERSE
 
-
 X=1.
 
 ```text
@@ -3972,7 +3814,6 @@ ELSE DROP HR THEN THEN ;
 [Source block 170, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-170)
 
 ### `SW-45` — TERSE
-
 
 X=1.
 
@@ -3989,7 +3830,6 @@ ELSE DROP HRL THEN THEN ;
 
 ### `SW-90` — TERSE
 
-
 `( a b -- )`
 
 SW-90 ignores direction/random inputs and returns the far-right foul sector.
@@ -4003,7 +3843,6 @@ SW-90 ignores direction/random inputs and returns the far-right foul sector.
 [Source block 170, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-170)
 
 ### `SW+30` — TERSE
-
 
 X=1.
 
@@ -4020,7 +3859,6 @@ ELSE DROP HL THEN THEN ;
 
 ### `SW+45` — TERSE
 
-
 X=1.
 
 ```text
@@ -4036,7 +3874,6 @@ ELSE DROP HLL THEN THEN ;
 
 ### `SW+90` — TERSE
 
-
 `( a b -- )`
 
 SW+90 always returns foul-left after dropping its inputs.
@@ -4051,7 +3888,6 @@ SW+90 always returns foul-left after dropping its inputs.
 
 ### `SW0` — TERSE
 
-
 X=1.
 
 ```text
@@ -4065,7 +3901,6 @@ ELSE ( x=0 ) DROP IF HM ELSE F2NDR THEN THEN ;
 [Source block 170, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-170)
 
 ### `SWALK` — TERSE
-
 
 `( x y options -- )`
 
@@ -4082,7 +3917,6 @@ Uses ROT and SPOST to compose game logic.
 [Source block 179, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-179)
 
 ### `TCNT` — TERSE
-
 
 `( -- )`
 
@@ -4102,7 +3936,6 @@ A" DEPOSIT 1 COIN PER PLAYER" SPOST THEN ELSE DP1 THEN ;
 
 ### `TERSECHK` — TERSE
 
-
 `( -- )`
 
 Look at terse routine flags.
@@ -4120,7 +3953,6 @@ CHKPLRS B@ IF PLRCHK THEN UPCRED B@ IF CREDARROW THEN ;
 [Source block 132, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-132)
 
 ### `TF` — TERSE
-
 
 `( -- )`
 
@@ -4165,7 +3997,6 @@ HITYET BONE MYAH S10 ;
 
 ### `THW,` — TERSE
 
-
 `( -- )`
 
 Emit the throw command.
@@ -4177,7 +4008,6 @@ Emit the throw command.
 [Source block 225, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `TWAIT` — TERSE
-
 
 `( count -- )`
 
@@ -4199,7 +4029,6 @@ DROP DI ;
 
 ### `V` — TERSE
 
-
 `( -- )`
 
 Uses VARIABLE to compose game logic.
@@ -4216,7 +4045,6 @@ Uses VARIABLE to compose game logic.
 
 ### `V=` — TERSE
 
-
 `( -- )`
 
 Uses V and VARIABLE to compose game logic.
@@ -4231,7 +4059,6 @@ Uses V and VARIABLE to compose game logic.
 
 ### `VIBS` — TERSE
 
-
 `( value -- )`
 
 Emit a vibrato setting.
@@ -4243,7 +4070,6 @@ Emit a vibrato setting.
 [Source block 141, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `VIS` — TERSE
-
 
 `( -- )`
 
@@ -4260,7 +4086,6 @@ HOM and VIS draw HOME/VISITOR using a large initial character and the remaining 
 [Source block 237, line 12](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-237)
 
 ### `WHBODDS` — TERSE
-
 
 `( -- )`
 
@@ -4288,7 +4113,6 @@ THEN THEN THEN DROP THEN ;
 
 ### `WTHW,` — TERSE
 
-
 `( -- )`
 
 Emit the wait-for-throw command.
@@ -4300,7 +4124,6 @@ Emit the wait-for-throw command.
 [Source block 225, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `WUPGO` — TERSE
-
 
 `( -- )`
 
@@ -4318,7 +4141,6 @@ WUPGO activates WHOSUP with runner/automatic-forward flags;
 
 ### `WUPTON` — TERSE
 
-
 `( -- )`
 
 WUPTON installs WUPWRT.
@@ -4334,7 +4156,6 @@ WUPTON installs WUPWRT.
 [Source block 240, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-240)
 
 ### `WUPWRT` — TERSE
-
 
 `( -- )`
 
@@ -4352,7 +4173,6 @@ PTAUTOTM PLYR1UP B@ IF HOM ELSE VIS THEN ;
 [Source block 238, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-238)
 
 ### `YOU1ST` — TERSE
-
 
 `( -- )`
 
@@ -4372,7 +4192,6 @@ A" GOOD LUCK" SPOST ;
 
 ### `ZERORAM` — TERSE
 
-
 `( -- )`
 
 ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT.
@@ -4388,7 +4207,6 @@ ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT.
 [Source block 273, line 14](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-273)
 
 ### `+LOOP` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4411,7 +4229,6 @@ LABEL PLDONE 6 D LXI, D DADX, NEXT
 
 ### `ALLFLDACT` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Sets all fielders active.
@@ -4428,7 +4245,6 @@ CODE ALLFLDACT ( sets all fielders active )
 [Source block 237, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-237) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `ANMSEQLOAD` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4450,7 +4266,6 @@ D VANMSEQH X STX, E VANMSEQL X STX, RET,
 
 ### `BALLERASE` — native CODE
 
-
 `Z80 register / stack ABI`
 
 BALLERASE preserves BC/IY around native BLERASE and returns to TERSE.
@@ -4467,7 +4282,6 @@ Y POPX, B POP, NEXT
 [Source block 180, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-180) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `BATHIT` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4487,7 +4301,6 @@ SWINGGO STA, EI, RET,
 [Source block 124, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-124) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `BATHITCHK` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4509,7 +4322,6 @@ HITTIME STA, HITGOING STA, BLERASE CALL, RET,
 [Source block 258, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-258) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `BATSWING` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4538,7 +4350,6 @@ THEN, THEN, THEN, RET,
 
 ### `BATWRITE` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Xor bat from swingtype.
@@ -4560,7 +4371,6 @@ H POP, RET,
 
 ### `BCD+` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Binary to decimal arithmatic.
@@ -4576,7 +4386,6 @@ D A MOV, H ADC, DAA, A H MOV, H PUSH, NEXT
 [Source block 250, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-250) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `BLDST` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4610,7 +4419,6 @@ THEN, THWPA H LXI, VECTPC SHLD, B POP, RET,
 
 ### `BLMOTION` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Set pc for ram pa table -tractor ball.
@@ -4623,7 +4431,6 @@ TBLPA H LXI, VECTPC SHLD, RET,
 [Source block 199, line 8](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-199) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `BLPOSCHK` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4662,7 +4469,6 @@ A XRA, OFTBLGO STA, TOOF STA, ( ofl t.o. timer ) THEN, RET,
 
 ### `BMUSIC` — native CODE
 
-
 `Z80 register / stack ABI`
 
 BMUSIC consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay.
@@ -4679,7 +4485,6 @@ NOTETIMER STA, A INR, MULTIPLE STA, THEN, NEXT
 [Source block 145, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-145) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `BUTTONCHK` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4719,7 +4524,6 @@ SWING STA, THEN, RET, -->
 [Source block 125, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-125) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `CHKCAUGHT` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4776,7 +4580,6 @@ EI, RET, ASSEMBLE>
 
 ### `CHKGROUNDER` — native CODE
 
-
 `Z80 register / stack ABI`
 
 If grounder adjust ball direction.
@@ -4796,7 +4599,6 @@ VXH X A LDX, 0A0 CPI, ' COMPDE CC, H POP, D DAD, RET,
 [Source block 253, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-253) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `CHKSCRTIME` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4821,7 +4623,6 @@ M A MOV, 1 ADI, DAA, A M MOV, D A MOV, SCORESHOW STA, RET,
 
 ### `CLRBLST` — native CODE
 
-
 `Z80 register / stack ABI`
 
 CLRBLST resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading.
@@ -4835,7 +4636,6 @@ CODE CLRBLST 30 A MVI, BALLS STA, STRIKES STA, NEXT
 [Source block 179, line 13](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-179) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `cnline` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4856,7 +4656,6 @@ PE, IF, EI, THEN, NEXT
 
 ### `COMPDE` — native CODE
 
-
 `Z80 register / stack ABI`
 
 COMPDE applies the same operation to DE while preserving HL.
@@ -4873,7 +4672,6 @@ CODE COMPDE H PUSH, XCHG, ' COMPHL CALL, XCHG, H POP, RET,
 
 ### `COMPHL` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Compliments HL.
@@ -4889,7 +4687,6 @@ H A MOV, CMA, A H MOV, L A MOV, CMA, A L MOV, H INX, RET,
 
 ### `COUNT` — native CODE
 
-
 `( address -- address+1 length )`
 
 Fetch the address and length of a counted string.
@@ -4904,7 +4701,6 @@ CODE COUNT ROMHERE !
 [Source block 276, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-276) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `cpost` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4945,7 +4741,6 @@ EXAF, PE, IF, EI, THEN, NEXT
 
 ### `DEACTIVATE` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Reset active bit in status.
@@ -4958,7 +4753,6 @@ VACT VSTATUS X RESX, 1 A MVI, SAMEDLT STA, RET,
 [Source block 190, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-190) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `DI` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4973,7 +4767,6 @@ CODE DI
 [Source block 292, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-292) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `DIVHLBY4` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -4995,7 +4788,6 @@ PSW POP, ' COMPHL CNZ, RET,
 
 ### `DO` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Enter a counted loop.
@@ -5009,7 +4801,6 @@ CODE DO
 [Source block 276, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-276) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `DSTCALC` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5055,7 +4846,6 @@ A XRA, RDST STA, VGO VSTATUS X SETX, THEN, RET, ASSEMBLE>
 
 ### `DSTLD` — native CODE
 
-
 `Z80 register / stack ABI`
 
 DSTLD reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively.
@@ -5072,7 +4862,6 @@ RET,
 [Source block 232, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-232) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `EI` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5092,7 +4881,6 @@ ROMHERE !
 
 ### `EIDI` — native CODE
 
-
 `Z80 register / stack ABI`
 
 EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers.
@@ -5106,7 +4894,6 @@ CODE EIDI EI, DI, NEXT
 [Source block 304, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `EMUSIC` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5125,7 +4912,6 @@ STA, MULTIPLE STA, NEXT ( CALL EMUSIC AS AN INIT IN PROGRAM )
 
 ### `EX` — native CODE
 
-
 `Z80 register / stack ABI`
 
 EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation.
@@ -5140,7 +4926,6 @@ CODE EX C9 B, NEXT
 
 ### `FILL` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Fill a memory/screen range.
@@ -5154,7 +4939,6 @@ CODE FILL ROMHERE !
 [Source block 293, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-293) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `FLDDST` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5181,7 +4965,6 @@ THEN, FLDPA H LXI, VECTPC SHLD, RET,
 
 ### `FLSHOFF` — native CODE
 
-
 `Z80 register / stack ABI`
 
 FLSHOFF disables flashing and services cleanup under DI.
@@ -5198,7 +4981,6 @@ B POP, NEXT
 [Source block 239, line 10](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-239) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `FMIRROR` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5223,7 +5005,6 @@ FORWARD IFMAIN FORWARD IFMOUND
 
 ### `HITRUN` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Activate proper runners and set trwbase.
@@ -5247,7 +5028,6 @@ DECIMAL ;S
 [Source block 167, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-167) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `HOMERCHK` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5284,7 +5064,6 @@ THEN, THEN, VDSTX BL SHLD, VDSTY BL SDED, EXX, NEXT -->
 
 ### `I` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Native game routine; source body below.
@@ -5309,7 +5088,6 @@ LABEL PLDONE 6 D LXI, D DADX, NEXT
 
 ### `IEX` — native CODE
 
-
 `Z80 register / stack ABI`
 
 IEX restores saved registers, enables interrupts and returns.
@@ -5324,7 +5102,6 @@ PSW POP, B POP, D POP, H POP, EI, RET,
 [Source block 291, line 11](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `INDEXW` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5343,7 +5120,6 @@ M E MOV, H INX, M D MOV, H DCX, PSW POP, RET,
 [Source block 234, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-234) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `INFIELD` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5369,7 +5145,6 @@ X POPX, B POP, NEXT
 
 ### `INFLDACT` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Set infielders active.
@@ -5387,7 +5162,6 @@ VSTATUS PT H LXI, 5 A MVI, ' SETACT CALL, RET,
 
 ### `ISTART` — native CODE
 
-
 `Z80 register / stack ABI`
 
 ISTART disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT.
@@ -5404,7 +5178,6 @@ INFBK OUT, IM2, EI, NEXT
 
 ### `KILLOF` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Stop outfield tractor ball control.
@@ -5420,7 +5193,6 @@ A XRA, OFTBLGO STA, RET,
 [Source block 236, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-236) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `LOADANM` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5443,7 +5215,6 @@ H POP, ( pc ) H INX, RET, ( returns updated pc in HL )
 
 ### `LOOP` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Advance or terminate a counted loop.
@@ -5457,7 +5228,6 @@ CODE LOOP
 [Source block 276, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-276) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `MULTHLBY4` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5476,7 +5246,6 @@ L SLAR, H RALR, PSW POP, ' COMPHL CNZ, RET,
 [Source block 236, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-236) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `MUSCPU` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5511,7 +5280,6 @@ LABEL MUSEND A ORA, PROCESS JZ, B POP, RET,
 
 ### `NDUP` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Uses ARRAY to process game state.
@@ -5529,7 +5297,6 @@ HEX VPTR @ 07C06 VPTR ! 2 ARRAY RND# VPTR !
 [Source block 294, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-294) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `OFFFDST` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5561,7 +5328,6 @@ F= NFORW F= RFDST F= REND F= NOFPU F= CKATBS F= RVACT
 
 ### `OFLDTBL` — native CODE
 
-
 `Z80 register / stack ABI`
 
 OFLDTBL gives all three outfielders OFTBLPA, activates them and returns;
@@ -5580,7 +5346,6 @@ DI, VPLAYACTPC RF SHLD, VPLAYACTPC CF SHLD, VPLAYACTPC LF SHLD,
 
 ### `OFMOTION` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Set pc for ram pa table -tractor ball.
@@ -5596,7 +5361,6 @@ OFPA H LXI, VECTPC SHLD, RET,
 
 ### `ON1ST` — native CODE
 
-
 `Z80 register / stack ABI`
 
 ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
@@ -5608,7 +5372,6 @@ CODE ON1ST X PUSHX, H POP, FLDON1ST SHLD, RET,
 [Source block 191, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-191) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `ON2ND` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5622,7 +5385,6 @@ CODE ON2ND X PUSHX, H POP, FLDON2ND SHLD, RET,
 
 ### `ON3RD` — native CODE
 
-
 `Z80 register / stack ABI`
 
 ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
@@ -5634,7 +5396,6 @@ CODE ON3RD X PUSHX, H POP, FLDON3RD SHLD, RET,
 [Source block 191, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-191) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `OPCODECHK` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5658,7 +5419,6 @@ VECTPC LHLD, THEN, RET, ASSEMBLE>
 
 ### `OUTFLDACT` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Sets outfielders active.
@@ -5675,7 +5435,6 @@ VSTATUS LF H LXI, 3 A MVI, ' SETACT CALL, RET,
 [Source block 237, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-237) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `PACTLOAD` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5703,7 +5462,6 @@ RET, -->
 
 ### `PATFETCH` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Loads actual pattern IX-vector.
@@ -5728,7 +5486,6 @@ D VPATH X STX, E VPATL X STX, RET,
 
 ### `PERSPECTIVE` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Pattern size determined by y.
@@ -5748,7 +5505,6 @@ RET,
 [Source block 255, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-255) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `PLAYACT` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5772,7 +5528,6 @@ X POPX, B POP, RET,
 
 ### `PMUSIC` — native CODE
 
-
 `Z80 register / stack ABI`
 
 PMUSIC installs a stream unconditionally and sets priority, repeat count and note timer.
@@ -5790,7 +5545,6 @@ PRIORITY STA, NOTETIMER STA, NEXT
 
 ### `PTAUTOTM` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Pitch auto timer.
@@ -5807,7 +5561,6 @@ TIMEOUT H LXI, FLDCLR LDA, A ANA, TIMEDCR CZ, NEXT
 [Source block 238, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-238) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `RESETRUNNERS` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5837,7 +5590,6 @@ FORWARD OUTOFFF FORWARD CCLEAVE
 [Source block 115, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-115) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `RND` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -5969,7 +5721,6 @@ BASE! ;S
 
 ### `RUNDST` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Runner base running control.
@@ -6027,7 +5778,6 @@ RUNPA H LXI, VECTPC SHLD, B POP, RET, ASSEMBLE> -->
 
 ### `SENTRY` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Game loop.
@@ -6056,7 +5806,6 @@ B POP, ' SENTRY JMP, -->
 
 ### `SETACT` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Sets avtive bit in status.
@@ -6073,7 +5822,6 @@ BEGIN, VACT M SET, D DAD, A DCR, 0=, END, RET,
 [Source block 237, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-237) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `STARTMUSIC` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6094,7 +5842,6 @@ ELSE, DOVERB MCANNON DOVERB S11 THEN, THEN, RET,
 [Source block 124, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-124) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `strtline` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6118,7 +5865,6 @@ SADR SHLD, B POP, NEXT
 
 ### `SWAN` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Transfer interrupt/screen execution state.
@@ -6134,7 +5880,6 @@ ROMHERE !
 [Source block 292, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-292) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `TBALLPITCH` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6161,7 +5906,6 @@ THEN, THEN, THEN, TBLDX SDED, EI, RET,
 [Source block 177, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-177) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `THROWANIM` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6205,7 +5949,6 @@ THROW STA, Y POPX, X POPX, EI, RET, -->
 
 ### `THROWBALL` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Finish scoring first.
@@ -6236,7 +5979,6 @@ VGO M RES, EI, RET,
 
 ### `THWANMSET` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Set up throw animation.
@@ -6255,7 +5997,6 @@ THROWANM STA, RET, ( set for sentry call )
 [Source block 191, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-191) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `TIMER` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6286,7 +6027,6 @@ TOOF H LXI, TIMEDCR CALL, A ANA, TOOFCK CNZ, RET,
 
 ### `VECTOR` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Vectors and limit checks.
@@ -6316,7 +6056,6 @@ RET,
 
 ### `VERASE` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Does pattern board erase from vector IX.
@@ -6336,7 +6075,6 @@ writep CALL, RET,
 [Source block 252, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-252) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `VWRITE` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6361,7 +6099,6 @@ RET,
 
 ### `WAIT` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Given A wait period stop every thing.
@@ -6375,7 +6112,6 @@ PSW POP, A DCR, 0=, END, RET,
 [Source block 236, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-236) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `WAITTHRW` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6392,7 +6128,6 @@ THROWANM STA, 20 A MVI, WAITTHROW STA, RET,
 [Source block 199, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-199) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `WRITE` — native CODE
-
 
 `Z80 register / stack ABI`
 
@@ -6417,7 +6152,6 @@ write CALL, EXX, H PUSH, Y POPX, NEXT
 
 ### `WRITR` — native CODE
 
-
 `Z80 register / stack ABI`
 
 Write with a relative pattern.
@@ -6440,7 +6174,6 @@ writep CALL, EXX, H PUSH, Y POPX, NEXT
 
 ### `AUTOR1` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners.
@@ -6455,7 +6188,6 @@ RET, ( sets vauto , vforw , vact , vrun )
 [Source block 235, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-235) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `AUTOR2` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6472,7 +6204,6 @@ RET,
 
 ### `AUTOR3` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Run third-runner automation logic.
@@ -6487,7 +6218,6 @@ RET,
 [Source block 235, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-235) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `BLERASE` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6507,7 +6237,6 @@ X POPX, ( stop ball ) NOBOD H LXI, VPAT BL SHLD, RET,
 
 ### `CHKATBS` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Check if active player at base in- A vstatus.
@@ -6522,7 +6251,6 @@ VACT A BIT, RZ, VATBS A BIT, RNZ, E INR, RET,
 [Source block 119, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-119) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `CHKCOIN1` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6541,7 +6269,6 @@ UPCRED STA, A XRA, SPBON STA, DOVERB MCOIN RET,
 [Source block 287, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-287) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `CHKCOIN2` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6563,7 +6290,6 @@ A XRA, SPBON STA, DOVERB MCOIN RET,
 [Source block 288, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-288) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `CMPOF` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6588,7 +6314,6 @@ VDSTX BL LHLD, VDSTY BL LDED, 20 A MVI, VGO VSTATUS X RESX,
 
 ### `COLORBAND` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.
@@ -6603,7 +6328,6 @@ PSW POP, H POP, EI, RET, ( palette only: preserve AF/HL )
 [Source block 269, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-269) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `debounce` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6625,7 +6349,6 @@ B E MOV, ( try again ) READPORT JMP, ASSEMBLE>
 
 ### `FETCH` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
@@ -6639,7 +6362,6 @@ SUBR FETCH MUSPC LHLD, M A MOV, RET,
 [Source block 143, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-143) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `FLSHWUP` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6663,7 +6385,6 @@ THEN, Y POPX, X POPX, RET,
 
 ### `FNBB` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Native game routine; source body below.
@@ -6675,7 +6396,6 @@ SUBR FNBB RET,
 [Source block 163, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-163) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `FONTUNPACK` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6695,7 +6415,6 @@ FNTLP DJNZ, B POP, 0 FONTWORK H LXI, RET,
 
 ### `FRO1` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Uses AUTOR1 to process game state.
@@ -6709,7 +6428,6 @@ SUBR FRO1 AUTOR1 CALL, RET,
 [Source block 163, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-163) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `FRO12` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6725,7 +6443,6 @@ SUBR FRO12 AUTOR1 CALL, AUTOR2 CALL, RET,
 
 ### `FRO123` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Uses AUTOR1 and AUTOR2 to process game state.
@@ -6739,7 +6456,6 @@ SUBR FRO123 AUTOR1 CALL, AUTOR2 CALL, AUTOR3 CALL, RET,
 [Source block 163, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-163) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `FRO13` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6755,7 +6471,6 @@ SUBR FRO13 VSTATUS R1 STA, AUTOR2 CALL, RET,
 
 ### `FRO2` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Native game routine; source body below.
@@ -6767,7 +6482,6 @@ SUBR FRO2 VSTATUS R1 STA, RET,
 [Source block 163, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-163) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `FRO23` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6781,7 +6495,6 @@ SUBR FRO23 VSTATUS R1 STA, VSTATUS R2 STA, RET,
 
 ### `FRO3` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Native game routine; source body below.
@@ -6793,7 +6506,6 @@ SUBR FRO3 VSTATUS R1 STA, RET,
 [Source block 163, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-163) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `HLOAD` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6810,7 +6522,6 @@ SUBR HLOAD FETCH CALL, INCPC CALL, 0 H MVI, A L MOV, RET,
 [Source block 143, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-143) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `IFSPAN` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6838,7 +6549,6 @@ CY, IF, H INX, THEN, IFPIX DJNZ, D POP,
 
 ### `INCPC` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
@@ -6853,7 +6563,6 @@ SUBR INCPC MUSPC LHLD, H INX, MUSPC SHLD, RET,
 
 ### `loadpc` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 loadpc installs MUSPC and STARTPC.
@@ -6867,7 +6576,6 @@ SUBR loadpc MUSPC SHLD, STARTPC SHLD, RET,
 [Source block 145, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-145) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `LVRSTAT` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6885,7 +6593,6 @@ RET,
 
 ### `NBB` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 NBB is the empty-bases no-op.
@@ -6897,7 +6604,6 @@ SUBR NBB RET,
 [Source block 165, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-165) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `OFBLCHK` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6923,7 +6629,6 @@ D DSBC, ' COMPHL CC, D POP, 10 A MVI, H CMP, >=, IF,
 
 ### `PCJUMP` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
@@ -6938,7 +6643,6 @@ MUSPC SDED, RET,
 [Source block 143, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-143) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `relabs` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -6964,7 +6668,6 @@ MRFLOP C BIT, 0<>, IF, NEG, 0=, IF, H DCX, THEN, THEN,
 
 ### `reloff` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Compute relative offset of x , y of pattern.
@@ -6988,7 +6691,6 @@ D POP, Y INXX, Y INXX, ( offset pattern ) RET,
 
 ### `RO1` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
@@ -7003,7 +6705,6 @@ SETDBLPLAY JNZ, VMAGIC R2 B LXI, RET,
 [Source block 165, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-165) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `RO12` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -7021,7 +6722,6 @@ VMAGIC R3 B LXI, RET,
 
 ### `RO123` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 RO23 and RO123 choose forced advancement and double-play targets for their base combinations.
@@ -7037,7 +6737,6 @@ SETDBLPLAY JNZ, VMAGIC R1 B LXI, RET,
 [Source block 166, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-166) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `RO13` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -7056,7 +6755,6 @@ VMAGIC R3 B LXI, RET,
 
 ### `RO2` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
@@ -7071,7 +6769,6 @@ AUTOR1 CALL, THEN, VMAGIC R2 B LXI, RET,
 [Source block 165, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-165) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `RO23` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -7089,7 +6786,6 @@ RET,
 
 ### `RO3` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
@@ -7105,7 +6801,6 @@ AUTOR1 CNZ, RET,
 
 ### `SETDBLPLAY` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Sets up double play HL-guy on 1st.
@@ -7120,7 +6815,6 @@ SUBR SETDBLPLAY ( sets up double play HL-guy on 1st )
 [Source block 165, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-165) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `TAKEOFF` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -7141,7 +6835,6 @@ LABEL TORET RET, ASSEMBLE>
 [Source block 164, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-164) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `TBALLPRC` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -7177,7 +6870,6 @@ LABEL LDOFPA OFPA SHLD, RET, ASSEMBLE>
 
 ### `TBLVEL` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Tractorball vel HL-# add. D-max vel.
@@ -7198,7 +6890,6 @@ PSW POP, ' COMPHL CNZ, RET,
 
 ### `TIMEDCR` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 HL-timer add if goes to zero return 1 else 0.
@@ -7215,7 +6906,6 @@ ELSE, A XRA, THEN, RET,
 [Source block 233, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-233) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `TOOFCK` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -7235,7 +6925,6 @@ ELSE, CMPOF CALL, EI, 1 A MVI, TOOFF STA, THEN, RET,
 
 ### `WALKOVER` — native SUBR
 
-
 `Z80 register / stack ABI`
 
 Walked runner at base.
@@ -7250,7 +6939,6 @@ SUBR WALKOVER ( walked runner at base )
 [Source block 235, line 12](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-235) · [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm)
 
 ### `write` — native SUBR
-
 
 `Z80 register / stack ABI`
 
@@ -7281,7 +6969,6 @@ THEN, B POP, ( magic ) RET, -->
 
 ### `writep` — native SUBR
 
-
 `( IY=patadr BC=ex/mag+shf HL=scradr --- )`
 
 Software write with pattern size on pattern.
@@ -7301,7 +6988,6 @@ SUBR writep ( software write with pattern size on pattern )
 
 ### `BASE!` — TERSE
 
-
 `( base -- )`
 
 Set the number base.
@@ -7314,7 +7000,6 @@ Set the number base.
 
 ### `BASE@` — TERSE
 
-
 `( -- base )`
 
 Fetch the current number base.
@@ -7325,6 +7010,6 @@ Fetch the current number base.
 
 [Source block 102, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-102)
 
-## DNA source references and catalog method
+## Source notes
 
-`Z80 Assembler` names are instruction emitters; they are not automatically executable game TERSE words. The source screens contain dated Extra Bases words together with later source/XC work. A native routine may take or return parameters via Z80 registers; `Z80 register / stack ABI` means the exact interface must be read from its implementation, not guessed as a TERSE stack signature. A dash in a stack field likewise means no complete stack signature has been established. Caller lists are references between the extracted named definitions and should not be confused with measured runtime invocation frequency. The [original source screens](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/extra-bases-11-20-79-v20261026-0001.terse) and [ROM disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) remain the authoritative implementation evidence.
+The catalog reproduces source implementations where present, including native Z80 routines and TERSE colon definitions. Host/compiler words whose own implementation is outside the supplied Extra Bases source are shown with an actual Extra Bases usage example and explicitly identified as host vocabulary. Stack signatures are taken from documented or source-verifiable behavior; native register-dependent routines retain their ABI designation pending individual register analysis. Source callers are static references, not runtime execution counts.
