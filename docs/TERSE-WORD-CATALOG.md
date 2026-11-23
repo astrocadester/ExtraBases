@@ -472,10 +472,10 @@ I 0400 * + 0400 UNPROT BMOVE PROT LOOP DROP R> + ;
 
 Divide the preceding stack value by the top value.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 3:** Defined as `/MOD DROP`.
 
 ```terse
-TBALLDX 100 / H MVI, D M MOV, -->
+: / /MOD DROP ;
 ```
 
 ### <a name="terse-word-2b"></a>`+`
