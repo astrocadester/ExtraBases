@@ -456,15 +456,12 @@ _at:
 
 ### <a name="terse-word-2a"></a>`*`
 
-`( a b -- product )`
+`( m n -- product )`
 
-Multiply two stack values.
+16-bit signed multiplication; result = m × n (16-bit cell).
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 2.** The DNA TERSE 81 Glossary specifies signed 16-bit multiplication. Its host-native instruction body is not given in the glossary.
 
-```terse
-I 0400 * + 0400 UNPROT BMOVE PROT LOOP DROP R> + ;
-```
 
 ### <a name="terse-word-2f"></a>`/`
 
@@ -635,13 +632,10 @@ _Bat:
 
 `( size -- )`
 
-Allocate/name an indexed byte array from a the size.
+Create a named array of size uninitialized bytes; indexing the resulting word returns the byte address.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 8.** Defining form: `size BARRAY name`. At use: `index name` leaves the address of byte `index` (no bounds check).
 
-```terse
-VLENGTH BARRAY BL
-```
 
 ### <a name="terse-word-42-45-47-49-4e"></a>`BEGIN`
 
@@ -659,41 +653,28 @@ Immediate XC wrapper that records a loop's object address.
 
 `( -- )`
 
-Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry.
+Create a dictionary word implemented in assembler; enter assembler vocabulary for the definition.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 11.** Defining form: `CODE name` followed by assembler instructions. A named native word is entered into the host dictionary.
 
-```terse
-CODE CHKSCRTIME ( score process ) DI,
-```
 
 ### <a name="terse-word-43-4f-4e-53-54-41-4e-54"></a>`CONSTANT`
 
 `( value -- )`
 
-Define a constant from a value.
+Create a named word whose execution pushes its defining value.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 11.** Defining form: `value CONSTANT name`. Runtime effect of `name`: `( -- value )`.
 
-```terse
-28 CONSTANT RRUN 68 CONSTANT LRUN
-```
-
-**Used by:** `C=`.
 
 ### <a name="terse-word-44-45-43-49-4d-41-4c"></a>`DECIMAL`
 
 `( -- )`
 
-Select radix ten for parsing subsequent source numbers.
+Select decimal numeric conversion base.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 12.** Sets the host's number conversion base to decimal (10). It acts on the development host, not as a game target instruction.
 
-```terse
-XCBEG DECIMAL xcsys xc ASM .OPS
-```
-
-**Used by:** `DTC`, `FMIRROR`, `HITRUN`.
 
 ### <a name="terse-word-44-52-4f-50"></a>`DROP`
 
@@ -751,13 +732,10 @@ Immediate XC wrapper emitting a conditional back-branch; game loops repeat until
 
 `( -- )`
 
-Select radix sixteen for parsing subsequent source numbers.
+Select hexadecimal numeric conversion base.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 15.** Sets the host's number conversion base to hexadecimal (16). It acts on the development host, not as a game target instruction.
 
-```terse
-HEX 0 ROMSTART ! 7F80 PSTACK !
-```
 
 ### <a name="terse-word-49-46"></a>`IF`
 
@@ -771,17 +749,24 @@ Immediate XC wrapper that emits a conditional target branch through XC-IF.
 
 ### <a name="terse-word-4c-49-54"></a>`LIT`
 
-`( -- value; inline cell )`
+`( -- value )`
 
-Compiler literal mechanism used by INEXT's host macro.
+Fetch the next inline dictionary cell and push it as a 16-bit literal.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 16.** Automatically compiled before a literal in a colon definition. `LIT` reads the following cell when executed; the original Extra Bases target ROM implementation is shown below.
 
-```terse
-{ : INEXT } { LIT [ } ' IEX { , } ASM { ] } JMP, { ; }
+```z80
+_LITERAL:
+            ld      a,(bc)              ; Read low byte from instruction pointer
+            inc     bc
+            ld      l,a
+            ld      a,(bc)              ; Read high byte from instruction pointer
+            inc     bc
+            ld      h,a
+            push    hl                  ; Push 16-bit literal
+            jp      (iy)                ; Resume TERSE interpreter
 ```
 
-**Used by:** `INEXT`.
 
 ### <a name="terse-word-4f-52"></a>`OR`
 
@@ -870,17 +855,12 @@ Immediate XC wrapper that resolves a saved target branch destination.
 
 ### <a name="terse-word-56-41-52-49-41-42-4c-45"></a>`VARIABLE`
 
-`( -- )`
+`( initial-value -- )`
 
-Allocate/name a cell variable with the initial value in this dialect.
+Create a named initialized 16-bit variable.
 
-**Source use:**
+**DNA TERSE 81 Glossary, page 22.** Defining form: `initial-value VARIABLE name`. Runtime effect of `name`: `( -- address )`.
 
-```terse
-0 VARIABLE MUSPC { : MASTER } 10 B, B, { ; } { : ATONE } 11 B,
-```
-
-**Used by:** `V`, `V=`.
 
 ### <a name="terse-word-58-4f-52"></a>`XOR`
 
