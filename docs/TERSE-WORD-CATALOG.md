@@ -122,7 +122,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>HRLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hrls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
 | <strong>HRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hrs--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
 | <strong>I'</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#i--terse" title="View implementation">📄</a> | Emit the target's indexed immediate reference. |
-| <strong>ICODE</strong><br><code>—</code> | <a href="#icode--terse" title="View implementation">📄</a> | ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets. |
+| <strong>ICODE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#icode--terse" title="View implementation">📄</a> | Defines the native interrupt handler and emits its Z80 register-save prologue in the host compiler. |
 | <strong>INEXT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#inext--terse" title="View implementation">📄</a> | INEXT emits a jump to IEX; |
 | <strong>INLOG</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#inlog--terse" title="View implementation">📄</a> | Infield master logic. |
 | <strong>INNODDS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#innodds--terse" title="View implementation">📄</a> | INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state; |
@@ -174,19 +174,19 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>QUIT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#quit--terse" title="View implementation">📄</a> | Uses HERE and LDPC to compose game logic. |
 | <strong>RCB,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rcb--terse" title="View implementation">📄</a> | Uses ACT, and DEACT, to compose game logic. |
 | <strong>RDRNDNTE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rdrndnte--terse" title="View implementation">📄</a> | Emit a randomized note with a rest interval. |
-| <strong>RECLINE</strong><br><code>—</code> | <a href="#recline--terse" title="View implementation">📄</a> | RECLINE derives one horizontal row from retained rectangle arguments. |
+| <strong>RECLINE</strong><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;options&nbsp;--&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;options&nbsp;)</code> | <a href="#recline--terse" title="View implementation">📄</a> | Draws a horizontal rectangle row without consuming the five retained rectangle arguments. |
 | <strong>RECTAN</strong><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code> | <a href="#rectan--terse" title="View implementation">📄</a> | In X, Y, X length, Y length, pxtype set. |
 | <strong>REST</strong><br><code>(&nbsp;duration&nbsp;--&nbsp;)</code> | <a href="#rest--terse" title="View implementation">📄</a> | Insert a silent music interval. |
 | <strong>REST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rest--terse-1" title="View implementation">📄</a> | Emit a resting playaction record. |
 | <strong>RETPA</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#retpa--terse" title="View implementation">📄</a> | Return to position pa. |
 | <strong>RNDNTE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rndnte--terse" title="View implementation">📄</a> | Emit a randomized musical note. |
 | <strong>RRRNDNTE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rrrndnte--terse" title="View implementation">📄</a> | Emit a sequence of randomized notes. |
-| <strong>RUN1CHK1ST</strong><br><code>—</code> | <a href="#run1chk1st--terse" title="View implementation">📄</a> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
-| <strong>RUN1CHK2ND</strong><br><code>—</code> | <a href="#run1chk2nd--terse" title="View implementation">📄</a> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
-| <strong>RUN2CHK</strong><br><code>—</code> | <a href="#run2chk--terse" title="View implementation">📄</a> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
-| <strong>RUN2CHK12ND</strong><br><code>—</code> | <a href="#run2chk12nd--terse" title="View implementation">📄</a> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; |
-| <strong>RUN2CHK1ST</strong><br><code>—</code> | <a href="#run2chk1st--terse" title="View implementation">📄</a> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
-| <strong>RUN3CHK</strong><br><code>—</code> | <a href="#run3chk--terse" title="View implementation">📄</a> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. |
+| <strong>RUN1CHK1ST</strong><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code> | <a href="#run1chk1st--terse" title="View implementation">📄</a> | Selects the runner vector for an occupied first-base slot, or delegates to the next occupancy test. |
+| <strong>RUN1CHK2ND</strong><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code> | <a href="#run1chk2nd--terse" title="View implementation">📄</a> | Chooses the next runner vector according to runner 1's second-base occupancy. |
+| <strong>RUN2CHK</strong><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code> | <a href="#run2chk--terse" title="View implementation">📄</a> | Returns the runner code and vector for the next open base. |
+| <strong>RUN2CHK12ND</strong><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code> | <a href="#run2chk12nd--terse" title="View implementation">📄</a> | Returns runner 2 or 3 vector based on second-base occupancy. |
+| <strong>RUN2CHK1ST</strong><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code> | <a href="#run2chk1st--terse" title="View implementation">📄</a> | Chooses runner 3 or delegates according to runner 2's first-base state. |
+| <strong>RUN3CHK</strong><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code> | <a href="#run3chk--terse" title="View implementation">📄</a> | Returns runner 3 or 4 code/vector from third runner's occupancy. |
 | <strong>RUNDST,</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rundst--terse" title="View implementation">📄</a> | Emit the runner destination command. |
 | <strong>S!</strong><br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code> | <a href="#s--terse" title="View implementation">📄</a> | Store cell with address-first arguments. |
 | <strong>S10</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#s10--terse" title="View implementation">📄</a> | S10 starts INTERRUPTS0 through ISTART; |
@@ -222,13 +222,13 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>STRINGPRC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#stringprc--terse" title="View implementation">📄</a> | String display. |
 | <strong>STRTBALL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#strtball--terse" title="View implementation">📄</a> | STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music. |
 | <strong>SUP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#sup--terse" title="View implementation">📄</a> | SUP posts UP. |
-| <strong>SW-30</strong><br><code>—</code> | <a href="#sw-30--terse" title="View implementation">📄</a> | X=1. |
-| <strong>SW-45</strong><br><code>—</code> | <a href="#sw-45--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SW-30</strong><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code> | <a href="#sw-30--terse" title="View implementation">📄</a> | Maps a −30° swing and horizontal direction into a baseball sector code. |
+| <strong>SW-45</strong><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code> | <a href="#sw-45--terse" title="View implementation">📄</a> | Maps a −45° swing and horizontal direction into a baseball sector code. |
 | <strong>SW-90</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code> | <a href="#sw-90--terse" title="View implementation">📄</a> | SW-90 ignores direction/random inputs and returns the far-right foul sector. |
-| <strong>SW+30</strong><br><code>—</code> | <a href="#sw30--terse" title="View implementation">📄</a> | X=1. |
-| <strong>SW+45</strong><br><code>—</code> | <a href="#sw45--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SW+30</strong><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code> | <a href="#sw30--terse" title="View implementation">📄</a> | Maps a +30° swing and horizontal direction into a baseball sector code. |
+| <strong>SW+45</strong><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code> | <a href="#sw45--terse" title="View implementation">📄</a> | Maps a +45° swing and horizontal direction into a baseball sector code. |
 | <strong>SW+90</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code> | <a href="#sw90--terse" title="View implementation">📄</a> | SW+90 always returns foul-left after dropping its inputs. |
-| <strong>SW0</strong><br><code>—</code> | <a href="#sw0--terse" title="View implementation">📄</a> | X=1. |
+| <strong>SW0</strong><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code> | <a href="#sw0--terse" title="View implementation">📄</a> | Maps a central swing and horizontal direction into a baseball sector code. |
 | <strong>SWALK</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#swalk--terse" title="View implementation">📄</a> | Uses ROT and SPOST to compose game logic. |
 | <strong>TCNT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tcnt--terse" title="View implementation">📄</a> | TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. |
 | <strong>TERSECHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tersechk--terse" title="View implementation">📄</a> | Look at terse routine flags. |
@@ -1948,7 +1948,9 @@ Emit the target's indexed immediate reference.
 
 ### `ICODE` — TERSE
 
-ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets.
+`( -- )`
+
+Defines the native interrupt handler and emits its Z80 register-save prologue in the host compiler.
 
 ```text
 { : ICODE } CODE { [ } ASM { ] } NEXT XTHL, D PUSH, B PUSH,
@@ -2702,7 +2704,9 @@ Emit a randomized note with a rest interval.
 
 ### `RECLINE` — TERSE
 
-RECLINE derives one horizontal row from retained rectangle arguments.
+`( x y width height options -- x y width height options )`
+
+Draws a horizontal rectangle row without consuming the five retained rectangle arguments.
 
 ```text
 : RECLINE 4 PICK 4 PICK 2DUP SWAP 6 PICK + SWAP DLINE ;
@@ -2788,7 +2792,9 @@ Emit a sequence of randomized notes.
 
 ### `RUN1CHK1ST` — TERSE
 
-RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy;
+`( -- occupancy-code vector-address )`
+
+Selects the runner vector for an occupied first-base slot, or delegates to the next occupancy test.
 
 ```text
 : RUN1CHK1ST VWBASE R1 B@ 1 = IF 1 VMAGIC R2
@@ -2801,7 +2807,9 @@ ELSE RUN1CHK2ND THEN ;
 
 ### `RUN1CHK2ND` — TERSE
 
-RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy;
+`( -- occupancy-code vector-address )`
+
+Chooses the next runner vector according to runner 1's second-base occupancy.
 
 ```text
 : RUN1CHK2ND VWBASE R1 B@ 2 = IF RUN2CHK12ND
@@ -2814,7 +2822,9 @@ ELSE RUN2CHK THEN ;
 
 ### `RUN2CHK` — TERSE
 
-RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address.
+`( -- occupancy-code vector-address )`
+
+Returns the runner code and vector for the next open base.
 
 ```text
 : RUN2CHK VWBASE R2 B@ 0 = IF 3 VMAGIC R2
@@ -2827,7 +2837,9 @@ ELSE RUN2CHK1ST THEN ;
 
 ### `RUN2CHK12ND` — TERSE
 
-RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy;
+`( -- occupancy-code vector-address )`
+
+Returns runner 2 or 3 vector based on second-base occupancy.
 
 ```text
 : RUN2CHK12ND VWBASE R2 B@ 0 = IF 2 VMAGIC R2
@@ -2840,7 +2852,9 @@ ELSE 4 VMAGIC R3 THEN ;
 
 ### `RUN2CHK1ST` — TERSE
 
-RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address.
+`( -- occupancy-code vector-address )`
+
+Chooses runner 3 or delegates according to runner 2's first-base state.
 
 ```text
 : RUN2CHK1ST VWBASE R2 B@ 1 = IF 6 VMAGIC R3
@@ -2853,7 +2867,9 @@ ELSE RUN3CHK THEN ;
 
 ### `RUN3CHK` — TERSE
 
-RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address.
+`( -- occupancy-code vector-address )`
+
+Returns runner 3 or 4 code/vector from third runner's occupancy.
 
 ```text
 : RUN3CHK VWBASE R3 B@ 0 = IF 7 VMAGIC R3 ELSE 5 VMAGIC R4
@@ -3378,7 +3394,9 @@ SUP posts UP.
 
 ### `SW-30` — TERSE
 
-X=1.
+`( random dx -- sector )`
+
+Maps a −30° swing and horizontal direction into a baseball sector code.
 
 ```text
 : SW-30 DUP IF 1 = IF ( x=1 ) IF F1STR ELSE HR THEN
@@ -3391,7 +3409,9 @@ ELSE DROP HR THEN THEN ;
 
 ### `SW-45` — TERSE
 
-X=1.
+`( random dx -- sector )`
+
+Maps a −45° swing and horizontal direction into a baseball sector code.
 
 ```text
 : SW-45 DUP IF 1 = IF ( x=1 ) DROP FBR
@@ -3416,7 +3436,9 @@ SW-90 ignores direction/random inputs and returns the far-right foul sector.
 
 ### `SW+30` — TERSE
 
-X=1.
+`( random dx -- sector )`
+
+Maps a +30° swing and horizontal direction into a baseball sector code.
 
 ```text
 : SW+30 DUP IF 1 = IF ( x=1 ) IF HL ELSE FSSR THEN
@@ -3429,7 +3451,9 @@ ELSE DROP HL THEN THEN ;
 
 ### `SW+45` — TERSE
 
-X=1.
+`( random dx -- sector )`
+
+Maps a +45° swing and horizontal direction into a baseball sector code.
 
 ```text
 : SW+45 DUP IF 1 = IF ( x=1 ) IF HLL ELSE F3RDR THEN
@@ -3454,7 +3478,9 @@ SW+90 always returns foul-left after dropping its inputs.
 
 ### `SW0` — TERSE
 
-X=1.
+`( random dx -- sector )`
+
+Maps a central swing and horizontal direction into a baseball sector code.
 
 ```text
 : SW0 DUP IF 1 = IF ( x=1 ) IF F2NDR ELSE HM THEN
