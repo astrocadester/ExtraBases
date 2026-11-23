@@ -460,16 +460,11 @@ _at:
 
 16-bit signed multiplication; result = m × n (16-bit cell).
 
-**DNA TERSE 81 Glossary, page 2.** The DNA TERSE 81 Glossary specifies signed 16-bit multiplication. Its host-native instruction body is not given in the glossary.
-
-
 ### <a name="terse-word-2f"></a>`/`
 
 `( a b -- quotient )`
 
 Divide the preceding stack value by the top value.
-
-**DNA TERSE 81 Glossary, page 3:** Defined as `/MOD DROP`.
 
 ```terse
 : / /MOD DROP ;
@@ -634,15 +629,6 @@ _Bat:
 
 Create a named array of size uninitialized bytes; indexing the resulting word returns the byte address.
 
-**DNA TERSE 81 Glossary, page 8.** Defining form: `size BARRAY name`. At use: `index name` leaves the address of byte `index` (no bounds check).
-
-
-```text
-size BARRAY name
-index name  ( -- byte-address )
-```
-
-
 ### <a name="terse-word-42-45-47-49-4e"></a>`BEGIN`
 
 `( -- )`
@@ -661,39 +647,17 @@ Immediate XC wrapper that records a loop's object address.
 
 Create a dictionary word implemented in assembler; enter assembler vocabulary for the definition.
 
-**DNA TERSE 81 Glossary, page 11.** Defining form: `CODE name` followed by assembler instructions. A named native word is entered into the host dictionary.
-
-
-```text
-CODE name
-  ... Z80 assembler instructions ...
-  NEXT
-```
-
-
 ### <a name="terse-word-43-4f-4e-53-54-41-4e-54"></a>`CONSTANT`
 
 `( value -- )`
 
 Create a named word whose execution pushes its defining value.
 
-**DNA TERSE 81 Glossary, page 11.** Defining form: `value CONSTANT name`. Runtime effect of `name`: `( -- value )`.
-
-
-```text
-value CONSTANT name
-name  ( -- value )
-```
-
-
 ### <a name="terse-word-44-45-43-49-4d-41-4c"></a>`DECIMAL`
 
 `( -- )`
 
 Select decimal numeric conversion base.
-
-**DNA TERSE 81 Glossary, page 12.** Sets the host's number conversion base to decimal (10). It acts on the development host, not as a game target instruction.
-
 
 ### <a name="terse-word-44-52-4f-50"></a>`DROP`
 
@@ -753,9 +717,6 @@ Immediate XC wrapper emitting a conditional back-branch; game loops repeat until
 
 Select hexadecimal numeric conversion base.
 
-**DNA TERSE 81 Glossary, page 15.** Sets the host's number conversion base to hexadecimal (16). It acts on the development host, not as a game target instruction.
-
-
 ### <a name="terse-word-49-46"></a>`IF`
 
 `( flag -- )`
@@ -772,8 +733,6 @@ Immediate XC wrapper that emits a conditional target branch through XC-IF.
 
 Fetch the next inline dictionary cell and push it as a 16-bit literal.
 
-**DNA TERSE 81 Glossary, page 16.** Automatically compiled before a literal in a colon definition. `LIT` reads the following cell when executed; the original Extra Bases target ROM implementation is shown below.
-
 ```z80
 _LITERAL:
             ld      a,(bc)              ; Read low byte from instruction pointer
@@ -785,7 +744,6 @@ _LITERAL:
             push    hl                  ; Push 16-bit literal
             jp      (iy)                ; Resume TERSE interpreter
 ```
-
 
 ### <a name="terse-word-4f-52"></a>`OR`
 
@@ -877,15 +835,6 @@ Immediate XC wrapper that resolves a saved target branch destination.
 `( initial-value -- )`
 
 Create a named initialized 16-bit variable.
-
-**DNA TERSE 81 Glossary, page 22.** Defining form: `initial-value VARIABLE name`. Runtime effect of `name`: `( -- address )`.
-
-
-```text
-initial-value VARIABLE name
-name  ( -- address )
-```
-
 
 ### <a name="terse-word-58-4f-52"></a>`XOR`
 
