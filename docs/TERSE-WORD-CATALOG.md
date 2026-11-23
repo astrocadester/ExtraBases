@@ -865,7 +865,7 @@ Emit the ball motion command.
 Emit a channel B note followed by its duration.
 
 ```text
-: BNOTE } BTONE DURATION
+{ : BNOTE } BTONE DURATION { ; }
 ```
 
 **Calls:** `BTONE`, `DURATION`.
