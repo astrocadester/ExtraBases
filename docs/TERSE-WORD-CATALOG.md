@@ -111,8 +111,8 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>FSSLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fssls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
 | <strong>FSSRS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fssrs--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
 | <strong>GETF</strong><br><code>(&nbsp;--&nbsp;index&nbsp;field-byte&nbsp;)</code> | <a href="#getf--terse" title="View implementation">📄</a> | GETF fetches FIELD bytes sequentially; |
-| <strong>GRNDRACTION</strong><br><code>—</code> | <a href="#grndraction--terse" title="View implementation">📄</a> | Given sectnm set up infield action. |
-| <strong>GRNDRHIT</strong><br><code>—</code> | <a href="#grndrhit--terse" title="View implementation">📄</a> | Grounder. |
+| <strong>GRNDRACTION</strong><br><code>(&nbsp;sector&nbsp;--&nbsp;)</code> | <a href="#grndraction--terse" title="View implementation">📄</a> | Consumes a selected hit-sector index, executes its `GSTBL` word, then installs the appropriate fielder playaction addresses. |
+| <strong>GRNDRHIT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#grndrhit--terse" title="View implementation">📄</a> | Computes a ground-ball sector from randomized timing and pitch direction, dispatches `GRNDRACTION`, then sets ball destination. |
 | <strong>HITDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hitdst--terse" title="View implementation">📄</a> | Chooses hit location. |
 | <strong>HLLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hlls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
 | <strong>HLS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hls--terse" title="View implementation">📄</a> | Uses BONE to compose game logic. |
@@ -284,14 +284,14 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>EIDI</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#eidi--native-code" title="View implementation">📄</a> | EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers. |
 | <strong>EMUSIC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#emusic--native-code" title="View implementation">📄</a> | EMUSIC selects ENDMUSIC and initializes timing/repetition to one; |
 | <strong>EX</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ex--native-code" title="View implementation">📄</a> | EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. |
-| <strong>FILL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fill--native-code" title="View implementation">📄</a> | Fill a memory/screen range. |
+| <strong>FILL</strong><br><code>(&nbsp;value&nbsp;address&nbsp;count&nbsp;--&nbsp;)</code> | <a href="#fill--native-code" title="View implementation">📄</a> | Fill a memory/screen range. |
 | <strong>FLDDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flddst--native-code" title="View implementation">📄</a> | Fielders take position logic. |
 | <strong>FLSHOFF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flshoff--native-code" title="View implementation">📄</a> | FLSHOFF disables flashing and services cleanup under DI. |
 | <strong>FMIRROR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fmirror--native-code" title="View implementation">📄</a> | FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. |
 | <strong>HITRUN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hitrun--native-code" title="View implementation">📄</a> | Activate proper runners and set trwbase. |
-| <strong>HOMERCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#homerchk--native-code" title="View implementation">📄</a> | Chk for homer or fence hit. |
+| <strong>HOMERCHK</strong><br><code>(&nbsp;y&nbsp;x&nbsp;hit-type&nbsp;random-x&nbsp;random-y&nbsp;--&nbsp;)</code> | <a href="#homerchk--native-code" title="View implementation">📄</a> | Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination. |
 | <strong>I</strong><br><code>(&nbsp;--&nbsp;index&nbsp;)</code> | <a href="#i--native-code" title="View implementation">📄</a> | Native game routine; source body below. |
-| <strong>IEX</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#iex--native-code" title="View implementation">📄</a> | IEX restores saved registers, enables interrupts and returns. |
+| <strong>IEX</strong><br><code>(&nbsp;saved-interrupt-frame&nbsp;--&nbsp;)</code> | <a href="#iex--native-code" title="View implementation">📄</a> | Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call. |
 | <strong>INDEXW</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#indexw--native-code" title="View implementation">📄</a> | Call routine A- disp HL- table add. |
 | <strong>INFIELD</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#infield--native-code" title="View implementation">📄</a> | Uses IFSPAN to process game state. |
 | <strong>INFLDACT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#infldact--native-code" title="View implementation">📄</a> | Set infielders active. |
@@ -301,7 +301,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>LOOP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#loop--native-code-1" title="View implementation">📄</a> | Advance or terminate a counted loop. |
 | <strong>MULTHLBY4</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#multhlby4--native-code" title="View implementation">📄</a> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. |
 | <strong>MUSCPU</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#muscpu--native-code" title="View implementation">📄</a> | Declare cross-screen dispatch labels and begin assembling MUSCPU. |
-| <strong>NDUP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ndup--native-code" title="View implementation">📄</a> | Uses ARRAY to process game state. |
+| <strong>NDUP</strong><br><code>(&nbsp;x1&nbsp;…&nbsp;xn&nbsp;n&nbsp;--&nbsp;x1&nbsp;…&nbsp;xn&nbsp;x1&nbsp;…&nbsp;xn&nbsp;)</code> | <a href="#ndup--native-code" title="View implementation">📄</a> | Uses ARRAY to process game state. |
 | <strong>OFFFDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#offfdst--native-code" title="View implementation">📄</a> | All player off field control. |
 | <strong>OFLDTBL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ofldtbl--native-code" title="View implementation">📄</a> | OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; |
 | <strong>OFMOTION</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ofmotion--native-code" title="View implementation">📄</a> | Set pc for ram pa table -tractor ball. |
@@ -323,7 +323,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>SETACT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#setact--native-code" title="View implementation">📄</a> | Sets avtive bit in status. |
 | <strong>STARTMUSIC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#startmusic--native-code" title="View implementation">📄</a> | STARTMUSIC clears its request. |
 | <strong>strtline</strong><br><code>(&nbsp;x&nbsp;y&nbsp;--&nbsp;)</code> | <a href="#strtline--native-code" title="View implementation">📄</a> | Given X Y sets up start of line. |
-| <strong>SWAN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#swan--native-code" title="View implementation">📄</a> | Transfer interrupt/screen execution state. |
+| <strong>SWAN</strong><br><code>(&nbsp;value&nbsp;--&nbsp;nibble-swapped-value&nbsp;)</code> | <a href="#swan--native-code" title="View implementation">📄</a> | Transfer interrupt/screen execution state. |
 | <strong>TBALLPITCH</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tballpitch--native-code" title="View implementation">📄</a> | Loads pitch velocities. |
 | <strong>THROWANIM</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#throwanim--native-code" title="View implementation">📄</a> | Sets up BLDST and player anim. |
 | <strong>THROWBALL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#throwball--native-code" title="View implementation">📄</a> | Finish scoring first. |
@@ -349,7 +349,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>CHKCOIN1</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkcoin1--native-subr" title="View implementation">📄</a> | Chk door 1 for coin drop. |
 | <strong>CHKCOIN2</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkcoin2--native-subr" title="View implementation">📄</a> | Chk door 2 for coin drop. |
 | <strong>CMPOF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#cmpof--native-subr" title="View implementation">📄</a> | Calculates proper deltas and patterns. |
-| <strong>COLORBAND</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#colorband--native-subr" title="View implementation">📄</a> | COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled. |
+| <strong>COLORBAND</strong><br><code>(&nbsp;saved-interrupt-frame&nbsp;--&nbsp;)</code> | <a href="#colorband--native-subr" title="View implementation">📄</a> | COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled. |
 | <strong>debounce</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#debounce--native-subr" title="View implementation">📄</a> | Debounce input transitions. |
 | <strong>FETCH</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fetch--native-subr" title="View implementation">📄</a> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
 | <strong>FLSHWUP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flshwup--native-subr" title="View implementation">📄</a> | Handle flash callback. |
@@ -1792,7 +1792,9 @@ GETF fetches FIELD bytes sequentially;
 
 ### `GRNDRACTION` — TERSE
 
-Given sectnm set up infield action.
+`( sector -- )`
+
+Consumes a selected hit-sector index, executes its `GSTBL` word, then installs the appropriate fielder playaction addresses.
 
 ```text
 : GRNDRACTION ( given sectnm set up infield action )
@@ -1811,7 +1813,9 @@ HRSS HR3RD LDINFLDPA THEN ;
 
 ### `GRNDRHIT` — TERSE
 
-Grounder.
+`( -- )`
+
+Computes a ground-ball sector from randomized timing and pitch direction, dispatches `GRNDRACTION`, then sets ball destination.
 
 ```text
 : GRNDRHIT ( grounder ) GRNDR BONE 2 VVEL BL B!
@@ -4480,11 +4484,20 @@ CODE EX C9 B, NEXT
 
 ### `FILL` — native CODE
 
-`( -- )`
+`( value address count -- )`
 
 Fill a memory/screen range.
 
 Named target kernel binding; verify input contract against target entry before assuming arguments.
+
+The target word is a threaded `RST $08` program at `$0253`: `ROT ROT 2DUP ! SWAP DROP DUP 1+ ROT 1- BMOVE RETURN`.
+
+```text
+FILL  ($0253)
+RST $08
+ROT  ROT  2DUP  !  SWAP  DROP
+DUP  1+  ROT  1-  BMOVE  RETURN
+```
 
 ```text
 CODE FILL ROMHERE !
@@ -4583,9 +4596,9 @@ DECIMAL ;S
 
 ### `HOMERCHK` — native CODE
 
-`Z80 register / stack ABI`
+`( y x hit-type random-x random-y -- )`
 
-Chk for homer or fence hit.
+Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination.
 
 ```text
 CODE HOMERCHK ( chk for homer or fence hit )
@@ -4640,9 +4653,9 @@ LABEL PLDONE 6 D LXI, D DADX, NEXT
 
 ### `IEX` — native CODE
 
-`Z80 register / stack ABI`
+`( saved-interrupt-frame -- )`
 
-IEX restores saved registers, enables interrupts and returns.
+Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call.
 
 ```text
 CODE IEX PSW POP, B POP, D POP, H POP, EXX, EXAF,
@@ -4830,11 +4843,13 @@ LABEL MUSEND A ORA, PROCESS JZ, B POP, RET,
 
 ### `NDUP` — native CODE
 
-`( -- )`
+`( x1 … xn n -- x1 … xn x1 … xn )`
 
 Uses ARRAY to process game state.
 
 Named target kernel binding; verify count and index contracts against native entry.
+
+The ROM's `$0260` `NPICK` primitive removes count `n`, copies the preceding `n` 16-bit parameter-stack cells in order, and leaves the originals intact.
 
 ```text
 CODE NDUP ROMHERE !
@@ -5415,11 +5430,13 @@ SADR SHLD, B POP, NEXT
 
 ### `SWAN` — native CODE
 
-`( -- )`
+`( value -- nibble-swapped-value )`
 
 Transfer interrupt/screen execution state.
 
 Named target kernel binding; verify low-byte nibble semantics against native entry.
+
+The `$0248` native primitive rotates the low byte by four bits and retains the high byte.
 
 ```text
 CODE SWAN
@@ -5864,11 +5881,13 @@ VDSTX BL LHLD, VDSTY BL LDED, 20 A MVI, VGO VSTATUS X RESX,
 
 ### `COLORBAND` — native SUBR
 
-`( -- )`
+`( saved-interrupt-frame -- )`
 
 COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.
 
 Interrupt service helper: consumes native return/interrupt frame; not an ordinary TERSE word call.
+
+Interrupt handler: preserves AF while writing palette ports, then restores the saved native frame. This stack frame is interrupt state, not a normal TERSE argument.
 
 ```text
 SUBR COLORBAND NEXT XTHL, PSW PUSH, M A MOV, INLIN OUT,
