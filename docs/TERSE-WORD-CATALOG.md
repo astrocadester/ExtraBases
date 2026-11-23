@@ -1,18 +1,24 @@
-<p align="right"><code>v20261123-0012</code></p>
+<p align="right"><code>v20261123-0013</code></p>
 
 # Extra Bases — TERSE Word Catalog
 
 - [TERSE runtime and inherited words](#catalog-runtime) (38)
+
   Core TERSE operations and inherited words used by the Extra Bases development and target environments.
 - [Extra Bases colon definitions](#catalog-colon) (201)
+
   Game-specific TERSE definitions combining existing words to implement gameplay, display, sound and control logic.
 - [Extra Bases native CODE words](#catalog-code) (85)
+
   Z80 machine-code words that implement game operations, hardware access and TERSE runtime services.
 - [Native SUBR helpers](#catalog-subr) (47)
+
   Z80 subroutines called by other native routines for shared calculations, drawing, input and state updates.
 - [Host and cross-compiler definitions](#catalog-host) (2)
+
   Definitions used by the development host to manage source compilation rather than game execution.
 - [Implementations](#catalog-implementations)
+
   Complete available source bodies, stack signatures, native Z80 effects and cross-references for cataloged words.
 
 <a name="catalog-runtime"></a>
