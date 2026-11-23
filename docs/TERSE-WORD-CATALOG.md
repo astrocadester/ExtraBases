@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0018</code></p>
+<p align="right"><code>v20261123-0019</code></p>
 
 # Extra Bases - TERSE Glossary
 
@@ -485,7 +485,35 @@ _at:
 
 `( m n -- product )`
 
-The Extra Bases target token dispatch table has no `*` token; its native `RND` routine contains internal multiplication machinery, but that is not a standalone `*` implementation. The 1982 XC identifies a host multiplication word at `$04A3`, whose instruction body is outside the supplied XC image. A byte-exact Extra Bases implementation cannot be assigned from these sources.
+**Original DNA host implementation — Gas Root 1.0, July 1982, entry $04A3.** This is the multiplication primitive used by the 1982 development-host interpreter. It consumes two 16-bit stack values and returns their low 16-bit product. The Extra Bases game's byte-token runtime remains a separate target.
+
+```z80
+xt_04A3:
+    exx                     ; Work with the host's alternate register set
+    pop de                  ; Multiplicand
+    pop bc                  ; Multiplier
+    ld hl,0                 ; Product accumulator
+multiply_loop:
+    srl b
+    rr c                    ; Shift multiplier right; low bit enters carry
+    jp nc,multiply_test
+    add hl,de               ; Include multiplicand when bit was set
+multiply_test:
+    ld a,b
+    or c
+    jp z,multiply_done
+    sla e
+    rl d                    ; Double multiplicand
+    jp multiply_loop
+multiply_done:
+    push hl                 ; Push low 16 bits of product
+    exx
+    jp (iy)                 ; Resume TERSE
+```
+
+**Source:** [WB original Gas Root interpreter, `xt_04A3`](https://github.com/lizard43/dnaTERSE-WB/blob/main/src/z80-runtime/terse-runtime.asm). The listing above replaces numeric branch destinations with local labels for readability; the original byte-annotated instructions are retained in WB.
+
+**Variant boundary:** This is a verified July 1982 host primitive, not a claim that the Extra Bases game ROM contains an identical standalone multiplication token or that the February 25, 1982 Ice TERSE V.19 host has the same bytes.
 
 
 ---
