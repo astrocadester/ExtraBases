@@ -2,7 +2,6 @@
 
 ## TERSE runtime and inherited words (34)
 
-| Word · Stack · Function · Implementation |
 | --- |
 | <strong>-</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;difference&nbsp;)</code><br>Subtract the top value from the preceding value.<br><a href="#terse-word-2d" title="View implementation">📄</a> |
 | <strong>!</strong><br><code>(&nbsp;value&nbsp;address&nbsp;--&nbsp;)</code><br>Store one 16-bit cell.<br><a href="#terse-word-21" title="View implementation">📄</a> |
@@ -41,7 +40,6 @@
 
 ## Extra Bases colon definitions (201)
 
-| Word · Stack · Function · Implementation |
 | --- |
 | <strong>]'[</strong><br><code>(&nbsp;--&nbsp;)</code><br>Source-level compiler/TERSE definition shown below.<br><a href="#terse-word-5d-27-5b" title="View implementation">📄</a> |
 | <strong>^</strong><br><code>(&nbsp;--&nbsp;)</code><br>Uses ABVOLS and MCVOLS to compose game logic.<br><a href="#terse-word-5e" title="View implementation">📄</a> |
@@ -247,7 +245,6 @@
 
 ## Extra Bases native CODE words (85)
 
-| Word · Stack · Function · Implementation |
 | --- |
 | <strong>+LOOP</strong><br><code>(&nbsp;increment&nbsp;--&nbsp;)</code><br>Uses LOOP to process game state.<br><a href="#terse-word-2b-4c-4f-4f-50" title="View implementation">📄</a> |
 | <strong>ALLFLDACT</strong><br><code>(&nbsp;--&nbsp;)</code><br>Sets all fielders active.<br><a href="#terse-word-41-4c-4c-46-4c-44-41-43-54" title="View implementation">📄</a> |
@@ -337,7 +334,6 @@
 
 ## Native SUBR helpers (47)
 
-| Word · Stack · Function · Implementation |
 | --- |
 | <strong>AUTOR1</strong><br><code>(&nbsp;--&nbsp;)</code><br>AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners.<br><a href="#terse-word-41-55-54-4f-52-31" title="View implementation">📄</a> |
 | <strong>AUTOR2</strong><br><code>(&nbsp;--&nbsp;)</code><br>Run second-runner automation logic.<br><a href="#terse-word-41-55-54-4f-52-32" title="View implementation">📄</a> |
@@ -389,7 +385,6 @@
 
 ## Host and cross-compiler definitions (2)
 
-| Word · Stack · Function · Implementation |
 | --- |
 | <strong>BASE!</strong><br><code>(&nbsp;base&nbsp;--&nbsp;)</code><br>Set the number base.<br><a href="#terse-word-42-41-53-45-21" title="View implementation">📄</a> |
 | <strong>BASE@</strong><br><code>(&nbsp;--&nbsp;base&nbsp;)</code><br>Fetch the current number base.<br><a href="#terse-word-42-41-53-45-40" title="View implementation">📄</a> |
