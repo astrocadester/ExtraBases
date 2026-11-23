@@ -1,7 +1,5 @@
 # Extra Bases — TERSE Word Catalog
 
-This catalog identifies TERSE words used or defined in Extra Bases, with their stack effects, functions, and implementations.
-
 ## TERSE runtime and inherited words (34)
 
 | Word · Stack · Function · Implementation |
