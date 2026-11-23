@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0015</code></p>
+<p align="right"><code>v20261123-0016</code></p>
 
 # Extra Bases - TERSE Glossary
 
@@ -485,6 +485,7 @@ _at:
 
 `( m n -- product )`
 
+The Extra Bases target token dispatch table has no `*` token; its native `RND` routine contains internal multiplication machinery, but that is not a standalone `*` implementation. The 1982 XC identifies a host multiplication word at `$04A3`, whose instruction body is outside the supplied XC image. A byte-exact Extra Bases implementation cannot be assigned from these sources.
 
 
 ---
@@ -661,6 +662,12 @@ The DNA TERSE 81 Glossary defines this host dictionary operation. The host imple
 
 Select the Z80 assembler vocabulary in the development host.
 
+**1979 XC host reference — vocabulary adapter only.** `CODE` invokes this assembler vocabulary entry; the uploaded 1979 image provides the binding at `$6A70`, which jumps to the host implementation at `$1EC4`. The host implementation body is outside this XC image.
+
+```z80
+xt_6a70_alias_ASM: ; alias_ASM
+        JP code_1ec4_ASM ; $6A70
+```
 
 
 ---
@@ -708,6 +715,33 @@ Create a named array of size uninitialized bytes; indexing the resulting word re
 
 `( size -- )`
 
+**1979 XC host reference.** The public `BARRAY` word delegates to `G79-BARRAY`. Its defining word allocates bytes using `G79-ALLOC`; the execution behavior uses `BTLIT`. This is host XC source, not a native Extra Bases ROM primitive.
+
+```z80
+xt_76c8_BARRAY: ; BARRAY
+        rst $08 ; $76C8 enter TERSE thread
+        dw xt_7602_G79_BARRAY ; $76C9 G79-BARRAY
+        dw xt_0074_EXIT ; $76CB EXIT
+
+xt_7602_G79_BARRAY: ; G79-BARRAY
+        rst $08 ; $7602 enter TERSE thread
+        dw xt_6dcb_G79XC ; $7603 G79XC
+        dw xt_1d36_DEFINITIONS ; $7605 DEFINITIONS
+        dw xt_00f5_0 ; $7607 0
+        dw xt_80d7_pv ; $7609 pv
+        dw xt_23d3__BUILDS ; $760B <BUILDS
+        dw xt_75bd_G79_ALLOC ; $760D G79-ALLOC
+        dw xt_00f5_0 ; $760F 0
+        dw xt_8100_prnt_ ; $7611 prnt,
+        dw xt_1e20_IMMED ; $7613 IMMED
+        dw xt_6dcb_G79XC ; $7615 G79XC
+        dw xt_1d36_DEFINITIONS ; $7617 DEFINITIONS
+        dw xt_23f9__DOES__ ; $7619 (DOES>)
+        rst $08 ; $761B enter TERSE thread
+        dw xt_8121_ref ; $761C ref
+        dw xt_833b_BTLIT ; $761E BTLIT
+        dw xt_0074_EXIT ; $7620 EXIT
+```
 
 
 ---
@@ -732,6 +766,44 @@ Create a dictionary word implemented in assembler; enter assembler vocabulary fo
 
 `( -- )`
 
+**1979 XC host reference.** Defines a native verb in `G79VERBS`, switches between the XC and assembler vocabularies, and uses its compile-state path to emit a native reference. This listing documents the host XC mechanism, not target-side game code.
+
+```z80
+xt_81ce_CODE: ; CODE
+        rst $08 ; $81CE enter TERSE thread
+        dw xt_6a59_alias_G79VERBS ; $81CF alias_G79VERBS
+        dw xt_1d36_DEFINITIONS ; $81D1 DEFINITIONS
+        dw xt_00fe_1 ; $81D3 1
+        dw xt_80d7_pv ; $81D5 pv
+        dw xt_23d3__BUILDS ; $81D7 <BUILDS
+        dw xt_69f8_alias_G79_HERE ; $81D9 alias_G79-HERE
+        dw xt_00fe_1 ; $81DB 1
+        dw xt_8100_prnt_ ; $81DD prnt,
+        dw xt_1e20_IMMED ; $81DF IMMED
+        dw xt_6a3f_alias_G79XC ; $81E1 alias_G79XC
+        dw xt_1d36_DEFINITIONS ; $81E3 DEFINITIONS
+        dw xt_6a70_alias_ASM ; $81E5 alias_ASM
+        dw xt_23f9__DOES__ ; $81E7 (DOES>)
+        rst $08 ; $81E9 enter TERSE thread
+        dw xt_6910_alias_G79_XCSTATE ; $81EA alias_G79-XCSTATE
+        dw xt_030b__ ; $81EC @
+        dw xt_0240_jzero ; $81EE jzero
+        dw thread_81fe ; $81F0 thread destination
+        dw xt_8121_ref ; $81F2 ref
+        dw xt_030b__ ; $81F4 @
+        dw xt_8188_byt_ ; $81F6 byt,
+        dw xt_6c67_alias_p ; $81F8 alias_p
+        dw xt_026b_jump ; $81FA jump
+        dw thread_8217 ; $81FC thread destination
+thread_81fe: ;
+        dw xt_80c7_errtype ; $81FE errtype
+        dw xt_13dd_inline_string ; $8200 inline-string
+        db $0012,$0020,$0056,$0045,$0052,$0042,$0020,$004E,$004F,$0054,$0020,$0045,$0058,$0045,$0043,$0055 ; $8202 " VERB NOT EXECUTED"
+        db $0054,$0045,$0044 ; $8212 continued
+        dw xt_12bf__ABORT ; $8215 .ABORT
+thread_8217: ;
+        dw xt_0074_EXIT ; $8217 EXIT
+```
 
 
 ---
@@ -742,6 +814,32 @@ Create a named word whose execution pushes its defining value.
 
 `( value -- )`
 
+**1979 XC host reference.** `CONSTANT` delegates to `G79-CONSTANT`, whose defining-word behavior creates a literal-emitting word through `XCLIT`. This is the cross-compiler's definition, not a native Extra Bases token.
+
+```z80
+xt_765b_CONSTANT: ; CONSTANT
+        rst $08 ; $765B enter TERSE thread
+        dw xt_750f_G79_CONSTANT ; $765C G79-CONSTANT
+        dw xt_0074_EXIT ; $765E EXIT
+
+xt_750f_G79_CONSTANT: ; G79-CONSTANT
+        rst $08 ; $750F enter TERSE thread
+        dw xt_6dcb_G79XC ; $7510 G79XC
+        dw xt_1d36_DEFINITIONS ; $7512 DEFINITIONS
+        dw xt_00f5_0 ; $7514 0
+        dw xt_80d7_pv ; $7516 pv
+        dw xt_23d3__BUILDS ; $7518 <BUILDS
+        dw xt_00f5_0 ; $751A 0
+        dw xt_8100_prnt_ ; $751C prnt,
+        dw xt_1e20_IMMED ; $751E IMMED
+        dw xt_6dcb_G79XC ; $7520 G79XC
+        dw xt_1d36_DEFINITIONS ; $7522 DEFINITIONS
+        dw xt_23f9__DOES__ ; $7524 (DOES>)
+        rst $08 ; $7526 enter TERSE thread
+        dw xt_8121_ref ; $7527 ref
+        dw xt_8316_XCLIT ; $7529 XCLIT
+        dw xt_0074_EXIT ; $752B EXIT
+```
 
 
 ---
@@ -752,6 +850,17 @@ Select decimal numeric conversion base.
 
 `( -- )`
 
+**1982 XC System host reference.** The original threaded word stores decimal base `$0A` into `BASE`; this reference is separate from the Extra Bases runtime.
+
+```z80
+xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; $1DE5 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DE6 BLIT
+        db $000A ; $1DE8 8-bit literal
+        dw xt_0709_BASE ; $1DE9 BASE
+        dw xt_0187__ ; $1DEB !
+        dw xt_00af_EXIT ; $1DED EXIT
+```
 
 
 ---
@@ -824,6 +933,20 @@ The DNA TERSE 81 Glossary defines this host dictionary operation. The host imple
 
 Return the address of the next free dictionary location.
 
+**1979 XC host reference.** `HERE` delegates to `G79-HERE`, which fetches the current value from the `G79-ROMHERE` pointer. This is the XC dictionary/object pointer, not a target-side Extra Bases primitive.
+
+```z80
+xt_7729_HERE: ; HERE
+        rst $08 ; $7729 enter TERSE thread
+        dw xt_6e78_G79_HERE ; $772A G79-HERE
+        dw xt_0074_EXIT ; $772C EXIT
+
+xt_6e78_G79_HERE: ; G79-HERE
+        rst $08 ; $6E78 enter TERSE thread
+        dw xt_6d57_G79_ROMHERE ; $6E79 G79-ROMHERE
+        dw xt_030b__ ; $6E7B @
+        dw xt_0074_EXIT ; $6E7D EXIT
+```
 
 
 ---
@@ -834,6 +957,17 @@ Select hexadecimal numeric conversion base.
 
 `( -- )`
 
+**1982 XC System host reference.** The original threaded word stores hexadecimal base `$10` into `BASE`; this reference is separate from the Extra Bases runtime.
+
+```z80
+xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXIT
+```
 
 
 ---
@@ -1008,6 +1142,36 @@ Create a named initialized 16-bit variable.
 
 `( initial-value -- )`
 
+**1979 XC host reference.** The original `VARIABLE` wrapper drops the incoming stack value, pushes a cell size of two bytes, and calls `G79-VARI` to define allocated storage. This 1979 behavior should not be described as automatically initializing the cell with the dropped value.
+
+```z80
+xt_7692_VARIABLE: ; VARIABLE
+        rst $08 ; $7692 enter TERSE thread
+        dw xt_0294_DROP ; $7693 DROP
+        dw xt_0349_LIT ; $7695 LIT
+        dw $0002 ; $7697 16-bit literal
+        dw xt_75d5_G79_VARI ; $7699 G79-VARI
+        dw xt_0074_EXIT ; $769B EXIT
+
+xt_75d5_G79_VARI: ; G79-VARI
+        rst $08 ; $75D5 enter TERSE thread
+        dw xt_6dcb_G79XC ; $75D6 G79XC
+        dw xt_1d36_DEFINITIONS ; $75D8 DEFINITIONS
+        dw xt_00f5_0 ; $75DA 0
+        dw xt_80d7_pv ; $75DC pv
+        dw xt_23d3__BUILDS ; $75DE <BUILDS
+        dw xt_75bd_G79_ALLOC ; $75E0 G79-ALLOC
+        dw xt_00f5_0 ; $75E2 0
+        dw xt_8100_prnt_ ; $75E4 prnt,
+        dw xt_1e20_IMMED ; $75E6 IMMED
+        dw xt_6dcb_G79XC ; $75E8 G79XC
+        dw xt_1d36_DEFINITIONS ; $75EA DEFINITIONS
+        dw xt_23f9__DOES__ ; $75EC (DOES>)
+        rst $08 ; $75EE enter TERSE thread
+        dw xt_8121_ref ; $75EF ref
+        dw xt_8316_XCLIT ; $75F1 XCLIT
+        dw xt_0074_EXIT ; $75F3 EXIT
+```
 
 
 ---
