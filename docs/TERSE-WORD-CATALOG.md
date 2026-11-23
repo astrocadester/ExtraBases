@@ -45,7 +45,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 
 | Word / stack | Function | DNA docs |
 | --- | --- | --- |
-| [`]'[`](#--terse)<br><sub><code>( -- )</code></sub> | Game-defined operation; source body below. | — |
+| [`]'[`](#--terse)<br><sub><code>( -- )</code></sub> | Source-level compiler/TERSE definition shown below. | — |
 | [`^`](#--terse-1)<br><sub><code>( -- )</code></sub> | Uses ABVOLS and MCVOLS to compose game logic. | — |
 | [`<INTERRUPTS`](#interrupts--terse)<br><sub><code>( -- )</code></sub> | Mark the start of interrupt data. | — |
 | [`ABVOLS`](#abvols--terse)<br><sub><code>( volume -- )</code></sub> | Emit the music volume command. | — |
@@ -64,8 +64,8 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`BZERO`](#bzero--terse)<br><sub><code>( address -- )</code></sub> | Store byte value 0. | — |
 | [`C=`](#c--terse)<br><sub><code>( value -- )</code></sub> | Uses CONSTANT to compose game logic. | — |
 | [`CHGS`](#chgs--terse)<br><sub><code>( -- )</code></sub> | CHGS posts CHANGE SIDES; | — |
-| [`CHKFLSHSTAY`](#chkflshstay--terse)<br><sub><code>—</code></sub> | When isccp turn off check for wupwrt. | — |
-| [`CHKGMCNT`](#chkgmcnt--terse)<br><sub><code>—</code></sub> | CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte. | — |
+| [`CHKFLSHSTAY`](#chkflshstay--terse)<br><sub><code>( -- )</code></sub> | When isccp turn off check for wupwrt. | — |
+| [`CHKGMCNT`](#chkgmcnt--terse)<br><sub><code>( -- credits )</code></sub> | CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte. | — |
 | [`CMAJOR`](#cmajor--terse)<br><sub><code>( -- )</code></sub> | Initialize the C-major sound pattern. | — |
 | [`CNLINE`](#cnline--terse)<br><sub><code>( -- )</code></sub> | CNLINE saves a new XIN/YIN endpoint and calls cnline from the current line state. | — |
 | [`CNOTE`](#cnote--terse)<br><sub><code>( -- )</code></sub> | Uses CTONE and DURATION to compose game logic. | — |
@@ -74,10 +74,10 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`CREDARROW`](#credarrow--terse)<br><sub><code>—</code></sub> | Update last inning arrow. | — |
 | [`CTONE`](#ctone--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel C. | — |
 | [`DEACT,`](#deact--terse)<br><sub><code>( -- )</code></sub> | Emit vector-deactivation command. | — |
-| [`DLINE`](#dline--terse)<br><sub><code>—</code></sub> | Draw a line , given X Y start coor X Y ending coor. | — |
+| [`DLINE`](#dline--terse)<br><sub><code>( x1 y1 x2 y2 -- )</code></sub> | Draw a line , given X Y start coor X Y ending coor. | — |
 | [`DOCHGS`](#dochgs--terse)<br><sub><code>( -- )</code></sub> | DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER; | — |
 | [`DOEHOMER`](#doehomer--terse)<br><sub><code>( -- )</code></sub> | DOEHOMER only posts the text. | — |
-| [`DOGOVER`](#dogover--terse)<br><sub><code>—</code></sub> | Do game over. | — |
+| [`DOGOVER`](#dogover--terse)<br><sub><code>( -- )</code></sub> | Do game over. | — |
 | [`DOHOMER`](#dohomer--terse)<br><sub><code>( -- )</code></sub> | DOHOMER erases the ball, displays HOMER, resets counts and clears the event timer; | — |
 | [`DOSAFE`](#dosafe--terse)<br><sub><code>( -- )</code></sub> | DOSAFE combines music/text. | — |
 | [`DOSBALL`](#dosball--terse)<br><sub><code>—</code></sub> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. | — |
@@ -86,11 +86,11 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`DP1`](#dp1--terse)<br><sub><code>( -- )</code></sub> | Display the one-coin deposit prompt. | — |
 | [`DP12CN`](#dp12cn--terse)<br><sub><code>( -- )</code></sub> | Uses B@ and SPOST to compose game logic. | — |
 | [`DP1CN`](#dp1cn--terse)<br><sub><code>( -- )</code></sub> | Uses SPOST to compose game logic. | — |
-| [`DPCN`](#dpcn--terse)<br><sub><code>—</code></sub> | Wait for next coin. | — |
+| [`DPCN`](#dpcn--terse)<br><sub><code>( -- )</code></sub> | Wait for next coin. | — |
 | [`dpost`](#dpost--terse)<br><sub><code>—</code></sub> | dpost isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit. | — |
 | [`DTC`](#dtc--terse)<br><sub><code>( -- )</code></sub> | DTC selects decimal and invokes the host editor. | — |
 | [`DURATION`](#duration--terse)<br><sub><code>( duration -- )</code></sub> | Emit a note-duration command. | — |
-| [`DWAIT`](#dwait--terse)<br><sub><code>—</code></sub> | DWAIT runs nested loops with interrupts enabled and disables them on return; | — |
+| [`DWAIT`](#dwait--terse)<br><sub><code>( limit -- )</code></sub> | DWAIT runs nested loops with interrupts enabled and disables them on return; | — |
 | [`F=`](#f--terse)<br><sub><code>( -- )</code></sub> | Declare a forward word with the game's source shorthand. | — |
 | [`F1STLS`](#f1stls--terse)<br><sub><code>( -- )</code></sub> | Select the first-base left-side action. | — |
 | [`F1STRS`](#f1strs--terse)<br><sub><code>( -- )</code></sub> | Select the first-base right-side action. | — |
@@ -110,7 +110,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`FOWR`](#fowr--terse)<br><sub><code>( -- )</code></sub> | Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells. | — |
 | [`FSSLS`](#fssls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
 | [`FSSRS`](#fssrs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`GETF`](#getf--terse)<br><sub><code>—</code></sub> | GETF fetches FIELD bytes sequentially; | — |
+| [`GETF`](#getf--terse)<br><sub><code>( -- index field-byte )</code></sub> | GETF fetches FIELD bytes sequentially; | — |
 | [`GRNDRACTION`](#grndraction--terse)<br><sub><code>—</code></sub> | Given sectnm set up infield action. | — |
 | [`GRNDRHIT`](#grndrhit--terse)<br><sub><code>—</code></sub> | Grounder. | — |
 | [`HITDST`](#hitdst--terse)<br><sub><code>—</code></sub> | Chooses hit location. | — |
@@ -118,16 +118,16 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`HLS`](#hls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
 | [`HMS`](#hms--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
 | [`HOM`](#hom--terse)<br><sub><code>( -- )</code></sub> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; | — |
-| [`HRBY2`](#hrby2--terse)<br><sub><code>—</code></sub> | HRBY2 halves HRAT. | — |
+| [`HRBY2`](#hrby2--terse)<br><sub><code>( -- )</code></sub> | HRBY2 halves HRAT. | — |
 | [`HRLS`](#hrls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
 | [`HRS`](#hrs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
 | [`I'`](#i--terse)<br><sub><code>( -- )</code></sub> | Emit the target's indexed immediate reference. | — |
 | [`ICODE`](#icode--terse)<br><sub><code>—</code></sub> | ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets. | — |
 | [`INEXT`](#inext--terse)<br><sub><code>( -- )</code></sub> | INEXT emits a jump to IEX; | — |
 | [`INLOG`](#inlog--terse)<br><sub><code>—</code></sub> | Infield master logic. | — |
-| [`INNODDS`](#innodds--terse)<br><sub><code>—</code></sub> | INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state; | — |
-| [`INSCN`](#inscn--terse)<br><sub><code>—</code></sub> | Insert coin call. | — |
-| [`INSTRC`](#instrc--terse)<br><sub><code>—</code></sub> | Instructions. | — |
+| [`INNODDS`](#innodds--terse)<br><sub><code>( -- )</code></sub> | INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state; | — |
+| [`INSCN`](#inscn--terse)<br><sub><code>( -- )</code></sub> | Insert coin call. | — |
+| [`INSTRC`](#instrc--terse)<br><sub><code>( -- )</code></sub> | Instructions. | — |
 | [`INSWAIT`](#inswait--terse)<br><sub><code>( count -- )</code></sub> | INSWAIT enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return. | — |
 | [`INTERRUPTS>`](#interrupts--terse-1)<br><sub><code>( -- )</code></sub> | Emit the interrupt-vector dispatch jump. | — |
 | [`INTHIGHRES`](#inthighres--terse)<br><sub><code>( -- )</code></sub> | Intialize screen for commercial mode. | — |
@@ -138,7 +138,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`LDPC`](#ldpc--terse)<br><sub><code>( -- )</code></sub> | Emit/load the music program-counter value. | — |
 | [`LDPCC`](#ldpcc--terse)<br><sub><code>( -- )</code></sub> | Emit/load a music program-counter command. | — |
 | [`LK,`](#lk--terse)<br><sub><code>( -- )</code></sub> | Uses BACT, and DEACT, to compose game logic. | — |
-| [`LSETTFCOOR`](#lsettfcoor--terse)<br><sub><code>—</code></sub> | Set take field coor & status -active , xpand. | — |
+| [`LSETTFCOOR`](#lsettfcoor--terse)<br><sub><code>( -- )</code></sub> | Set take field coor & status -active , xpand. | — |
 | [`MASTER`](#master--terse)<br><sub><code>( -- )</code></sub> | Define the game's master music stream. | — |
 | [`MBALL`](#mball--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
 | [`MCANNON`](#mcannon--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
@@ -147,7 +147,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`MFENCE`](#mfence--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
 | [`MFOUL`](#mfoul--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
 | [`MHIT`](#mhit--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MLINN`](#mlinn--terse)<br><sub><code>—</code></sub> | Mark last inning. | — |
+| [`MLINN`](#mlinn--terse)<br><sub><code>( -- )</code></sub> | Mark last inning. | — |
 | [`MOPENERS`](#mopeners--terse)<br><sub><code>( -- )</code></sub> | Uses PMUSIC to compose game logic. | — |
 | [`MOUT`](#mout--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
 | [`MSAFE`](#msafe--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
@@ -162,12 +162,12 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`ON2ND,`](#on2nd--terse)<br><sub><code>( -- )</code></sub> | Emit the second-base playaction command. | — |
 | [`ON3RD,`](#on3rd--terse)<br><sub><code>( -- )</code></sub> | Emit the third-base playaction command. | — |
 | [`OUTFLDHIT`](#outfldhit--terse)<br><sub><code>—</code></sub> | Fly ball. | — |
-| [`OUTLINE`](#outline--terse)<br><sub><code>—</code></sub> | Creates rectanguler outline. | — |
+| [`OUTLINE`](#outline--terse)<br><sub><code>( x y width height -- )</code></sub> | Creates rectanguler outline. | — |
 | [`OUTTIME`](#outtime--terse)<br><sub><code>( -- )</code></sub> | Out prc. | — |
-| [`PLRCHK`](#plrchk--terse)<br><sub><code>—</code></sub> | PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL; | — |
+| [`PLRCHK`](#plrchk--terse)<br><sub><code>( -- )</code></sub> | PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL; | — |
 | [`PLRSELECT`](#plrselect--terse)<br><sub><code>( -- )</code></sub> | Select singel player or 2 player. | — |
 | [`PPOST`](#ppost--terse)<br><sub><code>( x y options string -- x y options )</code></sub> | Draw a counted string and keep drawing coordinates. | — |
-| [`PUP`](#pup--terse)<br><sub><code>—</code></sub> | Power up routine. | — |
+| [`PUP`](#pup--terse)<br><sub><code>( -- )</code></sub> | Power up routine. | — |
 | [`PX0`](#px0--terse)<br><sub><code>( -- )</code></sub> | Emit zero/white pixel patterns and define PX1/PX0 to select them. | — |
 | [`PX1`](#px1--terse)<br><sub><code>( -- )</code></sub> | Emit zero/white pixel patterns and define PX1/PX0 to select them. | — |
 | [`QUIET`](#quiet--terse)<br><sub><code>( -- )</code></sub> | Uses ABVOLS and MCVOLS to compose game logic. | — |
@@ -175,10 +175,10 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`RCB,`](#rcb--terse)<br><sub><code>( -- )</code></sub> | Uses ACT, and DEACT, to compose game logic. | — |
 | [`RDRNDNTE`](#rdrndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a randomized note with a rest interval. | — |
 | [`RECLINE`](#recline--terse)<br><sub><code>—</code></sub> | RECLINE derives one horizontal row from retained rectangle arguments. | — |
-| [`RECTAN`](#rectan--terse)<br><sub><code>—</code></sub> | In X, Y, X length, Y length, pxtype set. | — |
+| [`RECTAN`](#rectan--terse)<br><sub><code>( x y width height -- )</code></sub> | In X, Y, X length, Y length, pxtype set. | — |
 | [`REST`](#rest--terse)<br><sub><code>( duration -- )</code></sub> | Insert a silent music interval. | — |
 | [`REST,`](#rest--terse-1)<br><sub><code>( -- )</code></sub> | Emit a resting playaction record. | — |
-| [`RETPA`](#retpa--terse)<br><sub><code>—</code></sub> | Return to position pa. | — |
+| [`RETPA`](#retpa--terse)<br><sub><code>( -- )</code></sub> | Return to position pa. | — |
 | [`RNDNTE`](#rndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a randomized musical note. | — |
 | [`RRRNDNTE`](#rrrndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a sequence of randomized notes. | — |
 | [`RUN1CHK1ST`](#run1chk1st--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
@@ -192,16 +192,16 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`S10`](#s10--terse)<br><sub><code>( -- )</code></sub> | S10 starts INTERRUPTS0 through ISTART; | — |
 | [`S11`](#s11--terse)<br><sub><code>( -- )</code></sub> | S11 starts INTERRUPTS1. | — |
 | [`SB!`](#sb--terse)<br><sub><code>( address value -- )</code></sub> | Store byte with address-first arguments. | — |
-| [`SBALL1`](#sball1--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SBALL2`](#sball2--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SBALL3`](#sball3--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SBALL1`](#sball1--terse)<br><sub><code>( x y options -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SBALL2`](#sball2--terse)<br><sub><code>( x y options -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SBALL3`](#sball3--terse)<br><sub><code>( x y options -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
 | [`SBO`](#sbo--terse)<br><sub><code>( -- )</code></sub> | SBO posts the three $30-based count characters at their fixed positions. | — |
 | [`SCOREME`](#scoreme--terse)<br><sub><code>( -- )</code></sub> | Plop scores up. | — |
 | [`SCRERASE`](#screrase--terse)<br><sub><code>( -- )</code></sub> | Erase entire screen. | — |
 | [`SCRS`](#scrs--terse)<br><sub><code>( -- )</code></sub> | SCRS clears two score rectangles and draws zero score characters. | — |
-| [`SETFDST`](#setfdst--terse)<br><sub><code>—</code></sub> | Set up fielder destination values. | — |
+| [`SETFDST`](#setfdst--terse)<br><sub><code>( -- )</code></sub> | Set up fielder destination values. | — |
 | [`SETTF`](#settf--terse)<br><sub><code>( -- )</code></sub> | SETTF performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading. | — |
-| [`SETTFPA`](#settfpa--terse)<br><sub><code>—</code></sub> | Take field pa. | — |
+| [`SETTFPA`](#settfpa--terse)<br><sub><code>( -- )</code></sub> | Take field pa. | — |
 | [`SFOUL`](#sfoul--terse)<br><sub><code>( -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
 | [`SGO`](#sgo--terse)<br><sub><code>( -- )</code></sub> | Uses SPOST to compose game logic. | — |
 | [`SHOMER`](#shomer--terse)<br><sub><code>( -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
@@ -209,8 +209,8 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`SOUT1`](#sout1--terse)<br><sub><code>( x y options -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
 | [`SOUT2`](#sout2--terse)<br><sub><code>( x y options -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
 | [`SOUT3`](#sout3--terse)<br><sub><code>( x y options -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SPLR`](#splr--terse)<br><sub><code>—</code></sub> | SPLR12/SPLR display available player choices; | — |
-| [`SPLR12`](#splr12--terse)<br><sub><code>—</code></sub> | SPLR12/SPLR display available player choices; | — |
+| [`SPLR`](#splr--terse)<br><sub><code>( -- )</code></sub> | SPLR12/SPLR display available player choices; | — |
+| [`SPLR12`](#splr12--terse)<br><sub><code>( -- )</code></sub> | SPLR12/SPLR display available player choices; | — |
 | [`SPOST`](#spost--terse)<br><sub><code>( x y options string -- )</code></sub> | Draw a string. | — |
 | [`SSAFE`](#ssafe--terse)<br><sub><code>( x y options -- )</code></sub> | SSAFE also redraws counts with SBO. | — |
 | [`SSTRIKE1`](#sstrike1--terse)<br><sub><code>( -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
@@ -218,20 +218,20 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`STFLD`](#stfld--terse)<br><sub><code>( -- )</code></sub> | STFLD installs RETPA and TAKEFIELD. | — |
 | [`STP,`](#stp--terse)<br><sub><code>( -- )</code></sub> | Emit a standing-action record. | — |
 | [`STRIKETIME`](#striketime--terse)<br><sub><code>( -- )</code></sub> | Strike process. | — |
-| [`STRINGGO`](#stringgo--terse)<br><sub><code>—</code></sub> | Given string , stringerase. | — |
-| [`STRINGPRC`](#stringprc--terse)<br><sub><code>—</code></sub> | String display. | — |
-| [`STRTBALL`](#strtball--terse)<br><sub><code>—</code></sub> | STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music. | — |
-| [`SUP`](#sup--terse)<br><sub><code>—</code></sub> | SUP posts UP. | — |
+| [`STRINGGO`](#stringgo--terse)<br><sub><code>( string erase-flag -- )</code></sub> | Given string , stringerase. | — |
+| [`STRINGPRC`](#stringprc--terse)<br><sub><code>( -- )</code></sub> | String display. | — |
+| [`STRTBALL`](#strtball--terse)<br><sub><code>( -- )</code></sub> | STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music. | — |
+| [`SUP`](#sup--terse)<br><sub><code>( -- )</code></sub> | SUP posts UP. | — |
 | [`SW-30`](#sw-30--terse)<br><sub><code>—</code></sub> | X=1. | — |
 | [`SW-45`](#sw-45--terse)<br><sub><code>—</code></sub> | X=1. | — |
-| [`SW-90`](#sw-90--terse)<br><sub><code>—</code></sub> | SW-90 ignores direction/random inputs and returns the far-right foul sector. | — |
+| [`SW-90`](#sw-90--terse)<br><sub><code>( a b -- )</code></sub> | SW-90 ignores direction/random inputs and returns the far-right foul sector. | — |
 | [`SW+30`](#sw30--terse)<br><sub><code>—</code></sub> | X=1. | — |
 | [`SW+45`](#sw45--terse)<br><sub><code>—</code></sub> | X=1. | — |
-| [`SW+90`](#sw90--terse)<br><sub><code>—</code></sub> | SW+90 always returns foul-left after dropping its inputs. | — |
+| [`SW+90`](#sw90--terse)<br><sub><code>( a b -- )</code></sub> | SW+90 always returns foul-left after dropping its inputs. | — |
 | [`SW0`](#sw0--terse)<br><sub><code>—</code></sub> | X=1. | — |
 | [`SWALK`](#swalk--terse)<br><sub><code>( x y options -- )</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`TCNT`](#tcnt--terse)<br><sub><code>—</code></sub> | TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. | — |
-| [`TERSECHK`](#tersechk--terse)<br><sub><code>—</code></sub> | Look at terse routine flags. | — |
+| [`TCNT`](#tcnt--terse)<br><sub><code>( -- )</code></sub> | TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. | — |
+| [`TERSECHK`](#tersechk--terse)<br><sub><code>( -- )</code></sub> | Look at terse routine flags. | — |
 | [`TF`](#tf--terse)<br><sub><code>—</code></sub> | Take the field. | — |
 | [`THW,`](#thw--terse)<br><sub><code>( -- )</code></sub> | Emit the throw command. | — |
 | [`TWAIT`](#twait--terse)<br><sub><code>( count -- )</code></sub> | Terse wait period. | — |
@@ -245,7 +245,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`WUPTON`](#wupton--terse)<br><sub><code>( -- )</code></sub> | WUPTON installs WUPWRT. | — |
 | [`WUPWRT`](#wupwrt--terse)<br><sub><code>( -- )</code></sub> | Write whos up for flash. | — |
 | [`YOU1ST`](#you1st--terse)<br><sub><code>( -- )</code></sub> | YOU1ST posts the greeting/extra-inning challenge, then continues to 306. | — |
-| [`ZERORAM`](#zeroram--terse)<br><sub><code>—</code></sub> | ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT. | — |
+| [`ZERORAM`](#zeroram--terse)<br><sub><code>( -- )</code></sub> | ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT. | — |
 
 ## Extra Bases native CODE words (85)
 
@@ -708,7 +708,7 @@ Bitwise exclusive OR of two values.
 
 `( -- )`
 
-Game-defined operation; source body below.
+Source-level compiler/TERSE definition shown below.
 
 ```text
 : ]'[ [COMPILE] ' ;
@@ -976,6 +976,8 @@ CHGS posts CHANGE SIDES;
 
 ### `CHKFLSHSTAY` — TERSE
 
+`( -- )`
+
 When isccp turn off check for wupwrt.
 
 ```text
@@ -994,6 +996,8 @@ DOWUP BZERO THEN ;
 [Source block 240, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-240)
 
 ### `CHKGMCNT` — TERSE
+
+`( -- credits )`
 
 CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte.
 
@@ -1143,6 +1147,8 @@ Emit vector-deactivation command.
 
 ### `DLINE` — TERSE
 
+`( x1 y1 x2 y2 -- )`
+
 Draw a line , given X Y start coor X Y ending coor.
 
 ```text
@@ -1188,6 +1194,8 @@ DOEHOMER only posts the text.
 [Source block 180, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-180)
 
 ### `DOGOVER` — TERSE
+
+`( -- )`
 
 Do game over.
 
@@ -1332,6 +1340,8 @@ SPOST ;
 
 ### `DPCN` — TERSE
 
+`( -- )`
+
 Wait for next coin.
 
 ```text
@@ -1390,6 +1400,8 @@ Emit a note-duration command.
 [Source block 141, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-141)
 
 ### `DWAIT` — TERSE
+
+`( limit -- )`
 
 DWAIT runs nested loops with interrupts enabled and disables them on return;
 
@@ -1689,6 +1701,8 @@ Uses BONE to compose game logic.
 
 ### `GETF` — TERSE
 
+`( -- index field-byte )`
+
 GETF fetches FIELD bytes sequentially;
 
 ```text
@@ -1823,6 +1837,8 @@ HOM and VIS draw HOME/VISITOR using a large initial character and the remaining 
 
 ### `HRBY2` — TERSE
 
+`( -- )`
+
 HRBY2 halves HRAT.
 
 ```text
@@ -1927,6 +1943,8 @@ ELSE GRNDRHIT THEN ALLFLDACT ;
 
 ### `INNODDS` — TERSE
 
+`( -- )`
+
 INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state;
 
 ```text
@@ -1942,6 +1960,8 @@ THEN ELSE 1 - IODTBL B@ THEN THEN IODDS B! ;
 [Source block 123, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-123)
 
 ### `INSCN` — TERSE
+
+`( -- )`
 
 Insert coin call.
 
@@ -1963,6 +1983,8 @@ THEN 2880 4C00 BASE2PAT 428 WRITR ;
 [Source block 127, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-127)
 
 ### `INSTRC` — TERSE
+
+`( -- )`
 
 Instructions.
 
@@ -2137,6 +2159,8 @@ Uses BACT, and DEACT, to compose game logic.
 
 ### `LSETTFCOOR` — TERSE
 
+`( -- )`
+
 Set take field coor & status -active , xpand.
 
 ```text
@@ -2288,6 +2312,8 @@ Uses BMUSIC to compose game logic.
 [Source block 146, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-146)
 
 ### `MLINN` — TERSE
+
+`( -- )`
 
 Mark last inning.
 
@@ -2513,6 +2539,8 @@ HL2ND HLOUTSSPA ELSE HROUT2NDPA HRSS THEN HR3RD LDINFLDPA ;
 
 ### `OUTLINE` — TERSE
 
+`( x y width height -- )`
+
 Creates rectanguler outline.
 
 ```text
@@ -2557,6 +2585,8 @@ ELSE MOUT THEN CLRBLST SBO DOSOUT ;
 [Source block 181, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-181)
 
 ### `PLRCHK` — TERSE
+
+`( -- )`
 
 PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL;
 
@@ -2609,6 +2639,8 @@ options for next string ;
 [Source block 248, line 7](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-248)
 
 ### `PUP` — TERSE
+
+`( -- )`
 
 Power up routine.
 
@@ -2725,6 +2757,8 @@ RECLINE derives one horizontal row from retained rectangle arguments.
 
 ### `RECTAN` — TERSE
 
+`( x y width height -- )`
+
 In X, Y, X length, Y length, pxtype set.
 
 ```text
@@ -2766,6 +2800,8 @@ Emit a resting playaction record.
 [Source block 225, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225)
 
 ### `RETPA` — TERSE
+
+`( -- )`
 
 Return to position pa.
 
@@ -2973,6 +3009,8 @@ Store byte with address-first arguments.
 
 ### `SBALL1` — TERSE
 
+`( x y options -- )`
+
 Uses ROT and SPOST to compose game logic.
 
 ```text
@@ -2987,6 +3025,8 @@ Uses ROT and SPOST to compose game logic.
 
 ### `SBALL2` — TERSE
 
+`( x y options -- )`
+
 Uses ROT and SPOST to compose game logic.
 
 ```text
@@ -3000,6 +3040,8 @@ Uses ROT and SPOST to compose game logic.
 [Source block 179, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-179)
 
 ### `SBALL3` — TERSE
+
+`( x y options -- )`
 
 Uses ROT and SPOST to compose game logic.
 
@@ -3083,6 +3125,8 @@ B00 8C00 308 30 CPOST 4500 8C00 308 30 CPOST ;
 
 ### `SETFDST` — TERSE
 
+`( -- )`
+
 Set up fielder destination values.
 
 ```text
@@ -3114,6 +3158,8 @@ SETTF performs coordinate/action initialization under DI/EI, then restores the c
 [Source block 214, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-214)
 
 ### `SETTFPA` — TERSE
+
+`( -- )`
 
 Take field pa.
 
@@ -3245,6 +3291,8 @@ Uses ROT and SPOST to compose game logic.
 
 ### `SPLR` — TERSE
 
+`( -- )`
+
 SPLR12/SPLR display available player choices;
 
 ```text
@@ -3261,6 +3309,8 @@ SPOST STRT1 BONE THEN ELSE SPLR12 THEN ;
 [Source block 128, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-128)
 
 ### `SPLR12` — TERSE
+
+`( -- )`
 
 SPLR12/SPLR display available player choices;
 
@@ -3390,6 +3440,8 @@ ELSE MSTRIKE DOSSTRIKE THEN SBO ;
 
 ### `STRINGGO` — TERSE
 
+`( string erase-flag -- )`
+
 Given string , stringerase.
 
 ```text
@@ -3408,6 +3460,8 @@ DROP DROP ;
 
 ### `STRINGPRC` — TERSE
 
+`( -- )`
+
 String display.
 
 ```text
@@ -3424,6 +3478,8 @@ THEN STRINGERASE BZERO ;
 [Source block 184, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-184)
 
 ### `STRTBALL` — TERSE
+
+`( -- )`
 
 STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music.
 
@@ -3442,6 +3498,8 @@ CMPLR B@ IF YOU1ST 50 DWAIT YOU1ST THEN
 [Source block 131, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-131)
 
 ### `SUP` — TERSE
+
+`( -- )`
 
 SUP posts UP.
 
@@ -3487,6 +3545,8 @@ ELSE DROP HRL THEN THEN ;
 
 ### `SW-90` — TERSE
 
+`( a b -- )`
+
 SW-90 ignores direction/random inputs and returns the far-right foul sector.
 
 ```text
@@ -3528,6 +3588,8 @@ ELSE DROP HLL THEN THEN ;
 [Source block 171, line 5](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-171)
 
 ### `SW+90` — TERSE
+
+`( a b -- )`
 
 SW+90 always returns foul-left after dropping its inputs.
 
@@ -3571,6 +3633,8 @@ Uses ROT and SPOST to compose game logic.
 
 ### `TCNT` — TERSE
 
+`( -- )`
+
 TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits.
 
 ```text
@@ -3586,6 +3650,8 @@ A" DEPOSIT 1 COIN PER PLAYER" SPOST THEN ELSE DP1 THEN ;
 [Source block 128, line 1](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-128)
 
 ### `TERSECHK` — TERSE
+
+`( -- )`
 
 Look at terse routine flags.
 
@@ -3825,6 +3891,8 @@ A" GOOD LUCK" SPOST ;
 [Source block 305, line 13](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-305)
 
 ### `ZERORAM` — TERSE
+
+`( -- )`
 
 ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT.
 
