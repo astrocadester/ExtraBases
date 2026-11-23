@@ -45,356 +45,356 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 
 | Word / stack | Function | DNA docs |
 | --- | --- | --- |
-| [**]'[**](#-terse)<br><sub><code>( -- )</code></sub> | Game-defined operation; source body below. | — |
-| [`^`](#--terse)<br><sub><code>( -- )</code></sub> | Uses ABVOLS and MCVOLS to compose game logic. | — |
-| [`<INTERRUPTS`](#--terse-1)<br><sub><code>( -- )</code></sub> | Mark the start of interrupt data. | — |
-| [`ABVOLS`](#interrupts--terse)<br><sub><code>( volume -- )</code></sub> | Emit the music volume command. | — |
-| [`ACT,`](#abvols--terse)<br><sub><code>( -- )</code></sub> | Emit a playaction record. | — |
-| [`ANOTE`](#act--terse)<br><sub><code>( -- )</code></sub> | Uses ATONE and DURATION to compose game logic. | — |
-| [`ATONE`](#anote--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel A. | — |
-| [`BACT,`](#atone--terse)<br><sub><code>( -- )</code></sub> | Emit a ball-action record. | — |
-| [`BALLTIME`](#bact--terse)<br><sub><code>—</code></sub> | Balls process. | — |
-| [`BLDST,`](#balltime--terse)<br><sub><code>( -- )</code></sub> | Emit the ball destination command. | — |
-| [`BLMOT,`](#bldst--terse)<br><sub><code>( -- )</code></sub> | Emit the ball motion command. | — |
-| [`BNOTE`](#blmot--terse)<br><sub><code>—</code></sub> | Uses BTONE and DURATION to compose game logic. | — |
-| [`BONE`](#bnote--terse)<br><sub><code>( address -- )</code></sub> | Store byte value 1. | — |
-| [`BTONE`](#bone--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel B. | — |
-| [`BV`](#btone--terse)<br><sub><code>( -- )</code></sub> | Define a named byte variable. | — |
-| [`BV=`](#bv--terse)<br><sub><code>( -- )</code></sub> | Uses BV to compose game logic. | — |
-| [`BZERO`](#bv--terse-1)<br><sub><code>( address -- )</code></sub> | Store byte value 0. | — |
-| [`C=`](#bzero--terse)<br><sub><code>( value -- )</code></sub> | Uses CONSTANT to compose game logic. | — |
-| [`CHGS`](#c--terse)<br><sub><code>—</code></sub> | CHGS posts CHANGE SIDES; | — |
-| [`CHKFLSHSTAY`](#chgs--terse)<br><sub><code>—</code></sub> | When isccp turn off check for wupwrt. | — |
-| [`CHKGMCNT`](#chkflshstay--terse)<br><sub><code>—</code></sub> | CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte. | — |
-| [`CMAJOR`](#chkgmcnt--terse)<br><sub><code>( -- )</code></sub> | Initialize the C-major sound pattern. | — |
-| [`CNLINE`](#cmajor--terse)<br><sub><code>( -- )</code></sub> | CNLINE saves a new XIN/YIN endpoint and calls cnline from the current line state. | — |
-| [`CNOTE`](#cnline--terse)<br><sub><code>( -- )</code></sub> | Uses CTONE and DURATION to compose game logic. | — |
-| [`CONGR`](#cnote--terse)<br><sub><code>( -- )</code></sub> | Display the congratulatory prompt. | — |
-| [`CPOST`](#congr--terse)<br><sub><code>( x y options char -- )</code></sub> | Draw one character at the specified position. | — |
-| [`CREDARROW`](#cpost--terse)<br><sub><code>—</code></sub> | Update last inning arrow. | — |
-| [`CTONE`](#credarrow--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel C. | — |
-| [`DEACT,`](#ctone--terse)<br><sub><code>( -- )</code></sub> | Emit vector-deactivation command. | — |
-| [`DLINE`](#deact--terse)<br><sub><code>—</code></sub> | Draw a line , given X Y start coor X Y ending coor. | — |
-| [`DOCHGS`](#dline--terse)<br><sub><code>( -- )</code></sub> | DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER; | — |
-| [`DOEHOMER`](#dochgs--terse)<br><sub><code>( -- )</code></sub> | DOEHOMER only posts the text. | — |
-| [`DOGOVER`](#doehomer--terse)<br><sub><code>—</code></sub> | Do game over. | — |
-| [`DOHOMER`](#dogover--terse)<br><sub><code>( -- )</code></sub> | DOHOMER erases the ball, displays HOMER, resets counts and clears the event timer; | — |
-| [`DOSAFE`](#dohomer--terse)<br><sub><code>( -- )</code></sub> | DOSAFE combines music/text. | — |
-| [`DOSBALL`](#dosafe--terse)<br><sub><code>—</code></sub> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. | — |
-| [`DOSOUT`](#dosball--terse)<br><sub><code>—</code></sub> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. | — |
-| [`DOSSTRIKE`](#dosout--terse)<br><sub><code>—</code></sub> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. | — |
-| [`DP1`](#dosstrike--terse)<br><sub><code>( -- )</code></sub> | Display the one-coin deposit prompt. | — |
-| [`DP12CN`](#dp1--terse)<br><sub><code>—</code></sub> | Uses B@ and SPOST to compose game logic. | — |
-| [`DP1CN`](#dp12cn--terse)<br><sub><code>—</code></sub> | Uses SPOST to compose game logic. | — |
-| [`DPCN`](#dp1cn--terse)<br><sub><code>—</code></sub> | Wait for next coin. | — |
-| [`dpost`](#dpcn--terse)<br><sub><code>—</code></sub> | dpost isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit. | — |
-| [`DTC`](#dpost--terse)<br><sub><code>( -- )</code></sub> | DTC selects decimal and invokes the host editor. | — |
-| [`DURATION`](#dtc--terse)<br><sub><code>( duration -- )</code></sub> | Emit a note-duration command. | — |
-| [`DWAIT`](#duration--terse)<br><sub><code>—</code></sub> | DWAIT runs nested loops with interrupts enabled and disables them on return; | — |
-| [`F=`](#dwait--terse)<br><sub><code>( -- )</code></sub> | Declare a forward word with the game's source shorthand. | — |
-| [`F1STLS`](#f--terse)<br><sub><code>( -- )</code></sub> | Select the first-base left-side action. | — |
-| [`F1STRS`](#f1stls--terse)<br><sub><code>( -- )</code></sub> | Select the first-base right-side action. | — |
-| [`F2NDLS`](#f1strs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`F2NDRS`](#f2ndls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`F3RDLS`](#f2ndrs--terse)<br><sub><code>( -- )</code></sub> | Select the third-base left-side action. | — |
-| [`F3RDRS`](#f3rdls--terse)<br><sub><code>( -- )</code></sub> | Select the third-base right-side action. | — |
-| [`FBLLS`](#f3rdrs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`FBLRS`](#fblls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`FIELDWRT`](#fblrs--terse)<br><sub><code>—</code></sub> | Write field outline. | — |
-| [`FL`](#fieldwrt--terse)<br><sub><code>—</code></sub> | Set up all of background. | — |
-| [`FLDDST,`](#fl--terse)<br><sub><code>( -- )</code></sub> | Emit the fielder destination command. | — |
-| [`FLFILL`](#flddst--terse)<br><sub><code>( -- )</code></sub> | FLFILL fills the background while allowing interrupts; | — |
-| [`FLSHME`](#flfill--terse)<br><sub><code>—</code></sub> | FLSHME executes only a nonzero address whose top two bits are clear; | — |
-| [`FLSHTON`](#flshme--terse)<br><sub><code>( -- )</code></sub> | FLSHTON saves a callback and starts its timer. | — |
-| [`FOULTIME`](#flshton--terse)<br><sub><code>—</code></sub> | Foulball process. | — |
-| [`FOWR`](#foultime--terse)<br><sub><code>( -- )</code></sub> | Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells. | — |
-| [`FSSLS`](#fowr--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`FSSRS`](#fssls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`GETF`](#fssrs--terse)<br><sub><code>—</code></sub> | GETF fetches FIELD bytes sequentially; | — |
-| [`GRNDRACTION`](#getf--terse)<br><sub><code>—</code></sub> | Given sectnm set up infield action. | — |
-| [`GRNDRHIT`](#grndraction--terse)<br><sub><code>—</code></sub> | Grounder. | — |
-| [`HITDST`](#grndrhit--terse)<br><sub><code>—</code></sub> | Chooses hit location. | — |
-| [`HLLS`](#hitdst--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`HLS`](#hlls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`HMS`](#hls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`HOM`](#hms--terse)<br><sub><code>—</code></sub> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; | — |
-| [`HRBY2`](#hom--terse)<br><sub><code>—</code></sub> | HRBY2 halves HRAT. | — |
-| [`HRLS`](#hrby2--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`HRS`](#hrls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
-| [`I'`](#hrs--terse)<br><sub><code>( -- )</code></sub> | Emit the target's indexed immediate reference. | — |
-| [`ICODE`](#i--terse)<br><sub><code>—</code></sub> | ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets. | — |
-| [`INEXT`](#icode--terse)<br><sub><code>( -- )</code></sub> | INEXT emits a jump to IEX; | — |
-| [`INLOG`](#inext--terse)<br><sub><code>—</code></sub> | Infield master logic. | — |
-| [`INNODDS`](#inlog--terse)<br><sub><code>—</code></sub> | INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state; | — |
-| [`INSCN`](#innodds--terse)<br><sub><code>—</code></sub> | Insert coin call. | — |
-| [`INSTRC`](#inscn--terse)<br><sub><code>—</code></sub> | Instructions. | — |
-| [`INSWAIT`](#instrc--terse)<br><sub><code>—</code></sub> | INSWAIT enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return. | — |
-| [`INTERRUPTS>`](#inswait--terse)<br><sub><code>( -- )</code></sub> | Emit the interrupt-vector dispatch jump. | — |
-| [`INTHIGHRES`](#interrupts--terse-1)<br><sub><code>( -- )</code></sub> | Intialize screen for commercial mode. | — |
-| [`ISCN`](#inthighres--terse)<br><sub><code>( -- )</code></sub> | Display the V15 instruction message. | — |
-| [`LABLE`](#iscn--terse)<br><sub><code>( -- )</code></sub> | Provide the original source's label-definition alias. | — |
-| [`LCB,`](#lable--terse)<br><sub><code>( -- )</code></sub> | Uses ACT, and DEACT, to compose game logic. | — |
-| [`LDINFLDPA`](#lcb--terse)<br><sub><code>( -- )</code></sub> | LDINFLDPA consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain. | — |
-| [`LDPC`](#ldinfldpa--terse)<br><sub><code>( -- )</code></sub> | Emit/load the music program-counter value. | — |
-| [`LDPCC`](#ldpc--terse)<br><sub><code>( -- )</code></sub> | Emit/load a music program-counter command. | — |
-| [`LK,`](#ldpcc--terse)<br><sub><code>( -- )</code></sub> | Uses BACT, and DEACT, to compose game logic. | — |
-| [`LSETTFCOOR`](#lk--terse)<br><sub><code>—</code></sub> | Set take field coor & status -active , xpand. | — |
-| [`MASTER`](#lsettfcoor--terse)<br><sub><code>( -- )</code></sub> | Define the game's master music stream. | — |
-| [`MBALL`](#master--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MCANNON`](#mball--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MCOIN`](#mcannon--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MCVOLS`](#mcoin--terse)<br><sub><code>( volume -- )</code></sub> | Emit music-channel volume values. | — |
-| [`MFENCE`](#mcvols--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MFOUL`](#mfence--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MHIT`](#mfoul--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MLINN`](#mhit--terse)<br><sub><code>—</code></sub> | Mark last inning. | — |
-| [`MOPENERS`](#mlinn--terse)<br><sub><code>( -- )</code></sub> | Uses PMUSIC to compose game logic. | — |
-| [`MOUT`](#mopeners--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MSAFE`](#mout--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MSTRIKE`](#msafe--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`MYAH`](#mstrike--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
-| [`NOISE`](#myah--terse)<br><sub><code>( -- )</code></sub> | Emit a noise/sound command. | — |
-| [`NOTES`](#noise--terse)<br><sub><code>( -- )</code></sub> | Uses ATONE and BTONE to compose game logic. | — |
-| [`NPOST`](#notes--terse)<br><sub><code>—</code></sub> | Post a bcd number on the screen ; see options. | — |
-| [`OFFDST,`](#npost--terse)<br><sub><code>( -- )</code></sub> | Emit the outfielder destination command. | — |
-| [`OFMOT,`](#offdst--terse)<br><sub><code>( -- )</code></sub> | Emit the outfield motion command. | — |
-| [`ON1ST,`](#ofmot--terse)<br><sub><code>( -- )</code></sub> | Emit the first-base playaction command. | — |
-| [`ON2ND,`](#on1st--terse)<br><sub><code>( -- )</code></sub> | Emit the second-base playaction command. | — |
-| [`ON3RD,`](#on2nd--terse)<br><sub><code>( -- )</code></sub> | Emit the third-base playaction command. | — |
-| [`OUTFLDHIT`](#on3rd--terse)<br><sub><code>—</code></sub> | Fly ball. | — |
-| [`OUTLINE`](#outfldhit--terse)<br><sub><code>—</code></sub> | Creates rectanguler outline. | — |
-| [`OUTTIME`](#outline--terse)<br><sub><code>—</code></sub> | Out prc. | — |
-| [`PLRCHK`](#outtime--terse)<br><sub><code>—</code></sub> | PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL; | — |
-| [`PLRSELECT`](#plrchk--terse)<br><sub><code>( -- )</code></sub> | Select singel player or 2 player. | — |
-| [`PPOST`](#plrselect--terse)<br><sub><code>( x y options string -- x y options )</code></sub> | Draw a counted string and keep drawing coordinates. | — |
-| [`PUP`](#ppost--terse)<br><sub><code>—</code></sub> | Power up routine. | — |
-| [`PX0`](#pup--terse)<br><sub><code>( -- )</code></sub> | Emit zero/white pixel patterns and define PX1/PX0 to select them. | — |
-| [`PX1`](#px0--terse)<br><sub><code>( -- )</code></sub> | Emit zero/white pixel patterns and define PX1/PX0 to select them. | — |
-| [`QUIET`](#px1--terse)<br><sub><code>( -- )</code></sub> | Uses ABVOLS and MCVOLS to compose game logic. | — |
-| [`QUIT`](#quiet--terse)<br><sub><code>( -- )</code></sub> | Uses HERE and LDPC to compose game logic. | — |
-| [`RCB,`](#quit--terse)<br><sub><code>( -- )</code></sub> | Uses ACT, and DEACT, to compose game logic. | — |
-| [`RDRNDNTE`](#rcb--terse)<br><sub><code>( -- )</code></sub> | Emit a randomized note with a rest interval. | — |
-| [`RECLINE`](#rdrndnte--terse)<br><sub><code>—</code></sub> | RECLINE derives one horizontal row from retained rectangle arguments. | — |
-| [`RECTAN`](#recline--terse)<br><sub><code>—</code></sub> | In X, Y, X length, Y length, pxtype set. | — |
-| [`REST`](#rectan--terse)<br><sub><code>( duration -- )</code></sub> | Insert a silent music interval. | — |
-| [`REST,`](#rest--terse)<br><sub><code>( -- )</code></sub> | Emit a resting playaction record. | — |
-| [`RETPA`](#rest--terse-1)<br><sub><code>—</code></sub> | Return to position pa. | — |
-| [`RNDNTE`](#retpa--terse)<br><sub><code>( -- )</code></sub> | Emit a randomized musical note. | — |
-| [`RRRNDNTE`](#rndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a sequence of randomized notes. | — |
-| [`RUN1CHK1ST`](#rrrndnte--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
-| [`RUN1CHK2ND`](#run1chk1st--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
-| [`RUN2CHK`](#run1chk2nd--terse)<br><sub><code>—</code></sub> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. | — |
-| [`RUN2CHK12ND`](#run2chk--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
-| [`RUN2CHK1ST`](#run2chk12nd--terse)<br><sub><code>—</code></sub> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. | — |
-| [`RUN3CHK`](#run2chk1st--terse)<br><sub><code>—</code></sub> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. | — |
-| [`RUNDST,`](#run3chk--terse)<br><sub><code>( -- )</code></sub> | Emit the runner destination command. | — |
-| [`S!`](#rundst--terse)<br><sub><code>( address value -- )</code></sub> | Store cell with address-first arguments. | — |
-| [`S10`](#s--terse)<br><sub><code>( -- )</code></sub> | S10 starts INTERRUPTS0 through ISTART; | — |
-| [`S11`](#s10--terse)<br><sub><code>( -- )</code></sub> | S11 starts INTERRUPTS1. | — |
-| [`SB!`](#s11--terse)<br><sub><code>( address value -- )</code></sub> | Store byte with address-first arguments. | — |
-| [`SBALL1`](#sb--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SBALL2`](#sball1--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SBALL3`](#sball2--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SBO`](#sball3--terse)<br><sub><code>—</code></sub> | SBO posts the three $30-based count characters at their fixed positions. | — |
-| [`SCOREME`](#sbo--terse)<br><sub><code>—</code></sub> | Plop scores up. | — |
-| [`SCRERASE`](#scoreme--terse)<br><sub><code>( -- )</code></sub> | Erase entire screen. | — |
-| [`SCRS`](#screrase--terse)<br><sub><code>—</code></sub> | SCRS clears two score rectangles and draws zero score characters. | — |
-| [`SETFDST`](#scrs--terse)<br><sub><code>—</code></sub> | Set up fielder destination values. | — |
-| [`SETTF`](#setfdst--terse)<br><sub><code>( -- )</code></sub> | SETTF performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading. | — |
-| [`SETTFPA`](#settf--terse)<br><sub><code>—</code></sub> | Take field pa. | — |
-| [`SFOUL`](#settfpa--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SGO`](#sfoul--terse)<br><sub><code>—</code></sub> | Uses SPOST to compose game logic. | — |
-| [`SHOMER`](#sgo--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SORRY`](#shomer--terse)<br><sub><code>( -- )</code></sub> | Display the losing-player prompt. | — |
-| [`SOUT1`](#sorry--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SOUT2`](#sout1--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SOUT3`](#sout2--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SPLR`](#sout3--terse)<br><sub><code>—</code></sub> | SPLR12/SPLR display available player choices; | — |
-| [`SPLR12`](#splr--terse)<br><sub><code>—</code></sub> | SPLR12/SPLR display available player choices; | — |
-| [`SPOST`](#splr12--terse)<br><sub><code>( x y options string -- )</code></sub> | Draw a string. | — |
-| [`SSAFE`](#spost--terse)<br><sub><code>—</code></sub> | SSAFE also redraws counts with SBO. | — |
-| [`SSTRIKE1`](#ssafe--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`SSTRIKE2`](#sstrike1--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`STFLD`](#sstrike2--terse)<br><sub><code>( -- )</code></sub> | STFLD installs RETPA and TAKEFIELD. | — |
-| [`STP,`](#stfld--terse)<br><sub><code>( -- )</code></sub> | Emit a standing-action record. | — |
-| [`STRIKETIME`](#stp--terse)<br><sub><code>—</code></sub> | Strike process. | — |
-| [`STRINGGO`](#striketime--terse)<br><sub><code>—</code></sub> | Given string , stringerase. | — |
-| [`STRINGPRC`](#stringgo--terse)<br><sub><code>—</code></sub> | String display. | — |
-| [`STRTBALL`](#stringprc--terse)<br><sub><code>—</code></sub> | STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music. | — |
-| [`SUP`](#strtball--terse)<br><sub><code>—</code></sub> | SUP posts UP. | — |
-| [`SW-30`](#sup--terse)<br><sub><code>—</code></sub> | X=1. | — |
-| [`SW-45`](#sw-30--terse)<br><sub><code>—</code></sub> | X=1. | — |
-| [`SW-90`](#sw-45--terse)<br><sub><code>—</code></sub> | SW-90 ignores direction/random inputs and returns the far-right foul sector. | — |
-| [`SW+30`](#sw-90--terse)<br><sub><code>—</code></sub> | X=1. | — |
-| [`SW+45`](#sw30--terse)<br><sub><code>—</code></sub> | X=1. | — |
-| [`SW+90`](#sw45--terse)<br><sub><code>—</code></sub> | SW+90 always returns foul-left after dropping its inputs. | — |
-| [`SW0`](#sw90--terse)<br><sub><code>—</code></sub> | X=1. | — |
-| [`SWALK`](#sw0--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
-| [`TCNT`](#swalk--terse)<br><sub><code>—</code></sub> | TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. | — |
-| [`TERSECHK`](#tcnt--terse)<br><sub><code>—</code></sub> | Look at terse routine flags. | — |
-| [`TF`](#tersechk--terse)<br><sub><code>—</code></sub> | Take the field. | — |
-| [`THW,`](#tf--terse)<br><sub><code>( -- )</code></sub> | Emit the throw command. | — |
-| [`TWAIT`](#thw--terse)<br><sub><code>—</code></sub> | Terse wait period. | — |
-| [`V`](#twait--terse)<br><sub><code>( -- )</code></sub> | Uses VARIABLE to compose game logic. | — |
-| [`V=`](#v--terse)<br><sub><code>( -- )</code></sub> | Uses V and VARIABLE to compose game logic. | — |
-| [`VIBS`](#v--terse-1)<br><sub><code>( value -- )</code></sub> | Emit a vibrato setting. | — |
-| [`VIS`](#vibs--terse)<br><sub><code>—</code></sub> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; | — |
-| [`WHBODDS`](#vis--terse)<br><sub><code>—</code></sub> | Sets who is on base calculates play odds. | — |
-| [`WTHW,`](#whbodds--terse)<br><sub><code>( -- )</code></sub> | Emit the wait-for-throw command. | — |
-| [`WUPGO`](#wthw--terse)<br><sub><code>—</code></sub> | WUPGO activates WHOSUP with runner/automatic-forward flags; | — |
-| [`WUPTON`](#wupgo--terse)<br><sub><code>( -- )</code></sub> | WUPTON installs WUPWRT. | — |
-| [`WUPWRT`](#wupton--terse)<br><sub><code>—</code></sub> | Write whos up for flash. | — |
-| [`YOU1ST`](#wupwrt--terse)<br><sub><code>—</code></sub> | YOU1ST posts the greeting/extra-inning challenge, then continues to 306. | — |
-| [`ZERORAM`](#you1st--terse)<br><sub><code>—</code></sub> | ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT. | — |
+| [`]'[`](#--terse)<br><sub><code>( -- )</code></sub> | Game-defined operation; source body below. | — |
+| [`^`](#--terse-1)<br><sub><code>( -- )</code></sub> | Uses ABVOLS and MCVOLS to compose game logic. | — |
+| [`<INTERRUPTS`](#interrupts--terse)<br><sub><code>( -- )</code></sub> | Mark the start of interrupt data. | — |
+| [`ABVOLS`](#abvols--terse)<br><sub><code>( volume -- )</code></sub> | Emit the music volume command. | — |
+| [`ACT,`](#act--terse)<br><sub><code>( -- )</code></sub> | Emit a playaction record. | — |
+| [`ANOTE`](#anote--terse)<br><sub><code>( -- )</code></sub> | Uses ATONE and DURATION to compose game logic. | — |
+| [`ATONE`](#atone--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel A. | — |
+| [`BACT,`](#bact--terse)<br><sub><code>( -- )</code></sub> | Emit a ball-action record. | — |
+| [`BALLTIME`](#balltime--terse)<br><sub><code>—</code></sub> | Balls process. | — |
+| [`BLDST,`](#bldst--terse)<br><sub><code>( -- )</code></sub> | Emit the ball destination command. | — |
+| [`BLMOT,`](#blmot--terse)<br><sub><code>( -- )</code></sub> | Emit the ball motion command. | — |
+| [`BNOTE`](#bnote--terse)<br><sub><code>—</code></sub> | Uses BTONE and DURATION to compose game logic. | — |
+| [`BONE`](#bone--terse)<br><sub><code>( address -- )</code></sub> | Store byte value 1. | — |
+| [`BTONE`](#btone--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel B. | — |
+| [`BV`](#bv--terse)<br><sub><code>( -- )</code></sub> | Define a named byte variable. | — |
+| [`BV=`](#bv--terse-1)<br><sub><code>( -- )</code></sub> | Uses BV to compose game logic. | — |
+| [`BZERO`](#bzero--terse)<br><sub><code>( address -- )</code></sub> | Store byte value 0. | — |
+| [`C=`](#c--terse)<br><sub><code>( value -- )</code></sub> | Uses CONSTANT to compose game logic. | — |
+| [`CHGS`](#chgs--terse)<br><sub><code>—</code></sub> | CHGS posts CHANGE SIDES; | — |
+| [`CHKFLSHSTAY`](#chkflshstay--terse)<br><sub><code>—</code></sub> | When isccp turn off check for wupwrt. | — |
+| [`CHKGMCNT`](#chkgmcnt--terse)<br><sub><code>—</code></sub> | CHKGMCNT posts the appropriate prompt around a timed wait and returns the current credit byte. | — |
+| [`CMAJOR`](#cmajor--terse)<br><sub><code>( -- )</code></sub> | Initialize the C-major sound pattern. | — |
+| [`CNLINE`](#cnline--terse)<br><sub><code>( -- )</code></sub> | CNLINE saves a new XIN/YIN endpoint and calls cnline from the current line state. | — |
+| [`CNOTE`](#cnote--terse)<br><sub><code>( -- )</code></sub> | Uses CTONE and DURATION to compose game logic. | — |
+| [`CONGR`](#congr--terse)<br><sub><code>( -- )</code></sub> | Display the congratulatory prompt. | — |
+| [`CPOST`](#cpost--terse)<br><sub><code>( x y options char -- )</code></sub> | Draw one character at the specified position. | — |
+| [`CREDARROW`](#credarrow--terse)<br><sub><code>—</code></sub> | Update last inning arrow. | — |
+| [`CTONE`](#ctone--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel C. | — |
+| [`DEACT,`](#deact--terse)<br><sub><code>( -- )</code></sub> | Emit vector-deactivation command. | — |
+| [`DLINE`](#dline--terse)<br><sub><code>—</code></sub> | Draw a line , given X Y start coor X Y ending coor. | — |
+| [`DOCHGS`](#dochgs--terse)<br><sub><code>( -- )</code></sub> | DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER; | — |
+| [`DOEHOMER`](#doehomer--terse)<br><sub><code>( -- )</code></sub> | DOEHOMER only posts the text. | — |
+| [`DOGOVER`](#dogover--terse)<br><sub><code>—</code></sub> | Do game over. | — |
+| [`DOHOMER`](#dohomer--terse)<br><sub><code>( -- )</code></sub> | DOHOMER erases the ball, displays HOMER, resets counts and clears the event timer; | — |
+| [`DOSAFE`](#dosafe--terse)<br><sub><code>( -- )</code></sub> | DOSAFE combines music/text. | — |
+| [`DOSBALL`](#dosball--terse)<br><sub><code>—</code></sub> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. | — |
+| [`DOSOUT`](#dosout--terse)<br><sub><code>—</code></sub> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. | — |
+| [`DOSSTRIKE`](#dosstrike--terse)<br><sub><code>—</code></sub> | DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word. | — |
+| [`DP1`](#dp1--terse)<br><sub><code>( -- )</code></sub> | Display the one-coin deposit prompt. | — |
+| [`DP12CN`](#dp12cn--terse)<br><sub><code>—</code></sub> | Uses B@ and SPOST to compose game logic. | — |
+| [`DP1CN`](#dp1cn--terse)<br><sub><code>—</code></sub> | Uses SPOST to compose game logic. | — |
+| [`DPCN`](#dpcn--terse)<br><sub><code>—</code></sub> | Wait for next coin. | — |
+| [`dpost`](#dpost--terse)<br><sub><code>—</code></sub> | dpost isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit. | — |
+| [`DTC`](#dtc--terse)<br><sub><code>( -- )</code></sub> | DTC selects decimal and invokes the host editor. | — |
+| [`DURATION`](#duration--terse)<br><sub><code>( duration -- )</code></sub> | Emit a note-duration command. | — |
+| [`DWAIT`](#dwait--terse)<br><sub><code>—</code></sub> | DWAIT runs nested loops with interrupts enabled and disables them on return; | — |
+| [`F=`](#f--terse)<br><sub><code>( -- )</code></sub> | Declare a forward word with the game's source shorthand. | — |
+| [`F1STLS`](#f1stls--terse)<br><sub><code>( -- )</code></sub> | Select the first-base left-side action. | — |
+| [`F1STRS`](#f1strs--terse)<br><sub><code>( -- )</code></sub> | Select the first-base right-side action. | — |
+| [`F2NDLS`](#f2ndls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`F2NDRS`](#f2ndrs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`F3RDLS`](#f3rdls--terse)<br><sub><code>( -- )</code></sub> | Select the third-base left-side action. | — |
+| [`F3RDRS`](#f3rdrs--terse)<br><sub><code>( -- )</code></sub> | Select the third-base right-side action. | — |
+| [`FBLLS`](#fblls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`FBLRS`](#fblrs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`FIELDWRT`](#fieldwrt--terse)<br><sub><code>—</code></sub> | Write field outline. | — |
+| [`FL`](#fl--terse)<br><sub><code>—</code></sub> | Set up all of background. | — |
+| [`FLDDST,`](#flddst--terse)<br><sub><code>( -- )</code></sub> | Emit the fielder destination command. | — |
+| [`FLFILL`](#flfill--terse)<br><sub><code>( -- )</code></sub> | FLFILL fills the background while allowing interrupts; | — |
+| [`FLSHME`](#flshme--terse)<br><sub><code>—</code></sub> | FLSHME executes only a nonzero address whose top two bits are clear; | — |
+| [`FLSHTON`](#flshton--terse)<br><sub><code>( -- )</code></sub> | FLSHTON saves a callback and starts its timer. | — |
+| [`FOULTIME`](#foultime--terse)<br><sub><code>—</code></sub> | Foulball process. | — |
+| [`FOWR`](#fowr--terse)<br><sub><code>( -- )</code></sub> | Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells. | — |
+| [`FSSLS`](#fssls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`FSSRS`](#fssrs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`GETF`](#getf--terse)<br><sub><code>—</code></sub> | GETF fetches FIELD bytes sequentially; | — |
+| [`GRNDRACTION`](#grndraction--terse)<br><sub><code>—</code></sub> | Given sectnm set up infield action. | — |
+| [`GRNDRHIT`](#grndrhit--terse)<br><sub><code>—</code></sub> | Grounder. | — |
+| [`HITDST`](#hitdst--terse)<br><sub><code>—</code></sub> | Chooses hit location. | — |
+| [`HLLS`](#hlls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`HLS`](#hls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`HMS`](#hms--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`HOM`](#hom--terse)<br><sub><code>—</code></sub> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; | — |
+| [`HRBY2`](#hrby2--terse)<br><sub><code>—</code></sub> | HRBY2 halves HRAT. | — |
+| [`HRLS`](#hrls--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`HRS`](#hrs--terse)<br><sub><code>( -- )</code></sub> | Uses BONE to compose game logic. | — |
+| [`I'`](#i--terse)<br><sub><code>( -- )</code></sub> | Emit the target's indexed immediate reference. | — |
+| [`ICODE`](#icode--terse)<br><sub><code>—</code></sub> | ICODE starts a CODE definition and emits the scheduler/register-save prologue: set INLIN/IPNT, swap alternate register banks and preserve the active register sets. | — |
+| [`INEXT`](#inext--terse)<br><sub><code>( -- )</code></sub> | INEXT emits a jump to IEX; | — |
+| [`INLOG`](#inlog--terse)<br><sub><code>—</code></sub> | Infield master logic. | — |
+| [`INNODDS`](#innodds--terse)<br><sub><code>—</code></sub> | INNODDS derives IODDS from inning, computer/player swing control and bonus-inning state; | — |
+| [`INSCN`](#inscn--terse)<br><sub><code>—</code></sub> | Insert coin call. | — |
+| [`INSTRC`](#instrc--terse)<br><sub><code>—</code></sub> | Instructions. | — |
+| [`INSWAIT`](#inswait--terse)<br><sub><code>—</code></sub> | INSWAIT enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return. | — |
+| [`INTERRUPTS>`](#interrupts--terse-1)<br><sub><code>( -- )</code></sub> | Emit the interrupt-vector dispatch jump. | — |
+| [`INTHIGHRES`](#inthighres--terse)<br><sub><code>( -- )</code></sub> | Intialize screen for commercial mode. | — |
+| [`ISCN`](#iscn--terse)<br><sub><code>( -- )</code></sub> | Display the V15 instruction message. | — |
+| [`LABLE`](#lable--terse)<br><sub><code>( -- )</code></sub> | Provide the original source's label-definition alias. | — |
+| [`LCB,`](#lcb--terse)<br><sub><code>( -- )</code></sub> | Uses ACT, and DEACT, to compose game logic. | — |
+| [`LDINFLDPA`](#ldinfldpa--terse)<br><sub><code>( -- )</code></sub> | LDINFLDPA consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain. | — |
+| [`LDPC`](#ldpc--terse)<br><sub><code>( -- )</code></sub> | Emit/load the music program-counter value. | — |
+| [`LDPCC`](#ldpcc--terse)<br><sub><code>( -- )</code></sub> | Emit/load a music program-counter command. | — |
+| [`LK,`](#lk--terse)<br><sub><code>( -- )</code></sub> | Uses BACT, and DEACT, to compose game logic. | — |
+| [`LSETTFCOOR`](#lsettfcoor--terse)<br><sub><code>—</code></sub> | Set take field coor & status -active , xpand. | — |
+| [`MASTER`](#master--terse)<br><sub><code>( -- )</code></sub> | Define the game's master music stream. | — |
+| [`MBALL`](#mball--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MCANNON`](#mcannon--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MCOIN`](#mcoin--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MCVOLS`](#mcvols--terse)<br><sub><code>( volume -- )</code></sub> | Emit music-channel volume values. | — |
+| [`MFENCE`](#mfence--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MFOUL`](#mfoul--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MHIT`](#mhit--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MLINN`](#mlinn--terse)<br><sub><code>—</code></sub> | Mark last inning. | — |
+| [`MOPENERS`](#mopeners--terse)<br><sub><code>( -- )</code></sub> | Uses PMUSIC to compose game logic. | — |
+| [`MOUT`](#mout--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MSAFE`](#msafe--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MSTRIKE`](#mstrike--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`MYAH`](#myah--terse)<br><sub><code>( -- )</code></sub> | Uses BMUSIC to compose game logic. | — |
+| [`NOISE`](#noise--terse)<br><sub><code>( -- )</code></sub> | Emit a noise/sound command. | — |
+| [`NOTES`](#notes--terse)<br><sub><code>( -- )</code></sub> | Uses ATONE and BTONE to compose game logic. | — |
+| [`NPOST`](#npost--terse)<br><sub><code>—</code></sub> | Post a bcd number on the screen ; see options. | — |
+| [`OFFDST,`](#offdst--terse)<br><sub><code>( -- )</code></sub> | Emit the outfielder destination command. | — |
+| [`OFMOT,`](#ofmot--terse)<br><sub><code>( -- )</code></sub> | Emit the outfield motion command. | — |
+| [`ON1ST,`](#on1st--terse)<br><sub><code>( -- )</code></sub> | Emit the first-base playaction command. | — |
+| [`ON2ND,`](#on2nd--terse)<br><sub><code>( -- )</code></sub> | Emit the second-base playaction command. | — |
+| [`ON3RD,`](#on3rd--terse)<br><sub><code>( -- )</code></sub> | Emit the third-base playaction command. | — |
+| [`OUTFLDHIT`](#outfldhit--terse)<br><sub><code>—</code></sub> | Fly ball. | — |
+| [`OUTLINE`](#outline--terse)<br><sub><code>—</code></sub> | Creates rectanguler outline. | — |
+| [`OUTTIME`](#outtime--terse)<br><sub><code>—</code></sub> | Out prc. | — |
+| [`PLRCHK`](#plrchk--terse)<br><sub><code>—</code></sub> | PLRCHK reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL; | — |
+| [`PLRSELECT`](#plrselect--terse)<br><sub><code>( -- )</code></sub> | Select singel player or 2 player. | — |
+| [`PPOST`](#ppost--terse)<br><sub><code>( x y options string -- x y options )</code></sub> | Draw a counted string and keep drawing coordinates. | — |
+| [`PUP`](#pup--terse)<br><sub><code>—</code></sub> | Power up routine. | — |
+| [`PX0`](#px0--terse)<br><sub><code>( -- )</code></sub> | Emit zero/white pixel patterns and define PX1/PX0 to select them. | — |
+| [`PX1`](#px1--terse)<br><sub><code>( -- )</code></sub> | Emit zero/white pixel patterns and define PX1/PX0 to select them. | — |
+| [`QUIET`](#quiet--terse)<br><sub><code>( -- )</code></sub> | Uses ABVOLS and MCVOLS to compose game logic. | — |
+| [`QUIT`](#quit--terse)<br><sub><code>( -- )</code></sub> | Uses HERE and LDPC to compose game logic. | — |
+| [`RCB,`](#rcb--terse)<br><sub><code>( -- )</code></sub> | Uses ACT, and DEACT, to compose game logic. | — |
+| [`RDRNDNTE`](#rdrndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a randomized note with a rest interval. | — |
+| [`RECLINE`](#recline--terse)<br><sub><code>—</code></sub> | RECLINE derives one horizontal row from retained rectangle arguments. | — |
+| [`RECTAN`](#rectan--terse)<br><sub><code>—</code></sub> | In X, Y, X length, Y length, pxtype set. | — |
+| [`REST`](#rest--terse)<br><sub><code>( duration -- )</code></sub> | Insert a silent music interval. | — |
+| [`REST,`](#rest--terse-1)<br><sub><code>( -- )</code></sub> | Emit a resting playaction record. | — |
+| [`RETPA`](#retpa--terse)<br><sub><code>—</code></sub> | Return to position pa. | — |
+| [`RNDNTE`](#rndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a randomized musical note. | — |
+| [`RRRNDNTE`](#rrrndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a sequence of randomized notes. | — |
+| [`RUN1CHK1ST`](#run1chk1st--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
+| [`RUN1CHK2ND`](#run1chk2nd--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
+| [`RUN2CHK`](#run2chk--terse)<br><sub><code>—</code></sub> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. | — |
+| [`RUN2CHK12ND`](#run2chk12nd--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
+| [`RUN2CHK1ST`](#run2chk1st--terse)<br><sub><code>—</code></sub> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. | — |
+| [`RUN3CHK`](#run3chk--terse)<br><sub><code>—</code></sub> | RUN3CHK, RUN2CHK1ST and RUN2CHK distinguish the later runner records' base bytes and leave an occupancy code plus the next available runner address. | — |
+| [`RUNDST,`](#rundst--terse)<br><sub><code>( -- )</code></sub> | Emit the runner destination command. | — |
+| [`S!`](#s--terse)<br><sub><code>( address value -- )</code></sub> | Store cell with address-first arguments. | — |
+| [`S10`](#s10--terse)<br><sub><code>( -- )</code></sub> | S10 starts INTERRUPTS0 through ISTART; | — |
+| [`S11`](#s11--terse)<br><sub><code>( -- )</code></sub> | S11 starts INTERRUPTS1. | — |
+| [`SB!`](#sb--terse)<br><sub><code>( address value -- )</code></sub> | Store byte with address-first arguments. | — |
+| [`SBALL1`](#sball1--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SBALL2`](#sball2--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SBALL3`](#sball3--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SBO`](#sbo--terse)<br><sub><code>—</code></sub> | SBO posts the three $30-based count characters at their fixed positions. | — |
+| [`SCOREME`](#scoreme--terse)<br><sub><code>—</code></sub> | Plop scores up. | — |
+| [`SCRERASE`](#screrase--terse)<br><sub><code>( -- )</code></sub> | Erase entire screen. | — |
+| [`SCRS`](#scrs--terse)<br><sub><code>—</code></sub> | SCRS clears two score rectangles and draws zero score characters. | — |
+| [`SETFDST`](#setfdst--terse)<br><sub><code>—</code></sub> | Set up fielder destination values. | — |
+| [`SETTF`](#settf--terse)<br><sub><code>( -- )</code></sub> | SETTF performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading. | — |
+| [`SETTFPA`](#settfpa--terse)<br><sub><code>—</code></sub> | Take field pa. | — |
+| [`SFOUL`](#sfoul--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SGO`](#sgo--terse)<br><sub><code>—</code></sub> | Uses SPOST to compose game logic. | — |
+| [`SHOMER`](#shomer--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SORRY`](#sorry--terse)<br><sub><code>( -- )</code></sub> | Display the losing-player prompt. | — |
+| [`SOUT1`](#sout1--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SOUT2`](#sout2--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SOUT3`](#sout3--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SPLR`](#splr--terse)<br><sub><code>—</code></sub> | SPLR12/SPLR display available player choices; | — |
+| [`SPLR12`](#splr12--terse)<br><sub><code>—</code></sub> | SPLR12/SPLR display available player choices; | — |
+| [`SPOST`](#spost--terse)<br><sub><code>( x y options string -- )</code></sub> | Draw a string. | — |
+| [`SSAFE`](#ssafe--terse)<br><sub><code>—</code></sub> | SSAFE also redraws counts with SBO. | — |
+| [`SSTRIKE1`](#sstrike1--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`SSTRIKE2`](#sstrike2--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`STFLD`](#stfld--terse)<br><sub><code>( -- )</code></sub> | STFLD installs RETPA and TAKEFIELD. | — |
+| [`STP,`](#stp--terse)<br><sub><code>( -- )</code></sub> | Emit a standing-action record. | — |
+| [`STRIKETIME`](#striketime--terse)<br><sub><code>—</code></sub> | Strike process. | — |
+| [`STRINGGO`](#stringgo--terse)<br><sub><code>—</code></sub> | Given string , stringerase. | — |
+| [`STRINGPRC`](#stringprc--terse)<br><sub><code>—</code></sub> | String display. | — |
+| [`STRTBALL`](#strtball--terse)<br><sub><code>—</code></sub> | STRTBALL runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music. | — |
+| [`SUP`](#sup--terse)<br><sub><code>—</code></sub> | SUP posts UP. | — |
+| [`SW-30`](#sw-30--terse)<br><sub><code>—</code></sub> | X=1. | — |
+| [`SW-45`](#sw-45--terse)<br><sub><code>—</code></sub> | X=1. | — |
+| [`SW-90`](#sw-90--terse)<br><sub><code>—</code></sub> | SW-90 ignores direction/random inputs and returns the far-right foul sector. | — |
+| [`SW+30`](#sw30--terse)<br><sub><code>—</code></sub> | X=1. | — |
+| [`SW+45`](#sw45--terse)<br><sub><code>—</code></sub> | X=1. | — |
+| [`SW+90`](#sw90--terse)<br><sub><code>—</code></sub> | SW+90 always returns foul-left after dropping its inputs. | — |
+| [`SW0`](#sw0--terse)<br><sub><code>—</code></sub> | X=1. | — |
+| [`SWALK`](#swalk--terse)<br><sub><code>—</code></sub> | Uses ROT and SPOST to compose game logic. | — |
+| [`TCNT`](#tcnt--terse)<br><sub><code>—</code></sub> | TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. | — |
+| [`TERSECHK`](#tersechk--terse)<br><sub><code>—</code></sub> | Look at terse routine flags. | — |
+| [`TF`](#tf--terse)<br><sub><code>—</code></sub> | Take the field. | — |
+| [`THW,`](#thw--terse)<br><sub><code>( -- )</code></sub> | Emit the throw command. | — |
+| [`TWAIT`](#twait--terse)<br><sub><code>—</code></sub> | Terse wait period. | — |
+| [`V`](#v--terse)<br><sub><code>( -- )</code></sub> | Uses VARIABLE to compose game logic. | — |
+| [`V=`](#v--terse-1)<br><sub><code>( -- )</code></sub> | Uses V and VARIABLE to compose game logic. | — |
+| [`VIBS`](#vibs--terse)<br><sub><code>( value -- )</code></sub> | Emit a vibrato setting. | — |
+| [`VIS`](#vis--terse)<br><sub><code>—</code></sub> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; | — |
+| [`WHBODDS`](#whbodds--terse)<br><sub><code>—</code></sub> | Sets who is on base calculates play odds. | — |
+| [`WTHW,`](#wthw--terse)<br><sub><code>( -- )</code></sub> | Emit the wait-for-throw command. | — |
+| [`WUPGO`](#wupgo--terse)<br><sub><code>—</code></sub> | WUPGO activates WHOSUP with runner/automatic-forward flags; | — |
+| [`WUPTON`](#wupton--terse)<br><sub><code>( -- )</code></sub> | WUPTON installs WUPWRT. | — |
+| [`WUPWRT`](#wupwrt--terse)<br><sub><code>—</code></sub> | Write whos up for flash. | — |
+| [`YOU1ST`](#you1st--terse)<br><sub><code>—</code></sub> | YOU1ST posts the greeting/extra-inning challenge, then continues to 306. | — |
+| [`ZERORAM`](#zeroram--terse)<br><sub><code>—</code></sub> | ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT. | — |
 
 ## Extra Bases native CODE words (85)
 
 | Word / stack | Function | DNA docs |
 | --- | --- | --- |
-| [`+LOOP`](#zeroram--terse)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses LOOP to process game state. | Glossary |
-| [`ALLFLDACT`](#loop--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets all fielders active. | — |
-| [`ANMSEQLOAD`](#allfldact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Finds proper anm seq by per=#. | — |
-| [`BALLERASE`](#anmseqload--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | BALLERASE preserves BC/IY around native BLERASE and returns to TERSE. | — |
-| [`BATHIT`](#ballerase--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | He hit it time to get em running. | — |
-| [`BATHITCHK`](#bathit--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Check window for hit. | — |
-| [`BATSWING`](#bathitchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Swings bat if appropriate. | — |
-| [`BATWRITE`](#batswing--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Xor bat from swingtype. | — |
-| [`BCD+`](#batwrite--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Binary to decimal arithmatic. | — |
-| [`BLDST`](#bcd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Ball thrown or hit. | — |
-| [`BLMOTION`](#bldst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set pc for ram pa table -tractor ball. | — |
-| [`BLPOSCHK`](#blmotion--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | BLPOSCHK branches on HITYET. | — |
-| [`BMUSIC`](#blposchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | BMUSIC consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay. | — |
-| [`BUTTONCHK`](#bmusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Reads buttons for swing run & pitch it. | — |
-| [`CHKCAUGHT`](#buttonchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Caught set in interrupt. | — |
-| [`CHKGROUNDER`](#chkcaught--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | If grounder adjust ball direction. | — |
-| [`CHKSCRTIME`](#chkgrounder--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Score process. | — |
-| [`CLRBLST`](#chkscrtime--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | CLRBLST resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading. | — |
-| [`cnline`](#clrblst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Calls vector line write. | — |
-| [`COMPDE`](#cnline--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | COMPDE applies the same operation to DE while preserving HL. | — |
-| [`COMPHL`](#compde--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Compliments HL. | — |
-| [`COUNT`](#comphl--native-code)<br><sub><code>( address -- address+1 length )</code></sub> | Fetch the address and length of a counted string. | Glossary |
-| [`cpost`](#count--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Post an ascii-character on the screen ; see opt. | — |
-| [`DEACTIVATE`](#cpost--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Reset active bit in status. | — |
-| [`DI`](#deactivate--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Disable interrupts. | — |
-| [`DIVHLBY4`](#di--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Divide HL by 4. | — |
-| [`DO`](#divhlby4--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Enter a counted loop. | Glossary |
-| [`DSTCALC`](#do--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Calc deltas to destination. | — |
-| [`DSTLD`](#dstcalc--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | DSTLD reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively. | — |
-| [`EI`](#dstld--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses SWAN to process game state. | — |
-| [`EIDI`](#ei--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers. | — |
-| [`EMUSIC`](#eidi--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | EMUSIC selects ENDMUSIC and initializes timing/repetition to one; | — |
-| [`EX`](#emusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. | — |
-| [`FILL`](#ex--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Fill a memory/screen range. | Glossary |
-| [`FLDDST`](#fill--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Fielders take position logic. | — |
-| [`FLSHOFF`](#flddst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | FLSHOFF disables flashing and services cleanup under DI. | — |
-| [`FMIRROR`](#flshoff--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. | — |
-| [`HITRUN`](#fmirror--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Activate proper runners and set trwbase. | — |
-| [`HOMERCHK`](#hitrun--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk for homer or fence hit. | — |
-| [`I`](#homerchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
-| [`IEX`](#i--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | IEX restores saved registers, enables interrupts and returns. | — |
-| [`INDEXW`](#iex--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Call routine A- disp HL- table add. | — |
-| [`INFIELD`](#indexw--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses IFSPAN to process game state. | — |
-| [`INFLDACT`](#infield--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set infielders active. | — |
-| [`ISTART`](#infldact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ISTART disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT. | — |
-| [`KILLOF`](#istart--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Stop outfield tractor ball control. | — |
-| [`LOADANM`](#killof--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads magic & anm HL-top of playact table. | — |
-| [`LOOP`](#loadanm--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Advance or terminate a counted loop. | Glossary |
-| [`MULTHLBY4`](#loop--native-code-1)<br><sub><code>Z80 register / stack ABI</code></sub> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. | — |
-| [`MUSCPU`](#multhlby4--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Declare cross-screen dispatch labels and begin assembling MUSCPU. | — |
-| [`NDUP`](#muscpu--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses ARRAY to process game state. | — |
-| [`OFFFDST`](#ndup--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | All player off field control. | — |
-| [`OFLDTBL`](#offfdst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; | — |
-| [`OFMOTION`](#ofldtbl--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set pc for ram pa table -tractor ball. | — |
-| [`ON1ST`](#ofmotion--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; | — |
-| [`ON2ND`](#on1st--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; | — |
-| [`ON3RD`](#on2nd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; | — |
-| [`OPCODECHK`](#on3rd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Called by plyactupdate. | — |
-| [`OUTFLDACT`](#opcodechk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets outfielders active. | — |
-| [`PACTLOAD`](#outfldact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads vect from plyact. | — |
-| [`PATFETCH`](#pactload--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads actual pattern IX-vector. | — |
-| [`PERSPECTIVE`](#patfetch--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Pattern size determined by y. | — |
-| [`PLAYACT`](#perspective--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Called in intterupt does update prc. | — |
-| [`PMUSIC`](#playact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | PMUSIC installs a stream unconditionally and sets priority, repeat count and note timer. | — |
-| [`PTAUTOTM`](#pmusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Pitch auto timer. | — |
-| [`RESETRUNNERS`](#ptautotm--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Reset runners to order of on base. | — |
-| [`RND`](#resetrunners--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Generate a random number. | — |
-| [`RUNDST`](#rnd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Runner base running control. | — |
-| [`SENTRY`](#rundst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Game loop. | — |
-| [`SETACT`](#sentry--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets avtive bit in status. | — |
-| [`STARTMUSIC`](#setact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | STARTMUSIC clears its request. | — |
-| [`strtline`](#startmusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Given X Y sets up start of line. | — |
-| [`SWAN`](#strtline--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Transfer interrupt/screen execution state. | — |
-| [`TBALLPITCH`](#swan--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads pitch velocities. | — |
-| [`THROWANIM`](#tballpitch--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets up BLDST and player anim. | — |
-| [`THROWBALL`](#throwanim--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Finish scoring first. | — |
-| [`THWANMSET`](#throwball--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set up throw animation. | — |
-| [`TIMER`](#thwanmset--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Interrupt timer routine. | — |
-| [`VECTOR`](#timer--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Vectors and limit checks. | — |
-| [`VERASE`](#vector--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Does pattern board erase from vector IX. | — |
-| [`VWRITE`](#verase--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Does reloff relabs patbrd from vector IX. | — |
-| [`WAIT`](#vwrite--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Given A wait period stop every thing. | — |
-| [`WAITTHRW`](#wait--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets flag for 1stbaseman to wait throw. | — |
-| [`WRITE`](#waitthrw--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Write with X Y sizes ; pattern with no header. | — |
-| [`WRITR`](#write--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Write with a relative pattern. | — |
+| [`+LOOP`](#loop--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses LOOP to process game state. | Glossary |
+| [`ALLFLDACT`](#allfldact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets all fielders active. | — |
+| [`ANMSEQLOAD`](#anmseqload--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Finds proper anm seq by per=#. | — |
+| [`BALLERASE`](#ballerase--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | BALLERASE preserves BC/IY around native BLERASE and returns to TERSE. | — |
+| [`BATHIT`](#bathit--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | He hit it time to get em running. | — |
+| [`BATHITCHK`](#bathitchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Check window for hit. | — |
+| [`BATSWING`](#batswing--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Swings bat if appropriate. | — |
+| [`BATWRITE`](#batwrite--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Xor bat from swingtype. | — |
+| [`BCD+`](#bcd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Binary to decimal arithmatic. | — |
+| [`BLDST`](#bldst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Ball thrown or hit. | — |
+| [`BLMOTION`](#blmotion--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set pc for ram pa table -tractor ball. | — |
+| [`BLPOSCHK`](#blposchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | BLPOSCHK branches on HITYET. | — |
+| [`BMUSIC`](#bmusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | BMUSIC consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay. | — |
+| [`BUTTONCHK`](#buttonchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Reads buttons for swing run & pitch it. | — |
+| [`CHKCAUGHT`](#chkcaught--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Caught set in interrupt. | — |
+| [`CHKGROUNDER`](#chkgrounder--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | If grounder adjust ball direction. | — |
+| [`CHKSCRTIME`](#chkscrtime--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Score process. | — |
+| [`CLRBLST`](#clrblst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | CLRBLST resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading. | — |
+| [`cnline`](#cnline--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Calls vector line write. | — |
+| [`COMPDE`](#compde--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | COMPDE applies the same operation to DE while preserving HL. | — |
+| [`COMPHL`](#comphl--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Compliments HL. | — |
+| [`COUNT`](#count--native-code)<br><sub><code>( address -- address+1 length )</code></sub> | Fetch the address and length of a counted string. | Glossary |
+| [`cpost`](#cpost--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Post an ascii-character on the screen ; see opt. | — |
+| [`DEACTIVATE`](#deactivate--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Reset active bit in status. | — |
+| [`DI`](#di--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Disable interrupts. | — |
+| [`DIVHLBY4`](#divhlby4--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Divide HL by 4. | — |
+| [`DO`](#do--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Enter a counted loop. | Glossary |
+| [`DSTCALC`](#dstcalc--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Calc deltas to destination. | — |
+| [`DSTLD`](#dstld--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | DSTLD reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively. | — |
+| [`EI`](#ei--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses SWAN to process game state. | — |
+| [`EIDI`](#eidi--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers. | — |
+| [`EMUSIC`](#emusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | EMUSIC selects ENDMUSIC and initializes timing/repetition to one; | — |
+| [`EX`](#ex--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. | — |
+| [`FILL`](#fill--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Fill a memory/screen range. | Glossary |
+| [`FLDDST`](#flddst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Fielders take position logic. | — |
+| [`FLSHOFF`](#flshoff--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | FLSHOFF disables flashing and services cleanup under DI. | — |
+| [`FMIRROR`](#fmirror--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. | — |
+| [`HITRUN`](#hitrun--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Activate proper runners and set trwbase. | — |
+| [`HOMERCHK`](#homerchk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk for homer or fence hit. | — |
+| [`I`](#i--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
+| [`IEX`](#iex--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | IEX restores saved registers, enables interrupts and returns. | — |
+| [`INDEXW`](#indexw--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Call routine A- disp HL- table add. | — |
+| [`INFIELD`](#infield--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses IFSPAN to process game state. | — |
+| [`INFLDACT`](#infldact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set infielders active. | — |
+| [`ISTART`](#istart--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ISTART disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT. | — |
+| [`KILLOF`](#killof--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Stop outfield tractor ball control. | — |
+| [`LOADANM`](#loadanm--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads magic & anm HL-top of playact table. | — |
+| [`LOOP`](#loop--native-code-1)<br><sub><code>Z80 register / stack ABI</code></sub> | Advance or terminate a counted loop. | Glossary |
+| [`MULTHLBY4`](#multhlby4--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. | — |
+| [`MUSCPU`](#muscpu--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Declare cross-screen dispatch labels and begin assembling MUSCPU. | — |
+| [`NDUP`](#ndup--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses ARRAY to process game state. | — |
+| [`OFFFDST`](#offfdst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | All player off field control. | — |
+| [`OFLDTBL`](#ofldtbl--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; | — |
+| [`OFMOTION`](#ofmotion--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set pc for ram pa table -tractor ball. | — |
+| [`ON1ST`](#on1st--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; | — |
+| [`ON2ND`](#on2nd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; | — |
+| [`ON3RD`](#on3rd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; | — |
+| [`OPCODECHK`](#opcodechk--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Called by plyactupdate. | — |
+| [`OUTFLDACT`](#outfldact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets outfielders active. | — |
+| [`PACTLOAD`](#pactload--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads vect from plyact. | — |
+| [`PATFETCH`](#patfetch--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads actual pattern IX-vector. | — |
+| [`PERSPECTIVE`](#perspective--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Pattern size determined by y. | — |
+| [`PLAYACT`](#playact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Called in intterupt does update prc. | — |
+| [`PMUSIC`](#pmusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | PMUSIC installs a stream unconditionally and sets priority, repeat count and note timer. | — |
+| [`PTAUTOTM`](#ptautotm--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Pitch auto timer. | — |
+| [`RESETRUNNERS`](#resetrunners--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Reset runners to order of on base. | — |
+| [`RND`](#rnd--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Generate a random number. | — |
+| [`RUNDST`](#rundst--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Runner base running control. | — |
+| [`SENTRY`](#sentry--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Game loop. | — |
+| [`SETACT`](#setact--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets avtive bit in status. | — |
+| [`STARTMUSIC`](#startmusic--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | STARTMUSIC clears its request. | — |
+| [`strtline`](#strtline--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Given X Y sets up start of line. | — |
+| [`SWAN`](#swan--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Transfer interrupt/screen execution state. | — |
+| [`TBALLPITCH`](#tballpitch--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads pitch velocities. | — |
+| [`THROWANIM`](#throwanim--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets up BLDST and player anim. | — |
+| [`THROWBALL`](#throwball--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Finish scoring first. | — |
+| [`THWANMSET`](#thwanmset--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Set up throw animation. | — |
+| [`TIMER`](#timer--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Interrupt timer routine. | — |
+| [`VECTOR`](#vector--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Vectors and limit checks. | — |
+| [`VERASE`](#verase--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Does pattern board erase from vector IX. | — |
+| [`VWRITE`](#vwrite--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Does reloff relabs patbrd from vector IX. | — |
+| [`WAIT`](#wait--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Given A wait period stop every thing. | — |
+| [`WAITTHRW`](#waitthrw--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets flag for 1stbaseman to wait throw. | — |
+| [`WRITE`](#write--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Write with X Y sizes ; pattern with no header. | — |
+| [`WRITR`](#writr--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Write with a relative pattern. | — |
 
 ## Native SUBR helpers (47)
 
 | Word / stack | Function | DNA docs |
 | --- | --- | --- |
-| [`AUTOR1`](#writr--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners. | — |
-| [`AUTOR2`](#autor1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Run second-runner automation logic. | — |
-| [`AUTOR3`](#autor2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Run third-runner automation logic. | — |
-| [`BLERASE`](#autor3--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Erases ball. | — |
-| [`CHKATBS`](#blerase--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Check if active player at base in- A vstatus. | — |
-| [`CHKCOIN1`](#chkatbs--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk door 1 for coin drop. | — |
-| [`CHKCOIN2`](#chkcoin1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk door 2 for coin drop. | — |
-| [`CMPOF`](#chkcoin2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Calculates proper deltas and patterns. | — |
-| [`COLORBAND`](#cmpof--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled. | — |
-| [`debounce`](#colorband--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Debounce input transitions. | — |
-| [`FETCH`](#debounce--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
-| [`FLSHWUP`](#fetch--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Handle flash callback. | — |
-| [`FNBB`](#flshwup--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
-| [`FONTUNPACK`](#fnbb--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FONTUNPACK reads two packed bytes and starts a five-row unpack loop. | — |
-| [`FRO1`](#fontunpack--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR1 to process game state. | — |
-| [`FRO12`](#fro1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR1 and AUTOR2 to process game state. | — |
-| [`FRO123`](#fro12--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR1 and AUTOR2 to process game state. | — |
-| [`FRO13`](#fro123--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR2 to process game state. | — |
-| [`FRO2`](#fro13--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
-| [`FRO23`](#fro2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
-| [`FRO3`](#fro23--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
-| [`HLOAD`](#fro3--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
-| [`IFSPAN`](#hload--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | IFSPAN preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value. | — |
-| [`INCPC`](#ifspan--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
-| [`loadpc`](#incpc--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | loadpc installs MUSPC and STARTPC. | — |
-| [`LVRSTAT`](#loadpc--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Load vstat for all runners in- A value. | — |
-| [`NBB`](#lvrstat--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | NBB is the empty-bases no-op. | — |
-| [`OFBLCHK`](#nbb--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk for catch or close when cmsw. | — |
-| [`PCJUMP`](#ofblchk--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
-| [`relabs`](#pcjump--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Relative X Y to magic address conversion. | — |
-| [`reloff`](#relabs--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Compute relative offset of x , y of pattern. | — |
-| [`RO1`](#reloff--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. | — |
-| [`RO12`](#ro1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO12 activates both forced runners, selecting a double-play or ordinary target; | — |
-| [`RO123`](#ro12--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. | — |
-| [`RO13`](#ro123--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO13 handles first-and-third occupancy and may branch through SETDBLPLAY. | — |
-| [`RO2`](#ro13--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. | — |
-| [`RO23`](#ro2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. | — |
-| [`RO3`](#ro23--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. | — |
-| [`SETDBLPLAY`](#ro3--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets up double play HL-guy on 1st. | — |
-| [`TAKEOFF`](#setdblplay--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Turn proper runners on. | — |
-| [`TBALLPRC`](#takeoff--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Pitch or control outfield. | — |
-| [`TBLVEL`](#tballprc--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Tractorball vel HL-# add. D-max vel. | — |
-| [`TIMEDCR`](#tblvel--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | HL-timer add if goes to zero return 1 else 0. | — |
-| [`TOOFCK`](#timedcr--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Time out outfield check. | — |
-| [`WALKOVER`](#toofck--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Walked runner at base. | — |
-| [`write`](#walkover--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Software write with x y size. | — |
-| [`writep`](#write--native-subr)<br><sub><code>( IY=patadr BC=ex/mag+shf HL=scradr --- )</code></sub> | Software write with pattern size on pattern. | — |
+| [`AUTOR1`](#autor1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners. | — |
+| [`AUTOR2`](#autor2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Run second-runner automation logic. | — |
+| [`AUTOR3`](#autor3--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Run third-runner automation logic. | — |
+| [`BLERASE`](#blerase--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Erases ball. | — |
+| [`CHKATBS`](#chkatbs--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Check if active player at base in- A vstatus. | — |
+| [`CHKCOIN1`](#chkcoin1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk door 1 for coin drop. | — |
+| [`CHKCOIN2`](#chkcoin2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk door 2 for coin drop. | — |
+| [`CMPOF`](#cmpof--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Calculates proper deltas and patterns. | — |
+| [`COLORBAND`](#colorband--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled. | — |
+| [`debounce`](#debounce--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Debounce input transitions. | — |
+| [`FETCH`](#fetch--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
+| [`FLSHWUP`](#flshwup--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Handle flash callback. | — |
+| [`FNBB`](#fnbb--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
+| [`FONTUNPACK`](#fontunpack--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FONTUNPACK reads two packed bytes and starts a five-row unpack loop. | — |
+| [`FRO1`](#fro1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR1 to process game state. | — |
+| [`FRO12`](#fro12--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR1 and AUTOR2 to process game state. | — |
+| [`FRO123`](#fro123--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR1 and AUTOR2 to process game state. | — |
+| [`FRO13`](#fro13--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses AUTOR2 to process game state. | — |
+| [`FRO2`](#fro2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
+| [`FRO23`](#fro23--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
+| [`FRO3`](#fro3--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Native game routine; source body below. | — |
+| [`HLOAD`](#hload--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
+| [`IFSPAN`](#ifspan--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | IFSPAN preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value. | — |
+| [`INCPC`](#incpc--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
+| [`loadpc`](#loadpc--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | loadpc installs MUSPC and STARTPC. | — |
+| [`LVRSTAT`](#lvrstat--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Load vstat for all runners in- A value. | — |
+| [`NBB`](#nbb--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | NBB is the empty-bases no-op. | — |
+| [`OFBLCHK`](#ofblchk--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Chk for catch or close when cmsw. | — |
+| [`PCJUMP`](#pcjump--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. | — |
+| [`relabs`](#relabs--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Relative X Y to magic address conversion. | — |
+| [`reloff`](#reloff--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Compute relative offset of x , y of pattern. | — |
+| [`RO1`](#ro1--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. | — |
+| [`RO12`](#ro12--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO12 activates both forced runners, selecting a double-play or ordinary target; | — |
+| [`RO123`](#ro123--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. | — |
+| [`RO13`](#ro13--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO13 handles first-and-third occupancy and may branch through SETDBLPLAY. | — |
+| [`RO2`](#ro2--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. | — |
+| [`RO23`](#ro23--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. | — |
+| [`RO3`](#ro3--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. | — |
+| [`SETDBLPLAY`](#setdblplay--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Sets up double play HL-guy on 1st. | — |
+| [`TAKEOFF`](#takeoff--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Turn proper runners on. | — |
+| [`TBALLPRC`](#tballprc--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Pitch or control outfield. | — |
+| [`TBLVEL`](#tblvel--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Tractorball vel HL-# add. D-max vel. | — |
+| [`TIMEDCR`](#timedcr--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | HL-timer add if goes to zero return 1 else 0. | — |
+| [`TOOFCK`](#toofck--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Time out outfield check. | — |
+| [`WALKOVER`](#walkover--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Walked runner at base. | — |
+| [`write`](#write--native-subr)<br><sub><code>Z80 register / stack ABI</code></sub> | Software write with x y size. | — |
+| [`writep`](#writep--native-subr)<br><sub><code>( IY=patadr BC=ex/mag+shf HL=scradr --- )</code></sub> | Software write with pattern size on pattern. | — |
 
 ## Host and cross-compiler definitions (2)
 
 | Word / stack | Function | DNA docs |
 | --- | --- | --- |
-| [`BASE!`](#writep--native-subr)<br><sub><code>( -- )</code></sub> | Set the number base. | — |
-| [`BASE@`](#base--terse)<br><sub><code>( -- )</code></sub> | Fetch the current number base. | — |
+| [`BASE!`](#base--terse)<br><sub><code>( -- )</code></sub> | Set the number base. | — |
+| [`BASE@`](#base--terse-1)<br><sub><code>( -- )</code></sub> | Fetch the current number base. | — |
 
 ## Implementations
 
