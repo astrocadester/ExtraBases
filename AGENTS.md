@@ -1,3 +1,0 @@
-# Mandatory assistant policy
-
-Before coding, read ENGINEERING-RULES.md, docs/SPRINT-PLAN.md and docs/TECHNICAL-DEBT.md. Original source, language, interpreter, compiler/XC and runtime are the authority. For TERSE, load the complete original-style source through the original interpreter and XC. Do not use host JavaScript/Python to parse definitions, map compiled word addresses, replace logic or patch execution tokens. Host tools may orchestrate, package native outputs and independently verify only. For any deviation STOP and obtain explicit approval BEFORE coding. Do not mistake passing tests for approval. Preserve original artifacts and existing plans; report only tests actually performed.
