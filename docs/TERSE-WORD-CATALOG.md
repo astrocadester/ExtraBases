@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0006</code></p>
+<p align="right"><code>v20261123-0007</code></p>
 
 # Extra Bases — TERSE Word Catalog
 
@@ -3803,8 +3803,6 @@ Clears $270 bytes starting at $7C30 and resets OFTFCNT.
 
 `( increment -- )`
 
-Increment consumed; IX loop frame updated or released
-
 Uses LOOP to process game state.
 
 ```text
@@ -3824,8 +3822,6 @@ LABEL PLDONE 6 D LXI, D DADX, NEXT
 
 `( -- )`
 
-RAM: infield/outfield active flags set; returns NEXT
-
 Sets all fielders active.
 
 ```text
@@ -3840,8 +3836,6 @@ CODE ALLFLDACT ( sets all fielders active )
 ### <a name="terse-word-41-4e-4d-53-45-51-4c-4f-41-44"></a><span>ANMSEQLOAD</span>
 
 `( -- )`
-
-IX: vector; RAM: VANMSEQH/L set; returns RET
 
 Finds proper anm seq by per=#.
 
@@ -3861,8 +3855,6 @@ D VANMSEQH X STX, E VANMSEQL X STX, RET,
 
 `( -- )`
 
-BC, IY preserved; ball cleared; returns NEXT
-
 Preserves BC/IY around native BLERASE and returns to TERSE.
 
 ```text
@@ -3877,8 +3869,6 @@ Y POPX, B POP, NEXT
 ### <a name="terse-word-42-41-54-48-49-54"></a><span>BATHIT</span>
 
 `( -- )`
-
-Updates hit, pitch and swing state; returns to native caller with 'RET'
 
 He hit it time to get em running.
 
@@ -3896,8 +3886,6 @@ SWINGGO STA, EI, RET,
 ### <a name="terse-word-42-41-54-48-49-54-43-48-4b"></a><span>BATHITCHK</span>
 
 `( -- )`
-
-HL = swing-state pointer; tests bat/ball overlap through table-selected hit window; returns to native caller
 
 Check window for hit.
 
@@ -3917,8 +3905,6 @@ HITTIME STA, HITGOING STA, BLERASE CALL, RET,
 ### <a name="terse-word-42-41-54-53-57-49-4e-47"></a><span>BATSWING</span>
 
 `( -- )`
-
-Reads swing counters from RAM, calls 'BATWRITE'/'BATHITCHK', updates swing/strike state
 
 Swings bat if appropriate.
 
@@ -3945,8 +3931,6 @@ THEN, THEN, THEN, RET,
 
 `( -- )`
 
-HL = swing-state pointer; derives drawing parameters and calls native pattern writer; restores HL
-
 Xor bat from swingtype.
 
 ```text
@@ -3966,8 +3950,6 @@ H POP, RET,
 
 `( a b -- bcd-sum )`
 
-HL contains BCD sum, pushed onto parameter stack
-
 Binary to decimal arithmatic.
 
 ```text
@@ -3981,8 +3963,6 @@ D A MOV, H ADC, DAA, A H MOV, H PUSH, NEXT
 ### <a name="terse-word-42-4c-44-53-54"></a><span>BLDST</span>
 
 `( -- )`
-
-Ball-vector update helper: computes motion/destination, handles catch/throw transitions
 
 Ball thrown or hit.
 
@@ -4014,8 +3994,6 @@ THEN, THWPA H LXI, VECTPC SHLD, B POP, RET,
 
 `( -- )`
 
-Sets 'VECTPC' to 'TBLPA' via HL; native 'RET'
-
 Set pc for ram pa table -tractor ball.
 
 ```text
@@ -4026,8 +4004,6 @@ TBLPA H LXI, VECTPC SHLD, RET,
 ### <a name="terse-word-42-4c-50-4f-53-43-48-4b"></a><span>BLPOSCHK</span>
 
 `( -- )`
-
-IX = ball vector; checks ball/pitch position, collision flags and destination vector
 
 Branches on HITYET.
 
@@ -4064,8 +4040,6 @@ A XRA, OFTBLGO STA, TOOF STA, ( ofl t.o. timer ) THEN, RET,
 
 `( music-address -- )`
 
-HL receives music address; note state conditionally initialized
-
 Consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay.
 
 ```text
@@ -4080,8 +4054,6 @@ NOTETIMER STA, A INR, MULTIPLE STA, THEN, NEXT
 ### <a name="terse-word-42-55-54-54-4f-4e-43-48-4b"></a><span>BUTTONCHK</span>
 
 `( -- )`
-
-Samples controls and updates pitch/run flags; saves/restores IX/IY on native calls
 
 Reads buttons for swing run & pitch it.
 
@@ -4119,8 +4091,6 @@ SWING STA, THEN, RET, -->
 ### <a name="terse-word-43-48-4b-43-41-55-47-48-54"></a><span>CHKCAUGHT</span>
 
 `( -- )`
-
-Interrupt-side caught-ball handler; saves native vector registers and changes runner/score flags
 
 Caught set in interrupt.
 
@@ -4175,8 +4145,6 @@ EI, RET, ASSEMBLE>
 
 `( -- )`
 
-IX = ball vector; adjusts velocity using grounder lookup; preserves HL across table lookup
-
 If grounder adjust ball direction.
 
 ```text
@@ -4194,8 +4162,6 @@ VXH X A LDX, 0A0 CPI, ' COMPDE CC, H POP, D DAD, RET,
 ### <a name="terse-word-43-48-4b-53-43-52-54-49-4d-45"></a><span>CHKSCRTIME</span>
 
 `( -- )`
-
-Scores play events from RAM, updates runner/base and score state; temporary IX stack saves balance on return
 
 Score process.
 
@@ -4218,8 +4184,6 @@ M A MOV, 1 ADI, DAA, A M MOV, D A MOV, SCORESHOW STA, RET,
 
 `( -- )`
 
-Stores ASCII zero ($30) into ball and strike counters; 'NEXT'
-
 Resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading.
 
 ```text
@@ -4231,8 +4195,6 @@ CODE CLRBLST 30 A MVI, BALLS STA, STRIKES STA, NEXT
 ### <a name="terse-word-63-6e-6c-69-6e-65"></a><span>cnline</span>
 
 `( -- )`
-
-Saves BC, IX and IY around 'VECTOR'; restores registers before 'NEXT'
 
 Calls vector line write.
 
@@ -4251,8 +4213,6 @@ PE, IF, EI, THEN, NEXT
 
 `( -- )`
 
-DE ← −DE; HL preserved
-
 Negate DE while preserving HL.
 
 ```text
@@ -4267,8 +4227,6 @@ CODE COMPDE H PUSH, XCHG, ' COMPHL CALL, XCHG, H POP, RET,
 
 `( -- )`
 
-HL ← −HL
-
 Compliments HL.
 
 ```text
@@ -4281,8 +4239,6 @@ H A MOV, CMA, A H MOV, L A MOV, CMA, A L MOV, H INX, RET,
 ### <a name="terse-word-43-4f-55-4e-54"></a><span>COUNT</span>
 
 `( address -- address+1 character )`
-
-Character returned with high-bit terminator stripped; address advanced by one
 
 Read the next character of a counted/high-bit-terminated string.
 
@@ -4303,8 +4259,6 @@ Read the next character of a counted/high-bit-terminated string.
 ### <a name="terse-word-63-70-6f-73-74"></a><span>cpost</span>
 
 `( x y options char -- x' y options )`
-
-Consumes drawing position, options and character; returns updated x and retained state
 
 Post an ascii-character on the screen ; see opt.
 
@@ -4343,8 +4297,6 @@ EXAF, PE, IF, EI, THEN, NEXT
 
 `( -- )`
 
-IX addresses vector; resets active status bit, writes 'SAMEDLT', returns
-
 Reset active bit in status.
 
 ```text
@@ -4355,8 +4307,6 @@ VACT VSTATUS X RESX, 1 A MVI, SAMEDLT STA, RET,
 ### <a name="terse-word-44-49"></a><span>DI</span>
 
 `( -- )`
-
-Maskable interrupts disabled; parameter stack unchanged
 
 Disable maskable Z80 interrupts.
 
@@ -4371,8 +4321,6 @@ _DI:
 ### <a name="terse-word-44-49-56-48-4c-42-59-34"></a><span>DIVHLBY4</span>
 
 `( -- )`
-
-HL ← signed(HL / 4)
 
 Divide HL by 4.
 
@@ -4391,8 +4339,6 @@ PSW POP, ' COMPHL CNZ, RET,
 ### <a name="terse-word-44-4f"></a><span>DO</span>
 
 `( limit start -- )`
-
-Two parameter-stack cells consumed; IX return stack holds start, limit and loop IP
 
 Enter a counted loop using a three-cell return-stack frame.
 
@@ -4416,8 +4362,6 @@ _DO:
 ### <a name="terse-word-44-53-54-43-41-4c-43"></a><span>DSTCALC</span>
 
 `( -- )`
-
-HL ← dy; DE ← dx; BC ← action selector
 
 Calc deltas to destination.
 
@@ -4461,8 +4405,6 @@ A XRA, RDST STA, VGO VSTATUS X SETX, THEN, RET, ASSEMBLE>
 
 `( -- )`
 
-IX input vector; HL ← destination X; DE ← destination Y
-
 Reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively.
 
 ```text
@@ -4477,8 +4419,6 @@ RET,
 ### <a name="terse-word-45-49"></a><span>EI</span>
 
 `( -- )`
-
-Maskable interrupts enabled; parameter stack unchanged
 
 Enable maskable Z80 interrupts.
 
@@ -4496,8 +4436,6 @@ _EI:
 
 `( -- )`
 
-Emits 'EI' then 'DI', returns through 'NEXT'
-
 Executes EI then DI, providing the Z80 interrupt opportunity used by callers.
 
 ```text
@@ -4509,8 +4447,6 @@ CODE EIDI EI, DI, NEXT
 ### <a name="terse-word-45-4d-55-53-49-43"></a><span>EMUSIC</span>
 
 `( -- )`
-
-Initializes music state and returns through 'NEXT'
 
 Selects ENDMUSIC and initializes timing/repetition to one.
 
@@ -4527,8 +4463,6 @@ STA, MULTIPLE STA, NEXT ( CALL EMUSIC AS AN INIT IN PROGRAM )
 
 `( -- )`
 
-Emits 'RET' instruction and continues through 'NEXT'
-
 Emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation.
 
 ```text
@@ -4540,8 +4474,6 @@ CODE EX C9 B, NEXT
 ### <a name="terse-word-46-49-4c-4c"></a><span>FILL</span>
 
 `( value address count -- )`
-
-Bytes [address..address+count−1] filled with value; parameter stack consumed
 
 Fill consecutive bytes with a specified value.
 
@@ -4567,8 +4499,6 @@ Fill consecutive bytes with a specified value.
 
 `( -- )`
 
-IX = fielder vector; computes velocity/destination and updates playaction state through native helpers
-
 Fielders take position logic.
 
 ```text
@@ -4592,8 +4522,6 @@ THEN, FLDPA H LXI, VECTPC SHLD, RET,
 
 `( -- )`
 
-Preserves BC; clears flash state and calls 'FLSHWUP' before 'NEXT'
-
 Disables flashing and services cleanup under DI.
 
 ```text
@@ -4608,8 +4536,6 @@ B POP, NEXT
 ### <a name="terse-word-46-4d-49-52-52-4f-52"></a><span>FMIRROR</span>
 
 `( -- )`
-
-Preserves BC while mirroring field graphics and returns through 'NEXT'
 
 Selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order.
 
@@ -4632,8 +4558,6 @@ FORWARD IFMAIN FORWARD IFMOUND
 
 `( -- )`
 
-Selects runner activation and throw target via indexed native dispatch; restores BC before 'NEXT'
-
 Activate proper runners and set trwbase.
 
 ```text
@@ -4655,8 +4579,6 @@ DECIMAL ;S
 ### <a name="terse-word-48-4f-4d-45-52-43-48-4b"></a><span>HOMERCHK</span>
 
 `( y x hit-type random-x random-y -- )`
-
-Five TERSE inputs consumed; ball/homer state updated
 
 Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination.
 
@@ -4691,8 +4613,6 @@ THEN, THEN, VDSTX BL SHLD, VDSTY BL SDED, EXX, NEXT -->
 
 `( -- index )`
 
-Loop index copied from IX return-stack frame to parameter stack; IX frame intact
-
 Fetch the innermost counted-loop index.
 
 ```z80
@@ -4709,8 +4629,6 @@ _Rat:
 
 `( saved-interrupt-frame -- )`
 
-Saved interrupt register frame restored, interrupt enabled
-
 Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call.
 
 ```text
@@ -4723,8 +4641,6 @@ PSW POP, B POP, D POP, H POP, EI, RET,
 ### <a name="terse-word-49-4e-44-45-58-57"></a><span>INDEXW</span>
 
 `( -- )`
-
-A,HL input table index/base; DE ← indexed word
 
 Call routine A- disp HL- table add.
 
@@ -4741,8 +4657,6 @@ M E MOV, H INX, M D MOV, H DCX, PSW POP, RET,
 ### <a name="terse-word-49-4e-46-49-45-4c-44"></a><span>INFIELD</span>
 
 `( -- )`
-
-Draws infield stripes/pitcher mound; preserves BC and IX around row-rendering helpers
 
 Uses IFSPAN to process game state.
 
@@ -4766,8 +4680,6 @@ X POPX, B POP, NEXT
 
 `( -- )`
 
-Sets HL to first infield vector, A to five records, and calls 'SETACT'
-
 Set infielders active.
 
 ```text
@@ -4783,8 +4695,6 @@ VSTATUS PT H LXI, 5 A MVI, ' SETACT CALL, RET,
 
 `( interrupt-address -- )`
 
-RAM[IPNT] ← interrupt handler address; mode IM2
-
 Disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT.
 
 ```text
@@ -4799,8 +4709,6 @@ INFBK OUT, IM2, EI, NEXT
 
 `( -- )`
 
-Clears outfield delta words and control flag; selects standing playaction
-
 Stop outfield tractor ball control.
 
 ```text
@@ -4814,8 +4722,6 @@ A XRA, OFTBLGO STA, RET,
 ### <a name="terse-word-4c-4f-41-44-41-4e-4d"></a><span>LOADANM</span>
 
 `( -- )`
-
-HL ← next playaction cursor; IX vector updated
 
 Loads magic & anm HL-top of playact table.
 
@@ -4835,8 +4741,6 @@ H POP, ( pc ) H INX, RET, ( returns updated pc in HL )
 ### <a name="terse-word-4c-4f-4f-50"></a><span>LOOP</span>
 
 `( -- )`
-
-Parameter stack unchanged; IX loop index incremented, loop frame retained or released
 
 Advance a counted loop and test its termination.
 
@@ -4870,8 +4774,6 @@ _LOOP:
 
 `( -- )`
 
-HL ← signed(4×HL)
-
 Multiplies the magnitude of HL by four through shifts, then restores its sign.
 
 ```text
@@ -4887,8 +4789,6 @@ L SLAR, H RALR, PSW POP, ' COMPHL CNZ, RET,
 ### <a name="terse-word-4d-55-53-43-50-55"></a><span>MUSCPU</span>
 
 `( -- )`
-
-Music tick handler; updates note timer, decodes music commands and drives sound ports
 
 Declare cross-screen dispatch labels and begin assembling MUSCPU.
 
@@ -4921,8 +4821,6 @@ LABEL MUSEND A ORA, PROCESS JZ, B POP, RET,
 
 `( x1 … xn n -- x1 … xn x1 … xn )`
 
-Parameter stack retains original n cells and appends a copy; count removed
-
 Duplicate the top n parameter-stack cells.
 
 ```z80
@@ -4954,8 +4852,6 @@ _NPICK_LOOP:
 
 `( -- )`
 
-IX = active fielder vector; selects off-field destination, computes movement deltas
-
 All player off field control.
 
 ```text
@@ -4984,8 +4880,6 @@ F= NFORW F= RFDST F= REND F= NOFPU F= CKATBS F= RVACT
 
 `( -- )`
 
-Assigns outfielder playaction table, invokes 'OUTFLDACT', and returns
-
 Gives all three outfielders OFTBLPA, activates them and returns.
 
 ```text
@@ -5002,8 +4896,6 @@ DI, VPLAYACTPC RF SHLD, VPLAYACTPC CF SHLD, VPLAYACTPC LF SHLD,
 
 `( -- )`
 
-Sets 'VECTPC' from 'OFPA', conditional on action opcode and IX status
-
 Set pc for ram pa table -tractor ball.
 
 ```text
@@ -5017,8 +4909,6 @@ OFPA H LXI, VECTPC SHLD, RET,
 
 `( -- )`
 
-RAM[FLDON1ST] ← IX
-
 ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
 
 ```text
@@ -5028,8 +4918,6 @@ CODE ON1ST X PUSHX, H POP, FLDON1ST SHLD, RET,
 ### <a name="terse-word-4f-4e-32-4e-44"></a><span>ON2ND</span>
 
 `( -- )`
-
-RAM[FLDON2ND] ← IX
 
 ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
 
@@ -5041,8 +4929,6 @@ CODE ON2ND X PUSHX, H POP, FLDON2ND SHLD, RET,
 
 `( -- )`
 
-RAM[FLDON3RD] ← IX
-
 ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
 
 ```text
@@ -5052,8 +4938,6 @@ CODE ON3RD X PUSHX, H POP, FLDON3RD SHLD, RET,
 ### <a name="terse-word-4f-50-43-4f-44-45-43-48-4b"></a><span>OPCODECHK</span>
 
 `( -- )`
-
-HL = playaction cursor; looks up opcode handler and executes with a native return trampoline
 
 Called by plyactupdate.
 
@@ -5075,8 +4959,6 @@ VECTPC LHLD, THEN, RET, ASSEMBLE>
 
 `( -- )`
 
-Sets HL to first outfield vector, A to three records, and calls 'SETACT'
-
 Sets outfielders active.
 
 ```text
@@ -5091,8 +4973,6 @@ VSTATUS LF H LXI, 3 A MVI, ' SETACT CALL, RET,
 ### <a name="terse-word-50-41-43-54-4c-4f-41-44"></a><span>PACTLOAD</span>
 
 `( -- )`
-
-IX = target vector; reads playaction stream, dispatches opcodes, advances vector PC
 
 Loads vect from plyact.
 
@@ -5118,8 +4998,6 @@ RET, -->
 
 `( -- )`
 
-IX = vector; selects animation-frame pattern from sequence table and stores its address
-
 Loads actual pattern IX-vector.
 
 ```text
@@ -5142,8 +5020,6 @@ D VPATH X STX, E VPATL X STX, RET,
 
 `( -- )`
 
-IX = vector; derives perspective class from Y and updates redraw flag if class changed
-
 Pattern size determined by y.
 
 ```text
@@ -5161,8 +5037,6 @@ RET,
 ### <a name="terse-word-50-4c-41-59-41-43-54"></a><span>PLAYACT</span>
 
 `( -- )`
-
-Reads 'VECTIX', preserves BC/IX, advances vector animation/update through helper routines
 
 Called in intterupt does update prc.
 
@@ -5184,8 +5058,6 @@ X POPX, B POP, RET,
 
 `( music-address -- )`
 
-HL consumes music address; RAM priority/timers updated
-
 Installs a stream unconditionally and sets priority, repeat count and note timer.
 
 ```text
@@ -5201,8 +5073,6 @@ PRIORITY STA, NOTETIMER STA, NEXT
 
 `( -- )`
 
-Calls 'TIMEDCR' for pitch timeout and returns through 'NEXT'
-
 Pitch auto timer.
 
 ```text
@@ -5217,8 +5087,6 @@ TIMEOUT H LXI, FLDCLR LDA, A ANA, TIMEDCR CZ, NEXT
 ### <a name="terse-word-52-45-53-45-54-52-55-4e-4e-45-52-53"></a><span>RESETRUNNERS</span>
 
 `( -- )`
-
-Reorders runner vector records by occupancy and resets final runner slot
 
 Reset runners to order of on base.
 
@@ -5246,8 +5114,6 @@ FORWARD OUTOFFF FORWARD CCLEAVE
 ### <a name="terse-word-52-4e-44"></a><span>RND</span>
 
 `( upper-bound -- random-value )`
-
-Upper bound consumed and scaled random result pushed; random seed advanced
 
 Produce a random value scaled to the supplied bound.
 
@@ -5318,8 +5184,6 @@ _MULU_DONE:
 
 `( -- )`
 
-IX = runner record; processes base occupancy, auto-forward and movement state
-
 Runner base running control.
 
 ```text
@@ -5375,8 +5239,6 @@ RUNPA H LXI, VECTPC SHLD, B POP, RET, ASSEMBLE> -->
 
 `( -- )`
 
-Native game scheduler; calls tick services, invokes 'TERSECHK', then loops
-
 Game loop.
 
 ```text
@@ -5403,8 +5265,6 @@ B POP, ' SENTRY JMP, -->
 
 `( -- )`
 
-HL,A input vector/count; VACT set across records
-
 Sets avtive bit in status.
 
 ```text
@@ -5419,8 +5279,6 @@ BEGIN, VACT M SET, D DAD, A DCR, 0=, END, RET,
 ### <a name="terse-word-53-54-41-52-54-4d-55-53-49-43"></a><span>STARTMUSIC</span>
 
 `( -- )`
-
-Selects event music from state flags and dispatches music requests
 
 Clears its request.
 
@@ -5439,8 +5297,6 @@ ELSE, DOVERB MCANNON DOVERB S11 THEN, THEN, RET,
 ### <a name="terse-word-73-74-72-74-6c-69-6e-65"></a><span>strtline</span>
 
 `( x y -- )`
-
-Pops X and Y to native registers, computes address/line setup; returns via 'NEXT'
 
 Given X Y sets up start of line.
 
@@ -5462,8 +5318,6 @@ SADR SHLD, B POP, NEXT
 
 `( value -- nibble-swapped-value )`
 
-High byte unchanged; low byte rotated four bits; result replaces input
-
 Exchange the high and low nibbles of the low byte.
 
 ```z80
@@ -5484,8 +5338,6 @@ _SWABN:
 ### <a name="terse-word-54-42-41-4c-4c-50-49-54-43-48"></a><span>TBALLPITCH</span>
 
 `( -- )`
-
-Computes pitcher/trackball velocity updates and writes movement fields
 
 Loads pitch velocities.
 
@@ -5510,8 +5362,6 @@ THEN, THEN, THEN, TBLDX SDED, EI, RET,
 ### <a name="terse-word-54-48-52-4f-57-41-4e-49-4d"></a><span>THROWANIM</span>
 
 `( -- )`
-
-Prepares ball/throw vector data; saves/restores IX and IY around native update
 
 Sets up BLDST and player anim.
 
@@ -5553,8 +5403,6 @@ THROW STA, Y POPX, X POPX, EI, RET, -->
 
 `( -- )`
 
-Builds the pitch or throw state, updates ball vector and runner decisions
-
 Finish scoring first.
 
 ```text
@@ -5583,8 +5431,6 @@ VGO M RES, EI, RET,
 
 `( -- )`
 
-Reads thrower vector from IX and stores 'WHOTHROWS'; initializes animation flags
-
 Set up throw animation.
 
 ```text
@@ -5601,8 +5447,6 @@ THROWANM STA, RET, ( set for sentry call )
 ### <a name="terse-word-54-49-4d-45-52"></a><span>TIMER</span>
 
 `( -- )`
-
-Scans game timers with 'TIMEDCR' and invokes native event handlers
 
 Interrupt timer routine.
 
@@ -5631,8 +5475,6 @@ TOOF H LXI, TIMEDCR CALL, A ANA, TOOFCK CNZ, RET,
 
 `( -- )`
 
-IX = vector record; advances positions and applies hardware limits
-
 Vectors and limit checks.
 
 ```text
@@ -5660,8 +5502,6 @@ RET,
 
 `( -- )`
 
-IX = vector record; derives previous pattern/screen address and calls native 'writep'
-
 Does pattern board erase from vector IX.
 
 ```text
@@ -5679,8 +5519,6 @@ writep CALL, RET,
 ### <a name="terse-word-56-57-52-49-54-45"></a><span>VWRITE</span>
 
 `( -- )`
-
-IX = vector record; derives pattern position, calls 'reloff'/'relabs'/'writep', saves erase address
 
 Does reloff relabs patbrd from vector IX.
 
@@ -5703,8 +5541,6 @@ RET,
 
 `( -- )`
 
-A = native delay count; preserves value over inner wait loop and returns
-
 Given A wait period stop every thing.
 
 ```text
@@ -5716,8 +5552,6 @@ PSW POP, A DCR, 0=, END, RET,
 ### <a name="terse-word-57-41-49-54-54-48-52-57"></a><span>WAITTHRW</span>
 
 `( -- )`
-
-Configures throw animation and wait state; A used for flags, native 'RET'
 
 Sets flag for 1stbaseman to wait throw.
 
@@ -5732,8 +5566,6 @@ THROWANM STA, 20 A MVI, WAITTHROW STA, RET,
 ### <a name="terse-word-57-52-49-54-45"></a><span>WRITE</span>
 
 `( x y pattern dimensions options -- )`
-
-Stack consumes x,y,pattern,dimensions,options; framebuffer updated
 
 Write with X Y sizes ; pattern with no header.
 
@@ -5756,8 +5588,6 @@ write CALL, EXX, H PUSH, Y POPX, NEXT
 
 `( x y relative-pattern options -- )`
 
-Stack consumes x,y,relative-pattern,options; framebuffer updated
-
 Write with a relative pattern.
 
 ```text
@@ -5778,8 +5608,6 @@ writep CALL, EXX, H PUSH, Y POPX, NEXT
 
 `( -- )`
 
-Writes automatic-run and active flags into runner 1 status fields
-
 AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners.
 
 ```text
@@ -5792,8 +5620,6 @@ RET, ( sets vauto , vforw , vact , vrun )
 ### <a name="terse-word-41-55-54-4f-52-32"></a><span>AUTOR2</span>
 
 `( -- )`
-
-Writes automatic-run and active flags into runner 2 status fields
 
 Run second-runner automation logic.
 
@@ -5808,8 +5634,6 @@ RET,
 
 `( -- )`
 
-Writes automatic-run and active flags into runner 3 status fields
-
 Run third-runner automation logic.
 
 ```text
@@ -5822,8 +5646,6 @@ RET,
 ### <a name="terse-word-42-4c-45-52-41-53-45"></a><span>BLERASE</span>
 
 `( -- )`
-
-Saves/restores IX; addresses ball vector, erases image, clears active bit
 
 Erases ball.
 
@@ -5841,8 +5663,6 @@ X POPX, ( stop ball ) NOBOD H LXI, VPAT BL SHLD, RET,
 
 `( -- )`
 
-A = vector status flags, E = accumulator; increments E if active and not at base
-
 Check if active player at base in- A vstatus.
 
 ```text
@@ -5855,8 +5675,6 @@ VACT A BIT, RZ, VATBS A BIT, RNZ, E INR, RET,
 ### <a name="terse-word-43-48-4b-43-4f-49-4e-31"></a><span>CHKCOIN1</span>
 
 `( -- )`
-
-Reads coin-door 1 via 'debounce'; updates credits and signals coin event
 
 Chk door 1 for coin drop.
 
@@ -5873,8 +5691,6 @@ UPCRED STA, A XRA, SPBON STA, DOVERB MCOIN RET,
 ### <a name="terse-word-43-48-4b-43-4f-49-4e-32"></a><span>CHKCOIN2</span>
 
 `( -- )`
-
-Reads coin-door 2 via 'debounce'; updates credits with door/DIP-specific increments
 
 Chk door 2 for coin drop.
 
@@ -5894,8 +5710,6 @@ A XRA, SPBON STA, DOVERB MCOIN RET,
 ### <a name="terse-word-43-4d-50-4f-46"></a><span>CMPOF</span>
 
 `( -- )`
-
-Selects outfielder vector in IX, computes deltas and activates outfield control
 
 Calculates proper deltas and patterns.
 
@@ -5918,8 +5732,6 @@ VDSTX BL LHLD, VDSTY BL LDED, 20 A MVI, VGO VSTATUS X RESX,
 
 `( saved-interrupt-frame -- )`
 
-Interrupt state restored, palette ports written
-
 Schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.
 
 ```text
@@ -5932,8 +5744,6 @@ PSW POP, H POP, EI, RET, ( palette only: preserve AF/HL )
 ### <a name="terse-word-64-65-62-6f-75-6e-63-65"></a><span>debounce</span>
 
 `( -- )`
-
-A = input port, HL = bit mask, DE = sampling duration; returns A = accepted pulse/zero
 
 Debounce input transitions.
 
@@ -5953,8 +5763,6 @@ B E MOV, ( try again ) READPORT JMP, ASSEMBLE>
 
 `( -- )`
 
-HL ← MUSICPC; A ← byte at HL
-
 Read the current music command byte; INCPC, HLOAD, and PCJUMP provide related stream operations.
 
 ```text
@@ -5966,8 +5774,6 @@ SUBR FETCH MUSPC LHLD, M A MOV, RET,
 ### <a name="terse-word-46-4c-53-48-57-55-50"></a><span>FLSHWUP</span>
 
 `( -- )`
-
-Saves/restores IX and IY while updating flash timer and callback
 
 Handle flash callback.
 
@@ -5989,8 +5795,6 @@ THEN, Y POPX, X POPX, RET,
 
 `( -- )`
 
-Native no-op helper; immediate 'RET'
-
 Native game routine; source body below.
 
 ```text
@@ -6000,8 +5804,6 @@ SUBR FNBB RET,
 ### <a name="terse-word-46-4f-4e-54-55-4e-50-41-43-4b"></a><span>FONTUNPACK</span>
 
 `( -- )`
-
-HL = packed font source; expands bytes into 'FONTWORK'; HL returns its address
 
 Reads two packed bytes and starts a five-row unpack loop.
 
@@ -6019,8 +5821,6 @@ FNTLP DJNZ, B POP, 0 FONTWORK H LXI, RET,
 
 `( -- )`
 
-Calls 'AUTOR1'; native 'RET'
-
 Uses AUTOR1 to process game state.
 
 ```text
@@ -6032,8 +5832,6 @@ SUBR FRO1 AUTOR1 CALL, RET,
 ### <a name="terse-word-46-52-4f-31-32"></a><span>FRO12</span>
 
 `( -- )`
-
-Calls 'AUTOR1', 'AUTOR2'; native 'RET'
 
 Uses AUTOR1 and AUTOR2 to process game state.
 
@@ -6047,8 +5845,6 @@ SUBR FRO12 AUTOR1 CALL, AUTOR2 CALL, RET,
 
 `( -- )`
 
-Calls 'AUTOR1', 'AUTOR2', 'AUTOR3'; native 'RET'
-
 Uses AUTOR1 and AUTOR2 to process game state.
 
 ```text
@@ -6060,8 +5856,6 @@ SUBR FRO123 AUTOR1 CALL, AUTOR2 CALL, AUTOR3 CALL, RET,
 ### <a name="terse-word-46-52-4f-31-33"></a><span>FRO13</span>
 
 `( -- )`
-
-Writes runner-1 status and calls 'AUTOR2'; native 'RET'
 
 Uses AUTOR2 to process game state.
 
@@ -6075,8 +5869,6 @@ SUBR FRO13 VSTATUS R1 STA, AUTOR2 CALL, RET,
 
 `( -- )`
 
-Writes runner-1 status field; native 'RET'
-
 Native game routine; source body below.
 
 ```text
@@ -6086,8 +5878,6 @@ SUBR FRO2 VSTATUS R1 STA, RET,
 ### <a name="terse-word-46-52-4f-32-33"></a><span>FRO23</span>
 
 `( -- )`
-
-Writes runner-1 and runner-2 status; native 'RET'
 
 Native game routine; source body below.
 
@@ -6099,8 +5889,6 @@ SUBR FRO23 VSTATUS R1 STA, VSTATUS R2 STA, RET,
 
 `( -- )`
 
-Writes runner-1 status field; native 'RET'
-
 Native game routine; source body below.
 
 ```text
@@ -6110,8 +5898,6 @@ SUBR FRO3 VSTATUS R1 STA, RET,
 ### <a name="terse-word-48-4c-4f-41-44"></a><span>HLOAD</span>
 
 `( -- )`
-
-HL ← zero-extended music byte
 
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
@@ -6126,8 +5912,6 @@ SUBR HLOAD FETCH CALL, INCPC CALL, 0 H MVI, A L MOV, RET,
 ### <a name="terse-word-49-46-53-50-41-4e"></a><span>IFSPAN</span>
 
 `( -- )`
-
-Uses incoming A and C for fielder span calculation; returns native register results
 
 Preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value.
 
@@ -6153,8 +5937,6 @@ CY, IF, H INX, THEN, IFPIX DJNZ, D POP,
 
 `( -- )`
 
-RAM[MUSPC] ← RAM[MUSPC]+1
-
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
 ```text
@@ -6167,8 +5949,6 @@ SUBR INCPC MUSPC LHLD, H INX, MUSPC SHLD, RET,
 
 `( -- )`
 
-RAM[MUSPC], RAM[STARTPC] ← HL
-
 Installs MUSPC and STARTPC.
 
 ```text
@@ -6180,8 +5960,6 @@ SUBR loadpc MUSPC SHLD, STARTPC SHLD, RET,
 ### <a name="terse-word-4c-56-52-53-54-41-54"></a><span>LVRSTAT</span>
 
 `( -- )`
-
-A = desired runner status byte; stores it across all four runner status fields
 
 Load vstat for all runners in- A value.
 
@@ -6197,8 +5975,6 @@ RET,
 
 `( -- )`
 
-Native no-op helper; immediate 'RET'
-
 Do nothing for the empty-bases case.
 
 ```text
@@ -6208,8 +5984,6 @@ SUBR NBB RET,
 ### <a name="terse-word-4f-46-42-4c-43-48-4b"></a><span>OFBLCHK</span>
 
 `( -- )`
-
-D = maximum catch distance; checks nearby ball/player vectors, returns native result in A
 
 Chk for catch or close when cmsw.
 
@@ -6233,8 +6007,6 @@ D DSBC, ' COMPHL CC, D POP, 10 A MVI, H CMP, >=, IF,
 
 `( -- )`
 
-RAM[MUSPC] ← 16-bit branch target
-
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
 ```text
@@ -6247,8 +6019,6 @@ MUSPC SDED, RET,
 ### <a name="terse-word-72-65-6c-61-62-73"></a><span>relabs</span>
 
 `( -- )`
-
-BC ← expansion/shift; HL ← screen address
 
 Relative X Y to magic address conversion.
 
@@ -6272,8 +6042,6 @@ MRFLOP C BIT, 0<>, IF, NEG, 0=, IF, H DCX, THEN, THEN,
 
 `( -- )`
 
-DE ← x offset; HL ← y offset; IY ← absolute pattern
-
 Compute relative offset of x , y of pattern.
 
 ```text
@@ -6295,8 +6063,6 @@ D POP, Y INXX, Y INXX, ( offset pattern ) RET,
 
 `( -- )`
 
-Activates runner 1 and selects a native runner pointer in BC, conditional on double-play state
-
 RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
 
 ```text
@@ -6309,8 +6075,6 @@ SETDBLPLAY JNZ, VMAGIC R2 B LXI, RET,
 ### <a name="terse-word-52-4f-31-32"></a><span>RO12</span>
 
 `( -- )`
-
-Activates runners 1 and 2; selects the next runner pointer in BC
 
 Activates both forced runners, selecting a double-play or ordinary target.
 
@@ -6326,8 +6090,6 @@ VMAGIC R3 B LXI, RET,
 
 `( -- )`
 
-Activates runners 1–3; selects runner pointer in BC, conditional on double play
-
 RO23 and RO123 choose forced advancement and double-play targets for their base combinations.
 
 ```text
@@ -6341,8 +6103,6 @@ SETDBLPLAY JNZ, VMAGIC R1 B LXI, RET,
 ### <a name="terse-word-52-4f-31-33"></a><span>RO13</span>
 
 `( -- )`
-
-Activates runner 2, then chooses runner pointer and double-play path
 
 Handles first-and-third occupancy and may branch through SETDBLPLAY.
 
@@ -6359,8 +6119,6 @@ VMAGIC R3 B LXI, RET,
 
 `( -- )`
 
-Activates runner 1 conditionally; returns BC = runner 2 vector
-
 RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
 
 ```text
@@ -6373,8 +6131,6 @@ AUTOR1 CALL, THEN, VMAGIC R2 B LXI, RET,
 ### <a name="terse-word-52-4f-32-33"></a><span>RO23</span>
 
 `( -- )`
-
-Selects runner 3 in BC, conditionally activating runners 1 and 2
 
 Select forced advancement and double-play targets for second- and third-base runners.
 
@@ -6390,8 +6146,6 @@ RET,
 
 `( -- )`
 
-Selects runner 2 in BC, conditionally activates runner 1
-
 RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
 
 ```text
@@ -6405,8 +6159,6 @@ AUTOR1 CNZ, RET,
 
 `( -- )`
 
-HL identifies runner on first; sets 'DBLPLAY' flag
-
 Sets up double play HL-guy on 1st.
 
 ```text
@@ -6419,8 +6171,6 @@ SUBR SETDBLPLAY ( sets up double play HL-guy on 1st )
 ### <a name="terse-word-54-41-4b-45-4f-46-46"></a><span>TAKEOFF</span>
 
 `( -- )`
-
-Dispatches runner-activation handler via BC/table and native return trampoline
 
 Turn proper runners on.
 
@@ -6439,8 +6189,6 @@ LABEL TORET RET, ASSEMBLE>
 ### <a name="terse-word-54-42-41-4c-4c-50-52-43"></a><span>TBALLPRC</span>
 
 `( -- )`
-
-Samples trackball port and computes tractor-ball/outfielder velocity state
 
 Pitch or control outfield.
 
@@ -6474,8 +6222,6 @@ LABEL LDOFPA OFPA SHLD, RET, ASSEMBLE>
 
 `( -- )`
 
-HL addresses current velocity byte, D = maximum; returns signed velocity increment in HL
-
 Tractorball vel HL-# add. D-max vel.
 
 ```text
@@ -6494,8 +6240,6 @@ PSW POP, ' COMPHL CNZ, RET,
 
 `( -- )`
 
-A ← 1 if timer reached zero, otherwise 0
-
 HL-timer add if goes to zero return 1 else 0.
 
 ```text
@@ -6510,8 +6254,6 @@ ELSE, A XRA, THEN, RET,
 ### <a name="terse-word-54-4f-4f-46-43-4b"></a><span>TOOFCK</span>
 
 `( -- )`
-
-Decrements outfielder timeout and invokes 'CMPOF' if still active
 
 Time out outfield check.
 
@@ -6529,8 +6271,6 @@ ELSE, CMPOF CALL, EI, 1 A MVI, TOOFF STA, THEN, RET,
 
 `( -- )`
 
-Sets 'CAUGHT' and 'THROWAROUND' flags to one
-
 Walked runner at base.
 
 ```text
@@ -6543,8 +6283,6 @@ SUBR WALKOVER ( walked runner at base )
 ### <a name="terse-word-77-72-69-74-65"></a><span>write</span>
 
 `( -- )`
-
-IY,BC,DE,HL input drawing state; frame buffer updated
 
 Software write with x y size.
 
@@ -6571,11 +6309,9 @@ THEN, B POP, ( magic ) RET, -->
 
 ### <a name="terse-word-77-72-69-74-65-70"></a><span>writep</span>
 
-`( IY=patadr BC=ex/mag+shf HL=scradr --- )`
+`( -- )`
 
-Native register outcome requires further verification.
-
-Software write with pattern size on pattern.
+Uses IY for the pattern address, BC for expansion/magic and shift settings, and HL for the screen address. Loads the pattern dimensions and transfers to the native drawing routine.
 
 ```text
 SUBR writep ( software write with pattern size on pattern )
@@ -6610,4 +6346,4 @@ Fetch the current number base.
 
 ## Source notes
 
-The catalog reproduces source implementations where present, including native Z80 routines and TERSE colon definitions. Stack signatures are taken from documented or source-verifiable behavior; native words show their parameter-stack effects and the observed Z80 register/memory outcomes together; entries lacking full register preservation verification must be read as observed effects, not a complete clobber contract. Source callers are static references, not runtime execution counts.
+The catalog reproduces source implementations where present, including native Z80 routines and TERSE colon definitions. Stack signatures describe TERSE parameter-stack behavior; native register and memory behavior is explained in the implementation description or original source listing where relevant. Source callers are static references, not runtime execution counts.
