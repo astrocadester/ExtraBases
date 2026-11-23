@@ -8,19 +8,19 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | --- | --- | --- |
 | [`-`](#---shared)<br><sub><code>( a b -- difference )</code></sub> | Subtract the top value from the preceding value. | Glossary |
 | [`!`](#--shared)<br><sub><code>( value address -- )</code></sub> | Store one 16-bit cell. | Glossary |
-| [`@`](#--shared)<br><sub><code>( address -- value )</code></sub> | Fetch one 16-bit cell. | Glossary |
-| [`*`](#--shared)<br><sub><code>( a b -- product )</code></sub> | Multiply two stack values. | Glossary |
-| [`/`](#--shared)<br><sub><code>( a b -- quotient )</code></sub> | Divide the preceding stack value by the top value. | Glossary |
-| [`+`](#--shared)<br><sub><code>( a b -- sum )</code></sub> | Add two stack values. | Glossary |
-| [`<`](#--shared)<br><sub><code>( a b -- flag )</code></sub> | Compare whether the preceding value is less than the top value. | Glossary |
-| [`=`](#--shared)<br><sub><code>( a b -- flag )</code></sub> | Compare two values for equality. | Glossary |
-| [`>`](#--shared)<br><sub><code>( a b -- flag )</code></sub> | Compare whether the preceding value is greater than the top value. | Glossary |
+| [`@`](#--shared-1)<br><sub><code>( address -- value )</code></sub> | Fetch one 16-bit cell. | Glossary |
+| [`*`](#--shared-2)<br><sub><code>( a b -- product )</code></sub> | Multiply two stack values. | Glossary |
+| [`/`](#--shared-3)<br><sub><code>( a b -- quotient )</code></sub> | Divide the preceding stack value by the top value. | Glossary |
+| [`+`](#--shared-4)<br><sub><code>( a b -- sum )</code></sub> | Add two stack values. | Glossary |
+| [`<`](#--shared-5)<br><sub><code>( a b -- flag )</code></sub> | Compare whether the preceding value is less than the top value. | Glossary |
+| [`=`](#--shared-6)<br><sub><code>( a b -- flag )</code></sub> | Compare two values for equality. | Glossary |
+| [`>`](#--shared-7)<br><sub><code>( a b -- flag )</code></sub> | Compare whether the preceding value is greater than the top value. | Glossary |
 | [`0=`](#0--shared)<br><sub><code>( n -- flag )</code></sub> | Return a condition indicating zero. | Glossary |
 | [`2DUP`](#2dup--shared)<br><sub><code>( a b -- a b a b )</code></sub> | Duplicate the top two stack cells. | Glossary |
 | [`AND`](#and--shared)<br><sub><code>( a b -- result )</code></sub> | Bitwise AND of two values. | Glossary |
 | [`ARRAY`](#array--shared)<br><sub><code>—</code></sub> | Allocate/name an indexed cell array from a the size. | Glossary |
 | [`B!`](#b--shared)<br><sub><code>( byte address -- )</code></sub> | Store one byte. | Glossary |
-| [`B@`](#b--shared)<br><sub><code>( address -- byte )</code></sub> | Fetch one byte. | Glossary |
+| [`B@`](#b--shared-1)<br><sub><code>( address -- byte )</code></sub> | Fetch one byte. | Glossary |
 | [`BARRAY`](#barray--shared)<br><sub><code>( size -- )</code></sub> | Allocate/name an indexed byte array from a the size. | Glossary |
 | [`BEGIN`](#begin--shared)<br><sub><code>( -- )</code></sub> | Immediate XC wrapper that records a loop's object address. | Glossary |
 | [`CODE`](#code--shared)<br><sub><code>—</code></sub> | Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry. | Glossary |
@@ -47,7 +47,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | --- | --- | --- |
 | [**]'[**](#-terse)<br><sub><code>( -- )</code></sub> | Game-defined operation; source body below. | — |
 | [`^`](#--terse)<br><sub><code>( -- )</code></sub> | Uses ABVOLS and MCVOLS to compose game logic. | — |
-| [`<INTERRUPTS`](#--terse)<br><sub><code>( -- )</code></sub> | Mark the start of interrupt data. | — |
+| [`<INTERRUPTS`](#--terse-1)<br><sub><code>( -- )</code></sub> | Mark the start of interrupt data. | — |
 | [`ABVOLS`](#interrupts--terse)<br><sub><code>( volume -- )</code></sub> | Emit the music volume command. | — |
 | [`ACT,`](#abvols--terse)<br><sub><code>( -- )</code></sub> | Emit a playaction record. | — |
 | [`ANOTE`](#act--terse)<br><sub><code>( -- )</code></sub> | Uses ATONE and DURATION to compose game logic. | — |
@@ -61,7 +61,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`BTONE`](#bone--terse)<br><sub><code>( tone -- )</code></sub> | Emit tone setting for channel B. | — |
 | [`BV`](#btone--terse)<br><sub><code>( -- )</code></sub> | Define a named byte variable. | — |
 | [`BV=`](#bv--terse)<br><sub><code>( -- )</code></sub> | Uses BV to compose game logic. | — |
-| [`BZERO`](#bv--terse)<br><sub><code>( address -- )</code></sub> | Store byte value 0. | — |
+| [`BZERO`](#bv--terse-1)<br><sub><code>( address -- )</code></sub> | Store byte value 0. | — |
 | [`C=`](#bzero--terse)<br><sub><code>( value -- )</code></sub> | Uses CONSTANT to compose game logic. | — |
 | [`CHGS`](#c--terse)<br><sub><code>—</code></sub> | CHGS posts CHANGE SIDES; | — |
 | [`CHKFLSHSTAY`](#chgs--terse)<br><sub><code>—</code></sub> | When isccp turn off check for wupwrt. | — |
@@ -130,7 +130,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`INSTRC`](#inscn--terse)<br><sub><code>—</code></sub> | Instructions. | — |
 | [`INSWAIT`](#instrc--terse)<br><sub><code>—</code></sub> | INSWAIT enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return. | — |
 | [`INTERRUPTS>`](#inswait--terse)<br><sub><code>( -- )</code></sub> | Emit the interrupt-vector dispatch jump. | — |
-| [`INTHIGHRES`](#interrupts--terse)<br><sub><code>( -- )</code></sub> | Intialize screen for commercial mode. | — |
+| [`INTHIGHRES`](#interrupts--terse-1)<br><sub><code>( -- )</code></sub> | Intialize screen for commercial mode. | — |
 | [`ISCN`](#inthighres--terse)<br><sub><code>( -- )</code></sub> | Display the V15 instruction message. | — |
 | [`LABLE`](#iscn--terse)<br><sub><code>( -- )</code></sub> | Provide the original source's label-definition alias. | — |
 | [`LCB,`](#lable--terse)<br><sub><code>( -- )</code></sub> | Uses ACT, and DEACT, to compose game logic. | — |
@@ -178,7 +178,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`RECTAN`](#recline--terse)<br><sub><code>—</code></sub> | In X, Y, X length, Y length, pxtype set. | — |
 | [`REST`](#rectan--terse)<br><sub><code>( duration -- )</code></sub> | Insert a silent music interval. | — |
 | [`REST,`](#rest--terse)<br><sub><code>( -- )</code></sub> | Emit a resting playaction record. | — |
-| [`RETPA`](#rest--terse)<br><sub><code>—</code></sub> | Return to position pa. | — |
+| [`RETPA`](#rest--terse-1)<br><sub><code>—</code></sub> | Return to position pa. | — |
 | [`RNDNTE`](#retpa--terse)<br><sub><code>( -- )</code></sub> | Emit a randomized musical note. | — |
 | [`RRRNDNTE`](#rndnte--terse)<br><sub><code>( -- )</code></sub> | Emit a sequence of randomized notes. | — |
 | [`RUN1CHK1ST`](#rrrndnte--terse)<br><sub><code>—</code></sub> | RUN2CHK12ND, RUN1CHK2ND and RUN1CHK1ST complete the decision tree for first/second occupancy; | — |
@@ -237,7 +237,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`TWAIT`](#thw--terse)<br><sub><code>—</code></sub> | Terse wait period. | — |
 | [`V`](#twait--terse)<br><sub><code>( -- )</code></sub> | Uses VARIABLE to compose game logic. | — |
 | [`V=`](#v--terse)<br><sub><code>( -- )</code></sub> | Uses V and VARIABLE to compose game logic. | — |
-| [`VIBS`](#v--terse)<br><sub><code>( value -- )</code></sub> | Emit a vibrato setting. | — |
+| [`VIBS`](#v--terse-1)<br><sub><code>( value -- )</code></sub> | Emit a vibrato setting. | — |
 | [`VIS`](#vibs--terse)<br><sub><code>—</code></sub> | HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; | — |
 | [`WHBODDS`](#vis--terse)<br><sub><code>—</code></sub> | Sets who is on base calculates play odds. | — |
 | [`WTHW,`](#whbodds--terse)<br><sub><code>( -- )</code></sub> | Emit the wait-for-throw command. | — |
@@ -299,7 +299,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | [`KILLOF`](#istart--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Stop outfield tractor ball control. | — |
 | [`LOADANM`](#killof--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Loads magic & anm HL-top of playact table. | — |
 | [`LOOP`](#loadanm--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Advance or terminate a counted loop. | Glossary |
-| [`MULTHLBY4`](#loop--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. | — |
+| [`MULTHLBY4`](#loop--native-code-1)<br><sub><code>Z80 register / stack ABI</code></sub> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. | — |
 | [`MUSCPU`](#multhlby4--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Declare cross-screen dispatch labels and begin assembling MUSCPU. | — |
 | [`NDUP`](#muscpu--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | Uses ARRAY to process game state. | — |
 | [`OFFFDST`](#ndup--native-code)<br><sub><code>Z80 register / stack ABI</code></sub> | All player off field control. | — |
