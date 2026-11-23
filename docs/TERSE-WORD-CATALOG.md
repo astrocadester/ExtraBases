@@ -1,16 +1,17 @@
-<p align="right"><code>v20261123-0009</code></p>
+<p align="right"><code>v20261123-0010</code></p>
 
 # Extra Bases — TERSE Word Catalog
 
 ## Catalog index
 
-- [TERSE runtime and inherited words](#terse-runtime-and-inherited-words-38) (38)
-- [Extra Bases colon definitions](#extra-bases-colon-definitions-201) (201)
-- [Extra Bases native CODE words](#extra-bases-native-code-words-85) (85)
-- [Native SUBR helpers](#native-subr-helpers-47) (47)
-- [Host and cross-compiler definitions](#host-and-cross-compiler-definitions-2) (2)
-- [Implementations](#implementations)
+- [TERSE runtime and inherited words](#catalog-runtime) (38)
+- [Extra Bases colon definitions](#catalog-colon) (201)
+- [Extra Bases native CODE words](#catalog-code) (85)
+- [Native SUBR helpers](#catalog-subr) (47)
+- [Host and cross-compiler definitions](#catalog-host) (2)
+- [Implementations](#catalog-implementations)
 
+<a name="catalog-runtime"></a>
 ## TERSE runtime and inherited words (38)
 
 <table>
@@ -56,6 +57,7 @@
 </tbody>
 </table>
 
+<a name="catalog-colon"></a>
 ## Extra Bases colon definitions (201)
 
 <table>
@@ -264,6 +266,7 @@
 </tbody>
 </table>
 
+<a name="catalog-code"></a>
 ## Extra Bases native CODE words (85)
 
 <table>
@@ -356,6 +359,7 @@
 </tbody>
 </table>
 
+<a name="catalog-subr"></a>
 ## Native SUBR helpers (47)
 
 <table>
@@ -410,6 +414,7 @@
 </tbody>
 </table>
 
+<a name="catalog-host"></a>
 ## Host and cross-compiler definitions (2)
 
 <table>
@@ -419,6 +424,7 @@
 </tbody>
 </table>
 
+<a name="catalog-implementations"></a>
 ## Implementations
 
 ### <a name="terse-word-2d"></a><span>-</span>
