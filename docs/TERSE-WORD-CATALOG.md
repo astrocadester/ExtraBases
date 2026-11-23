@@ -256,18 +256,18 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>ANMSEQLOAD</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#anmseqload--native-code" title="View implementation">📄</a> | Finds proper anm seq by per=#. |
 | <strong>BALLERASE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ballerase--native-code" title="View implementation">📄</a> | BALLERASE preserves BC/IY around native BLERASE and returns to TERSE. |
 | <strong>BATHIT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#bathit--native-code" title="View implementation">📄</a> | He hit it time to get em running. |
-| <strong>BATHITCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#bathitchk--native-code" title="View implementation">📄</a> | Check window for hit. |
-| <strong>BATSWING</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#batswing--native-code" title="View implementation">📄</a> | Swings bat if appropriate. |
-| <strong>BATWRITE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#batwrite--native-code" title="View implementation">📄</a> | Xor bat from swingtype. |
+| <strong>BATHITCHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#bathitchk--native-code" title="View implementation">📄</a> | Check window for hit. |
+| <strong>BATSWING</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#batswing--native-code" title="View implementation">📄</a> | Swings bat if appropriate. |
+| <strong>BATWRITE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#batwrite--native-code" title="View implementation">📄</a> | Xor bat from swingtype. |
 | <strong>BCD+</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;bcd-sum&nbsp;)</code> | <a href="#bcd--native-code" title="View implementation">📄</a> | Binary to decimal arithmatic. |
-| <strong>BLDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#bldst--native-code" title="View implementation">📄</a> | Ball thrown or hit. |
+| <strong>BLDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#bldst--native-code" title="View implementation">📄</a> | Ball thrown or hit. |
 | <strong>BLMOTION</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#blmotion--native-code" title="View implementation">📄</a> | Set pc for ram pa table -tractor ball. |
-| <strong>BLPOSCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#blposchk--native-code" title="View implementation">📄</a> | BLPOSCHK branches on HITYET. |
+| <strong>BLPOSCHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#blposchk--native-code" title="View implementation">📄</a> | BLPOSCHK branches on HITYET. |
 | <strong>BMUSIC</strong><br><code>(&nbsp;music-address&nbsp;--&nbsp;)</code> | <a href="#bmusic--native-code" title="View implementation">📄</a> | BMUSIC consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay. |
-| <strong>BUTTONCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#buttonchk--native-code" title="View implementation">📄</a> | Reads buttons for swing run & pitch it. |
-| <strong>CHKCAUGHT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkcaught--native-code" title="View implementation">📄</a> | Caught set in interrupt. |
-| <strong>CHKGROUNDER</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkgrounder--native-code" title="View implementation">📄</a> | If grounder adjust ball direction. |
-| <strong>CHKSCRTIME</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkscrtime--native-code" title="View implementation">📄</a> | Score process. |
+| <strong>BUTTONCHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#buttonchk--native-code" title="View implementation">📄</a> | Reads buttons for swing run & pitch it. |
+| <strong>CHKCAUGHT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkcaught--native-code" title="View implementation">📄</a> | Caught set in interrupt. |
+| <strong>CHKGROUNDER</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkgrounder--native-code" title="View implementation">📄</a> | If grounder adjust ball direction. |
+| <strong>CHKSCRTIME</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkscrtime--native-code" title="View implementation">📄</a> | Score process. |
 | <strong>CLRBLST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#clrblst--native-code" title="View implementation">📄</a> | CLRBLST resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading. |
 | <strong>cnline</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#cnline--native-code" title="View implementation">📄</a> | Calls vector line write. |
 | <strong>COMPDE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#compde--native-code" title="View implementation">📄</a> | COMPDE applies the same operation to DE while preserving HL. |
@@ -278,60 +278,60 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>DI</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#di--native-code" title="View implementation">📄</a> | Disable interrupts. |
 | <strong>DIVHLBY4</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#divhlby4--native-code" title="View implementation">📄</a> | Divide HL by 4. |
 | <strong>DO</strong><br><code>(&nbsp;limit&nbsp;start&nbsp;--&nbsp;)</code> | <a href="#do--native-code" title="View implementation">📄</a> | Enter a counted loop. |
-| <strong>DSTCALC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#dstcalc--native-code" title="View implementation">📄</a> | Calc deltas to destination. |
+| <strong>DSTCALC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dstcalc--native-code" title="View implementation">📄</a> | Calc deltas to destination. |
 | <strong>DSTLD</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#dstld--native-code" title="View implementation">📄</a> | DSTLD reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively. |
 | <strong>EI</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ei--native-code" title="View implementation">📄</a> | Uses SWAN to process game state. |
 | <strong>EIDI</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#eidi--native-code" title="View implementation">📄</a> | EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers. |
 | <strong>EMUSIC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#emusic--native-code" title="View implementation">📄</a> | EMUSIC selects ENDMUSIC and initializes timing/repetition to one; |
 | <strong>EX</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ex--native-code" title="View implementation">📄</a> | EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. |
 | <strong>FILL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fill--native-code" title="View implementation">📄</a> | Fill a memory/screen range. |
-| <strong>FLDDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#flddst--native-code" title="View implementation">📄</a> | Fielders take position logic. |
+| <strong>FLDDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flddst--native-code" title="View implementation">📄</a> | Fielders take position logic. |
 | <strong>FLSHOFF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flshoff--native-code" title="View implementation">📄</a> | FLSHOFF disables flashing and services cleanup under DI. |
 | <strong>FMIRROR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fmirror--native-code" title="View implementation">📄</a> | FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. |
-| <strong>HITRUN</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#hitrun--native-code" title="View implementation">📄</a> | Activate proper runners and set trwbase. |
+| <strong>HITRUN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#hitrun--native-code" title="View implementation">📄</a> | Activate proper runners and set trwbase. |
 | <strong>HOMERCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#homerchk--native-code" title="View implementation">📄</a> | Chk for homer or fence hit. |
 | <strong>I</strong><br><code>(&nbsp;--&nbsp;index&nbsp;)</code> | <a href="#i--native-code" title="View implementation">📄</a> | Native game routine; source body below. |
 | <strong>IEX</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#iex--native-code" title="View implementation">📄</a> | IEX restores saved registers, enables interrupts and returns. |
 | <strong>INDEXW</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#indexw--native-code" title="View implementation">📄</a> | Call routine A- disp HL- table add. |
-| <strong>INFIELD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#infield--native-code" title="View implementation">📄</a> | Uses IFSPAN to process game state. |
+| <strong>INFIELD</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#infield--native-code" title="View implementation">📄</a> | Uses IFSPAN to process game state. |
 | <strong>INFLDACT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#infldact--native-code" title="View implementation">📄</a> | Set infielders active. |
 | <strong>ISTART</strong><br><code>(&nbsp;interrupt-address&nbsp;--&nbsp;)</code> | <a href="#istart--native-code" title="View implementation">📄</a> | ISTART disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT. |
 | <strong>KILLOF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#killof--native-code" title="View implementation">📄</a> | Stop outfield tractor ball control. |
-| <strong>LOADANM</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#loadanm--native-code" title="View implementation">📄</a> | Loads magic & anm HL-top of playact table. |
+| <strong>LOADANM</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#loadanm--native-code" title="View implementation">📄</a> | Loads magic & anm HL-top of playact table. |
 | <strong>LOOP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#loop--native-code-1" title="View implementation">📄</a> | Advance or terminate a counted loop. |
 | <strong>MULTHLBY4</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#multhlby4--native-code" title="View implementation">📄</a> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. |
-| <strong>MUSCPU</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#muscpu--native-code" title="View implementation">📄</a> | Declare cross-screen dispatch labels and begin assembling MUSCPU. |
+| <strong>MUSCPU</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#muscpu--native-code" title="View implementation">📄</a> | Declare cross-screen dispatch labels and begin assembling MUSCPU. |
 | <strong>NDUP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ndup--native-code" title="View implementation">📄</a> | Uses ARRAY to process game state. |
-| <strong>OFFFDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#offfdst--native-code" title="View implementation">📄</a> | All player off field control. |
+| <strong>OFFFDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#offfdst--native-code" title="View implementation">📄</a> | All player off field control. |
 | <strong>OFLDTBL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ofldtbl--native-code" title="View implementation">📄</a> | OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; |
 | <strong>OFMOTION</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ofmotion--native-code" title="View implementation">📄</a> | Set pc for ram pa table -tractor ball. |
 | <strong>ON1ST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#on1st--native-code" title="View implementation">📄</a> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
 | <strong>ON2ND</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#on2nd--native-code" title="View implementation">📄</a> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
 | <strong>ON3RD</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#on3rd--native-code" title="View implementation">📄</a> | ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; |
-| <strong>OPCODECHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#opcodechk--native-code" title="View implementation">📄</a> | Called by plyactupdate. |
+| <strong>OPCODECHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#opcodechk--native-code" title="View implementation">📄</a> | Called by plyactupdate. |
 | <strong>OUTFLDACT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#outfldact--native-code" title="View implementation">📄</a> | Sets outfielders active. |
-| <strong>PACTLOAD</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#pactload--native-code" title="View implementation">📄</a> | Loads vect from plyact. |
-| <strong>PATFETCH</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#patfetch--native-code" title="View implementation">📄</a> | Loads actual pattern IX-vector. |
-| <strong>PERSPECTIVE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#perspective--native-code" title="View implementation">📄</a> | Pattern size determined by y. |
-| <strong>PLAYACT</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#playact--native-code" title="View implementation">📄</a> | Called in intterupt does update prc. |
+| <strong>PACTLOAD</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#pactload--native-code" title="View implementation">📄</a> | Loads vect from plyact. |
+| <strong>PATFETCH</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#patfetch--native-code" title="View implementation">📄</a> | Loads actual pattern IX-vector. |
+| <strong>PERSPECTIVE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#perspective--native-code" title="View implementation">📄</a> | Pattern size determined by y. |
+| <strong>PLAYACT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#playact--native-code" title="View implementation">📄</a> | Called in intterupt does update prc. |
 | <strong>PMUSIC</strong><br><code>(&nbsp;music-address&nbsp;--&nbsp;)</code> | <a href="#pmusic--native-code" title="View implementation">📄</a> | PMUSIC installs a stream unconditionally and sets priority, repeat count and note timer. |
 | <strong>PTAUTOTM</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ptautotm--native-code" title="View implementation">📄</a> | Pitch auto timer. |
-| <strong>RESETRUNNERS</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#resetrunners--native-code" title="View implementation">📄</a> | Reset runners to order of on base. |
+| <strong>RESETRUNNERS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#resetrunners--native-code" title="View implementation">📄</a> | Reset runners to order of on base. |
 | <strong>RND</strong><br><code>(&nbsp;upper-bound&nbsp;--&nbsp;random-value&nbsp;)</code> | <a href="#rnd--native-code" title="View implementation">📄</a> | Generate a random number. |
-| <strong>RUNDST</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#rundst--native-code" title="View implementation">📄</a> | Runner base running control. |
-| <strong>SENTRY</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#sentry--native-code" title="View implementation">📄</a> | Game loop. |
+| <strong>RUNDST</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#rundst--native-code" title="View implementation">📄</a> | Runner base running control. |
+| <strong>SENTRY</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#sentry--native-code" title="View implementation">📄</a> | Game loop. |
 | <strong>SETACT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#setact--native-code" title="View implementation">📄</a> | Sets avtive bit in status. |
-| <strong>STARTMUSIC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#startmusic--native-code" title="View implementation">📄</a> | STARTMUSIC clears its request. |
+| <strong>STARTMUSIC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#startmusic--native-code" title="View implementation">📄</a> | STARTMUSIC clears its request. |
 | <strong>strtline</strong><br><code>(&nbsp;x&nbsp;y&nbsp;--&nbsp;)</code> | <a href="#strtline--native-code" title="View implementation">📄</a> | Given X Y sets up start of line. |
 | <strong>SWAN</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#swan--native-code" title="View implementation">📄</a> | Transfer interrupt/screen execution state. |
-| <strong>TBALLPITCH</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#tballpitch--native-code" title="View implementation">📄</a> | Loads pitch velocities. |
-| <strong>THROWANIM</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#throwanim--native-code" title="View implementation">📄</a> | Sets up BLDST and player anim. |
-| <strong>THROWBALL</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#throwball--native-code" title="View implementation">📄</a> | Finish scoring first. |
-| <strong>THWANMSET</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#thwanmset--native-code" title="View implementation">📄</a> | Set up throw animation. |
-| <strong>TIMER</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#timer--native-code" title="View implementation">📄</a> | Interrupt timer routine. |
-| <strong>VECTOR</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#vector--native-code" title="View implementation">📄</a> | Vectors and limit checks. |
-| <strong>VERASE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#verase--native-code" title="View implementation">📄</a> | Does pattern board erase from vector IX. |
-| <strong>VWRITE</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#vwrite--native-code" title="View implementation">📄</a> | Does reloff relabs patbrd from vector IX. |
+| <strong>TBALLPITCH</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tballpitch--native-code" title="View implementation">📄</a> | Loads pitch velocities. |
+| <strong>THROWANIM</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#throwanim--native-code" title="View implementation">📄</a> | Sets up BLDST and player anim. |
+| <strong>THROWBALL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#throwball--native-code" title="View implementation">📄</a> | Finish scoring first. |
+| <strong>THWANMSET</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#thwanmset--native-code" title="View implementation">📄</a> | Set up throw animation. |
+| <strong>TIMER</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#timer--native-code" title="View implementation">📄</a> | Interrupt timer routine. |
+| <strong>VECTOR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#vector--native-code" title="View implementation">📄</a> | Vectors and limit checks. |
+| <strong>VERASE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#verase--native-code" title="View implementation">📄</a> | Does pattern board erase from vector IX. |
+| <strong>VWRITE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#vwrite--native-code" title="View implementation">📄</a> | Does reloff relabs patbrd from vector IX. |
 | <strong>WAIT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#wait--native-code" title="View implementation">📄</a> | Given A wait period stop every thing. |
 | <strong>WAITTHRW</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#waitthrw--native-code" title="View implementation">📄</a> | Sets flag for 1stbaseman to wait throw. |
 | <strong>WRITE</strong><br><code>(&nbsp;x&nbsp;y&nbsp;pattern&nbsp;dimensions&nbsp;options&nbsp;--&nbsp;)</code> | <a href="#write--native-code" title="View implementation">📄</a> | Write with X Y sizes ; pattern with no header. |
@@ -346,13 +346,13 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>AUTOR3</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#autor3--native-subr" title="View implementation">📄</a> | Run third-runner automation logic. |
 | <strong>BLERASE</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#blerase--native-subr" title="View implementation">📄</a> | Erases ball. |
 | <strong>CHKATBS</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkatbs--native-subr" title="View implementation">📄</a> | Check if active player at base in- A vstatus. |
-| <strong>CHKCOIN1</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkcoin1--native-subr" title="View implementation">📄</a> | Chk door 1 for coin drop. |
-| <strong>CHKCOIN2</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#chkcoin2--native-subr" title="View implementation">📄</a> | Chk door 2 for coin drop. |
-| <strong>CMPOF</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#cmpof--native-subr" title="View implementation">📄</a> | Calculates proper deltas and patterns. |
+| <strong>CHKCOIN1</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkcoin1--native-subr" title="View implementation">📄</a> | Chk door 1 for coin drop. |
+| <strong>CHKCOIN2</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#chkcoin2--native-subr" title="View implementation">📄</a> | Chk door 2 for coin drop. |
+| <strong>CMPOF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#cmpof--native-subr" title="View implementation">📄</a> | Calculates proper deltas and patterns. |
 | <strong>COLORBAND</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#colorband--native-subr" title="View implementation">📄</a> | COLORBAND schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled. |
-| <strong>debounce</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#debounce--native-subr" title="View implementation">📄</a> | Debounce input transitions. |
+| <strong>debounce</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#debounce--native-subr" title="View implementation">📄</a> | Debounce input transitions. |
 | <strong>FETCH</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fetch--native-subr" title="View implementation">📄</a> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
-| <strong>FLSHWUP</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#flshwup--native-subr" title="View implementation">📄</a> | Handle flash callback. |
+| <strong>FLSHWUP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#flshwup--native-subr" title="View implementation">📄</a> | Handle flash callback. |
 | <strong>FNBB</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fnbb--native-subr" title="View implementation">📄</a> | Native game routine; source body below. |
 | <strong>FONTUNPACK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fontunpack--native-subr" title="View implementation">📄</a> | FONTUNPACK reads two packed bytes and starts a five-row unpack loop. |
 | <strong>FRO1</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#fro1--native-subr" title="View implementation">📄</a> | Uses AUTOR1 to process game state. |
@@ -368,7 +368,7 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>loadpc</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#loadpc--native-subr" title="View implementation">📄</a> | loadpc installs MUSPC and STARTPC. |
 | <strong>LVRSTAT</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#lvrstat--native-subr" title="View implementation">📄</a> | Load vstat for all runners in- A value. |
 | <strong>NBB</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#nbb--native-subr" title="View implementation">📄</a> | NBB is the empty-bases no-op. |
-| <strong>OFBLCHK</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#ofblchk--native-subr" title="View implementation">📄</a> | Chk for catch or close when cmsw. |
+| <strong>OFBLCHK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ofblchk--native-subr" title="View implementation">📄</a> | Chk for catch or close when cmsw. |
 | <strong>PCJUMP</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#pcjump--native-subr" title="View implementation">📄</a> | FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address. |
 | <strong>relabs</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#relabs--native-subr" title="View implementation">📄</a> | Relative X Y to magic address conversion. |
 | <strong>reloff</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#reloff--native-subr" title="View implementation">📄</a> | Compute relative offset of x , y of pattern. |
@@ -380,8 +380,8 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>RO23</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ro23--native-subr" title="View implementation">📄</a> | RO23 and RO123 choose forced advancement and double-play targets for their base combinations. |
 | <strong>RO3</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#ro3--native-subr" title="View implementation">📄</a> | RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC. |
 | <strong>SETDBLPLAY</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#setdblplay--native-subr" title="View implementation">📄</a> | Sets up double play HL-guy on 1st. |
-| <strong>TAKEOFF</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#takeoff--native-subr" title="View implementation">📄</a> | Turn proper runners on. |
-| <strong>TBALLPRC</strong><br><code>Z80&nbsp;register&nbsp;/&nbsp;stack&nbsp;ABI</code> | <a href="#tballprc--native-subr" title="View implementation">📄</a> | Pitch or control outfield. |
+| <strong>TAKEOFF</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#takeoff--native-subr" title="View implementation">📄</a> | Turn proper runners on. |
+| <strong>TBALLPRC</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tballprc--native-subr" title="View implementation">📄</a> | Pitch or control outfield. |
 | <strong>TBLVEL</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#tblvel--native-subr" title="View implementation">📄</a> | Tractorball vel HL-# add. D-max vel. |
 | <strong>TIMEDCR</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#timedcr--native-subr" title="View implementation">📄</a> | HL-timer add if goes to zero return 1 else 0. |
 | <strong>TOOFCK</strong><br><code>(&nbsp;--&nbsp;)</code> | <a href="#toofck--native-subr" title="View implementation">📄</a> | Time out outfield check. |
@@ -3858,9 +3858,11 @@ SWINGGO STA, EI, RET,
 
 ### `BATHITCHK` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Check window for hit.
+
+HL = swing-state pointer; tests bat/ball overlap through table-selected hit window; returns to native caller.
 
 ```text
 CODE BATHITCHK ( check window for hit )
@@ -3877,9 +3879,11 @@ HITTIME STA, HITGOING STA, BLERASE CALL, RET,
 
 ### `BATSWING` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Swings bat if appropriate.
+
+Reads swing counters from RAM, calls `BATWRITE`/`BATHITCHK`, updates swing/strike state.
 
 ```text
 CODE BATSWING ( swings bat if appropriate )
@@ -3902,9 +3906,11 @@ THEN, THEN, THEN, RET,
 
 ### `BATWRITE` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Xor bat from swingtype.
+
+HL = swing-state pointer; derives drawing parameters and calls native pattern writer; restores HL.
 
 ```text
 CODE BATWRITE ( xor bat from swingtype )
@@ -3937,9 +3943,11 @@ D A MOV, H ADC, DAA, A H MOV, H PUSH, NEXT
 
 ### `BLDST` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Ball thrown or hit.
+
+Ball-vector update helper: computes motion/destination, handles catch/throw transitions.
 
 ```text
 CODE BLDST ( ball thrown or hit )
@@ -3980,9 +3988,11 @@ TBLPA H LXI, VECTPC SHLD, RET,
 
 ### `BLPOSCHK` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 BLPOSCHK branches on HITYET.
+
+IX = ball vector; checks ball/pitch position, collision flags and destination vector.
 
 ```text
 CODE BLPOSCHK
@@ -4032,9 +4042,11 @@ NOTETIMER STA, A INR, MULTIPLE STA, THEN, NEXT
 
 ### `BUTTONCHK` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Reads buttons for swing run & pitch it.
+
+Samples controls and updates pitch/run flags; saves/restores IX/IY on native calls.
 
 ```text
 CODE BUTTONCHK ( reads buttons for swing run & pitch it )
@@ -4069,9 +4081,11 @@ SWING STA, THEN, RET, -->
 
 ### `CHKCAUGHT` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Caught set in interrupt.
+
+Interrupt-side caught-ball handler; saves native vector registers and changes runner/score flags.
 
 ```text
 CODE CHKCAUGHT ( caught set in interrupt )
@@ -4122,9 +4136,11 @@ EI, RET, ASSEMBLE>
 
 ### `CHKGROUNDER` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 If grounder adjust ball direction.
+
+IX = ball vector; adjusts velocity using grounder lookup; preserves HL across table lookup.
 
 ```text
 CODE CHKGROUNDER ( if grounder adjust ball direction )
@@ -4140,9 +4156,11 @@ VXH X A LDX, 0A0 CPI, ' COMPDE CC, H POP, D DAD, RET,
 
 ### `CHKSCRTIME` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Score process.
+
+Scores play events from RAM, updates runner/base and score state; temporary IX stack saves balance on return.
 
 ```text
 CODE CHKSCRTIME ( score process ) DI,
@@ -4338,9 +4356,11 @@ CODE DO
 
 ### `DSTCALC` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Calc deltas to destination.
+
+Input HL = destination X, DE = destination Y, A = speed, IX = vector; output HL = dy, DE = dx, BC = action selector.
 
 ```text
 CODE DSTCALC ( calc deltas to destination )
@@ -4474,9 +4494,11 @@ CODE FILL ROMHERE !
 
 ### `FLDDST` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Fielders take position logic.
+
+IX = fielder vector; computes velocity/destination and updates playaction state through native helpers.
 
 ```text
 CODE FLDDST ( fielders take position logic )
@@ -4537,9 +4559,11 @@ FORWARD IFMAIN FORWARD IFMOUND
 
 ### `HITRUN` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Activate proper runners and set trwbase.
+
+Selects runner activation and throw target via indexed native dispatch; restores BC before `NEXT`.
 
 ```text
 CODE HITRUN ( activate proper runners and set trwbase )
@@ -4647,9 +4671,11 @@ M E MOV, H INX, M D MOV, H DCX, PSW POP, RET,
 
 ### `INFIELD` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Uses IFSPAN to process game state.
+
+Draws infield stripes/pitcher mound; preserves BC and IX around row-rendering helpers.
 
 ```text
 CODE INFIELD B PUSH, X PUSHX,
@@ -4718,9 +4744,11 @@ A XRA, OFTBLGO STA, RET,
 
 ### `LOADANM` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Loads magic & anm HL-top of playact table.
+
+HL = source playaction cursor, IX = target vector; writes pattern fields, returns HL advanced.
 
 ```text
 CODE LOADANM ( loads magic & anm HL-top of playact table )
@@ -4769,9 +4797,11 @@ L SLAR, H RALR, PSW POP, ' COMPHL CNZ, RET,
 
 ### `MUSCPU` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Declare cross-screen dispatch labels and begin assembling MUSCPU.
+
+Music tick handler; updates note timer, decodes music commands and drives sound ports.
 
 ```text
 CODE MUSCPU <ASSEMBLE
@@ -4818,9 +4848,11 @@ HEX VPTR @ 07C06 VPTR ! 2 ARRAY RND# VPTR !
 
 ### `OFFFDST` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 All player off field control.
+
+IX = active fielder vector; selects off-field destination, computes movement deltas.
 
 ```text
 CODE OFFFDST ( all player off field control ) <ASSEMBLE
@@ -4915,9 +4947,11 @@ CODE ON3RD X PUSHX, H POP, FLDON3RD SHLD, RET,
 
 ### `OPCODECHK` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Called by plyactupdate.
+
+HL = playaction cursor; looks up opcode handler and executes with a native return trampoline.
 
 ```text
 CODE OPCODECHK ( called by plyactupdate ) <ASSEMBLE
@@ -4952,9 +4986,11 @@ VSTATUS LF H LXI, 3 A MVI, ' SETACT CALL, RET,
 
 ### `PACTLOAD` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Loads vect from plyact.
+
+IX = target vector; reads playaction stream, dispatches opcodes, advances vector PC.
 
 ```text
 CODE PACTLOAD ( loads vect from plyact )
@@ -4976,9 +5012,11 @@ RET, -->
 
 ### `PATFETCH` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Loads actual pattern IX-vector.
+
+IX = vector; selects animation-frame pattern from sequence table and stores its address.
 
 ```text
 CODE PATFETCH ( loads actual pattern IX-vector )
@@ -4998,9 +5036,11 @@ D VPATH X STX, E VPATL X STX, RET,
 
 ### `PERSPECTIVE` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Pattern size determined by y.
+
+IX = vector; derives perspective class from Y and updates redraw flag if class changed.
 
 ```text
 CODE PERSPECTIVE ( pattern size determined by y )
@@ -5016,9 +5056,11 @@ RET,
 
 ### `PLAYACT` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Called in intterupt does update prc.
+
+Reads `VECTIX`, preserves BC/IX, advances vector animation/update through helper routines.
 
 ```text
 CODE PLAYACT ( called in intterupt does update prc )
@@ -5070,9 +5112,11 @@ TIMEOUT H LXI, FLDCLR LDA, A ANA, TIMEDCR CZ, NEXT
 
 ### `RESETRUNNERS` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Reset runners to order of on base.
+
+Reorders runner vector records by occupancy and resets final runner slot.
 
 ```text
 CODE RESETRUNNERS ( reset runners to order of on base )
@@ -5227,9 +5271,11 @@ BASE! ;S
 
 ### `RUNDST` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Runner base running control.
+
+IX = runner record; processes base occupancy, auto-forward and movement state.
 
 ```text
 CODE RUNDST ( runner base running control ) <ASSEMBLE
@@ -5282,9 +5328,11 @@ RUNPA H LXI, VECTPC SHLD, B POP, RET, ASSEMBLE> -->
 
 ### `SENTRY` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Game loop.
+
+Native game scheduler; calls tick services, invokes `TERSECHK`, then loops.
 
 ```text
 CODE SENTRY ( game loop ) B PUSH,
@@ -5325,9 +5373,11 @@ BEGIN, VACT M SET, D DAD, A DCR, 0=, END, RET,
 
 ### `STARTMUSIC` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 STARTMUSIC clears its request.
+
+Selects event music from state flags and dispatches music requests.
 
 ```text
 CODE STARTMUSIC A XRA, STMUSIC STA,
@@ -5381,9 +5431,11 @@ ROMHERE !
 
 ### `TBALLPITCH` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Loads pitch velocities.
+
+Computes pitcher/trackball velocity updates and writes movement fields.
 
 ```text
 CODE TBALLPITCH ( loads pitch velocities )
@@ -5405,9 +5457,11 @@ THEN, THEN, THEN, TBLDX SDED, EI, RET,
 
 ### `THROWANIM` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Sets up BLDST and player anim.
+
+Prepares ball/throw vector data; saves/restores IX and IY around native update.
 
 ```text
 CODE THROWANIM ( sets up BLDST and player anim )
@@ -5445,9 +5499,11 @@ THROW STA, Y POPX, X POPX, EI, RET, -->
 
 ### `THROWBALL` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Finish scoring first.
+
+Builds the pitch or throw state, updates ball vector and runner decisions.
 
 ```text
 CODE THROWBALL FLDCLR LDA, A ANA, RNZ, ( finish scoring first )
@@ -5473,9 +5529,11 @@ VGO M RES, EI, RET,
 
 ### `THWANMSET` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Set up throw animation.
+
+Reads thrower vector from IX and stores `WHOTHROWS`; initializes animation flags.
 
 ```text
 CODE THWANMSET ( set up throw animation )
@@ -5490,9 +5548,11 @@ THROWANM STA, RET, ( set for sentry call )
 
 ### `TIMER` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Interrupt timer routine.
+
+Scans game timers with `TIMEDCR` and invokes native event handlers.
 
 ```text
 CODE TIMER ( interrupt timer routine )
@@ -5517,9 +5577,11 @@ TOOF H LXI, TIMEDCR CALL, A ANA, TOOFCK CNZ, RET,
 
 ### `VECTOR` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Vectors and limit checks.
+
+IX = vector record; advances positions and applies hardware limits.
 
 ```text
 CODE VECTOR ( vectors and limit checks )
@@ -5544,9 +5606,11 @@ RET,
 
 ### `VERASE` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Does pattern board erase from vector IX.
+
+IX = vector record; derives previous pattern/screen address and calls native `writep`.
 
 ```text
 CODE VERASE ( does pattern board erase from vector IX )
@@ -5562,9 +5626,11 @@ writep CALL, RET,
 
 ### `VWRITE` — native CODE
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Does reloff relabs patbrd from vector IX.
+
+IX = vector record; derives pattern position, calls `reloff`/`relabs`/`writep`, saves erase address.
 
 ```text
 CODE VWRITE ( does reloff relabs patbrd from vector IX )
@@ -5736,9 +5802,11 @@ VACT A BIT, RZ, VATBS A BIT, RNZ, E INR, RET,
 
 ### `CHKCOIN1` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Chk door 1 for coin drop.
+
+Reads coin-door 1 via `debounce`; updates credits and signals coin event.
 
 ```text
 SUBR CHKCOIN1 ( chk door 1 for coin drop )
@@ -5752,9 +5820,11 @@ UPCRED STA, A XRA, SPBON STA, DOVERB MCOIN RET,
 
 ### `CHKCOIN2` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Chk door 2 for coin drop.
+
+Reads coin-door 2 via `debounce`; updates credits with door/DIP-specific increments.
 
 ```text
 SUBR CHKCOIN2 ( chk door 2 for coin drop )
@@ -5771,9 +5841,11 @@ A XRA, SPBON STA, DOVERB MCOIN RET,
 
 ### `CMPOF` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Calculates proper deltas and patterns.
+
+Selects outfielder vector in IX, computes deltas and activates outfield control.
 
 ```text
 SUBR CMPOF ( calculates proper deltas and patterns )
@@ -5807,9 +5879,11 @@ PSW POP, H POP, EI, RET, ( palette only: preserve AF/HL )
 
 ### `debounce` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Debounce input transitions.
+
+A = input port, HL = bit mask, DE = sampling duration; returns A = accepted pulse/zero.
 
 ```text
 SUBR debounce <ASSEMBLE
@@ -5839,9 +5913,11 @@ SUBR FETCH MUSPC LHLD, M A MOV, RET,
 
 ### `FLSHWUP` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Handle flash callback.
+
+Saves/restores IX and IY while updating flash timer and callback.
 
 ```text
 SUBR FLSHWUP ( handle flash callback )
@@ -6079,9 +6155,11 @@ SUBR NBB RET,
 
 ### `OFBLCHK` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Chk for catch or close when cmsw.
+
+D = maximum catch distance; checks nearby ball/player vectors, returns native result in A.
 
 ```text
 SUBR OFBLCHK ( chk for catch or close when cmsw )
@@ -6288,9 +6366,11 @@ SUBR SETDBLPLAY ( sets up double play HL-guy on 1st )
 
 ### `TAKEOFF` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Turn proper runners on.
+
+Dispatches runner-activation handler via BC/table and native return trampoline.
 
 ```text
 SUBR TAKEOFF ( turn proper runners on ) <ASSEMBLE
@@ -6306,9 +6386,11 @@ LABEL TORET RET, ASSEMBLE>
 
 ### `TBALLPRC` — native SUBR
 
-`Z80 register / stack ABI`
+`( -- )`
 
 Pitch or control outfield.
+
+Samples trackball port and computes tractor-ball/outfielder velocity state.
 
 ```text
 SUBR TBALLPRC ( pitch or control outfield ) <ASSEMBLE
