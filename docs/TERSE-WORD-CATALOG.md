@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0016</code></p>
+<p align="right"><code>v20261123-0017</code></p>
 
 # Extra Bases - TERSE Glossary
 
@@ -50,7 +50,7 @@
 <tr><td><strong>ROT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Rotate the top three stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;c&nbsp;--&nbsp;b&nbsp;c&nbsp;a&nbsp;)</code></td></tr>
 <tr><td><strong>SWAP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Exchange the top two stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;b&nbsp;a&nbsp;)</code></td></tr>
 <tr><td><strong>THEN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-45-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper that resolves a saved target branch destination.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
-<tr><td><strong>VARIABLE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-41-52-49-41-42-4c-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate/name a cell variable with the initial value in this dialect.<br><code>(&nbsp;initial-value&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>VARIABLE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-41-52-49-41-42-4c-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Define a named 16-bit variable; the 1979 XC wrapper discards its incoming value before allocation.<br><code>(&nbsp;value&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>XOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-58-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Bitwise exclusive OR of two values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code></td></tr>
 </tbody>
 </table>
@@ -1138,9 +1138,9 @@ Immediate XC wrapper that resolves a saved target branch destination.
 
 ### <a name="terse-word-56-41-52-49-41-42-4c-45"></a><span>VARIABLE</span>
 
-Create a named initialized 16-bit variable.
+Define a named 16-bit variable; the 1979 XC wrapper discards its incoming value before allocation.
 
-`( initial-value -- )`
+`( value -- )`
 
 **1979 XC host reference.** The original `VARIABLE` wrapper drops the incoming stack value, pushes a cell size of two bytes, and calls `G79-VARI` to define allocated storage. This 1979 behavior should not be described as automatically initializing the cell with the dropped value.
 
