@@ -1,28 +1,28 @@
-<p align="right"><code>v20261123-0013</code></p>
+<p align="right"><code>v20261123-0014</code></p>
 
-# Extra Bases — TERSE Word Catalog
+# Extra Bases - TERSE Glossary
 
-- [TERSE runtime and inherited words](#catalog-runtime) (38)
+- [Standard TERSE Vocabulary](#catalog-runtime) (38)
 
   Core TERSE operations and inherited words used by the Extra Bases development and target environments.
-- [Extra Bases colon definitions](#catalog-colon) (201)
+- [Extra Bases TERSE Definitions](#catalog-colon) (201)
 
   Game-specific TERSE definitions combining existing words to implement gameplay, display, sound and control logic.
-- [Extra Bases native CODE words](#catalog-code) (85)
+- [Extra Bases CODE Verbs](#catalog-code) (85)
 
   Z80 machine-code words that implement game operations, hardware access and TERSE runtime services.
-- [Native SUBR helpers](#catalog-subr) (47)
+- [Z80 SUBR Routines](#catalog-subr) (47)
 
   Z80 subroutines called by other native routines for shared calculations, drawing, input and state updates.
-- [Host and cross-compiler definitions](#catalog-host) (2)
+- [Development Host Vocabulary](#catalog-host) (2)
 
   Definitions used by the development host to manage source compilation rather than game execution.
-- [Implementations](#catalog-implementations)
+- [Word and Verb Implementations](#catalog-implementations)
 
   Complete available source bodies, stack signatures, native Z80 effects and cross-references for cataloged words.
 
 <a name="catalog-runtime"></a>
-## TERSE runtime and inherited words (38)
+## Standard TERSE Vocabulary (38)
 
 <table>
 <tbody>
@@ -68,7 +68,7 @@
 </table>
 
 <a name="catalog-colon"></a>
-## Extra Bases colon definitions (201)
+## Extra Bases TERSE Definitions (201)
 
 <table>
 <tbody>
@@ -277,7 +277,7 @@
 </table>
 
 <a name="catalog-code"></a>
-## Extra Bases native CODE words (85)
+## Extra Bases CODE Verbs (85)
 
 <table>
 <tbody>
@@ -370,7 +370,7 @@
 </table>
 
 <a name="catalog-subr"></a>
-## Native SUBR helpers (47)
+## Z80 SUBR Routines (47)
 
 <table>
 <tbody>
@@ -425,7 +425,7 @@
 </table>
 
 <a name="catalog-host"></a>
-## Host and cross-compiler definitions (2)
+## Development Host Vocabulary (2)
 
 <table>
 <tbody>
@@ -435,7 +435,7 @@
 </table>
 
 <a name="catalog-implementations"></a>
-## Implementations
+## Word and Verb Implementations
 
 ### <a name="terse-word-2d"></a><span>-</span>
 
