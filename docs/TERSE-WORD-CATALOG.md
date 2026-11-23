@@ -9,12 +9,12 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | Word / stack | Function | DNA documentation |
 | --- | --- | --- |
 | [`ABVOLS`](#word-abvols)<br><sub><code>(see implementation)</code></sub> | Definition. Allocate MUSPC and define emitters for sound-register writes and duration opcode 1. A command typically emits its opcode followed by the byte. | — |
-| [`ACT`](#word-act)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`ACT,`](#word-actx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`ANOTE`](#word-anote)<br><sub><code>(see implementation)</code></sub> | Definition. Define timed individual notes, randomized-note variants and three-voice NOTES. Their repeated B, calls consume stack arguments in reverse push order. | — |
 | [`ATONE`](#word-atone)<br><sub><code>(see implementation)</code></sub> | Definition. Allocate MUSPC and define emitters for sound-register writes and duration opcode 1. A command typically emits its opcode followed by the byte. | — |
-| [`BACT`](#word-bact)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`BACT,`](#word-bactx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`BALLTIME`](#word-balltime)<br><sub><code>(see implementation)</code></sub> | Definition. BALLTIME increments BALLS. At $34 display WALK, start forced runner movement and a WALK timer, update odds/base state and clear counts; otherwise play/post the ball count. | — |
-| [`BLMOT`](#word-blmot)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`BLMOT,`](#word-blmotx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`BNOTE`](#word-bnote)<br><sub><code>(see implementation)</code></sub> | Definition. Define timed individual notes, randomized-note variants and three-voice NOTES. Their repeated B, calls consume stack arguments in reverse push order. | — |
 | [`BONE`](#word-bone)<br><sub><code>( address -- )</code></sub> | Definition. BONE/BZERO store one/zero through SB!. WUPGO activates WHOSUP with runner/automatic-forward flags; continue. | — |
 | [`BTONE`](#word-btone)<br><sub><code>(see implementation)</code></sub> | Definition. Allocate MUSPC and define emitters for sound-register writes and duration opcode 1. A command typically emits its opcode followed by the byte. | — |
@@ -30,7 +30,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`CPOST`](#word-cpost)<br><sub><code>( x y options char -- )</code></sub> | Definition. 3DROP discards three cells. CPOST calls lower-case cpost, then discards its returned X/Y/options. | — |
 | [`CREDARROW`](#word-credarrow)<br><sub><code>(see implementation)</code></sub> | Definition. CREDARROW clears UPCRED and handles STRT1, the coin-mode switch, game-over/player-selection state and computer-player pricing. Some credits remain as a one-credit remainder in two-player mode. | — |
 | [`CTONE`](#word-ctone)<br><sub><code>(see implementation)</code></sub> | Definition. Allocate MUSPC and define emitters for sound-register writes and duration opcode 1. A command typically emits its opcode followed by the byte. | — |
-| [`DEACT`](#word-deact)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`DEACT,`](#word-deactx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`DLINE`](#word-dline)<br><sub><code>(see implementation)</code></sub> | Definition. DLINE saves endpoint and initial X/Y state, converts Y for strtline, draws through cnline and continues loading. | — |
 | [`DOCHGS`](#word-dochgs)<br><sub><code>(see implementation)</code></sub> | Definition. FLSHOFF disables flashing and services cleanup under DI. DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER; continue. | — |
 | [`DOEHOMER`](#word-doehomer)<br><sub><code>(see implementation)</code></sub> | Definition. DOHOMER erases the ball, displays HOMER, resets counts and clears the event timer; DOEHOMER only posts the text. Continue. | — |
@@ -90,7 +90,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`LDINFLDPA`](#word-ldinfldpa)<br><sub><code>(see implementation)</code></sub> | Definition. LDINFLDPA consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain. | — |
 | [`LDPC`](#word-ldpc)<br><sub><code>(see implementation)</code></sub> | Definition. Define LDPC (opcode 3), QUIT (opcode 4 with an embedded loop address), LDPCC (opcode 2) and QUIET, which clears tone/volume settings before ending. | — |
 | [`LDPCC`](#word-ldpcc)<br><sub><code>(see implementation)</code></sub> | Definition. Define LDPC (opcode 3), QUIT (opcode 4 with an embedded loop address), LDPCC (opcode 2) and QUIET, which clears tone/volume settings before ending. | — |
-| [`LK`](#word-lk)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`LK,`](#word-lkx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`LSETTFCOOR`](#word-lsettfcoor)<br><sub><code>(see implementation)</code></sub> | Definition. LSETTFCOOR loops through four runners, setting magic, positions, expansion, runner status and invisible pattern pointers. | — |
 | [`MASTER`](#word-master)<br><sub><code>(see implementation)</code></sub> | Definition. Allocate MUSPC and define emitters for sound-register writes and duration opcode 1. A command typically emits its opcode followed by the byte. | — |
 | [`MBALL`](#word-mball)<br><sub><code>(see implementation)</code></sub> | Definition. Wrap cannon, crowd, hit, fence, strike, ball, foul, safe and out streams with BMUSIC. Each wrapper pushes zero before the stream address. BMUSIC’s visible body pops the stream pointer; the leading zero’s wider role depends on the native runtime calling convention. | — |
@@ -109,8 +109,8 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`NOISE`](#word-noise)<br><sub><code>(see implementation)</code></sub> | Definition. Allocate MUSPC and define emitters for sound-register writes and duration opcode 1. A command typically emits its opcode followed by the byte. | — |
 | [`NOTES`](#word-notes)<br><sub><code>(see implementation)</code></sub> | Definition. Define timed individual notes, randomized-note variants and three-voice NOTES. Their repeated B, calls consume stack arguments in reverse push order. | — |
 | [`NPOST`](#word-npost)<br><sub><code>(see implementation)</code></sub> | Definition. NPOST iterates the requested byte count, posts each high then low nibble using SWAN and dpost, drops remaining drawing arguments and continues. | — |
-| [`OFFDST`](#word-offdst)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
-| [`OFMOT`](#word-ofmot)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`OFFDST,`](#word-offdstx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`OFMOT,`](#word-ofmotx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`OUTFLDHIT`](#word-outfldhit)<br><sub><code>(see implementation)</code></sub> | Definition. Set outfield, timer, speed and airborne flags; select randomized Y/X coordinates and a HMHTBL class, call HOMERCHK and start the batter. | — |
 | [`OUTLINE`](#word-outline)<br><sub><code>(see implementation)</code></sub> | Definition. OUTLINE uses NDUP/PICK and line continuation to draw four edges from X/Y/width/height. | — |
 | [`OUTTIME`](#word-outtime)<br><sub><code>(see implementation)</code></sub> | Definition. Define GAME OVER text. OUTTIME increments OUTS; reaching $33 enters the third-out path and requests cheer music. | — |
@@ -163,7 +163,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`SSTRIKE1`](#word-sstrike1)<br><sub><code>(see implementation)</code></sub> | Definition. Define SAFE, FOUL, one/two/three OUT and first/second STRIKE display words. Each supplies its X coordinate and text to SPOST; SSAFE also redraws counts with SBO. Continue. | — |
 | [`SSTRIKE2`](#word-sstrike2)<br><sub><code>(see implementation)</code></sub> | Definition. Define SAFE, FOUL, one/two/three OUT and first/second STRIKE display words. Each supplies its X coordinate and text to SPOST; SSAFE also redraws counts with SBO. Continue. | — |
 | [`STFLD`](#word-stfld)<br><sub><code>(see implementation)</code></sub> | Definition. STFLD installs RETPA and TAKEFIELD. SETTF performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading. | — |
-| [`STP`](#word-stp)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`STP,`](#word-stpx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`STRIKETIME`](#word-striketime)<br><sub><code>(see implementation)</code></sub> | Definition. STRIKETIME increments STRIKES. At $33 call OUTTIME and retain the OUT event code; otherwise play/post the new strike count. | — |
 | [`STRINGGO`](#word-stringgo)<br><sub><code>(see implementation)</code></sub> | Definition. STRINGGO sets the shared Y/options, chooses STETBL for erase or STTBL for an event and initializes its expiry timer, executes the selected word and drops retained drawing parameters. | — |
 | [`STRINGPRC`](#word-stringprc)<br><sub><code>(see implementation)</code></sub> | Definition. STRINGPRC takes and clears STRING, erases an existing timed message when necessary, records OLDSTRING, draws/processes the new event and clears STRINGERASE. | — |
@@ -180,13 +180,13 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`TCNT`](#word-tcnt)<br><sub><code>(see implementation)</code></sub> | Definition. TCNT chooses one-coin versus per-player continuation wording from CNSW12 and current credits. | — |
 | [`TERSECHK`](#word-tersechk)<br><sub><code>(see implementation)</code></sub> | Definition. TERSECHK advances the random generator and services pending take-field, player-selection, player-check and credit-update flags. | — |
 | [`TF`](#word-tf)<br><sub><code>(see implementation)</code></sub> | Definition. TF clears transient RAM, initializes ball/strike/out character bytes to $30, reads and inverts the pricing DIP bit, switches PLYR1UP and adjusts computer control. | — |
-| [`THW`](#word-thw)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`THW,`](#word-thwx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`TWAIT`](#word-twait)<br><sub><code>(see implementation)</code></sub> | Definition. TWAIT performs a high-level delay with interrupts enabled, shortening it under the credit/pricing conditions shown, and finishes with interrupts disabled; continue. | — |
 | [`V`](#word-v)<br><sub><code>(see implementation)</code></sub> | Definition. Define V as VARIABLE and BV as BVARIABLE, then continue the music processor source. | — |
 | [`VIBS`](#word-vibs)<br><sub><code>(see implementation)</code></sub> | Definition. Allocate MUSPC and define emitters for sound-register writes and duration opcode 1. A command typically emits its opcode followed by the byte. | — |
 | [`VIS`](#word-vis)<br><sub><code>(see implementation)</code></sub> | Definition. HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string; continue. | — |
 | [`WHBODDS`](#word-whbodds)<br><sub><code>(see implementation)</code></sub> | Definition. HRBY2 halves HRAT. WHBODDS finds BASESTATUS and WHOSUP using the decision tree, treating an empty R1 as empty bases. | — |
-| [`WTHW`](#word-wthw)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
+| [`WTHW,`](#word-wthwx2c)<br><sub><code>(see implementation)</code></sub> | Original source definition or target word. | — |
 | [`WUPGO`](#word-wupgo)<br><sub><code>(see implementation)</code></sub> | Definition. BONE/BZERO store one/zero through SB!. WUPGO activates WHOSUP with runner/automatic-forward flags; continue. | — |
 | [`WUPTON`](#word-wupton)<br><sub><code>(see implementation)</code></sub> | Definition. WUPTON installs WUPWRT. CHKFLSHSTAY checks whether flashing was reserved and stops that special use while retaining its phase state. | — |
 | [`WUPWRT`](#word-wupwrt)<br><sub><code>(see implementation)</code></sub> | Definition. PTAUTOTM decrements TIMEOUT only when field clearing is idle; WUPWRT calls it and draws the currently batting team label. | — |
@@ -205,7 +205,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`BATSWING`](#word-batswing)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. BATSWING marks a strike attempt, XOR-erases/redraws successive phases, checks contact until HITGOING is set and starts the reset delay at the last phase; continue. | — |
 | [`BATWRITE`](#word-batwrite)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. BATWRITE looks up the angle, uses fixed batter coordinates/options and draws the relative pattern, preserving its caller's pointer. | — |
 | [`BCD+`](#word-bcdx2b)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. BCD+ pops two cells, adds their low bytes with DAA, adds high bytes with carry and DAA, and pushes the resulting packed-BCD cell.  | — |
-| [`BLDST`](#word-bldst)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. BLDST preserves BC, reads the ball speed, loads its destination and calls DSTCALC; a LDFLAG result means retain the current motion. | — |
+| [`BLDST,`](#word-bldstx2c)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. BLDST preserves BC, reads the ball speed, loads its destination and calls DSTCALC; a LDFLAG result means retain the current motion. | — |
 | [`BLMOTION`](#word-blmotion)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. BLMOTION selects the writable pitch-ball RAM action record TBLPA. | — |
 | [`BLPOSCHK`](#word-blposchk)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. BLPOSCHK branches on HITYET. A pitch beyond Y=$BC enters pitch-completion handling unless contact is already pending. | — |
 | [`BMUSIC`](#word-bmusic)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. loadpc installs MUSPC and STARTPC. BMUSIC consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay. | — |
@@ -230,7 +230,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`EMUSIC`](#word-emusic)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. EMUSIC selects ENDMUSIC and initializes timing/repetition to one; it is intended for startup. | — |
 | [`EX`](#word-ex)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. | — |
 | [`FILL`](#word-fill)<br><sub><code>(see implementation)</code></sub> | Native byte fill at $0253, called as value/address/count in this source. | — |
-| [`FLDDST`](#word-flddst)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. FLDDST calculates motion at speed 4. On pitcher arrival select STPT and initialize pitch/timeout/outfield-control state; other arrivals select STND. | — |
+| [`FLDDST,`](#word-flddstx2c)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. FLDDST calculates motion at speed 4. On pitcher arrival select STPT and initialize pitch/timeout/outfield-control state; other arrivals select STND. | — |
 | [`FLSHOFF`](#word-flshoff)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. FLSHOFF disables flashing and services cleanup under DI. DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER; continue. | — |
 | [`FMIRROR`](#word-fmirror)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. | — |
 | [`HITRUN`](#word-hitrun)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. Declare HRRET, define HITRUN, clear OFTBLGO so ordinary runners do not automatically advance two bases, and preserve BC. | — |
@@ -250,9 +250,9 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`OFFFDST`](#word-offfdst)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. OFFFDST schedules a take-field delay for outfielders, chooses an exit side from team/runner status and calls DSTCALC for the off-field destination. | — |
 | [`OFLDTBL`](#word-ofldtbl)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; continue. | — |
 | [`OFMOTION`](#word-ofmotion)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. OFMOTION selects OFPA and deactivates a standing outfielder. | — |
-| [`ON1ST`](#word-on1st)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; continue. | — |
-| [`ON2ND`](#word-on2nd)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; continue. | — |
-| [`ON3RD`](#word-on3rd)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; continue. | — |
+| [`ON1ST,`](#word-on1stx2c)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; continue. | — |
+| [`ON2ND,`](#word-on2ndx2c)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; continue. | — |
+| [`ON3RD,`](#word-on3rdx2c)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell; continue. | — |
 | [`OPCODECHK`](#word-opcodechk)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. OPCODECHK treats bytes below $28 as commands, saves the next stream address in VECTPC, indexes OPTBL after adjusting the command index, dispatches via a synthetic native return and reloads VECTPC. | — |
 | [`OUTFLDACT`](#word-outfldact)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. INFLDACT activates five infielders; OUTFLDACT activates three outfielders; ALLFLDACT calls both and returns to TERSE. | — |
 | [`PACTLOAD`](#word-pactload)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. PACTLOAD fetches VPLAYACTPC, services a command and either skips the existing movement fields for SAMEDLT or calls LOADANM. | — |
@@ -263,7 +263,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`PTAUTOTM`](#word-ptautotm)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. PTAUTOTM decrements TIMEOUT only when field clearing is idle; WUPWRT calls it and draws the currently batting team label. | — |
 | [`RESETRUNNERS`](#word-resetrunners)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. Declare copy-path labels, enter assembly, and set a four-pass loop while saving the loop accumulator/flags. | — |
 | [`RND`](#word-rnd)<br><sub><code>(see implementation)</code></sub> | Native random-range helper at $0275. | — |
-| [`RUNDST`](#word-rundst)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. Declare its cross-screen branch labels and enter RUNDST assembly. | — |
+| [`RUNDST,`](#word-rundstx2c)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. Declare its cross-screen branch labels and enter RUNDST assembly. | — |
 | [`SENTRY`](#word-sentry)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. SENTRY preserves BC, polls the request flags and conditionally calls button, pitch, outfield, throw, hit, catch, scoring and music routines. | — |
 | [`SETACT`](#word-setact)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. SETACT takes the first status address in HL and count in A, setting VACT at VLENGTH-byte strides. | — |
 | [`STARTMUSIC`](#word-startmusic)<br><sub><code>(see implementation)</code></sub> | Native word / kernel binding. STARTMUSIC clears its request. CHEERME selects crowd cheer and normal palette setup; otherwise choose fence or homer cannon music, with the homer palette schedule when needed. | — |
@@ -343,7 +343,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`CF`](#word-cf)<br><sub><code>(see implementation)</code></sub> | VLENGTH-byte vector record for the center fielder. Record layout is defined in 148; allocation order is defined in 216. | — |
 | [`FONTWORK`](#word-fontwork)<br><sub><code>(see implementation)</code></sub> | Byte array. Allocate a five-byte FONTWORK buffer. FONTUNPACK reads two packed bytes and starts a five-row unpack loop. | — |
 | [`IPNT`](#word-ipnt)<br><sub><code>(see implementation)</code></sub> | Interrupt schedule pointer programmed/advanced by the generated handlers. | — |
-| [`LCB`](#word-lcb)<br><sub><code>(see implementation)</code></sub> | Constant LCB, assigned source expression/value `368` (use the defining screen’s radix). Define RRUN/LRUN, fielding, throwing, covering, standing, invisible, ball, pitcher and on-base selectors. Their repeated low-byte values and changing high bytes select rendering mode and PATTERNS groups. | — |
+| [`LCB,`](#word-lcbx2c)<br><sub><code>(see implementation)</code></sub> | Constant LCB, assigned source expression/value `368` (use the defining screen’s radix). Define RRUN/LRUN, fielding, throwing, covering, standing, invisible, ball, pitcher and on-base selectors. Their repeated low-byte values and changing high bytes select rendering mode and PATTERNS groups. | — |
 | [`LF`](#word-lf)<br><sub><code>(see implementation)</code></sub> | VLENGTH-byte vector record for the left fielder. Record layout is defined in 148; allocation order is defined in 216. | — |
 | [`LFLD`](#word-lfld)<br><sub><code>(see implementation)</code></sub> | Constant LFLD, assigned source expression/value `168` (use the defining screen’s radix). Define RRUN/LRUN, fielding, throwing, covering, standing, invisible, ball, pitcher and on-base selectors. Their repeated low-byte values and changing high bytes select rendering mode and PATTERNS groups. | — |
 | [`LRUN`](#word-lrun)<br><sub><code>(see implementation)</code></sub> | Constant LRUN, assigned source expression/value `68` (use the defining screen’s radix). Define RRUN/LRUN, fielding, throwing, covering, standing, invisible, ball, pitcher and on-base selectors. Their repeated low-byte values and changing high bytes select rendering mode and PATTERNS groups. | — |
@@ -355,7 +355,7 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | [`R2`](#word-r2)<br><sub><code>(see implementation)</code></sub> | VLENGTH-byte vector record for runner slot 2. Record layout is defined in 148; allocation order is defined in 216. | — |
 | [`R3`](#word-r3)<br><sub><code>(see implementation)</code></sub> | VLENGTH-byte vector record for runner slot 3. Record layout is defined in 148; allocation order is defined in 216. | — |
 | [`R4`](#word-r4)<br><sub><code>(see implementation)</code></sub> | VLENGTH-byte vector record for runner slot 4. Record layout is defined in 148; allocation order is defined in 216. | — |
-| [`RCB`](#word-rcb)<br><sub><code>(see implementation)</code></sub> | Constant RCB, assigned source expression/value `328` (use the defining screen’s radix). Define RRUN/LRUN, fielding, throwing, covering, standing, invisible, ball, pitcher and on-base selectors. Their repeated low-byte values and changing high bytes select rendering mode and PATTERNS groups. | — |
+| [`RCB,`](#word-rcbx2c)<br><sub><code>(see implementation)</code></sub> | Constant RCB, assigned source expression/value `328` (use the defining screen’s radix). Define RRUN/LRUN, fielding, throwing, covering, standing, invisible, ball, pitcher and on-base selectors. Their repeated low-byte values and changing high bytes select rendering mode and PATTERNS groups. | — |
 | [`RF`](#word-rf)<br><sub><code>(see implementation)</code></sub> | VLENGTH-byte vector record for the right fielder. Record layout is defined in 148; allocation order is defined in 216. | — |
 | [`RFLD`](#word-rfld)<br><sub><code>(see implementation)</code></sub> | Constant RFLD, assigned source expression/value `128` (use the defining screen’s radix). Define RRUN/LRUN, fielding, throwing, covering, standing, invisible, ball, pitcher and on-base selectors. Their repeated low-byte values and changing high bytes select rendering mode and PATTERNS groups. | — |
 | [`RND#`](#word-rndx23)<br><sub><code>(see implementation)</code></sub> | Two-cell random-generator state array explicitly placed at $7C06. | — |
@@ -533,7 +533,252 @@ This is an index of **words found in the Extra Bases source**, not an assertion 
 | Word / stack | Function | DNA documentation |
 | --- | --- | --- |
 
+
+## Additional punctuation-bearing DNA names (10)
+
+| Word / stack | Function | DNA documentation |
+| --- | --- | --- |
+| [`REST,`](#word-restx2c)<br><sub><code>(see implementation)</code></sub> | Emit a neutral playaction record | — |
+| [`^`](#word-x5e)<br><sub><code>(see implementation)</code></sub> | Restore music sound-channel volume settings | — |
+| [`<INTERRUPTS`](#word-x3cinterrupts)<br><sub><code>(see implementation)</code></sub> | Mark interrupt vector data start | — |
+| [`INTERRUPTS>`](#word-interruptsx3e)<br><sub><code>(see implementation)</code></sub> | Emit the interrupt exit/dispatch jump | — |
+| [`I'`](#word-ix27)<br><sub><code>(see implementation)</code></sub> | Compile an indexed immediate operand | — |
+| [`V=`](#word-vx3d)<br><sub><code>(see implementation)</code></sub> | Define a zero-initialized word variable | — |
+| [`BV=`](#word-bvx3d)<br><sub><code>(see implementation)</code></sub> | Define a zero-initialized byte variable | — |
+| [`C=`](#word-cx3d)<br><sub><code>(see implementation)</code></sub> | Define a constant through the source shorthand | — |
+| [`F=`](#word-fx3d)<br><sub><code>(see implementation)</code></sub> | Declare a forward name through the source shorthand | — |
+| [`1+B!`](#word-1x2bbx21)<br><sub><code>(see implementation)</code></sub> | Increment a byte at an address | — |
+
 ## Word implementations and usage
+
+<a id="word-restx2c"></a>
+
+### `REST,` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Emit a neutral playaction record.
+
+**Source:** [block 225, line 2](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-225).
+
+```terse
+{ : REST, } NBD , B, 0 , 0 , { ; } ( rest time give update# )
+{ : ACT, } , B, , , { ; } ( given dx dy update# magic )
+{ : ON1ST, } 2 B, { ; }
+{ : ON2ND, } 3 B, { ; } { : ON3RD, } 4 B, { ; }
+0A C= OPBLDST 6 C= OPBLMOT { : WTHW, } 0D B, { ; }
+{ : OFMOT, } 5 B, { ; } { : BLMOT, } OPBLMOT B, { ; }
+{ : RUNDST, } 8 B, { ; } { : OFFDST, } 9 B, { ; }
+{ : BLDST, } OPBLDST B, { ; } { : FLDDST, } 7 B, { ; }
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-x5e"></a>
+
+### `^` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Restore music sound-channel volume settings.
+
+**Source:** [block 136, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-136).
+
+```terse
+{ : ^ } EF ABVOLS 0F MCVOLS { ; } BTABLE TAKE-ME CMAJOR 0 VIBS
+14 #C1 #E1 #C2 NOTES 0A #E1 #G1 #C3 NOTES 0A #C1 #F1 #A2 NOTES
+0A #C1 #E1 #G2 NOTES 0A #C1 #G1 #E2 NOTES
+1E #B0 #D1 #G2 NOTES 1E #G0 #F1 #D2 NOTES 14 #C1 #E1 #C2 NOTES
+0A #E1 #G1 #C3 NOTES 0A #F1 #C2 #A2 NOTES 0A #E1 #C2 #G2 NOTES
+0A #C1 #G1 #E2 NOTES 3C #B0 #D1 #G2 NOTES 3C #C1 #E2 #C3 NOTES
+0 CHEERSSCORE LDPCC -->
+0A #C1 #G1 #E2 NOTES 14 #B0 #D1 #G2 NOTES 0A #C1 #E1 #G2 NOTES
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-x3cinterrupts"></a>
+
+### `<INTERRUPTS` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Mark interrupt vector data start.
+
+**Source:** [block 291, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291).
+
+```terse
+{ : <INTERRUPTS } DATA HERE { ; }
+{ : INTERRUPTS> } { [ } ASM { ] } JMP, { ; }
+: ]'[ [COMPILE] ' ;
+{ : I' } 0CD B, ]'[ { 2+ } , B, { ; }
+{ : ICODE } CODE { [ } ASM { ] } NEXT XTHL, D PUSH, B PUSH,
+PSW PUSH, M A MOV, INLIN OUT, H INX, IPNT SHLD,
+EXX, EXAF, H PUSH, D PUSH, B PUSH, PSW PUSH,
+ASM { ; }
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-interruptsx3e"></a>
+
+### `INTERRUPTS>` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Emit the interrupt exit/dispatch jump.
+
+**Source:** [block 291, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291).
+
+```terse
+{ : INTERRUPTS> } { [ } ASM { ] } JMP, { ; }
+: ]'[ [COMPILE] ' ;
+{ : I' } 0CD B, ]'[ { 2+ } , B, { ; }
+{ : ICODE } CODE { [ } ASM { ] } NEXT XTHL, D PUSH, B PUSH,
+PSW PUSH, M A MOV, INLIN OUT, H INX, IPNT SHLD,
+EXX, EXAF, H PUSH, D PUSH, B PUSH, PSW PUSH,
+ASM { ; }
+CODE IEX PSW POP, B POP, D POP, H POP, EXX, EXAF,
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-ix27"></a>
+
+### `I'` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Compile an indexed immediate operand.
+
+**Source:** [block 291, line 6](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-291).
+
+```terse
+{ : I' } 0CD B, ]'[ { 2+ } , B, { ; }
+{ : ICODE } CODE { [ } ASM { ] } NEXT XTHL, D PUSH, B PUSH,
+PSW PUSH, M A MOV, INLIN OUT, H INX, IPNT SHLD,
+EXX, EXAF, H PUSH, D PUSH, B PUSH, PSW PUSH,
+ASM { ; }
+CODE IEX PSW POP, B POP, D POP, H POP, EXX, EXAF,
+PSW POP, B POP, D POP, H POP, EI, RET,
+{ : INEXT } { LIT [ } ' IEX { , } ASM { ] } JMP, { ; }
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-vx3d"></a>
+
+### `V=` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Define a zero-initialized word variable.
+
+**Source:** [block 304, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304).
+
+```terse
+{ : V= } 0 VARIABLE { ; } { : BV= } 0 BVARIABLE { ; }
+{ : C= } CONSTANT { ; } { : F= } FORWARD { ; }
+{ : LABLE } DATA { ; }
+CODE EIDI EI, DI, NEXT
+{ : DTC } DECIMAL EDIT { ; }
+
+BASE@ HEX ROMHERE @ 0F2 ROMHERE ! CODE 1+B! ROMHERE !
+BASE! ;S
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-bvx3d"></a>
+
+### `BV=` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Define a zero-initialized byte variable.
+
+**Source:** [block 304, line 3](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304).
+
+```terse
+{ : V= } 0 VARIABLE { ; } { : BV= } 0 BVARIABLE { ; }
+{ : C= } CONSTANT { ; } { : F= } FORWARD { ; }
+{ : LABLE } DATA { ; }
+CODE EIDI EI, DI, NEXT
+{ : DTC } DECIMAL EDIT { ; }
+
+BASE@ HEX ROMHERE @ 0F2 ROMHERE ! CODE 1+B! ROMHERE !
+BASE! ;S
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-cx3d"></a>
+
+### `C=` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Define a constant through the source shorthand.
+
+**Source:** [block 304, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304).
+
+```terse
+{ : C= } CONSTANT { ; } { : F= } FORWARD { ; }
+{ : LABLE } DATA { ; }
+CODE EIDI EI, DI, NEXT
+{ : DTC } DECIMAL EDIT { ; }
+
+BASE@ HEX ROMHERE @ 0F2 ROMHERE ! CODE 1+B! ROMHERE !
+BASE! ;S
+
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-fx3d"></a>
+
+### `F=` — :
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Declare a forward name through the source shorthand.
+
+**Source:** [block 304, line 4](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304).
+
+```terse
+{ : C= } CONSTANT { ; } { : F= } FORWARD { ; }
+{ : LABLE } DATA { ; }
+CODE EIDI EI, DI, NEXT
+{ : DTC } DECIMAL EDIT { ; }
+
+BASE@ HEX ROMHERE @ 0F2 ROMHERE ! CODE 1+B! ROMHERE !
+BASE! ;S
+
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
+
+<a id="word-1x2bbx21"></a>
+
+### `1+B!` — CODE
+
+**Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in supplied references.
+
+**Function:** Increment a byte at an address.
+
+**Source:** [block 304, line 9](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/terse/README.md#block-304).
+
+```terse
+BASE@ HEX ROMHERE @ 0F2 ROMHERE ! CODE 1+B! ROMHERE !
+BASE! ;S
+
+
+
+
+
+```
+
+**Usage/implementation:** Examine the full source block and the annotated dictionary for matching definitions, operands, and callers; linked block occurrence alone is not a runtime call trace.
 
 <a id="word-abvols"></a>
 
@@ -584,9 +829,9 @@ BD C= #C1 B2 C= #CS1 A8 C= #D1 9F C= #DS1 96 C= #E1
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-act"></a>
+<a id="word-actx2c"></a>
 
-### `ACT` — :
+### `ACT,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -741,9 +986,9 @@ BD C= #C1 B2 C= #CS1 A8 C= #D1 9F C= #DS1 96 C= #E1
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-bact"></a>
+<a id="word-bactx2c"></a>
 
-### `BACT` — :
+### `BACT,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -797,9 +1042,9 @@ CLRBLST ELSE MBALL DOSBALL THEN SBO ;
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-blmot"></a>
+<a id="word-blmotx2c"></a>
 
-### `BLMOT` — :
+### `BLMOT,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -1333,9 +1578,9 @@ BD C= #C1 B2 C= #CS1 A8 C= #D1 9F C= #DS1 96 C= #E1
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-deact"></a>
+<a id="word-deactx2c"></a>
 
-### `DEACT` — :
+### `DEACT,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -2764,9 +3009,9 @@ BD C= #C1 B2 C= #CS1 A8 C= #D1 9F C= #DS1 96 C= #E1
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-lk"></a>
+<a id="word-lkx2c"></a>
 
-### `LK` — :
+### `LK,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -3282,9 +3527,9 @@ OVER + SWAP DO I B@ SWAN dpost I B@ dpost LOOP
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-offdst"></a>
+<a id="word-offdstx2c"></a>
 
-### `OFFDST` — :
+### `OFFDST,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -3345,9 +3590,9 @@ LABLE F1STL1ST 140 -40 0B RFLD ACT, WTHW, STP,
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-ofmot"></a>
+<a id="word-ofmotx2c"></a>
 
-### `OFMOT` — :
+### `OFMOT,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -4678,9 +4923,9 @@ PPOST 3DROP ;
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-stp"></a>
+<a id="word-stpx2c"></a>
 
-### `STP` — :
+### `STP,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -5122,9 +5367,9 @@ HITYET BONE MYAH S10 ;
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-thw"></a>
+<a id="word-thwx2c"></a>
 
-### `THW` — :
+### `THW,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -5330,9 +5575,9 @@ THEN THEN THEN DROP THEN ;
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-wthw"></a>
+<a id="word-wthwx2c"></a>
 
-### `WTHW` — :
+### `WTHW,` — :
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -5693,9 +5938,9 @@ D A MOV, H ADC, DAA, A H MOV, H PUSH, NEXT
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-bldst"></a>
+<a id="word-bldstx2c"></a>
 
-### `BLDST` — CODE
+### `BLDST,` — CODE
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -6384,9 +6629,9 @@ ROMHERE @ HEX 0253 ROMHERE ! CODE FILL ROMHERE !
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-flddst"></a>
+<a id="word-flddstx2c"></a>
 
-### `FLDDST` — CODE
+### `FLDDST,` — CODE
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -6939,9 +7184,9 @@ OFPA H LXI, VECTPC SHLD, RET,
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-on1st"></a>
+<a id="word-on1stx2c"></a>
 
-### `ON1ST` — CODE
+### `ON1ST,` — CODE
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -6959,9 +7204,9 @@ CODE ON1ST X PUSHX, H POP, FLDON1ST SHLD, RET,
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-on2nd"></a>
+<a id="word-on2ndx2c"></a>
 
-### `ON2ND` — CODE
+### `ON2ND,` — CODE
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -6979,9 +7224,9 @@ CODE ON2ND X PUSHX, H POP, FLDON2ND SHLD, RET,
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-on3rd"></a>
+<a id="word-on3rdx2c"></a>
 
-### `ON3RD` — CODE
+### `ON3RD,` — CODE
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -7304,9 +7549,9 @@ C3 B, E7 B, E7 B, DB B, DB B, C3 B, C3 B, C3 B, C3 B, C3 B,
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-rundst"></a>
+<a id="word-rundstx2c"></a>
 
-### `RUNDST` — CODE
+### `RUNDST,` — CODE
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -9075,9 +9320,9 @@ VLENGTH BARRAY CF
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-lcb"></a>
+<a id="word-lcbx2c"></a>
 
-### `LCB` — CONSTANT
+### `LCB,` — CONSTANT
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
@@ -9315,9 +9560,9 @@ VLENGTH BARRAY R4
 
 **Dependencies / callers:** follow the definition and source-use links above. Source occurrence is not equivalent to a decoded execution-cell caller graph; the [Z80 disassembly](https://github.com/lizard43/ExtraBases/blob/docs/extra-bases-terse-word-catalog-v20261122-0001/src/eb_disassembly.asm) is the separate target-level evidence.
 
-<a id="word-rcb"></a>
+<a id="word-rcbx2c"></a>
 
-### `RCB` — CONSTANT
+### `RCB,` — CONSTANT
 
 **Stack:** `(see implementation)`. **DNA documentation:** No exact-spelling entry confirmed in the supplied reference extracts.
 
