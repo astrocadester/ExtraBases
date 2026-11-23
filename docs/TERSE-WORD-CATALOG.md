@@ -1,5 +1,7 @@
 # Extra Bases — TERSE Word Catalog
 
+Revision: `v20261123-0001`
+
 ## TERSE runtime and inherited words (34)
 
 <table>
@@ -573,7 +575,7 @@ _AND:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `CREDARROW`, `FLSHME`, `INSWAIT`, `OUTTIME`, `PLRCHK`, `RETPA`, `TBALLPRC`, `TF`, `dpost`.
+**Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-42-41-4c-4c-50-52-43"><code>TBALLPRC</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
 ### <a name="terse-word-41-52-52-41-59"></a>`ARRAY`
 
@@ -588,7 +590,7 @@ _ARRAY:
             jp      $0062               ; Jump to add inline base address and push
 ```
 
-**Used by:** `NDUP`.
+**Used by:** <a href="#terse-word-4e-44-55-50"><code>NDUP</code></a>.
 
 ### <a name="terse-word-42-21"></a>`B!`
 
@@ -604,7 +606,7 @@ _Bbang:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `BALLTIME`, `CREDARROW`, `DOGOVER`, `DPCN`, `FL`, `FOULTIME`, `GETF`, `GRNDRACTION`, `GRNDRHIT`, `HITDST`, `HRBY2`, `INLOG`, `INNODDS`, `LSETTFCOOR`, `OUTFLDHIT`, `OUTTIME`, `SB!`, `STRIKETIME`, `STRINGGO`, `STRINGPRC`, `TF`, `WHBODDS`, `ZERORAM`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-45-54-46"><code>GETF</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-48-49-54-44-53-54"><code>HITDST</code></a>, <a href="#terse-word-48-52-42-59-32"><code>HRBY2</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-53-42-21"><code>SB!</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-47-4f"><code>STRINGGO</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-5a-45-52-4f-52-41-4d"><code>ZERORAM</code></a>.
 
 ### <a name="terse-word-42-40"></a>`B@`
 
@@ -621,7 +623,7 @@ _Bat:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `BALLTIME`, `CHKFLSHSTAY`, `CHKGMCNT`, `CREDARROW`, `DOGOVER`, `DOSBALL`, `DOSOUT`, `DOSSTRIKE`, `DP12CN`, `DPCN`, `FOULTIME`, `GETF`, `GRNDRHIT`, `HRBY2`, `INLOG`, `INNODDS`, `INSCN`, `INSTRC`, `LSETTFCOOR`, `MLINN`, `NPOST`, `OUTFLDHIT`, `OUTTIME`, `PLRCHK`, `PPOST`, `RETPA`, `RUN1CHK1ST`, `RUN1CHK2ND`, `RUN2CHK`, `RUN2CHK12ND`, `RUN2CHK1ST`, `RUN3CHK`, `SBO`, `SCOREME`, `SPLR`, `STRIKETIME`, `STRINGPRC`, `STRTBALL`, `TCNT`, `TERSECHK`, `TF`, `TWAIT`, `WHBODDS`, `WUPWRT`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-43-48-4b-47-4d-43-4e-54"><code>CHKGMCNT</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>, <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>, <a href="#terse-word-44-4f-53-53-54-52-49-4b-45"><code>DOSSTRIKE</code></a>, <a href="#terse-word-44-50-31-32-43-4e"><code>DP12CN</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-45-54-46"><code>GETF</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-48-52-42-59-32"><code>HRBY2</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-52-55-4e-31-43-48-4b-31-53-54"><code>RUN1CHK1ST</code></a>, <a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44"><code>RUN1CHK2ND</code></a>, <a href="#terse-word-52-55-4e-32-43-48-4b"><code>RUN2CHK</code></a>, <a href="#terse-word-52-55-4e-32-43-48-4b-31-32-4e-44"><code>RUN2CHK12ND</code></a>, <a href="#terse-word-52-55-4e-32-43-48-4b-31-53-54"><code>RUN2CHK1ST</code></a>, <a href="#terse-word-52-55-4e-33-43-48-4b"><code>RUN3CHK</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-43-4e-54"><code>TCNT</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
 ### <a name="terse-word-42-41-52-52-41-59"></a>`BARRAY`
 
@@ -639,7 +641,7 @@ Immediate XC wrapper that records a loop's object address.
 : BEGIN } XC-BEGIN { ;
 ```
 
-**Used by:** `INSTRC`, `INSWAIT`, `RECTAN`, `TWAIT`.
+**Used by:** <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
 ### <a name="terse-word-43-4f-44-45"></a>`CODE`
 
@@ -671,7 +673,7 @@ _DROP:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `CPOST`, `CREDARROW`, `DOGOVER`, `DOSBALL`, `DOSOUT`, `FOULTIME`, `GRNDRHIT`, `INNODDS`, `INSWAIT`, `LSETTFCOOR`, `MLINN`, `NPOST`, `OUTLINE`, `OUTTIME`, `PLRCHK`, `RECTAN`, `RETPA`, `SPOST`, `STRINGGO`, `SW+30`, `SW+45`, `SW+90`, `SW-30`, `SW-45`, `SW-90`, `SW0`, `TERSECHK`, `TF`, `TWAIT`, `WHBODDS`, `dpost`.
+**Used by:** <a href="#terse-word-43-50-4f-53-54"><code>CPOST</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>, <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-53-50-4f-53-54"><code>SPOST</code></a>, <a href="#terse-word-53-54-52-49-4e-47-47-4f"><code>STRINGGO</code></a>, <a href="#terse-word-53-57-2b-33-30"><code>SW+30</code></a>, <a href="#terse-word-53-57-2b-34-35"><code>SW+45</code></a>, <a href="#terse-word-53-57-2b-39-30"><code>SW+90</code></a>, <a href="#terse-word-53-57-2d-33-30"><code>SW-30</code></a>, <a href="#terse-word-53-57-2d-34-35"><code>SW-45</code></a>, <a href="#terse-word-53-57-2d-39-30"><code>SW-90</code></a>, <a href="#terse-word-53-57-30"><code>SW0</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
 ### <a name="terse-word-44-55-50"></a>`DUP`
 
@@ -687,7 +689,7 @@ _DUP:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `BALLTIME`, `CREDARROW`, `DLINE`, `DOSBALL`, `DOSOUT`, `FL`, `FLSHME`, `FOULTIME`, `GRNDRACTION`, `GRNDRHIT`, `INLOG`, `INNODDS`, `INSWAIT`, `LSETTFCOOR`, `MLINN`, `OUTTIME`, `PLRCHK`, `PUP`, `RECLINE`, `RECTAN`, `RETPA`, `SCOREME`, `STRIKETIME`, `STRINGPRC`, `SW+30`, `SW+45`, `SW-30`, `SW-45`, `SW0`, `TF`, `TWAIT`, `WHBODDS`, `WUPGO`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4c-49-4e-45"><code>DLINE</code></a>, <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>, <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-52-45-43-4c-49-4e-45"><code>RECLINE</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-53-57-2b-33-30"><code>SW+30</code></a>, <a href="#terse-word-53-57-2b-34-35"><code>SW+45</code></a>, <a href="#terse-word-53-57-2d-33-30"><code>SW-30</code></a>, <a href="#terse-word-53-57-2d-34-35"><code>SW-45</code></a>, <a href="#terse-word-53-57-30"><code>SW0</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-57-55-50-47-4f"><code>WUPGO</code></a>.
 
 ### <a name="terse-word-45-4c-53-45"></a>`ELSE`
 
@@ -709,7 +711,7 @@ Immediate XC wrapper emitting a conditional back-branch; game loops repeat until
 : END } XC-END { ;
 ```
 
-**Used by:** `INSTRC`, `INSWAIT`, `RECTAN`, `TWAIT`.
+**Used by:** <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
 ### <a name="terse-word-48-45-58"></a>`HEX`
 
@@ -765,7 +767,7 @@ _OR:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `OUTTIME`, `RETPA`, `dpost`.
+**Used by:** <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
 ### <a name="terse-word-4f-56-45-52"></a>`OVER`
 
@@ -783,7 +785,7 @@ _OVER:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `FLSHME`, `NPOST`, `OUTLINE`, `PPOST`, `dpost`.
+**Used by:** <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
 ### <a name="terse-word-52-4f-54"></a>`ROT`
 
@@ -801,7 +803,7 @@ _ROT:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `RECTAN`, `SBALL1`, `SBALL2`, `SBALL3`, `SFOUL`, `SHOMER`, `SOUT1`, `SOUT2`, `SOUT3`, `SSAFE`, `SSTRIKE1`, `SSTRIKE2`, `SWALK`, `TF`.
+**Used by:** <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-53-42-41-4c-4c-31"><code>SBALL1</code></a>, <a href="#terse-word-53-42-41-4c-4c-32"><code>SBALL2</code></a>, <a href="#terse-word-53-42-41-4c-4c-33"><code>SBALL3</code></a>, <a href="#terse-word-53-46-4f-55-4c"><code>SFOUL</code></a>, <a href="#terse-word-53-48-4f-4d-45-52"><code>SHOMER</code></a>, <a href="#terse-word-53-4f-55-54-31"><code>SOUT1</code></a>, <a href="#terse-word-53-4f-55-54-32"><code>SOUT2</code></a>, <a href="#terse-word-53-4f-55-54-33"><code>SOUT3</code></a>, <a href="#terse-word-53-53-41-46-45"><code>SSAFE</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-31"><code>SSTRIKE1</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-32"><code>SSTRIKE2</code></a>, <a href="#terse-word-53-57-41-4c-4b"><code>SWALK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-53-57-41-50"></a>`SWAP`
 
@@ -818,7 +820,7 @@ _SWAP:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `MLINN`, `NPOST`, `PPOST`, `RECLINE`, `S!`, `SB!`, `WHBODDS`, `dpost`.
+**Used by:** <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-43-4c-49-4e-45"><code>RECLINE</code></a>, <a href="#terse-word-53-21"><code>S!</code></a>, <a href="#terse-word-53-42-21"><code>SB!</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
 ### <a name="terse-word-54-48-45-4e"></a>`THEN`
 
@@ -856,7 +858,7 @@ _XOR:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `PLRCHK`, `TF`, `dpost`.
+**Used by:** <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
 ### <a name="terse-word-5d-27-5b"></a>`]'[`
 
@@ -902,7 +904,7 @@ Emit the music volume command.
 { : ABVOLS } 16 B, B, { ; }
 ```
 
-**Used by:** `CMAJOR`, `QUIET`, `REST`, `^`.
+**Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>, <a href="#terse-word-52-45-53-54"><code>REST</code></a>, <a href="#terse-word-5e"><code>^</code></a>.
 
 ### <a name="terse-word-41-43-54-2c"></a>`ACT,`
 
@@ -914,7 +916,7 @@ Emit a playaction record.
 { : ACT, } , B, , , { ; }
 ```
 
-**Used by:** `BACT,`, `LCB,`, `RCB,`, `STP,`.
+**Used by:** <a href="#terse-word-42-41-43-54-2c"><code>BACT,</code></a>, <a href="#terse-word-4c-43-42-2c"><code>LCB,</code></a>, <a href="#terse-word-52-43-42-2c"><code>RCB,</code></a>, <a href="#terse-word-53-54-50-2c"><code>STP,</code></a>.
 
 ### <a name="terse-word-41-4e-4f-54-45"></a>`ANOTE`
 
@@ -939,7 +941,7 @@ Emit tone setting for channel A.
 B, { ; }
 ```
 
-**Used by:** `ANOTE`, `NOTES`, `QUIET`.
+**Used by:** <a href="#terse-word-41-4e-4f-54-45"><code>ANOTE</code></a>, <a href="#terse-word-4e-4f-54-45-53"><code>NOTES</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
 ### <a name="terse-word-42-41-43-54-2c"></a>`BACT,`
 
@@ -953,7 +955,7 @@ Emit a ball-action record.
 
 **Calls:** `ACT,`.
 
-**Used by:** `LK,`.
+**Used by:** <a href="#terse-word-4c-4b-2c"><code>LK,</code></a>.
 
 ### <a name="terse-word-42-41-4c-4c-54-49-4d-45"></a>`BALLTIME`
 
@@ -1016,7 +1018,7 @@ Store byte value 1.
 
 **Calls:** `SB!`.
 
-**Used by:** `BALLTIME`, `CREDARROW`, `DOGOVER`, `DPCN`, `F2NDLS`, `F2NDRS`, `FBLLS`, `FBLRS`, `FLSHTON`, `FSSLS`, `FSSRS`, `GRNDRHIT`, `HLLS`, `HLS`, `HMS`, `HRLS`, `HRS`, `INLOG`, `INSWAIT`, `OUTFLDHIT`, `OUTTIME`, `PLRCHK`, `PLRSELECT`, `PUP`, `SPLR`, `STFLD`, `STRTBALL`, `TF`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-32-4e-44-4c-53"><code>F2NDLS</code></a>, <a href="#terse-word-46-32-4e-44-52-53"><code>F2NDRS</code></a>, <a href="#terse-word-46-42-4c-4c-53"><code>FBLLS</code></a>, <a href="#terse-word-46-42-4c-52-53"><code>FBLRS</code></a>, <a href="#terse-word-46-4c-53-48-54-4f-4e"><code>FLSHTON</code></a>, <a href="#terse-word-46-53-53-4c-53"><code>FSSLS</code></a>, <a href="#terse-word-46-53-53-52-53"><code>FSSRS</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-48-4c-4c-53"><code>HLLS</code></a>, <a href="#terse-word-48-4c-53"><code>HLS</code></a>, <a href="#terse-word-48-4d-53"><code>HMS</code></a>, <a href="#terse-word-48-52-4c-53"><code>HRLS</code></a>, <a href="#terse-word-48-52-53"><code>HRS</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>, <a href="#terse-word-53-54-46-4c-44"><code>STFLD</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-42-54-4f-4e-45"></a>`BTONE`
 
@@ -1028,7 +1030,7 @@ Emit tone setting for channel B.
 { : BTONE } 12 B, B, { ; }
 ```
 
-**Used by:** `BNOTE`, `NOTES`, `QUIET`.
+**Used by:** <a href="#terse-word-42-4e-4f-54-45"><code>BNOTE</code></a>, <a href="#terse-word-4e-4f-54-45-53"><code>NOTES</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
 ### <a name="terse-word-42-56"></a>`BV`
 
@@ -1040,7 +1042,7 @@ Define a named byte variable.
 { : BV } BVARIABLE { ; }
 ```
 
-**Used by:** `BV=`.
+**Used by:** <a href="#terse-word-42-56-3d"><code>BV=</code></a>.
 
 ### <a name="terse-word-42-56-3d"></a>`BV=`
 
@@ -1066,7 +1068,7 @@ Store byte value 0.
 
 **Calls:** `SB!`.
 
-**Used by:** `CHKFLSHSTAY`, `CREDARROW`, `DOCHGS`, `DOGOVER`, `DOHOMER`, `DPCN`, `FIELDWRT`, `GRNDRACTION`, `HITDST`, `INLOG`, `INSTRC`, `PLRSELECT`, `SCOREME`, `STRINGPRC`, `STRTBALL`, `TF`.
+**Used by:** <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-48-49-54-44-53-54"><code>HITDST</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-43-3d"></a>`C=`
 
@@ -1092,7 +1094,7 @@ CHGS posts CHANGE SIDES;
 
 **Calls:** `SPOST`.
 
-**Used by:** `DOCHGS`.
+**Used by:** <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>.
 
 ### <a name="terse-word-43-48-4b-46-4c-53-48-53-54-41-59"></a>`CHKFLSHSTAY`
 
@@ -1111,7 +1113,7 @@ DOWUP BZERO THEN ;
 
 **Calls:** `B@`, `BZERO`, `FLSHOFF`, `WUPWRT`, `WUPTON`.
 
-**Used by:** `CREDARROW`.
+**Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>.
 
 ### <a name="terse-word-43-48-4b-47-4d-43-4e-54"></a>`CHKGMCNT`
 
@@ -1125,7 +1127,7 @@ CHKGMCNT posts the appropriate prompt around a timed wait and returns the curren
 
 **Calls:** `DP12CN`, `TWAIT`, `B@`.
 
-**Used by:** `TF`.
+**Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-43-4d-41-4a-4f-52"></a>`CMAJOR`
 
@@ -1152,7 +1154,7 @@ YIN ! XIN ! cnline ;
 
 **Calls:** `cnline`.
 
-**Used by:** `FIELDWRT`, `OUTLINE`.
+**Used by:** <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>.
 
 ### <a name="terse-word-43-4e-4f-54-45"></a>`CNOTE`
 
@@ -1166,7 +1168,7 @@ Emit a channel C note followed by its duration.
 
 **Calls:** `CTONE`, `DURATION`.
 
-**Used by:** `NOTES`.
+**Used by:** <a href="#terse-word-4e-4f-54-45-53"><code>NOTES</code></a>.
 
 ### <a name="terse-word-43-4f-4e-47-52"></a>`CONGR`
 
@@ -1181,7 +1183,7 @@ SPOST 0E00 2800 828 A" LETS PLAY AGAIN I WILL BUY" SPOST ;
 
 **Calls:** `SPOST`.
 
-**Used by:** `TF`.
+**Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-43-50-4f-53-54"></a>`CPOST`
 
@@ -1198,7 +1200,7 @@ cpost 3DROP ;
 
 **Calls:** `cpost`, `DROP`.
 
-**Used by:** `FL`, `HOM`, `SBO`, `SCRS`, `VIS`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-48-4f-4d"><code>HOM</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>, <a href="#terse-word-53-43-52-53"><code>SCRS</code></a>, <a href="#terse-word-56-49-53"><code>VIS</code></a>.
 
 ### <a name="terse-word-43-52-45-44-41-52-52-4f-57"></a>`CREDARROW`
 
@@ -1221,7 +1223,7 @@ CHKFLSHSTAY ELSE DROP THEN THEN EI ;
 
 **Calls:** `DI`, `BZERO`, `B@`, `BONE`, `DUP`, `B!`, `AND`, `MLINN`, `CHKFLSHSTAY`, `DROP`, `EI`.
 
-**Used by:** `STRTBALL`, `TERSECHK`.
+**Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
 ### <a name="terse-word-43-54-4f-4e-45"></a>`CTONE`
 
@@ -1233,7 +1235,7 @@ Emit tone setting for channel C.
 { : CTONE } 13 B, B, { ; }
 ```
 
-**Used by:** `CNOTE`, `QUIET`.
+**Used by:** <a href="#terse-word-43-4e-4f-54-45"><code>CNOTE</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
 ### <a name="terse-word-44-45-41-43-54-2c"></a>`DEACT,`
 
@@ -1245,7 +1247,7 @@ Emit vector-deactivation command.
 { : DEACT, } 0C B, { ; }
 ```
 
-**Used by:** `LCB,`, `LK,`, `RCB,`, `STP,`.
+**Used by:** <a href="#terse-word-4c-43-42-2c"><code>LCB,</code></a>, <a href="#terse-word-4c-4b-2c"><code>LK,</code></a>, <a href="#terse-word-52-43-42-2c"><code>RCB,</code></a>, <a href="#terse-word-53-54-50-2c"><code>STP,</code></a>.
 
 ### <a name="terse-word-44-4c-49-4e-45"></a>`DLINE`
 
@@ -1261,7 +1263,7 @@ SWAB ( set y for relabs ) strtline cnline ;
 
 **Calls:** `DUP`, `strtline`, `cnline`.
 
-**Used by:** `FIELDWRT`, `OUTLINE`, `RECLINE`.
+**Used by:** <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>, <a href="#terse-word-52-45-43-4c-49-4e-45"><code>RECLINE</code></a>.
 
 ### <a name="terse-word-44-4f-43-48-47-53"></a>`DOCHGS`
 
@@ -1275,7 +1277,7 @@ DOCHGS flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER;
 
 **Calls:** `CHGS`, `FLSHTON`, `DWAIT`, `FLSHOFF`, `BZERO`.
 
-**Used by:** `TF`.
+**Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-44-4f-45-48-4f-4d-45-52"></a>`DOEHOMER`
 
@@ -1307,7 +1309,7 @@ FLSHOFF DROP 0 PLYR1UP BZERO ( plyr1up 0 ) EIDI ;
 
 **Calls:** `SGO`, `B!`, `BONE`, `PX0`, `RECTAN`, `EIDI`, `BZERO`, `MLINN`, `DI`, `PX1`, `SCRS`, `B@`, `FLSHOFF`, `TWAIT`, `INSCN`, `DROP`.
 
-**Used by:** `TF`.
+**Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-44-4f-48-4f-4d-45-52"></a>`DOHOMER`
 
@@ -1346,7 +1348,7 @@ ELSE SBALL3 THEN THEN ;
 
 **Calls:** `B@`, `DUP`, `DROP`, `SBALL1`, `SBALL2`, `SBALL3`.
 
-**Used by:** `BALLTIME`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>.
 
 ### <a name="terse-word-44-4f-53-4f-55-54"></a>`DOSOUT`
 
@@ -1361,7 +1363,7 @@ ELSE SOUT3 THEN THEN ;
 
 **Calls:** `B@`, `DUP`, `DROP`, `SOUT1`, `SOUT2`, `SOUT3`.
 
-**Used by:** `OUTTIME`.
+**Used by:** <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
 ### <a name="terse-word-44-4f-53-53-54-52-49-4b-45"></a>`DOSSTRIKE`
 
@@ -1375,7 +1377,7 @@ DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the
 
 **Calls:** `B@`, `SSTRIKE1`, `SSTRIKE2`.
 
-**Used by:** `STRIKETIME`.
+**Used by:** <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
 ### <a name="terse-word-44-50-31"></a>`DP1`
 
@@ -1389,7 +1391,7 @@ Display the one-coin deposit prompt.
 
 **Calls:** `SPOST`.
 
-**Used by:** `TCNT`.
+**Used by:** <a href="#terse-word-54-43-4e-54"><code>TCNT</code></a>.
 
 ### <a name="terse-word-44-50-31-32-43-4e"></a>`DP12CN`
 
@@ -1405,7 +1407,7 @@ ELSE DP1CN THEN ;
 
 **Calls:** `B@`, `SPOST`, `DP1CN`.
 
-**Used by:** `CHKGMCNT`.
+**Used by:** <a href="#terse-word-43-48-4b-47-4d-43-4e-54"><code>CHKGMCNT</code></a>.
 
 ### <a name="terse-word-44-50-31-43-4e"></a>`DP1CN`
 
@@ -1420,7 +1422,7 @@ SPOST ;
 
 **Calls:** `SPOST`.
 
-**Used by:** `DP12CN`, `DPCN`, `SORRY`.
+**Used by:** <a href="#terse-word-44-50-31-32-43-4e"><code>DP12CN</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-53-4f-52-52-59"><code>SORRY</code></a>.
 
 ### <a name="terse-word-44-50-43-4e"></a>`DPCN`
 
@@ -1436,7 +1438,7 @@ GAMEOVER BZERO ELSE LINN BZERO UPCRED BONE THEN CREDITS 1+B! ;
 
 **Calls:** `DP1CN`, `BZERO`, `TWAIT`, `B@`, `BONE`, `B!`.
 
-**Used by:** `TF`.
+**Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-64-70-6f-73-74"></a>`dpost`
 
@@ -1451,7 +1453,7 @@ SWAP BFFF AND SWAP ELSE DROP 20 THEN cpost ;
 
 **Calls:** `AND`, `OVER`, `XOR`, `OR`, `SWAP`, `DROP`, `cpost`.
 
-**Used by:** `NPOST`.
+**Used by:** <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>.
 
 ### <a name="terse-word-44-54-43"></a>`DTC`
 
@@ -1475,7 +1477,7 @@ Emit a note-duration command.
 { : DURATION } 1 B, B, { ; }
 ```
 
-**Used by:** `ANOTE`, `BNOTE`, `CNOTE`, `REST`.
+**Used by:** <a href="#terse-word-41-4e-4f-54-45"><code>ANOTE</code></a>, <a href="#terse-word-42-4e-4f-54-45"><code>BNOTE</code></a>, <a href="#terse-word-43-4e-4f-54-45"><code>CNOTE</code></a>, <a href="#terse-word-52-45-53-54"><code>REST</code></a>.
 
 ### <a name="terse-word-44-57-41-49-54"></a>`DWAIT`
 
@@ -1489,7 +1491,7 @@ DWAIT runs nested loops with interrupts enabled and disables them on return;
 
 **Calls:** `EI`, `DO`, `LOOP`, `DI`.
 
-**Used by:** `DOCHGS`, `STRTBALL`.
+**Used by:** <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
 ### <a name="terse-word-46-3d"></a>`F=`
 
@@ -1605,7 +1607,7 @@ FINDEX BZERO GETF GETF GETF GETF DLINE
 
 **Calls:** `BZERO`, `GETF`, `DLINE`, `DO`, `CNLINE`, `LOOP`.
 
-**Used by:** `FL`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
 ### <a name="terse-word-46-4c"></a>`FL`
 
@@ -1636,7 +1638,7 @@ F00 SUP
 
 **Calls:** `OUTP`, `ZERORAM`, `FLFILL`, `EI`, `INFIELD`, `PX1`, `FIELDWRT`, `WRITR`, `FMIRROR`, `OUTLINE`, `SPOST`, `CPOST`, `RECTAN`, `EIDI`, `HOM`, `VIS`, `SCRS`, `DUP`, `B!`, `SBO`, `SUP`.
 
-**Used by:** `PLRSELECT`, `PUP`, `STRTBALL`.
+**Used by:** <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
 ### <a name="terse-word-46-4c-44-44-53-54-2c"></a>`FLDDST,`
 
@@ -1660,7 +1662,7 @@ FLFILL fills the background while allowing interrupts;
 
 **Calls:** `EI`, `FILL`, `DI`.
 
-**Used by:** `FL`, `INSTRC`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>.
 
 ### <a name="terse-word-46-4c-53-48-4d-45"></a>`FLSHME`
 
@@ -1674,7 +1676,7 @@ FLSHME executes only a nonzero address whose top two bits are clear;
 
 **Calls:** `DUP`, `AND`, `OVER`, `EX`.
 
-**Used by:** `FLSHWUP`.
+**Used by:** <a href="#terse-word-46-4c-53-48-57-55-50"><code>FLSHWUP</code></a>.
 
 ### <a name="terse-word-46-4c-53-48-54-4f-4e"></a>`FLSHTON`
 
@@ -1688,7 +1690,7 @@ FLSHTON saves a callback and starts its timer.
 
 **Calls:** `BONE`.
 
-**Used by:** `DOCHGS`, `INSCN`, `WUPTON`.
+**Used by:** <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-57-55-50-54-4f-4e"><code>WUPTON</code></a>.
 
 ### <a name="terse-word-46-4f-55-4c-54-49-4d-45"></a>`FOULTIME`
 
@@ -1750,7 +1752,7 @@ GETF fetches FIELD bytes sequentially;
 
 **Calls:** `B@`, `B!`.
 
-**Used by:** `FIELDWRT`.
+**Used by:** <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>.
 
 ### <a name="terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"></a>`GRNDRACTION`
 
@@ -1771,7 +1773,7 @@ HRSS HR3RD LDINFLDPA THEN ;
 
 **Calls:** `BZERO`, `EX`, `DUP`, `B!`, `LDINFLDPA`.
 
-**Used by:** `GRNDRHIT`.
+**Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>.
 
 ### <a name="terse-word-47-52-4e-44-52-48-49-54"></a>`GRNDRHIT`
 
@@ -1796,7 +1798,7 @@ VDSTY BL ! THEN HITDST ;
 
 **Calls:** `BONE`, `B!`, `RND`, `B@`, `EX`, `DUP`, `GRNDRACTION`, `MFOUL`, `DROP`, `WUPGO`, `HITRUN`, `HITDST`.
 
-**Used by:** `INLOG`.
+**Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
 ### <a name="terse-word-48-49-54-44-53-54"></a>`HITDST`
 
@@ -1812,7 +1814,7 @@ BAL THWPA ! 2800 VX BL ! AD00 VY BL ! ;
 
 **Calls:** `BZERO`, `B!`.
 
-**Used by:** `GRNDRHIT`, `OUTFLDHIT`.
+**Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
 ### <a name="terse-word-48-4c-4c-53"></a>`HLLS`
 
@@ -1862,7 +1864,7 @@ HOM and VIS draw HOME/VISITOR using a large initial character and the remaining 
 
 **Calls:** `CPOST`, `SPOST`.
 
-**Used by:** `FL`, `WUPWRT`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
 ### <a name="terse-word-48-52-42-59-32"></a>`HRBY2`
 
@@ -1876,7 +1878,7 @@ HRBY2 halves HRAT.
 
 **Calls:** `B@`, `B!`.
 
-**Used by:** `WHBODDS`.
+**Used by:** <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>.
 
 ### <a name="terse-word-48-52-4c-53"></a>`HRLS`
 
@@ -1958,7 +1960,7 @@ ELSE GRNDRHIT THEN ALLFLDACT ;
 
 **Calls:** `BZERO`, `BONE`, `MHIT`, `B@`, `RND`, `DUP`, `B!`, `OUTFLDHIT`, `GRNDRHIT`, `ALLFLDACT`.
 
-**Used by:** `BATHIT`.
+**Used by:** <a href="#terse-word-42-41-54-48-49-54"><code>BATHIT</code></a>.
 
 ### <a name="terse-word-49-4e-4e-4f-44-44-53"></a>`INNODDS`
 
@@ -1995,7 +1997,7 @@ THEN 2880 4C00 BASE2PAT 428 WRITR ;
 
 **Calls:** `SGO`, `ISCN`, `FLSHTON`, `B@`, `SPOST`, `WRITR`.
 
-**Used by:** `DOGOVER`.
+**Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>.
 
 ### <a name="terse-word-49-4e-53-54-52-43"></a>`INSTRC`
 
@@ -2021,7 +2023,7 @@ FLFILL 6000 2800 828 A" PRESS ANY BUTTON TO START GAME" SPOST
 
 **Calls:** `BZERO`, `BEGIN`, `FLFILL`, `SPOST`, `INSWAIT`, `B@`, `END`.
 
-**Used by:** `STRTBALL`.
+**Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
 ### <a name="terse-word-49-4e-53-57-41-49-54"></a>`INSWAIT`
 
@@ -2037,7 +2039,7 @@ INSWAIT enables interrupts, loops until its count expires or any masked active-l
 
 **Calls:** `EI`, `BEGIN`, `DO`, `LOOP`, `INP`, `AND`, `DROP`, `BONE`, `DUP`, `END`, `DI`.
 
-**Used by:** `INSTRC`.
+**Used by:** <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>.
 
 ### <a name="terse-word-49-4e-54-45-52-52-55-50-54-53-3e"></a>`INTERRUPTS>`
 
@@ -2065,7 +2067,7 @@ Intialize screen for commercial mode.
 
 **Calls:** `OUTP`.
 
-**Used by:** `PUP`.
+**Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
 ### <a name="terse-word-49-53-43-4e"></a>`ISCN`
 
@@ -2079,7 +2081,7 @@ Display the V15 instruction message.
 
 **Calls:** `SPOST`.
 
-**Used by:** `INSCN`.
+**Used by:** <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>.
 
 ### <a name="terse-word-4c-41-42-4c-45"></a>`LABLE`
 
@@ -2114,7 +2116,7 @@ LDINFLDPA consumes stacked action pointers and installs them for third base, sho
 VPLAYACTPC 1ST ! VPLAYACTPC PT ! ;
 ```
 
-**Used by:** `GRNDRACTION`, `OUTFLDHIT`.
+**Used by:** <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
 ### <a name="terse-word-4c-44-50-43"></a>`LDPC`
 
@@ -2126,7 +2128,7 @@ Emit/load the music program-counter value.
 { : LDPC } 3 B, , { ; }
 ```
 
-**Used by:** `QUIT`.
+**Used by:** <a href="#terse-word-51-55-49-54"><code>QUIT</code></a>.
 
 ### <a name="terse-word-4c-44-50-43-43"></a>`LDPCC`
 
@@ -2176,7 +2178,7 @@ NBD RUNPA ! STND OFPA ! NBD TBLPA ! BAL THWPA ! ;
 
 **Calls:** `DO`, `DUP`, `SB!`, `S!`, `LOOP`, `B@`, `DROP`, `B!`.
 
-**Used by:** `SETTF`.
+**Used by:** <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>.
 
 ### <a name="terse-word-4d-41-53-54-45-52"></a>`MASTER`
 
@@ -2188,7 +2190,7 @@ Define the game's master music stream.
 { : MASTER } 10 B, B, { ; }
 ```
 
-**Used by:** `CMAJOR`.
+**Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>.
 
 ### <a name="terse-word-4d-42-41-4c-4c"></a>`MBALL`
 
@@ -2202,7 +2204,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `BALLTIME`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>.
 
 ### <a name="terse-word-4d-43-41-4e-4e-4f-4e"></a>`MCANNON`
 
@@ -2216,7 +2218,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `SCOREME`, `STARTMUSIC`.
+**Used by:** <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
 ### <a name="terse-word-4d-43-4f-49-4e"></a>`MCOIN`
 
@@ -2230,7 +2232,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `CHKCOIN1`, `CHKCOIN2`.
+**Used by:** <a href="#terse-word-43-48-4b-43-4f-49-4e-31"><code>CHKCOIN1</code></a>, <a href="#terse-word-43-48-4b-43-4f-49-4e-32"><code>CHKCOIN2</code></a>.
 
 ### <a name="terse-word-4d-43-56-4f-4c-53"></a>`MCVOLS`
 
@@ -2242,7 +2244,7 @@ Emit music-channel volume values.
 { : MCVOLS } 15 B, B, { ; }
 ```
 
-**Used by:** `CMAJOR`, `QUIET`, `REST`, `^`.
+**Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>, <a href="#terse-word-52-45-53-54"><code>REST</code></a>, <a href="#terse-word-5e"><code>^</code></a>.
 
 ### <a name="terse-word-4d-46-45-4e-43-45"></a>`MFENCE`
 
@@ -2256,7 +2258,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `STARTMUSIC`.
+**Used by:** <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
 ### <a name="terse-word-4d-46-4f-55-4c"></a>`MFOUL`
 
@@ -2270,7 +2272,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `GRNDRHIT`.
+**Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>.
 
 ### <a name="terse-word-4d-48-49-54"></a>`MHIT`
 
@@ -2284,7 +2286,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `INLOG`.
+**Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
 ### <a name="terse-word-4d-4c-49-4e-4e"></a>`MLINN`
 
@@ -2300,7 +2302,7 @@ THEN A500 IMRK 301 828 WRITE ELSE DROP DROP THEN EI ;
 
 **Calls:** `DI`, `PX0`, `RECTAN`, `B@`, `DUP`, `SWAP`, `DO`, `LOOP`, `DROP`, `WRITE`, `EI`.
 
-**Used by:** `CREDARROW`, `DOGOVER`, `PLRSELECT`, `STRTBALL`, `TF`.
+**Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-4d-4f-50-45-4e-45-52-53"></a>`MOPENERS`
 
@@ -2314,7 +2316,7 @@ Uses PMUSIC to compose game logic.
 
 **Calls:** `PMUSIC`.
 
-**Used by:** `STRTBALL`.
+**Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
 ### <a name="terse-word-4d-4f-55-54"></a>`MOUT`
 
@@ -2328,7 +2330,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `OUTTIME`.
+**Used by:** <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
 ### <a name="terse-word-4d-53-41-46-45"></a>`MSAFE`
 
@@ -2342,7 +2344,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `DOSAFE`.
+**Used by:** <a href="#terse-word-44-4f-53-41-46-45"><code>DOSAFE</code></a>.
 
 ### <a name="terse-word-4d-53-54-52-49-4b-45"></a>`MSTRIKE`
 
@@ -2356,7 +2358,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `STRIKETIME`.
+**Used by:** <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
 ### <a name="terse-word-4d-59-41-48"></a>`MYAH`
 
@@ -2370,7 +2372,7 @@ Uses BMUSIC to compose game logic.
 
 **Calls:** `BMUSIC`.
 
-**Used by:** `BALLTIME`, `OUTTIME`, `SCOREME`, `STARTMUSIC`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
 ### <a name="terse-word-4e-4f-49-53-45"></a>`NOISE`
 
@@ -2382,7 +2384,7 @@ Emit a noise/sound command.
 { : NOISE } 17 B, B, { ; }
 ```
 
-**Used by:** `CMAJOR`.
+**Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>.
 
 ### <a name="terse-word-4e-4f-54-45-53"></a>`NOTES`
 
@@ -2412,7 +2414,7 @@ OVER + SWAP DO I B@ SWAN dpost I B@ dpost LOOP
 
 **Calls:** `OVER`, `SWAP`, `DO`, `I`, `B@`, `SWAN`, `dpost`, `LOOP`, `DROP`.
 
-**Used by:** `SCOREME`.
+**Used by:** <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>.
 
 ### <a name="terse-word-4f-46-46-44-53-54-2c"></a>`OFFDST,`
 
@@ -2482,7 +2484,7 @@ HL2ND HLOUTSSPA ELSE HROUT2NDPA HRSS THEN HR3RD LDINFLDPA ;
 
 **Calls:** `B!`, `BONE`, `RND`, `B@`, `HOMERCHK`, `WUPGO`, `HITDST`, `LDINFLDPA`.
 
-**Used by:** `INLOG`.
+**Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
 ### <a name="terse-word-4f-55-54-4c-49-4e-45"></a>`OUTLINE`
 
@@ -2499,7 +2501,7 @@ Creates rectanguler outline.
 
 **Calls:** `NDUP`, `DROP`, `OVER`, `DLINE`, `CNLINE`.
 
-**Used by:** `FL`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
 ### <a name="terse-word-4f-55-54-54-49-4d-45"></a>`OUTTIME`
 
@@ -2525,7 +2527,7 @@ ELSE MOUT THEN CLRBLST SBO DOSOUT ;
 
 **Calls:** `DUP`, `B!`, `B@`, `MYAH`, `DO`, `S!`, `OR`, `AND`, `SB!`, `LOOP`, `DROP`, `BONE`, `BALLERASE`, `SGO`, `FLSHOFF`, `MOUT`, `CLRBLST`, `SBO`, `DOSOUT`.
 
-**Used by:** `STRIKETIME`.
+**Used by:** <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
 ### <a name="terse-word-50-4c-52-43-48-4b"></a>`PLRCHK`
 
@@ -2542,7 +2544,7 @@ CNSW12 BONE THEN STRTBALL THEN THEN THEN ;
 
 **Calls:** `INP`, `DUP`, `AND`, `XOR`, `DROP`, `BONE`, `STRTBALL`, `DI`, `SPOST`, `EI`, `B@`.
 
-**Used by:** `TERSECHK`.
+**Used by:** <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
 ### <a name="terse-word-50-4c-52-53-45-4c-45-43-54"></a>`PLRSELECT`
 
@@ -2558,7 +2560,7 @@ SPLR SELECT BZERO MLINN ;
 
 **Calls:** `DI`, `FL`, `BONE`, `SPLR`, `BZERO`, `MLINN`.
 
-**Used by:** `TERSECHK`.
+**Used by:** <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
 ### <a name="terse-word-50-50-4f-53-54"></a>`PPOST`
 
@@ -2577,7 +2579,7 @@ COUNT OVER + SWAP DO I B@ cpost LOOP ;
 
 **Calls:** `COUNT`, `OVER`, `SWAP`, `DO`, `I`, `B@`, `cpost`, `LOOP`.
 
-**Used by:** `SPOST`.
+**Used by:** <a href="#terse-word-53-50-4f-53-54"><code>SPOST</code></a>.
 
 ### <a name="terse-word-50-55-50"></a>`PUP`
 
@@ -2605,7 +2607,7 @@ Emit zero/white pixel patterns and define PX1/PX0 to select them.
 : PX0 0 PXT0 PXTYPE ! ;
 ```
 
-**Used by:** `DOGOVER`, `MLINN`.
+**Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>.
 
 ### <a name="terse-word-50-58-31"></a>`PX1`
 
@@ -2617,7 +2619,7 @@ Emit zero/white pixel patterns and define PX1/PX0 to select them.
 : PX1 0 PXT1 PXTYPE ! ;
 ```
 
-**Used by:** `DOGOVER`, `FL`.
+**Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>.
 
 ### <a name="terse-word-51-55-49-45-54"></a>`QUIET`
 
@@ -2644,7 +2646,7 @@ Uses HERE and LDPC to compose game logic.
 
 **Calls:** `HERE`, `LDPC`.
 
-**Used by:** `QUIET`.
+**Used by:** <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
 ### <a name="terse-word-52-43-42-2c"></a>`RCB,`
 
@@ -2680,7 +2682,7 @@ Draws a horizontal rectangle row without consuming the five retained rectangle a
 
 **Calls:** `DUP`, `SWAP`, `DLINE`.
 
-**Used by:** `RECTAN`.
+**Used by:** <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>.
 
 ### <a name="terse-word-52-45-43-54-41-4e"></a>`RECTAN`
 
@@ -2696,7 +2698,7 @@ DROP ;
 
 **Calls:** `BEGIN`, `RECLINE`, `ROT`, `DUP`, `END`, `DROP`.
 
-**Used by:** `DOGOVER`, `FL`, `MLINN`, `SCRS`.
+**Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-53-43-52-53"><code>SCRS</code></a>.
 
 ### <a name="terse-word-52-45-53-54"></a>`REST`
 
@@ -2734,7 +2736,7 @@ B@ 80 OR F7 AND SB! VLENGTH + LOOP DROP ;
 
 **Calls:** `DO`, `DUP`, `S!`, `B@`, `OR`, `AND`, `SB!`, `LOOP`, `DROP`.
 
-**Used by:** `STFLD`.
+**Used by:** <a href="#terse-word-53-54-46-4c-44"><code>STFLD</code></a>.
 
 ### <a name="terse-word-52-4e-44-4e-54-45"></a>`RNDNTE`
 
@@ -2769,7 +2771,7 @@ ELSE RUN1CHK2ND THEN ;
 
 **Calls:** `B@`, `RUN1CHK2ND`.
 
-**Used by:** `WHBODDS`.
+**Used by:** <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>.
 
 ### <a name="terse-word-52-55-4e-31-43-48-4b-32-4e-44"></a>`RUN1CHK2ND`
 
@@ -2784,7 +2786,7 @@ ELSE RUN2CHK THEN ;
 
 **Calls:** `B@`, `RUN2CHK12ND`, `RUN2CHK`.
 
-**Used by:** `RUN1CHK1ST`.
+**Used by:** <a href="#terse-word-52-55-4e-31-43-48-4b-31-53-54"><code>RUN1CHK1ST</code></a>.
 
 ### <a name="terse-word-52-55-4e-32-43-48-4b"></a>`RUN2CHK`
 
@@ -2799,7 +2801,7 @@ ELSE RUN2CHK1ST THEN ;
 
 **Calls:** `B@`, `RUN2CHK1ST`.
 
-**Used by:** `RUN1CHK2ND`.
+**Used by:** <a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44"><code>RUN1CHK2ND</code></a>.
 
 ### <a name="terse-word-52-55-4e-32-43-48-4b-31-32-4e-44"></a>`RUN2CHK12ND`
 
@@ -2814,7 +2816,7 @@ ELSE 4 VMAGIC R3 THEN ;
 
 **Calls:** `B@`.
 
-**Used by:** `RUN1CHK2ND`.
+**Used by:** <a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44"><code>RUN1CHK2ND</code></a>.
 
 ### <a name="terse-word-52-55-4e-32-43-48-4b-31-53-54"></a>`RUN2CHK1ST`
 
@@ -2829,7 +2831,7 @@ ELSE RUN3CHK THEN ;
 
 **Calls:** `B@`, `RUN3CHK`.
 
-**Used by:** `RUN2CHK`.
+**Used by:** <a href="#terse-word-52-55-4e-32-43-48-4b"><code>RUN2CHK</code></a>.
 
 ### <a name="terse-word-52-55-4e-33-43-48-4b"></a>`RUN3CHK`
 
@@ -2844,7 +2846,7 @@ THEN ;
 
 **Calls:** `B@`.
 
-**Used by:** `RUN2CHK1ST`.
+**Used by:** <a href="#terse-word-52-55-4e-32-43-48-4b-31-53-54"><code>RUN2CHK1ST</code></a>.
 
 ### <a name="terse-word-52-55-4e-44-53-54-2c"></a>`RUNDST,`
 
@@ -2868,7 +2870,7 @@ Store cell with address-first arguments.
 
 **Calls:** `SWAP`.
 
-**Used by:** `LSETTFCOOR`, `OUTTIME`, `RETPA`.
+**Used by:** <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>.
 
 ### <a name="terse-word-53-31-30"></a>`S10`
 
@@ -2882,7 +2884,7 @@ S10 starts INTERRUPTS0 through ISTART;
 
 **Calls:** `ISTART`.
 
-**Used by:** `PUP`, `STARTMUSIC`.
+**Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
 ### <a name="terse-word-53-31-31"></a>`S11`
 
@@ -2896,7 +2898,7 @@ S11 starts INTERRUPTS1.
 
 **Calls:** `ISTART`.
 
-**Used by:** `STARTMUSIC`.
+**Used by:** <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
 ### <a name="terse-word-53-42-21"></a>`SB!`
 
@@ -2910,7 +2912,7 @@ Store byte with address-first arguments.
 
 **Calls:** `SWAP`, `B!`.
 
-**Used by:** `BONE`, `BZERO`, `LSETTFCOOR`, `OUTTIME`, `RETPA`, `WUPGO`.
+**Used by:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>, <a href="#terse-word-42-5a-45-52-4f"><code>BZERO</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-57-55-50-47-4f"><code>WUPGO</code></a>.
 
 ### <a name="terse-word-53-42-41-4c-4c-31"></a>`SBALL1`
 
@@ -2924,7 +2926,7 @@ Draw the BALL 1 message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSBALL`.
+**Used by:** <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>.
 
 ### <a name="terse-word-53-42-41-4c-4c-32"></a>`SBALL2`
 
@@ -2938,7 +2940,7 @@ Draw the BALL 2 message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSBALL`.
+**Used by:** <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>.
 
 ### <a name="terse-word-53-42-41-4c-4c-33"></a>`SBALL3`
 
@@ -2952,7 +2954,7 @@ Draw the BALL 3 message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSBALL`.
+**Used by:** <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>.
 
 ### <a name="terse-word-53-42-4f"></a>`SBO`
 
@@ -2967,7 +2969,7 @@ CPOST 4700 B000 308 OUTS B@ CPOST ;
 
 **Calls:** `B@`, `CPOST`.
 
-**Used by:** `BALLTIME`, `DOHOMER`, `FL`, `FOULTIME`, `OUTTIME`, `SSAFE`, `STRIKETIME`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-53-53-41-46-45"><code>SSAFE</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
 ### <a name="terse-word-53-43-4f-52-45-4d-45"></a>`SCOREME`
 
@@ -2997,7 +2999,7 @@ Erase entire screen.
 
 **Calls:** `FILL`.
 
-**Used by:** `PUP`.
+**Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
 ### <a name="terse-word-53-43-52-53"></a>`SCRS`
 
@@ -3012,7 +3014,7 @@ B00 8C00 308 30 CPOST 4500 8C00 308 30 CPOST ;
 
 **Calls:** `RECTAN`, `CPOST`.
 
-**Used by:** `DOGOVER`, `FL`.
+**Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>.
 
 ### <a name="terse-word-53-45-54-46-44-53-54"></a>`SETFDST`
 
@@ -3060,7 +3062,7 @@ RUNBPA VPLAYACTPC R3 ! RUNBPA VPLAYACTPC R4 !
 TBLPA VPLAYACTPC BL ! ;
 ```
 
-**Used by:** `SETTF`.
+**Used by:** <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>.
 
 ### <a name="terse-word-53-46-4f-55-4c"></a>`SFOUL`
 
@@ -3074,7 +3076,7 @@ Uses ROT and SPOST to compose game logic.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `FOULTIME`.
+**Used by:** <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>.
 
 ### <a name="terse-word-53-47-4f"></a>`SGO`
 
@@ -3088,7 +3090,7 @@ Uses SPOST to compose game logic.
 
 **Calls:** `SPOST`.
 
-**Used by:** `DOGOVER`, `INSCN`, `OUTTIME`, `PUP`, `TF`.
+**Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-53-48-4f-4d-45-52"></a>`SHOMER`
 
@@ -3102,7 +3104,7 @@ Uses ROT and SPOST to compose game logic.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOEHOMER`, `DOHOMER`.
+**Used by:** <a href="#terse-word-44-4f-45-48-4f-4d-45-52"><code>DOEHOMER</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>.
 
 ### <a name="terse-word-53-4f-52-52-59"></a>`SORRY`
 
@@ -3116,7 +3118,7 @@ Display the losing-player prompt.
 
 **Calls:** `SPOST`, `DP1CN`.
 
-**Used by:** `TF`.
+**Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-53-4f-55-54-31"></a>`SOUT1`
 
@@ -3130,7 +3132,7 @@ Draw the 1 OUT message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSOUT`.
+**Used by:** <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>.
 
 ### <a name="terse-word-53-4f-55-54-32"></a>`SOUT2`
 
@@ -3144,7 +3146,7 @@ Draw the 2 OUT message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSOUT`.
+**Used by:** <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>.
 
 ### <a name="terse-word-53-4f-55-54-33"></a>`SOUT3`
 
@@ -3158,7 +3160,7 @@ Draw the 3 OUT message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSOUT`.
+**Used by:** <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>.
 
 ### <a name="terse-word-53-50-4c-52"></a>`SPLR`
 
@@ -3175,7 +3177,7 @@ SPOST STRT1 BONE THEN ELSE SPLR12 THEN ;
 
 **Calls:** `B@`, `SPLR12`, `SPOST`, `BONE`.
 
-**Used by:** `PLRSELECT`.
+**Used by:** <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>.
 
 ### <a name="terse-word-53-50-4c-52-31-32"></a>`SPLR12`
 
@@ -3189,7 +3191,7 @@ SPLR12/SPLR display available player choices;
 
 **Calls:** `SPOST`.
 
-**Used by:** `SPLR`.
+**Used by:** <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>.
 
 ### <a name="terse-word-53-50-4f-53-54"></a>`SPOST`
 
@@ -3207,7 +3209,7 @@ PPOST 3DROP ;
 
 **Calls:** `PPOST`, `DROP`.
 
-**Used by:** `CHGS`, `CONGR`, `DP1`, `DP12CN`, `DP1CN`, `FL`, `HOM`, `INSCN`, `INSTRC`, `ISCN`, `PLRCHK`, `SBALL1`, `SBALL2`, `SBALL3`, `SFOUL`, `SGO`, `SHOMER`, `SORRY`, `SOUT1`, `SOUT2`, `SOUT3`, `SPLR`, `SPLR12`, `SSAFE`, `SSTRIKE1`, `SSTRIKE2`, `SUP`, `SWALK`, `TCNT`, `VIS`, `YOU1ST`.
+**Used by:** <a href="#terse-word-43-48-47-53"><code>CHGS</code></a>, <a href="#terse-word-43-4f-4e-47-52"><code>CONGR</code></a>, <a href="#terse-word-44-50-31"><code>DP1</code></a>, <a href="#terse-word-44-50-31-32-43-4e"><code>DP12CN</code></a>, <a href="#terse-word-44-50-31-43-4e"><code>DP1CN</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-48-4f-4d"><code>HOM</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-49-53-43-4e"><code>ISCN</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-53-42-41-4c-4c-31"><code>SBALL1</code></a>, <a href="#terse-word-53-42-41-4c-4c-32"><code>SBALL2</code></a>, <a href="#terse-word-53-42-41-4c-4c-33"><code>SBALL3</code></a>, <a href="#terse-word-53-46-4f-55-4c"><code>SFOUL</code></a>, <a href="#terse-word-53-47-4f"><code>SGO</code></a>, <a href="#terse-word-53-48-4f-4d-45-52"><code>SHOMER</code></a>, <a href="#terse-word-53-4f-52-52-59"><code>SORRY</code></a>, <a href="#terse-word-53-4f-55-54-31"><code>SOUT1</code></a>, <a href="#terse-word-53-4f-55-54-32"><code>SOUT2</code></a>, <a href="#terse-word-53-4f-55-54-33"><code>SOUT3</code></a>, <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>, <a href="#terse-word-53-50-4c-52-31-32"><code>SPLR12</code></a>, <a href="#terse-word-53-53-41-46-45"><code>SSAFE</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-31"><code>SSTRIKE1</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-32"><code>SSTRIKE2</code></a>, <a href="#terse-word-53-55-50"><code>SUP</code></a>, <a href="#terse-word-53-57-41-4c-4b"><code>SWALK</code></a>, <a href="#terse-word-54-43-4e-54"><code>TCNT</code></a>, <a href="#terse-word-56-49-53"><code>VIS</code></a>, <a href="#terse-word-59-4f-55-31-53-54"><code>YOU1ST</code></a>.
 
 ### <a name="terse-word-53-53-41-46-45"></a>`SSAFE`
 
@@ -3221,7 +3223,7 @@ SSAFE also redraws counts with SBO.
 
 **Calls:** `ROT`, `SPOST`, `SBO`.
 
-**Used by:** `DOSAFE`.
+**Used by:** <a href="#terse-word-44-4f-53-41-46-45"><code>DOSAFE</code></a>.
 
 ### <a name="terse-word-53-53-54-52-49-4b-45-31"></a>`SSTRIKE1`
 
@@ -3235,7 +3237,7 @@ Draw the STRIKE 1 message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSSTRIKE`.
+**Used by:** <a href="#terse-word-44-4f-53-53-54-52-49-4b-45"><code>DOSSTRIKE</code></a>.
 
 ### <a name="terse-word-53-53-54-52-49-4b-45-32"></a>`SSTRIKE2`
 
@@ -3249,7 +3251,7 @@ Draw the STRIKE 2 message.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `DOSSTRIKE`.
+**Used by:** <a href="#terse-word-44-4f-53-53-54-52-49-4b-45"><code>DOSSTRIKE</code></a>.
 
 ### <a name="terse-word-53-54-46-4c-44"></a>`STFLD`
 
@@ -3263,7 +3265,7 @@ STFLD installs RETPA and TAKEFIELD.
 
 **Calls:** `RETPA`, `BONE`.
 
-**Used by:** `SETTF`.
+**Used by:** <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>.
 
 ### <a name="terse-word-53-54-50-2c"></a>`STP,`
 
@@ -3307,7 +3309,7 @@ DROP DROP ;
 
 **Calls:** `B!`, `EX`, `DROP`.
 
-**Used by:** `STRINGPRC`.
+**Used by:** <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>.
 
 ### <a name="terse-word-53-54-52-49-4e-47-50-52-43"></a>`STRINGPRC`
 
@@ -3342,7 +3344,7 @@ CMPLR B@ IF YOU1ST 50 DWAIT YOU1ST THEN
 
 **Calls:** `DI`, `INSTRC`, `FL`, `SUP`, `BONE`, `BZERO`, `B@`, `CREDARROW`, `MLINN`, `YOU1ST`, `DWAIT`, `TF`, `MOPENERS`.
 
-**Used by:** `PLRCHK`.
+**Used by:** <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>.
 
 ### <a name="terse-word-53-55-50"></a>`SUP`
 
@@ -3356,7 +3358,7 @@ SUP posts UP.
 
 **Calls:** `SPOST`.
 
-**Used by:** `FL`, `STRTBALL`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
 ### <a name="terse-word-53-57-2d-33-30"></a>`SW-30`
 
@@ -3468,7 +3470,7 @@ Uses ROT and SPOST to compose game logic.
 
 **Calls:** `ROT`, `SPOST`.
 
-**Used by:** `BALLTIME`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>.
 
 ### <a name="terse-word-54-43-4e-54"></a>`TCNT`
 
@@ -3484,7 +3486,7 @@ A" DEPOSIT 1 COIN PER PLAYER" SPOST THEN ELSE DP1 THEN ;
 
 **Calls:** `SPOST`, `B@`, `DP1`.
 
-**Used by:** `TF`.
+**Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-54-45-52-53-45-43-48-4b"></a>`TERSECHK`
 
@@ -3500,7 +3502,7 @@ CHKPLRS B@ IF PLRCHK THEN UPCRED B@ IF CREDARROW THEN ;
 
 **Calls:** `RND`, `DROP`, `B@`, `TF`, `PLRSELECT`, `PLRCHK`, `CREDARROW`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-54-46"></a>`TF`
 
@@ -3541,7 +3543,7 @@ HITYET BONE MYAH S10 ;
 
 **Calls:** `DI`, `ZERORAM`, `EI`, `DUP`, `B!`, `INP`, `AND`, `XOR`, `B@`, `ROT`, `BONE`, `SGO`, `DOGOVER`, `CONGR`, `TWAIT`, `MLINN`, `BZERO`, `SORRY`, `DOCHGS`, `DPCN`, `CHKGMCNT`, `DROP`, `TCNT`.
 
-**Used by:** `PUP`, `STRTBALL`, `TERSECHK`.
+**Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
 ### <a name="terse-word-54-48-57-2c"></a>`THW,`
 
@@ -3569,7 +3571,7 @@ DROP DI ;
 
 **Calls:** `EI`, `BEGIN`, `DO`, `LOOP`, `B@`, `DUP`, `DROP`, `END`, `DI`.
 
-**Used by:** `CHKGMCNT`, `DOGOVER`, `DPCN`, `TF`.
+**Used by:** <a href="#terse-word-43-48-4b-47-4d-43-4e-54"><code>CHKGMCNT</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-56"></a>`V`
 
@@ -3583,7 +3585,7 @@ Uses VARIABLE to compose game logic.
 
 **Calls:** `VARIABLE`.
 
-**Used by:** `V=`.
+**Used by:** <a href="#terse-word-56-3d"><code>V=</code></a>.
 
 ### <a name="terse-word-56-3d"></a>`V=`
 
@@ -3619,7 +3621,7 @@ HOM and VIS draw HOME/VISITOR using a large initial character and the remaining 
 
 **Calls:** `CPOST`, `SPOST`.
 
-**Used by:** `FL`, `WUPWRT`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
 ### <a name="terse-word-57-48-42-4f-44-44-53"></a>`WHBODDS`
 
@@ -3643,7 +3645,7 @@ THEN THEN THEN DROP THEN ;
 
 **Calls:** `B@`, `RUN1CHK1ST`, `B!`, `RND`, `SWAP`, `DUP`, `HRBY2`, `DROP`.
 
-**Used by:** `BALLTIME`, `THROWBALL`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-54-48-52-4f-57-42-41-4c-4c"><code>THROWBALL</code></a>.
 
 ### <a name="terse-word-57-54-48-57-2c"></a>`WTHW,`
 
@@ -3667,7 +3669,7 @@ WUPGO activates WHOSUP with runner/automatic-forward flags;
 
 **Calls:** `DUP`, `SB!`.
 
-**Used by:** `BALLTIME`, `GRNDRHIT`, `OUTFLDHIT`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
 ### <a name="terse-word-57-55-50-54-4f-4e"></a>`WUPTON`
 
@@ -3681,7 +3683,7 @@ WUPTON installs WUPWRT.
 
 **Calls:** `WUPWRT`, `FLSHTON`.
 
-**Used by:** `CHKFLSHSTAY`.
+**Used by:** <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>.
 
 ### <a name="terse-word-57-55-50-57-52-54"></a>`WUPWRT`
 
@@ -3696,7 +3698,7 @@ PTAUTOTM PLYR1UP B@ IF HOM ELSE VIS THEN ;
 
 **Calls:** `PTAUTOTM`, `B@`, `HOM`, `VIS`.
 
-**Used by:** `BUTTONCHK`, `CHKFLSHSTAY`, `WUPTON`.
+**Used by:** <a href="#terse-word-42-55-54-54-4f-4e-43-48-4b"><code>BUTTONCHK</code></a>, <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-57-55-50-54-4f-4e"><code>WUPTON</code></a>.
 
 ### <a name="terse-word-59-4f-55-31-53-54"></a>`YOU1ST`
 
@@ -3712,7 +3714,7 @@ A" GOOD LUCK" SPOST ;
 
 **Calls:** `SPOST`.
 
-**Used by:** `STRTBALL`.
+**Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
 ### <a name="terse-word-5a-45-52-4f-52-41-4d"></a>`ZERORAM`
 
@@ -3726,7 +3728,7 @@ ZERORAM clears $270 bytes starting at $7C30 and resets OFTFCNT.
 
 **Calls:** `DI`, `FILL`, `B!`.
 
-**Used by:** `FL`, `TF`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
 ### <a name="terse-word-2b-4c-4f-4f-50"></a>`+LOOP`
 
@@ -3764,7 +3766,7 @@ CODE ALLFLDACT ( sets all fielders active )
 
 **Calls:** `INFLDACT`, `OUTFLDACT`.
 
-**Used by:** `INLOG`.
+**Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
 ### <a name="terse-word-41-4e-4d-53-45-51-4c-4f-41-44"></a>`ANMSEQLOAD`
 
@@ -3784,7 +3786,7 @@ D VANMSEQH X STX, E VANMSEQL X STX, RET,
 
 **Calls:** `INDEXW`.
 
-**Used by:** `PLAYACT`.
+**Used by:** <a href="#terse-word-50-4c-41-59-41-43-54"><code>PLAYACT</code></a>.
 
 ### <a name="terse-word-42-41-4c-4c-45-52-41-53-45"></a>`BALLERASE`
 
@@ -3801,7 +3803,7 @@ Y POPX, B POP, NEXT
 
 **Calls:** `BLERASE`.
 
-**Used by:** `DOHOMER`, `OUTTIME`.
+**Used by:** <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
 ### <a name="terse-word-42-41-54-48-49-54"></a>`BATHIT`
 
@@ -3820,7 +3822,7 @@ SWINGGO STA, EI, RET,
 
 **Calls:** `INLOG`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-42-41-54-48-49-54-43-48-4b"></a>`BATHITCHK`
 
@@ -3841,7 +3843,7 @@ HITTIME STA, HITGOING STA, BLERASE CALL, RET,
 
 **Calls:** `INDEXW`, `MULTHLBY4`, `BLERASE`.
 
-**Used by:** `BATSWING`.
+**Used by:** <a href="#terse-word-42-41-54-53-57-49-4e-47"><code>BATSWING</code></a>.
 
 ### <a name="terse-word-42-41-54-53-57-49-4e-47"></a>`BATSWING`
 
@@ -3889,7 +3891,7 @@ H POP, RET,
 
 **Calls:** `INDEXW`, `reloff`, `relabs`, `writep`.
 
-**Used by:** `BATSWING`.
+**Used by:** <a href="#terse-word-42-41-54-53-57-49-4e-47"><code>BATSWING</code></a>.
 
 ### <a name="terse-word-42-43-44-2b"></a>`BCD+`
 
@@ -4004,7 +4006,7 @@ NOTETIMER STA, A INR, MULTIPLE STA, THEN, NEXT
 
 **Calls:** `loadpc`.
 
-**Used by:** `MBALL`, `MCANNON`, `MCOIN`, `MFENCE`, `MFOUL`, `MHIT`, `MOUT`, `MSAFE`, `MSTRIKE`, `MYAH`.
+**Used by:** <a href="#terse-word-4d-42-41-4c-4c"><code>MBALL</code></a>, <a href="#terse-word-4d-43-41-4e-4e-4f-4e"><code>MCANNON</code></a>, <a href="#terse-word-4d-43-4f-49-4e"><code>MCOIN</code></a>, <a href="#terse-word-4d-46-45-4e-43-45"><code>MFENCE</code></a>, <a href="#terse-word-4d-46-4f-55-4c"><code>MFOUL</code></a>, <a href="#terse-word-4d-48-49-54"><code>MHIT</code></a>, <a href="#terse-word-4d-4f-55-54"><code>MOUT</code></a>, <a href="#terse-word-4d-53-41-46-45"><code>MSAFE</code></a>, <a href="#terse-word-4d-53-54-52-49-4b-45"><code>MSTRIKE</code></a>, <a href="#terse-word-4d-59-41-48"><code>MYAH</code></a>.
 
 ### <a name="terse-word-42-55-54-54-4f-4e-43-48-4b"></a>`BUTTONCHK`
 
@@ -4043,7 +4045,7 @@ SWING STA, THEN, RET, -->
 
 **Calls:** `OFBLCHK`, `WUPWRT`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-43-48-4b-43-41-55-47-48-54"></a>`CHKCAUGHT`
 
@@ -4098,7 +4100,7 @@ EI, RET, ASSEMBLE>
 
 **Calls:** `LVRSTAT`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-43-48-4b-47-52-4f-55-4e-44-45-52"></a>`CHKGROUNDER`
 
@@ -4118,7 +4120,7 @@ VXH X A LDX, 0A0 CPI, ' COMPDE CC, H POP, D DAD, RET,
 
 **Calls:** `INDEXW`, `COMPDE`.
 
-**Used by:** `VECTOR`.
+**Used by:** <a href="#terse-word-56-45-43-54-4f-52"><code>VECTOR</code></a>.
 
 ### <a name="terse-word-43-48-4b-53-43-52-54-49-4d-45"></a>`CHKSCRTIME`
 
@@ -4141,7 +4143,7 @@ ELSE, SCORE2 H LXI, 2 D MVI, THEN,
 M A MOV, 1 ADI, DAA, A M MOV, D A MOV, SCORESHOW STA, RET,
 ```
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-43-4c-52-42-4c-53-54"></a>`CLRBLST`
 
@@ -4155,7 +4157,7 @@ CLRBLST resets ball and strike bytes to ASCII zero ($30), returns to TERSE and c
 CODE CLRBLST 30 A MVI, BALLS STA, STRIKES STA, NEXT
 ```
 
-**Used by:** `BALLTIME`, `DOHOMER`, `OUTTIME`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
 ### <a name="terse-word-63-6e-6c-69-6e-65"></a>`cnline`
 
@@ -4174,7 +4176,7 @@ PE, IF, EI, THEN, NEXT
 
 **Calls:** `VECTOR`.
 
-**Used by:** `CNLINE`, `DLINE`.
+**Used by:** <a href="#terse-word-43-4e-4c-49-4e-45"><code>CNLINE</code></a>, <a href="#terse-word-44-4c-49-4e-45"><code>DLINE</code></a>.
 
 ### <a name="terse-word-43-4f-4d-50-44-45"></a>`COMPDE`
 
@@ -4190,7 +4192,7 @@ CODE COMPDE H PUSH, XCHG, ' COMPHL CALL, XCHG, H POP, RET,
 
 **Calls:** `COMPHL`.
 
-**Used by:** `CHKGROUNDER`.
+**Used by:** <a href="#terse-word-43-48-4b-47-52-4f-55-4e-44-45-52"><code>CHKGROUNDER</code></a>.
 
 ### <a name="terse-word-43-4f-4d-50-48-4c"></a>`COMPHL`
 
@@ -4205,7 +4207,7 @@ CODE COMPHL ( compliments HL )
 H A MOV, CMA, A H MOV, L A MOV, CMA, A L MOV, H INX, RET,
 ```
 
-**Used by:** `COMPDE`, `DIVHLBY4`, `DSTCALC`, `MULTHLBY4`, `OFBLCHK`, `TBLVEL`.
+**Used by:** <a href="#terse-word-43-4f-4d-50-44-45"><code>COMPDE</code></a>, <a href="#terse-word-44-49-56-48-4c-42-59-34"><code>DIVHLBY4</code></a>, <a href="#terse-word-44-53-54-43-41-4c-43"><code>DSTCALC</code></a>, <a href="#terse-word-4d-55-4c-54-48-4c-42-59-34"><code>MULTHLBY4</code></a>, <a href="#terse-word-4f-46-42-4c-43-48-4b"><code>OFBLCHK</code></a>, <a href="#terse-word-54-42-4c-56-45-4c"><code>TBLVEL</code></a>.
 
 ### <a name="terse-word-43-4f-55-4e-54"></a>`COUNT`
 
@@ -4227,7 +4229,7 @@ Read the next character of a counted/high-bit-terminated string.
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `PPOST`.
+**Used by:** <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>.
 
 ### <a name="terse-word-63-70-6f-73-74"></a>`cpost`
 
@@ -4266,7 +4268,7 @@ EXAF, PE, IF, EI, THEN, NEXT
 
 **Calls:** `FONTUNPACK`, `relabs`.
 
-**Used by:** `CPOST`, `PPOST`, `dpost`.
+**Used by:** <a href="#terse-word-43-50-4f-53-54"><code>CPOST</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
 ### <a name="terse-word-44-45-41-43-54-49-56-41-54-45"></a>`DEACTIVATE`
 
@@ -4295,7 +4297,7 @@ _DI:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `CREDARROW`, `DOGOVER`, `DWAIT`, `FLFILL`, `INSWAIT`, `MLINN`, `PLRCHK`, `PLRSELECT`, `PUP`, `SETTF`, `STRTBALL`, `TF`, `TWAIT`, `ZERORAM`.
+**Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-4c-46-49-4c-4c"><code>FLFILL</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-5a-45-52-4f-52-41-4d"><code>ZERORAM</code></a>.
 
 ### <a name="terse-word-44-49-56-48-4c-42-59-34"></a>`DIVHLBY4`
 
@@ -4315,7 +4317,7 @@ PSW POP, ' COMPHL CNZ, RET,
 
 **Calls:** `COMPHL`.
 
-**Used by:** `VECTOR`.
+**Used by:** <a href="#terse-word-56-45-43-54-4f-52"><code>VECTOR</code></a>.
 
 ### <a name="terse-word-44-4f"></a>`DO`
 
@@ -4340,7 +4342,7 @@ _DO:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `DWAIT`, `FIELDWRT`, `INSWAIT`, `LSETTFCOOR`, `MLINN`, `NPOST`, `OUTTIME`, `PPOST`, `RETPA`, `TWAIT`.
+**Used by:** <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
 ### <a name="terse-word-44-53-54-43-41-4c-43"></a>`DSTCALC`
 
@@ -4384,7 +4386,7 @@ A XRA, RDST STA, VGO VSTATUS X SETX, THEN, RET, ASSEMBLE>
 
 **Calls:** `COMPHL`.
 
-**Used by:** `BLDST`, `CMPOF`, `FLDDST`, `OFFFDST`.
+**Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>, <a href="#terse-word-43-4d-50-4f-46"><code>CMPOF</code></a>, <a href="#terse-word-46-4c-44-44-53-54"><code>FLDDST</code></a>, <a href="#terse-word-4f-46-46-46-44-53-54"><code>OFFFDST</code></a>.
 
 ### <a name="terse-word-44-53-54-4c-44"></a>`DSTLD`
 
@@ -4401,7 +4403,7 @@ VDSTYL X E LDX,
 RET,
 ```
 
-**Used by:** `BLDST`, `FLDDST`.
+**Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>, <a href="#terse-word-46-4c-44-44-53-54"><code>FLDDST</code></a>.
 
 ### <a name="terse-word-45-49"></a>`EI`
 
@@ -4419,7 +4421,7 @@ _EI:
 
 **Calls:** `SWAN`.
 
-**Used by:** `CREDARROW`, `DWAIT`, `FL`, `FLFILL`, `INSWAIT`, `MLINN`, `PLRCHK`, `PUP`, `SETTF`, `TF`, `TWAIT`.
+**Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4c-46-49-4c-4c"><code>FLFILL</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
 ### <a name="terse-word-45-49-44-49"></a>`EIDI`
 
@@ -4433,7 +4435,7 @@ EIDI executes EI then DI, providing the Z80 interrupt opportunity used by caller
 CODE EIDI EI, DI, NEXT
 ```
 
-**Used by:** `DOGOVER`, `FL`.
+**Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>.
 
 ### <a name="terse-word-45-4d-55-53-49-43"></a>`EMUSIC`
 
@@ -4450,7 +4452,7 @@ STA, MULTIPLE STA, NEXT ( CALL EMUSIC AS AN INIT IN PROGRAM )
 
 **Calls:** `loadpc`.
 
-**Used by:** `PUP`.
+**Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
 ### <a name="terse-word-45-58"></a>`EX`
 
@@ -4464,7 +4466,7 @@ EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to be
 CODE EX C9 B, NEXT
 ```
 
-**Used by:** `FLSHME`, `GRNDRACTION`, `GRNDRHIT`, `STRINGGO`.
+**Used by:** <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-53-54-52-49-4e-47-47-4f"><code>STRINGGO</code></a>.
 
 ### <a name="terse-word-46-49-4c-4c"></a>`FILL`
 
@@ -4490,7 +4492,7 @@ Fill consecutive bytes with a specified value.
             DB      $03                 ; $025F: RETURN
 ```
 
-**Used by:** `FLFILL`, `SCRERASE`, `ZERORAM`.
+**Used by:** <a href="#terse-word-46-4c-46-49-4c-4c"><code>FLFILL</code></a>, <a href="#terse-word-53-43-52-45-52-41-53-45"><code>SCRERASE</code></a>, <a href="#terse-word-5a-45-52-4f-52-41-4d"><code>ZERORAM</code></a>.
 
 ### <a name="terse-word-46-4c-44-44-53-54"></a>`FLDDST`
 
@@ -4532,7 +4534,7 @@ B POP, NEXT
 
 **Calls:** `FLSHWUP`.
 
-**Used by:** `CHKFLSHSTAY`, `DOCHGS`, `DOGOVER`, `OUTTIME`.
+**Used by:** <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
 ### <a name="terse-word-46-4d-49-52-52-4f-52"></a>`FMIRROR`
 
@@ -4555,7 +4557,7 @@ FORWARD IFMAIN FORWARD IFMOUND
 
 **Calls:** `DECIMAL`.
 
-**Used by:** `FL`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
 ### <a name="terse-word-48-49-54-52-55-4e"></a>`HITRUN`
 
@@ -4579,7 +4581,7 @@ DECIMAL ;S
 
 **Calls:** `INDEXW`, `DECIMAL`.
 
-**Used by:** `BALLTIME`, `GRNDRHIT`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>.
 
 ### <a name="terse-word-48-4f-4d-45-52-43-48-4b"></a>`HOMERCHK`
 
@@ -4614,7 +4616,7 @@ THEN, THEN, VDSTX BL SHLD, VDSTY BL SDED, EXX, NEXT -->
 
 **Calls:** `INDEXW`.
 
-**Used by:** `OUTFLDHIT`.
+**Used by:** <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
 ### <a name="terse-word-49"></a>`I`
 
@@ -4632,7 +4634,7 @@ _Rat:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `NPOST`, `PPOST`.
+**Used by:** <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>.
 
 ### <a name="terse-word-49-45-58"></a>`IEX`
 
@@ -4647,7 +4649,7 @@ CODE IEX PSW POP, B POP, D POP, H POP, EXX, EXAF,
 PSW POP, B POP, D POP, H POP, EI, RET,
 ```
 
-**Used by:** `INEXT`.
+**Used by:** <a href="#terse-word-49-4e-45-58-54"><code>INEXT</code></a>.
 
 ### <a name="terse-word-49-4e-44-45-58-57"></a>`INDEXW`
 
@@ -4665,7 +4667,7 @@ L ADD, A L MOV, 0 A MVI, H ADC, A H MOV,
 M E MOV, H INX, M D MOV, H DCX, PSW POP, RET,
 ```
 
-**Used by:** `ANMSEQLOAD`, `BATHITCHK`, `BATWRITE`, `CHKGROUNDER`, `HITRUN`, `HOMERCHK`, `LOADANM`, `OPCODECHK`, `PATFETCH`, `TAKEOFF`, `THROWANIM`, `THROWBALL`.
+**Used by:** <a href="#terse-word-41-4e-4d-53-45-51-4c-4f-41-44"><code>ANMSEQLOAD</code></a>, <a href="#terse-word-42-41-54-48-49-54-43-48-4b"><code>BATHITCHK</code></a>, <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-43-48-4b-47-52-4f-55-4e-44-45-52"><code>CHKGROUNDER</code></a>, <a href="#terse-word-48-49-54-52-55-4e"><code>HITRUN</code></a>, <a href="#terse-word-48-4f-4d-45-52-43-48-4b"><code>HOMERCHK</code></a>, <a href="#terse-word-4c-4f-41-44-41-4e-4d"><code>LOADANM</code></a>, <a href="#terse-word-4f-50-43-4f-44-45-43-48-4b"><code>OPCODECHK</code></a>, <a href="#terse-word-50-41-54-46-45-54-43-48"><code>PATFETCH</code></a>, <a href="#terse-word-54-41-4b-45-4f-46-46"><code>TAKEOFF</code></a>, <a href="#terse-word-54-48-52-4f-57-41-4e-49-4d"><code>THROWANIM</code></a>, <a href="#terse-word-54-48-52-4f-57-42-41-4c-4c"><code>THROWBALL</code></a>.
 
 ### <a name="terse-word-49-4e-46-49-45-4c-44"></a>`INFIELD`
 
@@ -4689,7 +4691,7 @@ X POPX, B POP, NEXT
 
 **Calls:** `IFSPAN`.
 
-**Used by:** `FL`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
 ### <a name="terse-word-49-4e-46-4c-44-41-43-54"></a>`INFLDACT`
 
@@ -4706,7 +4708,7 @@ VSTATUS PT H LXI, 5 A MVI, ' SETACT CALL, RET,
 
 **Calls:** `SETACT`.
 
-**Used by:** `ALLFLDACT`.
+**Used by:** <a href="#terse-word-41-4c-4c-46-4c-44-41-43-54"><code>ALLFLDACT</code></a>.
 
 ### <a name="terse-word-49-53-54-41-52-54"></a>`ISTART`
 
@@ -4722,7 +4724,7 @@ IPNT { SWAB } A MVI, STAI, IPNT A MVI,
 INFBK OUT, IM2, EI, NEXT
 ```
 
-**Used by:** `S10`, `S11`.
+**Used by:** <a href="#terse-word-53-31-30"><code>S10</code></a>, <a href="#terse-word-53-31-31"><code>S11</code></a>.
 
 ### <a name="terse-word-4b-49-4c-4c-4f-46"></a>`KILLOF`
 
@@ -4738,7 +4740,7 @@ CODE KILLOF ( stop outfield tractor ball control )
 A XRA, OFTBLGO STA, RET,
 ```
 
-**Used by:** `BLDST`.
+**Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>.
 
 ### <a name="terse-word-4c-4f-41-44-41-4e-4d"></a>`LOADANM`
 
@@ -4759,7 +4761,7 @@ H POP, ( pc ) H INX, RET, ( returns updated pc in HL )
 
 **Calls:** `INDEXW`.
 
-**Used by:** `PACTLOAD`.
+**Used by:** <a href="#terse-word-50-41-43-54-4c-4f-41-44"><code>PACTLOAD</code></a>.
 
 ### <a name="terse-word-4c-4f-4f-50"></a>`LOOP`
 
@@ -4793,7 +4795,7 @@ _LOOP:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `+LOOP`, `DWAIT`, `FIELDWRT`, `INSWAIT`, `LSETTFCOOR`, `MLINN`, `NPOST`, `OUTTIME`, `PPOST`, `RETPA`, `TWAIT`.
+**Used by:** <a href="#terse-word-2b-4c-4f-4f-50"><code>+LOOP</code></a>, <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
 ### <a name="terse-word-4d-55-4c-54-48-4c-42-59-34"></a>`MULTHLBY4`
 
@@ -4811,7 +4813,7 @@ L SLAR, H RALR, PSW POP, ' COMPHL CNZ, RET,
 
 **Calls:** `COMPHL`.
 
-**Used by:** `BATHITCHK`, `OFBLCHK`.
+**Used by:** <a href="#terse-word-42-41-54-48-49-54-43-48-4b"><code>BATHITCHK</code></a>, <a href="#terse-word-4f-46-42-4c-43-48-4b"><code>OFBLCHK</code></a>.
 
 ### <a name="terse-word-4d-55-53-43-50-55"></a>`MUSCPU`
 
@@ -4877,7 +4879,7 @@ _NPICK_LOOP:
 
 **Calls:** `ARRAY`.
 
-**Used by:** `OUTLINE`.
+**Used by:** <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>.
 
 ### <a name="terse-word-4f-46-46-46-44-53-54"></a>`OFFFDST`
 
@@ -4925,7 +4927,7 @@ DI, VPLAYACTPC RF SHLD, VPLAYACTPC CF SHLD, VPLAYACTPC LF SHLD,
 
 **Calls:** `OUTFLDACT`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-4f-46-4d-4f-54-49-4f-4e"></a>`OFMOTION`
 
@@ -4998,7 +5000,7 @@ VECTPC LHLD, THEN, RET, ASSEMBLE>
 
 **Calls:** `INDEXW`.
 
-**Used by:** `PACTLOAD`.
+**Used by:** <a href="#terse-word-50-41-43-54-4c-4f-41-44"><code>PACTLOAD</code></a>.
 
 ### <a name="terse-word-4f-55-54-46-4c-44-41-43-54"></a>`OUTFLDACT`
 
@@ -5015,7 +5017,7 @@ VSTATUS LF H LXI, 3 A MVI, ' SETACT CALL, RET,
 
 **Calls:** `SETACT`.
 
-**Used by:** `ALLFLDACT`, `CMPOF`, `OFLDTBL`.
+**Used by:** <a href="#terse-word-41-4c-4c-46-4c-44-41-43-54"><code>ALLFLDACT</code></a>, <a href="#terse-word-43-4d-50-4f-46"><code>CMPOF</code></a>, <a href="#terse-word-4f-46-4c-44-54-42-4c"><code>OFLDTBL</code></a>.
 
 ### <a name="terse-word-50-41-43-54-4c-4f-41-44"></a>`PACTLOAD`
 
@@ -5041,7 +5043,7 @@ RET, -->
 
 **Calls:** `OPCODECHK`, `LOADANM`.
 
-**Used by:** `PLAYACT`.
+**Used by:** <a href="#terse-word-50-4c-41-59-41-43-54"><code>PLAYACT</code></a>.
 
 ### <a name="terse-word-50-41-54-46-45-54-43-48"></a>`PATFETCH`
 
@@ -5065,7 +5067,7 @@ D VPATH X STX, E VPATL X STX, RET,
 
 **Calls:** `INDEXW`.
 
-**Used by:** `PLAYACT`.
+**Used by:** <a href="#terse-word-50-4c-41-59-41-43-54"><code>PLAYACT</code></a>.
 
 ### <a name="terse-word-50-45-52-53-50-45-43-54-49-56-45"></a>`PERSPECTIVE`
 
@@ -5124,7 +5126,7 @@ PRIORITY STA, NOTETIMER STA, NEXT
 
 **Calls:** `loadpc`.
 
-**Used by:** `MOPENERS`.
+**Used by:** <a href="#terse-word-4d-4f-50-45-4e-45-52-53"><code>MOPENERS</code></a>.
 
 ### <a name="terse-word-50-54-41-55-54-4f-54-4d"></a>`PTAUTOTM`
 
@@ -5141,7 +5143,7 @@ TIMEOUT H LXI, FLDCLR LDA, A ANA, TIMEDCR CZ, NEXT
 
 **Calls:** `TIMEDCR`.
 
-**Used by:** `WUPWRT`.
+**Used by:** <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
 ### <a name="terse-word-52-45-53-45-54-52-55-4e-4e-45-52-53"></a>`RESETRUNNERS`
 
@@ -5170,7 +5172,7 @@ A DCR, 0=, END, ( do 4 tms ) RET, ASSEMBLE> -->
 FORWARD OUTOFFF FORWARD CCLEAVE
 ```
 
-**Used by:** `THROWBALL`.
+**Used by:** <a href="#terse-word-54-48-52-4f-57-42-41-4c-4c"><code>THROWBALL</code></a>.
 
 ### <a name="terse-word-52-4e-44"></a>`RND`
 
@@ -5241,7 +5243,7 @@ _MULU_DONE:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `GRNDRHIT`, `INLOG`, `MUSCPU`, `OUTFLDHIT`, `TERSECHK`, `WHBODDS`.
+**Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>.
 
 ### <a name="terse-word-52-55-4e-44-53-54"></a>`RUNDST`
 
@@ -5326,7 +5328,7 @@ B POP, ' SENTRY JMP, -->
 
 **Calls:** `BUTTONCHK`, `TBALLPITCH`, `OFLDTBL`, `THROWBALL`, `THROWANIM`, `BATHIT`, `CHKCAUGHT`, `CHKSCRTIME`, `STARTMUSIC`, `TERSECHK`.
 
-**Used by:** `PUP`.
+**Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
 ### <a name="terse-word-53-45-54-41-43-54"></a>`SETACT`
 
@@ -5343,7 +5345,7 @@ VLENGTH D LXI,
 BEGIN, VACT M SET, D DAD, A DCR, 0=, END, RET,
 ```
 
-**Used by:** `INFLDACT`, `OUTFLDACT`.
+**Used by:** <a href="#terse-word-49-4e-46-4c-44-41-43-54"><code>INFLDACT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-41-43-54"><code>OUTFLDACT</code></a>.
 
 ### <a name="terse-word-53-54-41-52-54-4d-55-53-49-43"></a>`STARTMUSIC`
 
@@ -5363,7 +5365,7 @@ ELSE, DOVERB MCANNON DOVERB S11 THEN, THEN, RET,
 
 **Calls:** `MYAH`, `S10`, `MFENCE`, `MCANNON`, `S11`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-73-74-72-74-6c-69-6e-65"></a>`strtline`
 
@@ -5385,7 +5387,7 @@ SADR SHLD, B POP, NEXT
 
 **Calls:** `relabs`.
 
-**Used by:** `DLINE`.
+**Used by:** <a href="#terse-word-44-4c-49-4e-45"><code>DLINE</code></a>.
 
 ### <a name="terse-word-53-57-41-4e"></a>`SWAN`
 
@@ -5408,7 +5410,7 @@ _SWABN:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** `EI`, `NPOST`.
+**Used by:** <a href="#terse-word-45-49"><code>EI</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>.
 
 ### <a name="terse-word-54-42-41-4c-4c-50-49-54-43-48"></a>`TBALLPITCH`
 
@@ -5434,7 +5436,7 @@ M A MOV, A ANA,
 THEN, THEN, THEN, TBLDX SDED, EI, RET,
 ```
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-54-48-52-4f-57-41-4e-49-4d"></a>`THROWANIM`
 
@@ -5476,7 +5478,7 @@ THROW STA, Y POPX, X POPX, EI, RET, -->
 
 **Calls:** `CHKATBS`, `INDEXW`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-54-48-52-4f-57-42-41-4c-4c"></a>`THROWBALL`
 
@@ -5506,7 +5508,7 @@ VGO M RES, EI, RET,
 
 **Calls:** `RESETRUNNERS`, `WHBODDS`, `INDEXW`.
 
-**Used by:** `SENTRY`.
+**Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
 ### <a name="terse-word-54-48-57-41-4e-4d-53-45-54"></a>`THWANMSET`
 
@@ -5525,7 +5527,7 @@ THROWANM STA, RET, ( set for sentry call )
 
 **Calls:** `BLERASE`.
 
-**Used by:** `WAITTHRW`.
+**Used by:** <a href="#terse-word-57-41-49-54-54-48-52-57"><code>WAITTHRW</code></a>.
 
 ### <a name="terse-word-54-49-4d-45-52"></a>`TIMER`
 
@@ -5583,7 +5585,7 @@ RET,
 
 **Calls:** `DIVHLBY4`, `CHKGROUNDER`.
 
-**Used by:** `cnline`.
+**Used by:** <a href="#terse-word-63-6e-6c-69-6e-65"><code>cnline</code></a>.
 
 ### <a name="terse-word-56-45-52-41-53-45"></a>`VERASE`
 
@@ -5603,7 +5605,7 @@ writep CALL, RET,
 
 **Calls:** `writep`.
 
-**Used by:** `BLERASE`.
+**Used by:** <a href="#terse-word-42-4c-45-52-41-53-45"><code>BLERASE</code></a>.
 
 ### <a name="terse-word-56-57-52-49-54-45"></a>`VWRITE`
 
@@ -5679,7 +5681,7 @@ write CALL, EXX, H PUSH, Y POPX, NEXT
 
 **Calls:** `relabs`, `write`.
 
-**Used by:** `MLINN`.
+**Used by:** <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>.
 
 ### <a name="terse-word-57-52-49-54-52"></a>`WRITR`
 
@@ -5701,7 +5703,7 @@ writep CALL, EXX, H PUSH, Y POPX, NEXT
 
 **Calls:** `reloff`, `relabs`, `writep`.
 
-**Used by:** `FL`, `INSCN`.
+**Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>.
 
 ### <a name="terse-word-41-55-54-4f-52-31"></a>`AUTOR1`
 
@@ -5716,7 +5718,7 @@ SUBR AUTOR1 3 A MVI, VRSTAT R1 STA, 81 A MVI, VSTATUS R1 STA,
 RET, ( sets vauto , vforw , vact , vrun )
 ```
 
-**Used by:** `FRO1`, `FRO12`, `FRO123`, `RO1`, `RO12`, `RO123`, `RO13`, `RO2`, `RO23`, `RO3`.
+**Used by:** <a href="#terse-word-46-52-4f-31"><code>FRO1</code></a>, <a href="#terse-word-46-52-4f-31-32"><code>FRO12</code></a>, <a href="#terse-word-46-52-4f-31-32-33"><code>FRO123</code></a>, <a href="#terse-word-52-4f-31"><code>RO1</code></a>, <a href="#terse-word-52-4f-31-32"><code>RO12</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>, <a href="#terse-word-52-4f-31-33"><code>RO13</code></a>, <a href="#terse-word-52-4f-32"><code>RO2</code></a>, <a href="#terse-word-52-4f-32-33"><code>RO23</code></a>, <a href="#terse-word-52-4f-33"><code>RO3</code></a>.
 
 ### <a name="terse-word-41-55-54-4f-52-32"></a>`AUTOR2`
 
@@ -5731,7 +5733,7 @@ SUBR AUTOR2 3 A MVI, VRSTAT R2 STA, 81 A MVI, VSTATUS R2 STA,
 RET,
 ```
 
-**Used by:** `FRO12`, `FRO123`, `FRO13`, `RO12`, `RO123`, `RO13`, `RO23`.
+**Used by:** <a href="#terse-word-46-52-4f-31-32"><code>FRO12</code></a>, <a href="#terse-word-46-52-4f-31-32-33"><code>FRO123</code></a>, <a href="#terse-word-46-52-4f-31-33"><code>FRO13</code></a>, <a href="#terse-word-52-4f-31-32"><code>RO12</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>, <a href="#terse-word-52-4f-31-33"><code>RO13</code></a>, <a href="#terse-word-52-4f-32-33"><code>RO23</code></a>.
 
 ### <a name="terse-word-41-55-54-4f-52-33"></a>`AUTOR3`
 
@@ -5746,7 +5748,7 @@ SUBR AUTOR3 3 A MVI, VRSTAT R3 STA, 81 A MVI, VSTATUS R3 STA,
 RET,
 ```
 
-**Used by:** `FRO123`, `RO123`.
+**Used by:** <a href="#terse-word-46-52-4f-31-32-33"><code>FRO123</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>.
 
 ### <a name="terse-word-42-4c-45-52-41-53-45"></a>`BLERASE`
 
@@ -5764,7 +5766,7 @@ X POPX, ( stop ball ) NOBOD H LXI, VPAT BL SHLD, RET,
 
 **Calls:** `VERASE`.
 
-**Used by:** `BALLERASE`, `BATHITCHK`, `THWANMSET`.
+**Used by:** <a href="#terse-word-42-41-4c-4c-45-52-41-53-45"><code>BALLERASE</code></a>, <a href="#terse-word-42-41-54-48-49-54-43-48-4b"><code>BATHITCHK</code></a>, <a href="#terse-word-54-48-57-41-4e-4d-53-45-54"><code>THWANMSET</code></a>.
 
 ### <a name="terse-word-43-48-4b-41-54-42-53"></a>`CHKATBS`
 
@@ -5779,7 +5781,7 @@ SUBR CHKATBS ( check if active player at base in- A vstatus )
 VACT A BIT, RZ, VATBS A BIT, RNZ, E INR, RET,
 ```
 
-**Used by:** `THROWANIM`.
+**Used by:** <a href="#terse-word-54-48-52-4f-57-41-4e-49-4d"><code>THROWANIM</code></a>.
 
 ### <a name="terse-word-43-48-4b-43-4f-49-4e-31"></a>`CHKCOIN1`
 
@@ -5841,7 +5843,7 @@ VDSTX BL LHLD, VDSTY BL LDED, 20 A MVI, VGO VSTATUS X RESX,
 
 **Calls:** `DSTCALC`, `OUTFLDACT`.
 
-**Used by:** `BLDST`, `TIMER`, `TOOFCK`.
+**Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>, <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>, <a href="#terse-word-54-4f-4f-46-43-4b"><code>TOOFCK</code></a>.
 
 ### <a name="terse-word-43-4f-4c-4f-52-42-41-4e-44"></a>`COLORBAND`
 
@@ -5876,7 +5878,7 @@ B E MOV, ( try again ) READPORT JMP, ASSEMBLE>
 ( BB coin routine    CHKCOIN1 )
 ```
 
-**Used by:** `CHKCOIN1`, `CHKCOIN2`.
+**Used by:** <a href="#terse-word-43-48-4b-43-4f-49-4e-31"><code>CHKCOIN1</code></a>, <a href="#terse-word-43-48-4b-43-4f-49-4e-32"><code>CHKCOIN2</code></a>.
 
 ### <a name="terse-word-46-45-54-43-48"></a>`FETCH`
 
@@ -5890,7 +5892,7 @@ FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances
 SUBR FETCH MUSPC LHLD, M A MOV, RET,
 ```
 
-**Used by:** `HLOAD`, `MUSCPU`.
+**Used by:** <a href="#terse-word-48-4c-4f-41-44"><code>HLOAD</code></a>, <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
 ### <a name="terse-word-46-4c-53-48-57-55-50"></a>`FLSHWUP`
 
@@ -5912,7 +5914,7 @@ THEN, Y POPX, X POPX, RET,
 
 **Calls:** `FLSHME`.
 
-**Used by:** `FLSHOFF`, `TIMER`.
+**Used by:** <a href="#terse-word-46-4c-53-48-4f-46-46"><code>FLSHOFF</code></a>, <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
 ### <a name="terse-word-46-4e-42-42"></a>`FNBB`
 
@@ -5942,7 +5944,7 @@ D SRLR, E RARR, D SRLR, E RARR, D SRLR, E RARR,
 FNTLP DJNZ, B POP, 0 FONTWORK H LXI, RET,
 ```
 
-**Used by:** `cpost`.
+**Used by:** <a href="#terse-word-63-70-6f-73-74"><code>cpost</code></a>.
 
 ### <a name="terse-word-46-52-4f-31"></a>`FRO1`
 
@@ -6050,7 +6052,7 @@ SUBR HLOAD FETCH CALL, INCPC CALL, 0 H MVI, A L MOV, RET,
 
 **Calls:** `FETCH`, `INCPC`.
 
-**Used by:** `MUSCPU`.
+**Used by:** <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
 ### <a name="terse-word-49-46-53-50-41-4e"></a>`IFSPAN`
 
@@ -6076,7 +6078,7 @@ CY, IF, H INX, THEN, IFPIX DJNZ, D POP,
 50 H LXI, D DAD, XCHG, RET,
 ```
 
-**Used by:** `INFIELD`.
+**Used by:** <a href="#terse-word-49-4e-46-49-45-4c-44"><code>INFIELD</code></a>.
 
 ### <a name="terse-word-49-4e-43-50-43"></a>`INCPC`
 
@@ -6090,7 +6092,7 @@ FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances
 SUBR INCPC MUSPC LHLD, H INX, MUSPC SHLD, RET,
 ```
 
-**Used by:** `HLOAD`, `MUSCPU`.
+**Used by:** <a href="#terse-word-48-4c-4f-41-44"><code>HLOAD</code></a>, <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
 ### <a name="terse-word-6c-6f-61-64-70-63"></a>`loadpc`
 
@@ -6104,7 +6106,7 @@ loadpc installs MUSPC and STARTPC.
 SUBR loadpc MUSPC SHLD, STARTPC SHLD, RET,
 ```
 
-**Used by:** `BMUSIC`, `EMUSIC`, `PMUSIC`.
+**Used by:** <a href="#terse-word-42-4d-55-53-49-43"><code>BMUSIC</code></a>, <a href="#terse-word-45-4d-55-53-49-43"><code>EMUSIC</code></a>, <a href="#terse-word-50-4d-55-53-49-43"><code>PMUSIC</code></a>.
 
 ### <a name="terse-word-4c-56-52-53-54-41-54"></a>`LVRSTAT`
 
@@ -6120,7 +6122,7 @@ VRSTAT R1 STA, VRSTAT R2 STA, VRSTAT R3 STA, VRSTAT R4 STA,
 RET,
 ```
 
-**Used by:** `BLPOSCHK`, `CHKCAUGHT`, `RUNDST`.
+**Used by:** <a href="#terse-word-42-4c-50-4f-53-43-48-4b"><code>BLPOSCHK</code></a>, <a href="#terse-word-43-48-4b-43-41-55-47-48-54"><code>CHKCAUGHT</code></a>, <a href="#terse-word-52-55-4e-44-53-54"><code>RUNDST</code></a>.
 
 ### <a name="terse-word-4e-42-42"></a>`NBB`
 
@@ -6156,7 +6158,7 @@ D DSBC, ' COMPHL CC, D POP, 10 A MVI, H CMP, >=, IF,
 
 **Calls:** `COMPHL`, `MULTHLBY4`.
 
-**Used by:** `BLPOSCHK`, `BUTTONCHK`.
+**Used by:** <a href="#terse-word-42-4c-50-4f-53-43-48-4b"><code>BLPOSCHK</code></a>, <a href="#terse-word-42-55-54-54-4f-4e-43-48-4b"><code>BUTTONCHK</code></a>.
 
 ### <a name="terse-word-50-43-4a-55-4d-50"></a>`PCJUMP`
 
@@ -6171,7 +6173,7 @@ SUBR PCJUMP MUSPC LHLD, M E MOV, H INX, M D MOV,
 MUSPC SDED, RET,
 ```
 
-**Used by:** `MUSCPU`.
+**Used by:** <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
 ### <a name="terse-word-72-65-6c-61-62-73"></a>`relabs`
 
@@ -6195,7 +6197,7 @@ MRFLOP C BIT, 0<>, IF, NEG, 0=, IF, H DCX, THEN, THEN,
 3 ANI, A E MOV, C A MOV, FC ANI, E ORA, A C MOV, RET,
 ```
 
-**Used by:** `BATWRITE`, `VWRITE`, `WRITE`, `WRITR`, `cpost`, `strtline`.
+**Used by:** <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-56-57-52-49-54-45"><code>VWRITE</code></a>, <a href="#terse-word-57-52-49-54-45"><code>WRITE</code></a>, <a href="#terse-word-57-52-49-54-52"><code>WRITR</code></a>, <a href="#terse-word-63-70-6f-73-74"><code>cpost</code></a>, <a href="#terse-word-73-74-72-74-6c-69-6e-65"><code>strtline</code></a>.
 
 ### <a name="terse-word-72-65-6c-6f-66-66"></a>`reloff`
 
@@ -6218,7 +6220,7 @@ MRFLIP C BIT, 0<>, IF, D DAD, ELSE, A ORA, D DSBC, THEN,
 D POP, Y INXX, Y INXX, ( offset pattern ) RET,
 ```
 
-**Used by:** `BATWRITE`, `VWRITE`, `WRITR`.
+**Used by:** <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-56-57-52-49-54-45"><code>VWRITE</code></a>, <a href="#terse-word-57-52-49-54-52"><code>WRITR</code></a>.
 
 ### <a name="terse-word-52-4f-31"></a>`RO1`
 
@@ -6343,7 +6345,7 @@ SUBR SETDBLPLAY ( sets up double play HL-guy on 1st )
 1 A MVI, DBLPLAY STA, RET,
 ```
 
-**Used by:** `RO1`, `RO12`, `RO123`, `RO13`.
+**Used by:** <a href="#terse-word-52-4f-31"><code>RO1</code></a>, <a href="#terse-word-52-4f-31-32"><code>RO12</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>, <a href="#terse-word-52-4f-31-33"><code>RO13</code></a>.
 
 ### <a name="terse-word-54-41-4b-45-4f-46-46"></a>`TAKEOFF`
 
@@ -6363,7 +6365,7 @@ LABEL TORET RET, ASSEMBLE>
 
 **Calls:** `INDEXW`.
 
-**Used by:** `TIMER`.
+**Used by:** <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
 ### <a name="terse-word-54-42-41-4c-4c-50-52-43"></a>`TBALLPRC`
 
@@ -6417,7 +6419,7 @@ PSW POP, ' COMPHL CNZ, RET,
 
 **Calls:** `COMPHL`.
 
-**Used by:** `TBALLPRC`.
+**Used by:** <a href="#terse-word-54-42-41-4c-4c-50-52-43"><code>TBALLPRC</code></a>.
 
 ### <a name="terse-word-54-49-4d-45-44-43-52"></a>`TIMEDCR`
 
@@ -6434,7 +6436,7 @@ A DCR, A M MOV, A ANA, 0=, IF, A INR, ( true change )
 ELSE, A XRA, THEN, RET,
 ```
 
-**Used by:** `PTAUTOTM`, `TIMER`.
+**Used by:** <a href="#terse-word-50-54-41-55-54-4f-54-4d"><code>PTAUTOTM</code></a>, <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
 ### <a name="terse-word-54-4f-4f-46-43-4b"></a>`TOOFCK`
 
@@ -6452,7 +6454,7 @@ ELSE, CMPOF CALL, EI, 1 A MVI, TOOFF STA, THEN, RET,
 
 **Calls:** `CMPOF`.
 
-**Used by:** `TIMER`.
+**Used by:** <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
 ### <a name="terse-word-57-41-4c-4b-4f-56-45-52"></a>`WALKOVER`
 
@@ -6467,7 +6469,7 @@ SUBR WALKOVER ( walked runner at base )
 1 A MVI, CAUGHT STA, THROWAROUND STA, RET,
 ```
 
-**Used by:** `TIMER`.
+**Used by:** <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
 ### <a name="terse-word-77-72-69-74-65"></a>`write`
 
@@ -6496,7 +6498,7 @@ THEN, B POP, ( magic ) RET, -->
 ( VGS write routines    writep , WRITE )
 ```
 
-**Used by:** `WRITE`, `writep`.
+**Used by:** <a href="#terse-word-57-52-49-54-45"><code>WRITE</code></a>, <a href="#terse-word-77-72-69-74-65-70"><code>writep</code></a>.
 
 ### <a name="terse-word-77-72-69-74-65-70"></a>`writep`
 
@@ -6515,7 +6517,7 @@ SUBR writep ( software write with pattern size on pattern )
 
 **Calls:** `write`.
 
-**Used by:** `BATWRITE`, `VERASE`, `VWRITE`, `WRITR`.
+**Used by:** <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-56-45-52-41-53-45"><code>VERASE</code></a>, <a href="#terse-word-56-57-52-49-54-45"><code>VWRITE</code></a>, <a href="#terse-word-57-52-49-54-52"><code>WRITR</code></a>.
 
 ### <a name="terse-word-42-41-53-45-21"></a>`BASE!`
 
