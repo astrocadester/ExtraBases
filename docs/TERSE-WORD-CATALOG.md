@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0010</code></p>
+<p align="right"><code>v20261123-0011</code></p>
 
 # Extra Bases — TERSE Word Catalog
 
@@ -3853,7 +3853,7 @@ CODE ALLFLDACT ( sets all fielders active )
 ### <a name="terse-word-41-4e-4d-53-45-51-4c-4f-41-44"></a><span>ANMSEQLOAD</span>
 `( -- )`
 
-IX: vector; RAM: VANMSEQH/L set; returns RET
+Uses IX's current VANMH/VANML animation table pointer and VPERS# to select an indexed 16-bit animation sequence address; stores it in IX:VANMSEQH/VANMSEQL and returns natively.
 
 Finds proper anm seq by per=#.
 
@@ -3888,7 +3888,7 @@ Y POPX, B POP, NEXT
 ### <a name="terse-word-42-41-54-48-49-54"></a><span>BATHIT</span>
 `( -- )`
 
-Updates hit, pitch and swing state; returns to native caller with 'RET'
+Writes HITYET, invokes INLOG with interrupts disabled, clears HITTIME, PITCHTIME and SWINGGO, then executes EI and returns natively.
 
 He hit it time to get em running.
 
@@ -3906,7 +3906,7 @@ SWINGGO STA, EI, RET,
 ### <a name="terse-word-42-41-54-48-49-54-43-48-4b"></a><span>BATHITCHK</span>
 `( -- )`
 
-HL = swing-state pointer; tests bat/ball overlap through table-selected hit window; returns to native caller
+Takes the swing-state entry through HL, looks up its hit window via BWTBL/INDEXW, compares ball Y/X against it, and, on a new hit, sets HITTIME and HITGOING and calls BLERASE; returns natively.
 
 Check window for hit.
 
@@ -4018,7 +4018,7 @@ THEN, THWPA H LXI, VECTPC SHLD, B POP, RET,
 ### <a name="terse-word-42-4c-4d-4f-54-49-4f-4e"></a><span>BLMOTION</span>
 `( -- )`
 
-Sets 'VECTPC' to 'TBLPA' via HL; native 'RET'
+Loads HL with TBLPA, stores it into VECTPC and returns natively; no TERSE parameter-stack cells are consumed.
 
 Set pc for ram pa table -tractor ball.
 
@@ -4066,7 +4066,7 @@ A XRA, OFTBLGO STA, TOOF STA, ( ofl t.o. timer ) THEN, RET,
 ### <a name="terse-word-42-4d-55-53-49-43"></a><span>BMUSIC</span>
 `( music-address -- )`
 
-HL receives music address; note state conditionally initialized
+Pops the music address into HL unconditionally. If PRIORITY is zero, calls loadpc, clears NOTETIMER and sets MULTIPLE to one; otherwise leaves the current music stream and timers unchanged.
 
 Consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay.
 
@@ -4246,7 +4246,7 @@ PE, IF, EI, THEN, NEXT
 ### <a name="terse-word-43-4f-4d-50-44-45"></a><span>COMPDE</span>
 `( -- )`
 
-DE ← −DE; HL preserved
+Negates DE through COMPHL after exchanging DE/HL, then restores the caller's original HL; returns natively.
 
 Negate DE while preserving HL.
 
@@ -4261,7 +4261,7 @@ CODE COMPDE H PUSH, XCHG, ' COMPHL CALL, XCHG, H POP, RET,
 ### <a name="terse-word-43-4f-4d-50-48-4c"></a><span>COMPHL</span>
 `( -- )`
 
-HL ← −HL
+Returns the two's-complement negation of HL (bitwise complement of both bytes followed by increment); no TERSE parameter-stack cells are consumed.
 
 Compliments HL.
 
@@ -4334,7 +4334,7 @@ EXAF, PE, IF, EI, THEN, NEXT
 ### <a name="terse-word-44-45-41-43-54-49-56-41-54-45"></a><span>DEACTIVATE</span>
 `( -- )`
 
-IX addresses vector; resets active status bit, writes 'SAMEDLT', returns
+Clears the VACT bit of VSTATUS in the vector addressed by IX, writes 1 to SAMEDLT and returns natively.
 
 Reset active bit in status.
 
@@ -4571,7 +4571,7 @@ THEN, FLDPA H LXI, VECTPC SHLD, RET,
 ### <a name="terse-word-46-4c-53-48-4f-46-46"></a><span>FLSHOFF</span>
 `( -- )`
 
-Preserves BC; clears flash state and calls 'FLSHWUP' before 'NEXT'
+Preserves BC, sets FLSHON to zero, disables interrupts (DI), calls FLSHWUP, restores BC, then resumes via NEXT; there is no EI in this routine.
 
 Disables flashing and services cleanup under DI.
 
@@ -4697,7 +4697,7 @@ PSW POP, B POP, D POP, H POP, EI, RET,
 ### <a name="terse-word-49-4e-44-45-58-57"></a><span>INDEXW</span>
 `( -- )`
 
-A,HL input table index/base; DE ← indexed word
+Inputs A = table index and HL = base address; computes HL = base + 2 × index, reads the little-endian indexed word into DE, restores A, and returns with HL pointing to the selected table entry.
 
 Call routine A- disp HL- table add.
 
@@ -4783,7 +4783,7 @@ A XRA, OFTBLGO STA, RET,
 ### <a name="terse-word-4c-4f-41-44-41-4e-4d"></a><span>LOADANM</span>
 `( -- )`
 
-HL ← next playaction cursor; IX vector updated
+Reads the next magic byte into IX:VMAGIC, uses the following pattern index with INDEXW/PATTERNS to store IX:VANMH/VANML, then returns HL advanced past both playaction bytes.
 
 Loads magic & anm HL-top of playact table.
 
@@ -4946,7 +4946,7 @@ F= NFORW F= RFDST F= REND F= NOFPU F= CKATBS F= RVACT
 ### <a name="terse-word-4f-46-4c-44-54-42-4c"></a><span>OFLDTBL</span>
 `( -- )`
 
-Assigns outfielder playaction table, invokes 'OUTFLDACT', and returns
+Clears OFTOTBL, disables interrupts, stores OFTBLPA in the right-, center- and left-fielder VPLAYACTPC cells, calls OUTFLDACT, enables interrupts and returns natively.
 
 Gives all three outfielders OFTBLPA, activates them and returns.
 
@@ -4963,7 +4963,7 @@ DI, VPLAYACTPC RF SHLD, VPLAYACTPC CF SHLD, VPLAYACTPC LF SHLD,
 ### <a name="terse-word-4f-46-4d-4f-54-49-4f-4e"></a><span>OFMOTION</span>
 `( -- )`
 
-Sets 'VECTPC' from 'OFPA', conditional on action opcode and IX status
+If the action byte at OFPA+1 equals 4 (standing), clears VACT in the IX vector; then writes OFPA into VECTPC and returns natively.
 
 Set pc for ram pa table -tractor ball.
 
@@ -5167,7 +5167,7 @@ TIMEOUT H LXI, FLDCLR LDA, A ANA, TIMEDCR CZ, NEXT
 ### <a name="terse-word-52-45-53-45-54-52-55-4e-4e-45-52-53"></a><span>RESETRUNNERS</span>
 `( -- )`
 
-Reorders runner vector records by occupancy and resets final runner slot
+Runs four occupancy-compaction passes using LDIR to move runner records upward; clears runner 4 base/motion, sets its position/pattern/playaction, and stores status 1 to R1, R3, R3 and R4 in the original listing (R2 is not named by those stores).
 
 Reset runners to order of on base.
 
@@ -5636,7 +5636,7 @@ RET,
 ### <a name="terse-word-57-41-49-54"></a><span>WAIT</span>
 `( -- )`
 
-A = native delay count; preserves value over inner wait loop and returns
+Uses incoming A as the outer delay count, preserves it on the native stack while an inner $FF-count busy loop runs, decrements the outer count and returns when it reaches zero.
 
 Given A wait period stop every thing.
 
@@ -5839,7 +5839,7 @@ VDSTX BL LHLD, VDSTY BL LDED, 20 A MVI, VGO VSTATUS X RESX,
 ### <a name="terse-word-43-4f-4c-4f-52-42-41-4e-44"></a><span>COLORBAND</span>
 `( saved-interrupt-frame -- )`
 
-Interrupt state restored, palette ports written
+Updates INLIN and IPNT; when FLSHSTAY is zero, writes palette ports 3 and 1. Restores AF and HL from its interrupt bridge, then explicitly enables maskable interrupts (EI) and returns.
 
 Schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.
 
@@ -5973,7 +5973,7 @@ SUBR FRO123 AUTOR1 CALL, AUTOR2 CALL, AUTOR3 CALL, RET,
 ### <a name="terse-word-46-52-4f-31-33"></a><span>FRO13</span>
 `( -- )`
 
-Writes runner-1 status and calls 'AUTOR2'; native 'RET'
+Writes incoming A to VSTATUS for runner R1, calls AUTOR2 (which sets runner R2 automatic-run/active state), then returns.
 
 Uses AUTOR2 to process game state.
 
@@ -5986,7 +5986,7 @@ SUBR FRO13 VSTATUS R1 STA, AUTOR2 CALL, RET,
 ### <a name="terse-word-46-52-4f-32"></a><span>FRO2</span>
 `( -- )`
 
-Writes runner-1 status field; native 'RET'
+Stores incoming A in VSTATUS for runner R1 and returns. The original FRO2 body names R1, not R2.
 
 Native game routine; source body below.
 
@@ -6008,7 +6008,7 @@ SUBR FRO23 VSTATUS R1 STA, VSTATUS R2 STA, RET,
 ### <a name="terse-word-46-52-4f-33"></a><span>FRO3</span>
 `( -- )`
 
-Writes runner-1 status field; native 'RET'
+Stores incoming A in VSTATUS for runner R1 and returns. The original FRO3 body names R1, not R3.
 
 Native game routine; source body below.
 
@@ -6059,7 +6059,7 @@ CY, IF, H INX, THEN, IFPIX DJNZ, D POP,
 ### <a name="terse-word-49-4e-43-50-43"></a><span>INCPC</span>
 `( -- )`
 
-RAM[MUSPC] ← RAM[MUSPC]+1
+Loads the 16-bit MUSPC pointer into HL, increments it by one and stores it back; returns natively.
 
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
@@ -6085,7 +6085,7 @@ SUBR loadpc MUSPC SHLD, STARTPC SHLD, RET,
 ### <a name="terse-word-4c-56-52-53-54-41-54"></a><span>LVRSTAT</span>
 `( -- )`
 
-A = desired runner status byte; stores it across all four runner status fields
+Input A is stored unchanged to VRSTAT for runners R1, R2, R3 and R4; returns natively.
 
 Load vstat for all runners in- A value.
 
@@ -6134,7 +6134,7 @@ D DSBC, ' COMPHL CC, D POP, 10 A MVI, H CMP, >=, IF,
 ### <a name="terse-word-50-43-4a-55-4d-50"></a><span>PCJUMP</span>
 `( -- )`
 
-RAM[MUSPC] ← 16-bit branch target
+Reads MUSPC into HL, fetches the following little-endian target bytes into DE, and stores DE to MUSPC; returns natively.
 
 FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
@@ -6296,7 +6296,7 @@ AUTOR1 CNZ, RET,
 ### <a name="terse-word-53-45-54-44-42-4c-50-4c-41-59"></a><span>SETDBLPLAY</span>
 `( -- )`
 
-HL identifies runner on first; sets 'DBLPLAY' flag
+Sets DBLPLAY to 1 and returns; HL is documented as the runner-on-first pointer by the original source comment but is not read by this subroutine.
 
 Sets up double play HL-guy on 1st.
 
@@ -6362,7 +6362,7 @@ LABEL LDOFPA OFPA SHLD, RET, ASSEMBLE>
 ### <a name="terse-word-54-42-4c-56-45-4c"></a><span>TBLVEL</span>
 `( -- )`
 
-HL addresses current velocity byte, D = maximum; returns signed velocity increment in HL
+Inputs HL = velocity-byte address and D = maximum parameter. Reads the signed velocity byte, selects magnitude $80 or $1B0 according to threshold 3, applies the original sign and returns the signed 16-bit result in HL (returns zero if the byte is zero).
 
 Tractorball vel HL-# add. D-max vel.
 
@@ -6381,7 +6381,7 @@ PSW POP, ' COMPHL CNZ, RET,
 ### <a name="terse-word-54-49-4d-45-44-43-52"></a><span>TIMEDCR</span>
 `( -- )`
 
-A ← 1 if timer reached zero, otherwise 0
+Input HL addresses a timer byte. If already zero, returns A = 0 without writing; otherwise decrements the byte and returns A = 1 only on transition to zero, or 0 if still nonzero.
 
 HL-timer add if goes to zero return 1 else 0.
 
@@ -6397,7 +6397,7 @@ ELSE, A XRA, THEN, RET,
 ### <a name="terse-word-54-4f-4f-46-43-4b"></a><span>TOOFCK</span>
 `( -- )`
 
-Decrements outfielder timeout and invokes 'CMPOF' if still active
+Decrements TOOF#. On a nonzero result, sets TOOF to $FF; when the counter reaches zero, calls CMPOF, enables interrupts (EI), and sets TOOFF to 1; returns natively.
 
 Time out outfield check.
 
@@ -6428,7 +6428,7 @@ SUBR WALKOVER ( walked runner at base )
 ### <a name="terse-word-77-72-69-74-65"></a><span>write</span>
 `( -- )`
 
-IY,BC,DE,HL input drawing state; frame buffer updated
+Inputs IY = pattern data, BC = expansion/magic/shift, DE = pattern dimensions and HL = screen address. Configures XPAND/MAGIC and writes the pattern through the raster drawing loops; this routine does not flush the shifter automatically.
 
 Software write with x y size.
 
@@ -6456,7 +6456,7 @@ THEN, B POP, ( magic ) RET, -->
 ### <a name="terse-word-77-72-69-74-65-70"></a><span>writep</span>
 `( -- )`
 
-Native register outcome requires further verification.
+Inputs: IY points to the size-prefixed pattern, BC holds expansion/magic/shift settings, and HL holds the screen address. Reads pattern X size into E and Y size into D, advances IY past the size bytes, and tail-jumps to write (no local RET).
 
 Uses IY for the pattern address, BC for expansion/magic and shift settings, and HL for the screen address. Loads the pattern dimensions and transfers to the native drawing routine.
 
