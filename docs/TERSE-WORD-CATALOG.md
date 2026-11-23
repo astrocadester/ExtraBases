@@ -1,69 +1,57 @@
-<p align="right"><code>v20261123-0014</code></p>
+<p align="right"><code>v20261123-0015</code></p>
 
 # Extra Bases - TERSE Glossary
 
-- [Standard TERSE Vocabulary](#catalog-runtime) (38)
-
-  Core TERSE operations and inherited words used by the Extra Bases development and target environments.
-- [Extra Bases TERSE Definitions](#catalog-colon) (201)
-
-  Game-specific TERSE definitions combining existing words to implement gameplay, display, sound and control logic.
-- [Extra Bases CODE Verbs](#catalog-code) (85)
-
-  Z80 machine-code words that implement game operations, hardware access and TERSE runtime services.
-- [Z80 SUBR Routines](#catalog-subr) (47)
-
-  Z80 subroutines called by other native routines for shared calculations, drawing, input and state updates.
-- [Development Host Vocabulary](#catalog-host) (2)
-
-  Definitions used by the development host to manage source compilation rather than game execution.
-- [Word and Verb Implementations](#catalog-implementations)
-
-  Complete available source bodies, stack signatures, native Z80 effects and cross-references for cataloged words.
+- [Standard TERSE Vocabulary](#catalog-runtime) (38)<br>Core TERSE operations and inherited words used by the Extra Bases development and target environments.
+- [Extra Bases TERSE Definitions](#catalog-colon) (201)<br>Game-specific TERSE definitions combining existing words to implement gameplay, display, sound and control logic.
+- [Extra Bases CODE Verbs](#catalog-code) (85)<br>Z80 machine-code words that implement game operations, hardware access and TERSE runtime services.
+- [Z80 SUBR Routines](#catalog-subr) (47)<br>Z80 subroutines called by other native routines for shared calculations, drawing, input and state updates.
+- [Development Host Vocabulary](#catalog-host) (2)<br>Definitions used by the development host to manage source compilation rather than game execution.
+- [Word and Verb Implementations](#catalog-implementations)<br>Complete available source bodies, stack signatures, native Z80 effects and cross-references for cataloged words.
 
 <a name="catalog-runtime"></a>
 ## Standard TERSE Vocabulary (38)
 
 <table>
 <tbody>
-<tr><td><strong>-</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;difference&nbsp;)</code><br>Subtract the top value from the preceding value.</td></tr>
-<tr><td><strong>!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;value&nbsp;address&nbsp;--&nbsp;)</code><br>Store one 16-bit cell.</td></tr>
-<tr><td><strong>@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;address&nbsp;--&nbsp;value&nbsp;)</code><br>Fetch one 16-bit cell.</td></tr>
-<tr><td><strong>*</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2a" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;m&nbsp;n&nbsp;--&nbsp;product&nbsp;)</code><br>Multiply two stack values.</td></tr>
-<tr><td><strong>/</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;quotient&nbsp;)</code><br>Divide the preceding stack value by the top value.</td></tr>
-<tr><td><strong>+</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;sum&nbsp;)</code><br>Add two stack values.</td></tr>
-<tr><td><strong>&lt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code><br>Compare whether the preceding value is less than the top value.</td></tr>
-<tr><td><strong>=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code><br>Compare two values for equality.</td></tr>
-<tr><td><strong>&gt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code><br>Compare whether the preceding value is greater than the top value.</td></tr>
-<tr><td><strong>0=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-30-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;n&nbsp;--&nbsp;flag&nbsp;)</code><br>Return a condition indicating zero.</td></tr>
-<tr><td><strong>2DUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-32-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;b&nbsp;)</code><br>Duplicate the top two stack cells.</td></tr>
-<tr><td><strong>AND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code><br>Bitwise AND of two values.</td></tr>
-<tr><td><strong>ARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;size&nbsp;--&nbsp;)</code><br>Allocate/name an indexed cell array from a the size.</td></tr>
-<tr><td><strong>ASM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-53-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select the Z80 assembler vocabulary in the development host.</td></tr>
-<tr><td><strong>B!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;byte&nbsp;address&nbsp;--&nbsp;)</code><br>Store one byte.</td></tr>
-<tr><td><strong>B@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;address&nbsp;--&nbsp;byte&nbsp;)</code><br>Fetch one byte.</td></tr>
-<tr><td><strong>BARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;size&nbsp;--&nbsp;)</code><br>Allocate/name an indexed byte array from a the size.</td></tr>
-<tr><td><strong>BEGIN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-45-47-49-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Immediate XC wrapper that records a loop's object address.</td></tr>
-<tr><td><strong>CODE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-44-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry.</td></tr>
-<tr><td><strong>CONSTANT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4e-53-54-41-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;value&nbsp;--&nbsp;)</code><br>Define a constant from a value.</td></tr>
-<tr><td><strong>DECIMAL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-45-43-49-4d-41-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select radix ten for parsing subsequent source numbers.</td></tr>
-<tr><td><strong>DROP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-52-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;--&nbsp;)</code><br>Discard the top stack cell.</td></tr>
-<tr><td><strong>DUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;--&nbsp;x&nbsp;x&nbsp;)</code><br>Duplicate the top stack cell.</td></tr>
-<tr><td><strong>ELSE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-4c-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Immediate XC wrapper that emits an unconditional branch and resolves the preceding conditional branch.</td></tr>
-<tr><td><strong>END</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code><br>Immediate XC wrapper emitting a conditional back-branch; game loops repeat until the condition becomes true.</td></tr>
-<tr><td><strong>HERE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-45-52-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;address&nbsp;)</code><br>Return the address of the next free dictionary location.</td></tr>
-<tr><td><strong>HEX</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-45-58" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select radix sixteen for parsing subsequent source numbers.</td></tr>
-<tr><td><strong>IF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code><br>Immediate XC wrapper that emits a conditional target branch through XC-IF.</td></tr>
-<tr><td><strong>INP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;port&nbsp;--&nbsp;value&nbsp;)</code><br>Read an 8-bit input-port value and push it zero-extended.</td></tr>
-<tr><td><strong>LIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;value&nbsp;)</code><br>Compiler literal mechanism used by INEXT's host macro.</td></tr>
-<tr><td><strong>OR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code><br>Bitwise inclusive OR of two values.</td></tr>
-<tr><td><strong>OUTP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;value&nbsp;port&nbsp;--&nbsp;)</code><br>Write the low byte of a value to a hardware output port.</td></tr>
-<tr><td><strong>OVER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-56-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;)</code><br>Copy the second stack cell to the top.</td></tr>
-<tr><td><strong>ROT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;c&nbsp;--&nbsp;b&nbsp;c&nbsp;a&nbsp;)</code><br>Rotate the top three stack cells.</td></tr>
-<tr><td><strong>SWAP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;b&nbsp;a&nbsp;)</code><br>Exchange the top two stack cells.</td></tr>
-<tr><td><strong>THEN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-45-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Immediate XC wrapper that resolves a saved target branch destination.</td></tr>
-<tr><td><strong>VARIABLE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-41-52-49-41-42-4c-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;initial-value&nbsp;--&nbsp;)</code><br>Allocate/name a cell variable with the initial value in this dialect.</td></tr>
-<tr><td><strong>XOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-58-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code><br>Bitwise exclusive OR of two values.</td></tr>
+<tr><td><strong>-</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Subtract the top value from the preceding value.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;difference&nbsp;)</code></td></tr>
+<tr><td><strong>!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Store one 16-bit cell.<br><code>(&nbsp;value&nbsp;address&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetch one 16-bit cell.<br><code>(&nbsp;address&nbsp;--&nbsp;value&nbsp;)</code></td></tr>
+<tr><td><strong>*</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2a" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Multiply two stack values.<br><code>(&nbsp;m&nbsp;n&nbsp;--&nbsp;product&nbsp;)</code></td></tr>
+<tr><td><strong>/</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Divide the preceding stack value by the top value.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;quotient&nbsp;)</code></td></tr>
+<tr><td><strong>+</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Add two stack values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;sum&nbsp;)</code></td></tr>
+<tr><td><strong>&lt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare whether the preceding value is less than the top value.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
+<tr><td><strong>=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare two values for equality.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
+<tr><td><strong>&gt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare whether the preceding value is greater than the top value.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
+<tr><td><strong>0=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-30-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Return a condition indicating zero.<br><code>(&nbsp;n&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
+<tr><td><strong>2DUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-32-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Duplicate the top two stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;b&nbsp;)</code></td></tr>
+<tr><td><strong>AND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Bitwise AND of two values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code></td></tr>
+<tr><td><strong>ARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate/name an indexed cell array from a the size.<br><code>(&nbsp;size&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ASM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-53-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select the Z80 assembler vocabulary in the development host.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>B!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Store one byte.<br><code>(&nbsp;byte&nbsp;address&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>B@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetch one byte.<br><code>(&nbsp;address&nbsp;--&nbsp;byte&nbsp;)</code></td></tr>
+<tr><td><strong>BARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate/name an indexed byte array from a the size.<br><code>(&nbsp;size&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BEGIN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-45-47-49-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper that records a loop's object address.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CODE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-44-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CONSTANT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4e-53-54-41-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Define a constant from a value.<br><code>(&nbsp;value&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DECIMAL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-45-43-49-4d-41-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select radix ten for parsing subsequent source numbers.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DROP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-52-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Discard the top stack cell.<br><code>(&nbsp;x&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Duplicate the top stack cell.<br><code>(&nbsp;x&nbsp;--&nbsp;x&nbsp;x&nbsp;)</code></td></tr>
+<tr><td><strong>ELSE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-4c-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper that emits an unconditional branch and resolves the preceding conditional branch.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>END</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper emitting a conditional back-branch; game loops repeat until the condition becomes true.<br><code>(&nbsp;flag&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HERE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-45-52-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Return the address of the next free dictionary location.<br><code>(&nbsp;--&nbsp;address&nbsp;)</code></td></tr>
+<tr><td><strong>HEX</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-45-58" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select radix sixteen for parsing subsequent source numbers.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>IF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper that emits a conditional target branch through XC-IF.<br><code>(&nbsp;flag&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Read an 8-bit input-port value and push it zero-extended.<br><code>(&nbsp;port&nbsp;--&nbsp;value&nbsp;)</code></td></tr>
+<tr><td><strong>LIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compiler literal mechanism used by INEXT's host macro.<br><code>(&nbsp;--&nbsp;value&nbsp;)</code></td></tr>
+<tr><td><strong>OR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Bitwise inclusive OR of two values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code></td></tr>
+<tr><td><strong>OUTP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Write the low byte of a value to a hardware output port.<br><code>(&nbsp;value&nbsp;port&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OVER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-56-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Copy the second stack cell to the top.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;)</code></td></tr>
+<tr><td><strong>ROT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Rotate the top three stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;c&nbsp;--&nbsp;b&nbsp;c&nbsp;a&nbsp;)</code></td></tr>
+<tr><td><strong>SWAP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Exchange the top two stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;b&nbsp;a&nbsp;)</code></td></tr>
+<tr><td><strong>THEN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-45-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper that resolves a saved target branch destination.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>VARIABLE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-41-52-49-41-42-4c-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate/name a cell variable with the initial value in this dialect.<br><code>(&nbsp;initial-value&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>XOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-58-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Bitwise exclusive OR of two values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code></td></tr>
 </tbody>
 </table>
 
@@ -72,207 +60,207 @@
 
 <table>
 <tbody>
-<tr><td><strong>]'[</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-5d-27-5b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Source-level compiler/TERSE definition shown below.</td></tr>
-<tr><td><strong>^</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-5e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses ABVOLS and MCVOLS to compose game logic.</td></tr>
-<tr><td><strong>&lt;INTERRUPTS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3c-49-4e-54-45-52-52-55-50-54-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Mark the start of interrupt data.</td></tr>
-<tr><td><strong>ABVOLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-42-56-4f-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;volume&nbsp;--&nbsp;)</code><br>Emit the music volume command.</td></tr>
-<tr><td><strong>ACT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-43-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a playaction record.</td></tr>
-<tr><td><strong>ANOTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-4f-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code><br>Emit a channel A note followed by its duration.</td></tr>
-<tr><td><strong>ATONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-54-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code><br>Emit tone setting for channel A.</td></tr>
-<tr><td><strong>BACT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-43-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a ball-action record.</td></tr>
-<tr><td><strong>BALLTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-4c-4c-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Balls process.</td></tr>
-<tr><td><strong>BLDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the ball destination command.</td></tr>
-<tr><td><strong>BLMOT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-4d-4f-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the ball motion command.</td></tr>
-<tr><td><strong>BNOTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4e-4f-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code><br>Emit a channel B note followed by its duration.</td></tr>
-<tr><td><strong>BONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;address&nbsp;--&nbsp;)</code><br>Store byte value 1.</td></tr>
-<tr><td><strong>BTONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-54-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code><br>Emit tone setting for channel B.</td></tr>
-<tr><td><strong>BV</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-56" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Define a named byte variable.</td></tr>
-<tr><td><strong>BV=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-56-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BV to compose game logic.</td></tr>
-<tr><td><strong>BZERO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-5a-45-52-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;address&nbsp;--&nbsp;)</code><br>Store byte value 0.</td></tr>
-<tr><td><strong>C=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;value&nbsp;--&nbsp;)</code><br>Uses CONSTANT to compose game logic.</td></tr>
-<tr><td><strong>CHGS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-47-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Posts CHANGE SIDES.</td></tr>
-<tr><td><strong>CHKFLSHSTAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>When isccp turn off check for wupwrt.</td></tr>
-<tr><td><strong>CHKGMCNT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-47-4d-43-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;credits&nbsp;)</code><br>Posts the appropriate prompt around a timed wait and returns the current credit byte.</td></tr>
-<tr><td><strong>CMAJOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4d-41-4a-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Initialize the C-major sound pattern.</td></tr>
-<tr><td><strong>CNLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4e-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Saves a new XIN/YIN endpoint and calls cnline from the current line state.</td></tr>
-<tr><td><strong>CNOTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4e-4f-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code><br>Emit a channel C note followed by its duration.</td></tr>
-<tr><td><strong>CONGR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4e-47-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Display the congratulatory prompt.</td></tr>
-<tr><td><strong>CPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;char&nbsp;--&nbsp;)</code><br>Draw one character at the specified position.</td></tr>
-<tr><td><strong>CREDARROW</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-52-45-44-41-52-52-4f-57" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Update last inning arrow.</td></tr>
-<tr><td><strong>CTONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-54-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;tone&nbsp;--&nbsp;)</code><br>Emit tone setting for channel C.</td></tr>
-<tr><td><strong>DEACT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-45-41-43-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit vector-deactivation command.</td></tr>
-<tr><td><strong>DLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x1&nbsp;y1&nbsp;x2&nbsp;y2&nbsp;--&nbsp;)</code><br>Draw a line , given X Y start coor X Y ending coor.</td></tr>
-<tr><td><strong>DOCHGS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-43-48-47-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER.</td></tr>
-<tr><td><strong>DOEHOMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-45-48-4f-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Display the home-run message.</td></tr>
-<tr><td><strong>DOGOVER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-47-4f-56-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Do game over.</td></tr>
-<tr><td><strong>DOHOMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-48-4f-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Erases the ball, displays HOMER, resets counts and clears the event timer.</td></tr>
-<tr><td><strong>DOSAFE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-41-46-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Play the safe-call music and display its message.</td></tr>
-<tr><td><strong>DOSBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Inspect the $30-based count character and display the matching out message.</td></tr>
-<tr><td><strong>DOSOUT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-4f-55-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.</td></tr>
-<tr><td><strong>DOSSTRIKE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-53-54-52-49-4b-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.</td></tr>
-<tr><td><strong>DP1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Display the one-coin deposit prompt.</td></tr>
-<tr><td><strong>DP12CN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-31-32-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses B@ and SPOST to compose game logic.</td></tr>
-<tr><td><strong>DP1CN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-31-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses SPOST to compose game logic.</td></tr>
-<tr><td><strong>DPCN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Wait for next coin.</td></tr>
-<tr><td><strong>dpost</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-64-70-6f-73-74" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;nibble&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code><br>Isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit.</td></tr>
-<tr><td><strong>DTC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-54-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Selects decimal and invokes the host editor.</td></tr>
-<tr><td><strong>DURATION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-55-52-41-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;duration&nbsp;--&nbsp;)</code><br>Emit a note-duration command.</td></tr>
-<tr><td><strong>DWAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;limit&nbsp;--&nbsp;)</code><br>Runs nested loops with interrupts enabled and disables them on return.</td></tr>
-<tr><td><strong>F=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Declare a forward word with the game's source shorthand.</td></tr>
-<tr><td><strong>F1STLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-31-53-54-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select the first-base left-side action.</td></tr>
-<tr><td><strong>F1STRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-31-53-54-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select the first-base right-side action.</td></tr>
-<tr><td><strong>F2NDLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-32-4e-44-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>F2NDRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-32-4e-44-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>F3RDLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-33-52-44-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select the third-base left-side action.</td></tr>
-<tr><td><strong>F3RDRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-33-52-44-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select the third-base right-side action.</td></tr>
-<tr><td><strong>FBLLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-42-4c-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>FBLRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-42-4c-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>FIELDWRT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-49-45-4c-44-57-52-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Write field outline.</td></tr>
-<tr><td><strong>FL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Set up all of background.</td></tr>
-<tr><td><strong>FLDDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-44-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the fielder destination command.</td></tr>
-<tr><td><strong>FLFILL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-46-49-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Fills the background while allowing interrupts.</td></tr>
-<tr><td><strong>FLSHME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Executes only a nonzero address whose top two bits are clear.</td></tr>
-<tr><td><strong>FLSHTON</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-54-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Saves a callback and starts its timer.</td></tr>
-<tr><td><strong>FOULTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4f-55-4c-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Foulball process.</td></tr>
-<tr><td><strong>FOWR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4f-57-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells.</td></tr>
-<tr><td><strong>FSSLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-53-53-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>FSSRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-53-53-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>GETF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-47-45-54-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;index&nbsp;field-byte&nbsp;)</code><br>Fetches FIELD bytes sequentially.</td></tr>
-<tr><td><strong>GRNDRACTION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;sector&nbsp;--&nbsp;)</code><br>Consumes a selected hit-sector index, executes its `GSTBL` word, then installs the appropriate fielder playaction addresses.</td></tr>
-<tr><td><strong>GRNDRHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-47-52-4e-44-52-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Computes a ground-ball sector from randomized timing and pitch direction, dispatches `GRNDRACTION`, then sets ball destination.</td></tr>
-<tr><td><strong>HITDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-49-54-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Chooses hit location.</td></tr>
-<tr><td><strong>HLLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4c-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>HLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>HMS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4d-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>HOM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4f-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Draw HOME using a large initial character and the remainder of the string.</td></tr>
-<tr><td><strong>HRBY2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-52-42-59-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Halves HRAT.</td></tr>
-<tr><td><strong>HRLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-52-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>HRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BONE to compose game logic.</td></tr>
-<tr><td><strong>I'</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-27" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the target's indexed immediate reference.</td></tr>
-<tr><td><strong>ICODE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-43-4f-44-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Defines the native interrupt handler and emits its Z80 register-save prologue in the host compiler.</td></tr>
-<tr><td><strong>INEXT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-45-58-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emits a jump to IEX.</td></tr>
-<tr><td><strong>INLOG</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-4c-4f-47" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Infield master logic.</td></tr>
-<tr><td><strong>INNODDS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-4e-4f-44-44-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Derives IODDS from inning, computer/player swing control and bonus-inning state.</td></tr>
-<tr><td><strong>INSCN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-53-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Insert coin call.</td></tr>
-<tr><td><strong>INSTRC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-53-54-52-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Instructions.</td></tr>
-<tr><td><strong>INSWAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-53-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;count&nbsp;--&nbsp;)</code><br>Enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return.</td></tr>
-<tr><td><strong>INTERRUPTS&gt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-54-45-52-52-55-50-54-53-3e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the interrupt-vector dispatch jump.</td></tr>
-<tr><td><strong>INTHIGHRES</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-54-48-49-47-48-52-45-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Intialize screen for commercial mode.</td></tr>
-<tr><td><strong>ISCN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-53-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Display the V15 instruction message.</td></tr>
-<tr><td><strong>LABLE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-41-42-4c-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Provide the original source's label-definition alias.</td></tr>
-<tr><td><strong>LCB,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-43-42-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses ACT, and DEACT, to compose game logic.</td></tr>
-<tr><td><strong>LDINFLDPA</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-44-49-4e-46-4c-44-50-41" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain.</td></tr>
-<tr><td><strong>LDPC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-44-50-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit/load the music program-counter value.</td></tr>
-<tr><td><strong>LDPCC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-44-50-43-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit/load a music program-counter command.</td></tr>
-<tr><td><strong>LK,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4b-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BACT, and DEACT, to compose game logic.</td></tr>
-<tr><td><strong>LSETTFCOOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Set take field coor & status -active , xpand.</td></tr>
-<tr><td><strong>MASTER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-41-53-54-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Define the game's master music stream.</td></tr>
-<tr><td><strong>MBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MCANNON</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-43-41-4e-4e-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MCOIN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-43-4f-49-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MCVOLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-43-56-4f-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;volume&nbsp;--&nbsp;)</code><br>Emit music-channel volume values.</td></tr>
-<tr><td><strong>MFENCE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-46-45-4e-43-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MFOUL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-46-4f-55-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MLINN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-4c-49-4e-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Mark last inning.</td></tr>
-<tr><td><strong>MOPENERS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-4f-50-45-4e-45-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses PMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MOUT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-4f-55-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MSAFE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-53-41-46-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MSTRIKE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-53-54-52-49-4b-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>MYAH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-59-41-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses BMUSIC to compose game logic.</td></tr>
-<tr><td><strong>NOISE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-4f-49-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a noise/sound command.</td></tr>
-<tr><td><strong>NOTES</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-4f-54-45-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses ATONE and BTONE to compose game logic.</td></tr>
-<tr><td><strong>NPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;address&nbsp;length&nbsp;--&nbsp;)</code><br>Post a bcd number on the screen ; see options.</td></tr>
-<tr><td><strong>OFFDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-46-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the outfielder destination command.</td></tr>
-<tr><td><strong>OFMOT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-4d-4f-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the outfield motion command.</td></tr>
-<tr><td><strong>ON1ST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-31-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the first-base playaction command.</td></tr>
-<tr><td><strong>ON2ND,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-32-4e-44-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the second-base playaction command.</td></tr>
-<tr><td><strong>ON3RD,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-33-52-44-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the third-base playaction command.</td></tr>
-<tr><td><strong>OUTFLDHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-46-4c-44-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Fly ball.</td></tr>
-<tr><td><strong>OUTLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code><br>Creates rectanguler outline.</td></tr>
-<tr><td><strong>OUTTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Out prc.</td></tr>
-<tr><td><strong>PLRCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4c-52-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL.</td></tr>
-<tr><td><strong>PLRSELECT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4c-52-53-45-4c-45-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select singel player or 2 player.</td></tr>
-<tr><td><strong>PPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code><br>Draw a counted string and keep drawing coordinates.</td></tr>
-<tr><td><strong>PUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Power up routine.</td></tr>
-<tr><td><strong>PX0</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-58-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit zero/white pixel patterns and define PX1/PX0 to select them.</td></tr>
-<tr><td><strong>PX1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-58-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit zero/white pixel patterns and define PX1/PX0 to select them.</td></tr>
-<tr><td><strong>QUIET</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-51-55-49-45-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses ABVOLS and MCVOLS to compose game logic.</td></tr>
-<tr><td><strong>QUIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-51-55-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses HERE and LDPC to compose game logic.</td></tr>
-<tr><td><strong>RCB,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-43-42-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses ACT, and DEACT, to compose game logic.</td></tr>
-<tr><td><strong>RDRNDNTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-44-52-4e-44-4e-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a randomized note with a rest interval.</td></tr>
-<tr><td><strong>RECLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-43-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;options&nbsp;--&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;options&nbsp;)</code><br>Draws a horizontal rectangle row without consuming the five retained rectangle arguments.</td></tr>
-<tr><td><strong>RECTAN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-43-54-41-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code><br>In X, Y, X length, Y length, pxtype set.</td></tr>
-<tr><td><strong>REST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;duration&nbsp;--&nbsp;)</code><br>Insert a silent music interval.</td></tr>
-<tr><td><strong>REST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a resting playaction record.</td></tr>
-<tr><td><strong>RETPA</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-54-50-41" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Return to position pa.</td></tr>
-<tr><td><strong>RNDNTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4e-44-4e-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a randomized musical note.</td></tr>
-<tr><td><strong>RRRNDNTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-52-52-4e-44-4e-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a sequence of randomized notes.</td></tr>
-<tr><td><strong>RUN1CHK1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-31-43-48-4b-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code><br>Selects the runner vector for an occupied first-base slot, or delegates to the next occupancy test.</td></tr>
-<tr><td><strong>RUN1CHK2ND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code><br>Chooses the next runner vector according to runner 1's second-base occupancy.</td></tr>
-<tr><td><strong>RUN2CHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-32-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code><br>Returns the runner code and vector for the next open base.</td></tr>
-<tr><td><strong>RUN2CHK12ND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-32-43-48-4b-31-32-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code><br>Returns runner 2 or 3 vector based on second-base occupancy.</td></tr>
-<tr><td><strong>RUN2CHK1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-32-43-48-4b-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code><br>Chooses runner 3 or delegates according to runner 2's first-base state.</td></tr>
-<tr><td><strong>RUN3CHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-33-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code><br>Returns runner 3 or 4 code/vector from third runner's occupancy.</td></tr>
-<tr><td><strong>RUNDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the runner destination command.</td></tr>
-<tr><td><strong>S!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code><br>Store cell with address-first arguments.</td></tr>
-<tr><td><strong>S10</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-31-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Starts INTERRUPTS0 through ISTART.</td></tr>
-<tr><td><strong>S11</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-31-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Starts INTERRUPTS1.</td></tr>
-<tr><td><strong>SB!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code><br>Store byte with address-first arguments.</td></tr>
-<tr><td><strong>SBALL1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-41-4c-4c-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the BALL 1 message.</td></tr>
-<tr><td><strong>SBALL2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-41-4c-4c-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the BALL 2 message.</td></tr>
-<tr><td><strong>SBALL3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-41-4c-4c-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the BALL 3 message.</td></tr>
-<tr><td><strong>SBO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Posts the three $30-based count characters at their fixed positions.</td></tr>
-<tr><td><strong>SCOREME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-43-4f-52-45-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Plop scores up.</td></tr>
-<tr><td><strong>SCRERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-43-52-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Erase entire screen.</td></tr>
-<tr><td><strong>SCRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-43-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Clears two score rectangles and draws zero score characters.</td></tr>
-<tr><td><strong>SETFDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-46-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Set up fielder destination values.</td></tr>
-<tr><td><strong>SETTF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-54-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading.</td></tr>
-<tr><td><strong>SETTFPA</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-54-46-50-41" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Take field pa.</td></tr>
-<tr><td><strong>SFOUL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-46-4f-55-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses ROT and SPOST to compose game logic.</td></tr>
-<tr><td><strong>SGO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-47-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses SPOST to compose game logic.</td></tr>
-<tr><td><strong>SHOMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-48-4f-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses ROT and SPOST to compose game logic.</td></tr>
-<tr><td><strong>SORRY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-52-52-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Display the losing-player prompt.</td></tr>
-<tr><td><strong>SOUT1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-55-54-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the 1 OUT message.</td></tr>
-<tr><td><strong>SOUT2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-55-54-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the 2 OUT message.</td></tr>
-<tr><td><strong>SOUT3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-55-54-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the 3 OUT message.</td></tr>
-<tr><td><strong>SPLR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-50-4c-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>SPLR12/SPLR display available player choices;</td></tr>
-<tr><td><strong>SPLR12</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-50-4c-52-31-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>SPLR12/SPLR display available player choices;</td></tr>
-<tr><td><strong>SPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;)</code><br>Draw a string.</td></tr>
-<tr><td><strong>SSAFE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-53-41-46-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Display SAFE and redraw counts using SBO.</td></tr>
-<tr><td><strong>SSTRIKE1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-53-54-52-49-4b-45-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the STRIKE 1 message.</td></tr>
-<tr><td><strong>SSTRIKE2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-53-54-52-49-4b-45-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Draw the STRIKE 2 message.</td></tr>
-<tr><td><strong>STFLD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-46-4c-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Installs RETPA and TAKEFIELD.</td></tr>
-<tr><td><strong>STP,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-50-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit a standing-action record.</td></tr>
-<tr><td><strong>STRIKETIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Strike process.</td></tr>
-<tr><td><strong>STRINGGO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-49-4e-47-47-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;string&nbsp;erase-flag&nbsp;--&nbsp;)</code><br>Given string , stringerase.</td></tr>
-<tr><td><strong>STRINGPRC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-49-4e-47-50-52-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>String display.</td></tr>
-<tr><td><strong>STRTBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-54-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music.</td></tr>
-<tr><td><strong>SUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Posts UP.</td></tr>
-<tr><td><strong>SW-30</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2d-33-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code><br>Maps a −30° swing and horizontal direction into a baseball sector code.</td></tr>
-<tr><td><strong>SW-45</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2d-34-35" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code><br>Maps a −45° swing and horizontal direction into a baseball sector code.</td></tr>
-<tr><td><strong>SW-90</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2d-39-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code><br>Ignores direction/random inputs and returns the far-right foul sector.</td></tr>
-<tr><td><strong>SW+30</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2b-33-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code><br>Maps a +30° swing and horizontal direction into a baseball sector code.</td></tr>
-<tr><td><strong>SW+45</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2b-34-35" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code><br>Maps a +45° swing and horizontal direction into a baseball sector code.</td></tr>
-<tr><td><strong>SW+90</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2b-39-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code><br>Discard the two inputs and return the far-left foul sector.</td></tr>
-<tr><td><strong>SW0</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code><br>Maps a central swing and horizontal direction into a baseball sector code.</td></tr>
-<tr><td><strong>SWALK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-4c-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code><br>Uses ROT and SPOST to compose game logic.</td></tr>
-<tr><td><strong>TCNT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-43-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Chooses one-coin versus per-player continuation wording from CNSW12 and current credits.</td></tr>
-<tr><td><strong>TERSECHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-45-52-53-45-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Look at terse routine flags.</td></tr>
-<tr><td><strong>TF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Take the field.</td></tr>
-<tr><td><strong>THW,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-57-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the throw command.</td></tr>
-<tr><td><strong>TWAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;count&nbsp;--&nbsp;)</code><br>Terse wait period.</td></tr>
-<tr><td><strong>V</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses VARIABLE to compose game logic.</td></tr>
-<tr><td><strong>V=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses V and VARIABLE to compose game logic.</td></tr>
-<tr><td><strong>VIBS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-49-42-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;value&nbsp;--&nbsp;)</code><br>Emit a vibrato setting.</td></tr>
-<tr><td><strong>VIS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-49-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string;</td></tr>
-<tr><td><strong>WHBODDS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-48-42-4f-44-44-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Sets who is on base calculates play odds.</td></tr>
-<tr><td><strong>WTHW,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-54-48-57-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emit the wait-for-throw command.</td></tr>
-<tr><td><strong>WUPGO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-55-50-47-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Activates WHOSUP with runner/automatic-forward flags.</td></tr>
-<tr><td><strong>WUPTON</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-55-50-54-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Installs WUPWRT.</td></tr>
-<tr><td><strong>WUPWRT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-55-50-57-52-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Write whos up for flash.</td></tr>
-<tr><td><strong>YOU1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-59-4f-55-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Posts the greeting/extra-inning challenge, then continues to 306.</td></tr>
-<tr><td><strong>ZERORAM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-5a-45-52-4f-52-41-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Clears $270 bytes starting at $7C30 and resets OFTFCNT.</td></tr>
+<tr><td><strong>]'[</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-5d-27-5b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Source-level compiler/TERSE definition shown below.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>^</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-5e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ABVOLS and MCVOLS to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>&lt;INTERRUPTS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3c-49-4e-54-45-52-52-55-50-54-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Mark the start of interrupt data.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ABVOLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-42-56-4f-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the music volume command.<br><code>(&nbsp;volume&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ACT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-43-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a playaction record.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ANOTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-4f-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a channel A note followed by its duration.<br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ATONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-54-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit tone setting for channel A.<br><code>(&nbsp;tone&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BACT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-43-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a ball-action record.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BALLTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-4c-4c-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Balls process.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BLDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the ball destination command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BLMOT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-4d-4f-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the ball motion command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BNOTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4e-4f-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a channel B note followed by its duration.<br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Store byte value 1.<br><code>(&nbsp;address&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BTONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-54-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit tone setting for channel B.<br><code>(&nbsp;tone&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BV</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-56" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Define a named byte variable.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BV=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-56-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BV to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BZERO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-5a-45-52-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Store byte value 0.<br><code>(&nbsp;address&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>C=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses CONSTANT to compose game logic.<br><code>(&nbsp;value&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHGS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-47-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Posts CHANGE SIDES.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKFLSHSTAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>When isccp turn off check for wupwrt.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKGMCNT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-47-4d-43-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Posts the appropriate prompt around a timed wait and returns the current credit byte.<br><code>(&nbsp;--&nbsp;credits&nbsp;)</code></td></tr>
+<tr><td><strong>CMAJOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4d-41-4a-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Initialize the C-major sound pattern.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CNLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4e-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Saves a new XIN/YIN endpoint and calls cnline from the current line state.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CNOTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4e-4f-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a channel C note followed by its duration.<br><code>(&nbsp;duration&nbsp;tone&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CONGR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4e-47-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Display the congratulatory prompt.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw one character at the specified position.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;char&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CREDARROW</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-52-45-44-41-52-52-4f-57" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Update last inning arrow.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CTONE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-54-4f-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit tone setting for channel C.<br><code>(&nbsp;tone&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DEACT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-45-41-43-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit vector-deactivation command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw a line , given X Y start coor X Y ending coor.<br><code>(&nbsp;x1&nbsp;y1&nbsp;x2&nbsp;y2&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOCHGS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-43-48-47-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOEHOMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-45-48-4f-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Display the home-run message.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOGOVER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-47-4f-56-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Do game over.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOHOMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-48-4f-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Erases the ball, displays HOMER, resets counts and clears the event timer.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOSAFE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-41-46-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Play the safe-call music and display its message.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOSBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Inspect the $30-based count character and display the matching out message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOSOUT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-4f-55-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DOSSTRIKE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f-53-53-54-52-49-4b-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DP1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Display the one-coin deposit prompt.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DP12CN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-31-32-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses B@ and SPOST to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DP1CN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-31-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses SPOST to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DPCN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-50-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Wait for next coin.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>dpost</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-64-70-6f-73-74" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;nibble&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code></td></tr>
+<tr><td><strong>DTC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-54-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Selects decimal and invokes the host editor.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DURATION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-55-52-41-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a note-duration command.<br><code>(&nbsp;duration&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DWAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Runs nested loops with interrupts enabled and disables them on return.<br><code>(&nbsp;limit&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>F=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Declare a forward word with the game's source shorthand.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>F1STLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-31-53-54-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select the first-base left-side action.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>F1STRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-31-53-54-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select the first-base right-side action.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>F2NDLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-32-4e-44-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>F2NDRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-32-4e-44-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>F3RDLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-33-52-44-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select the third-base left-side action.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>F3RDRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-33-52-44-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select the third-base right-side action.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FBLLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-42-4c-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FBLRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-42-4c-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FIELDWRT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-49-45-4c-44-57-52-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Write field outline.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set up all of background.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FLDDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-44-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the fielder destination command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FLFILL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-46-49-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fills the background while allowing interrupts.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FLSHME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Executes only a nonzero address whose top two bits are clear.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FLSHTON</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-54-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Saves a callback and starts its timer.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FOULTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4f-55-4c-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Foulball process.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FOWR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4f-57-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FSSLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-53-53-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FSSRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-53-53-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>GETF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-47-45-54-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetches FIELD bytes sequentially.<br><code>(&nbsp;--&nbsp;index&nbsp;field-byte&nbsp;)</code></td></tr>
+<tr><td><strong>GRNDRACTION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Consumes a selected hit-sector index, executes its `GSTBL` word, then installs the appropriate fielder playaction addresses.<br><code>(&nbsp;sector&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>GRNDRHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-47-52-4e-44-52-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Computes a ground-ball sector from randomized timing and pitch direction, dispatches `GRNDRACTION`, then sets ball destination.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HITDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-49-54-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Chooses hit location.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HLLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4c-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HMS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4d-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HOM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4f-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw HOME using a large initial character and the remainder of the string.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HRBY2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-52-42-59-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Halves HRAT.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HRLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-52-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>I'</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-27" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the target's indexed immediate reference.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ICODE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-43-4f-44-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Defines the native interrupt handler and emits its Z80 register-save prologue in the host compiler.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INEXT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-45-58-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emits a jump to IEX.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INLOG</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-4c-4f-47" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Infield master logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INNODDS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-4e-4f-44-44-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Derives IODDS from inning, computer/player swing control and bonus-inning state.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INSCN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-53-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Insert coin call.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INSTRC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-53-54-52-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Instructions.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INSWAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-53-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return.<br><code>(&nbsp;count&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INTERRUPTS&gt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-54-45-52-52-55-50-54-53-3e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the interrupt-vector dispatch jump.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INTHIGHRES</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-54-48-49-47-48-52-45-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Intialize screen for commercial mode.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ISCN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-53-43-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Display the V15 instruction message.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LABLE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-41-42-4c-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Provide the original source's label-definition alias.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LCB,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-43-42-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ACT, and DEACT, to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LDINFLDPA</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-44-49-4e-46-4c-44-50-41" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LDPC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-44-50-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit/load the music program-counter value.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LDPCC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-44-50-43-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit/load a music program-counter command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LK,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4b-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BACT, and DEACT, to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LSETTFCOOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set take field coor & status -active , xpand.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MASTER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-41-53-54-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Define the game's master music stream.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MCANNON</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-43-41-4e-4e-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MCOIN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-43-4f-49-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MCVOLS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-43-56-4f-4c-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit music-channel volume values.<br><code>(&nbsp;volume&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MFENCE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-46-45-4e-43-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MFOUL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-46-4f-55-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MLINN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-4c-49-4e-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Mark last inning.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MOPENERS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-4f-50-45-4e-45-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses PMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MOUT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-4f-55-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MSAFE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-53-41-46-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MSTRIKE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-53-54-52-49-4b-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MYAH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-59-41-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses BMUSIC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>NOISE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-4f-49-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a noise/sound command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>NOTES</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-4f-54-45-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ATONE and BTONE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>NPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Post a bcd number on the screen ; see options.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;address&nbsp;length&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OFFDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-46-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the outfielder destination command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OFMOT,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-4d-4f-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the outfield motion command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ON1ST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-31-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the first-base playaction command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ON2ND,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-32-4e-44-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the second-base playaction command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ON3RD,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-33-52-44-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the third-base playaction command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OUTFLDHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-46-4c-44-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fly ball.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OUTLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Creates rectanguler outline.<br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OUTTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Out prc.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PLRCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4c-52-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PLRSELECT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4c-52-53-45-4c-45-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select singel player or 2 player.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw a counted string and keep drawing coordinates.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;x&nbsp;y&nbsp;options&nbsp;)</code></td></tr>
+<tr><td><strong>PUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Power up routine.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PX0</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-58-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit zero/white pixel patterns and define PX1/PX0 to select them.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PX1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-58-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit zero/white pixel patterns and define PX1/PX0 to select them.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>QUIET</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-51-55-49-45-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ABVOLS and MCVOLS to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>QUIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-51-55-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses HERE and LDPC to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RCB,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-43-42-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ACT, and DEACT, to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RDRNDNTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-44-52-4e-44-4e-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a randomized note with a rest interval.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RECLINE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-43-4c-49-4e-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draws a horizontal rectangle row without consuming the five retained rectangle arguments.<br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;options&nbsp;--&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;options&nbsp;)</code></td></tr>
+<tr><td><strong>RECTAN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-43-54-41-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>In X, Y, X length, Y length, pxtype set.<br><code>(&nbsp;x&nbsp;y&nbsp;width&nbsp;height&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>REST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Insert a silent music interval.<br><code>(&nbsp;duration&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>REST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a resting playaction record.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RETPA</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-54-50-41" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Return to position pa.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RNDNTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4e-44-4e-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a randomized musical note.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RRRNDNTE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-52-52-4e-44-4e-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a sequence of randomized notes.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RUN1CHK1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-31-43-48-4b-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Selects the runner vector for an occupied first-base slot, or delegates to the next occupancy test.<br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code></td></tr>
+<tr><td><strong>RUN1CHK2ND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Chooses the next runner vector according to runner 1's second-base occupancy.<br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code></td></tr>
+<tr><td><strong>RUN2CHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-32-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Returns the runner code and vector for the next open base.<br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code></td></tr>
+<tr><td><strong>RUN2CHK12ND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-32-43-48-4b-31-32-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Returns runner 2 or 3 vector based on second-base occupancy.<br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code></td></tr>
+<tr><td><strong>RUN2CHK1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-32-43-48-4b-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Chooses runner 3 or delegates according to runner 2's first-base state.<br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code></td></tr>
+<tr><td><strong>RUN3CHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-33-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Returns runner 3 or 4 code/vector from third runner's occupancy.<br><code>(&nbsp;--&nbsp;occupancy-code&nbsp;vector-address&nbsp;)</code></td></tr>
+<tr><td><strong>RUNDST,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-44-53-54-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the runner destination command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>S!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Store cell with address-first arguments.<br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>S10</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-31-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Starts INTERRUPTS0 through ISTART.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>S11</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-31-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Starts INTERRUPTS1.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SB!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Store byte with address-first arguments.<br><code>(&nbsp;address&nbsp;value&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SBALL1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-41-4c-4c-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the BALL 1 message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SBALL2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-41-4c-4c-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the BALL 2 message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SBALL3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-41-4c-4c-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the BALL 3 message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SBO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-42-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Posts the three $30-based count characters at their fixed positions.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SCOREME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-43-4f-52-45-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Plop scores up.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SCRERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-43-52-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Erase entire screen.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SCRS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-43-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Clears two score rectangles and draws zero score characters.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SETFDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-46-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set up fielder destination values.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SETTF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-54-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SETTFPA</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-54-46-50-41" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Take field pa.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SFOUL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-46-4f-55-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ROT and SPOST to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SGO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-47-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses SPOST to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SHOMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-48-4f-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ROT and SPOST to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SORRY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-52-52-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Display the losing-player prompt.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SOUT1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-55-54-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the 1 OUT message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SOUT2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-55-54-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the 2 OUT message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SOUT3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-4f-55-54-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the 3 OUT message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SPLR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-50-4c-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>SPLR12/SPLR display available player choices;<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SPLR12</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-50-4c-52-31-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>SPLR12/SPLR display available player choices;<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SPOST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-50-4f-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw a string.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;string&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SSAFE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-53-41-46-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Display SAFE and redraw counts using SBO.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SSTRIKE1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-53-54-52-49-4b-45-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the STRIKE 1 message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SSTRIKE2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-53-54-52-49-4b-45-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Draw the STRIKE 2 message.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>STFLD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-46-4c-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Installs RETPA and TAKEFIELD.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>STP,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-50-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a standing-action record.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>STRIKETIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Strike process.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>STRINGGO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-49-4e-47-47-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Given string , stringerase.<br><code>(&nbsp;string&nbsp;erase-flag&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>STRINGPRC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-49-4e-47-50-52-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>String display.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>STRTBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-52-54-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Posts UP.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SW-30</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2d-33-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Maps a −30° swing and horizontal direction into a baseball sector code.<br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code></td></tr>
+<tr><td><strong>SW-45</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2d-34-35" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Maps a −45° swing and horizontal direction into a baseball sector code.<br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code></td></tr>
+<tr><td><strong>SW-90</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2d-39-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Ignores direction/random inputs and returns the far-right foul sector.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SW+30</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2b-33-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Maps a +30° swing and horizontal direction into a baseball sector code.<br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code></td></tr>
+<tr><td><strong>SW+45</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2b-34-35" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Maps a +45° swing and horizontal direction into a baseball sector code.<br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code></td></tr>
+<tr><td><strong>SW+90</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-2b-39-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Discard the two inputs and return the far-left foul sector.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SW0</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-30" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Maps a central swing and horizontal direction into a baseball sector code.<br><code>(&nbsp;random&nbsp;dx&nbsp;--&nbsp;sector&nbsp;)</code></td></tr>
+<tr><td><strong>SWALK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-4c-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses ROT and SPOST to compose game logic.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TCNT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-43-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Chooses one-coin versus per-player continuation wording from CNSW12 and current credits.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TERSECHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-45-52-53-45-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Look at terse routine flags.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Take the field.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>THW,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-57-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the throw command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TWAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Terse wait period.<br><code>(&nbsp;count&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>V</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses VARIABLE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>V=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses V and VARIABLE to compose game logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>VIBS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-49-42-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit a vibrato setting.<br><code>(&nbsp;value&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>VIS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-49-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string;<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WHBODDS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-48-42-4f-44-44-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets who is on base calculates play odds.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WTHW,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-54-48-57-2c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emit the wait-for-throw command.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WUPGO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-55-50-47-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Activates WHOSUP with runner/automatic-forward flags.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WUPTON</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-55-50-54-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Installs WUPWRT.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WUPWRT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-55-50-57-52-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Write whos up for flash.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>YOU1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-59-4f-55-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Posts the greeting/extra-inning challenge, then continues to 306.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ZERORAM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-5a-45-52-4f-52-41-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Clears $270 bytes starting at $7C30 and resets OFTFCNT.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 </tbody>
 </table>
 
@@ -281,91 +269,91 @@
 
 <table>
 <tbody>
-<tr><td><strong>+LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2b-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;increment&nbsp;--&nbsp;)</code><br>Uses LOOP to process game state.</td></tr>
-<tr><td><strong>ALLFLDACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4c-4c-46-4c-44-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Sets all fielders active.</td></tr>
-<tr><td><strong>ANMSEQLOAD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-4d-53-45-51-4c-4f-41-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Finds proper anm seq by per=#.</td></tr>
-<tr><td><strong>BALLERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-4c-4c-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Preserves BC/IY around native BLERASE and returns to TERSE.</td></tr>
-<tr><td><strong>BATHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>He hit it time to get em running.</td></tr>
-<tr><td><strong>BATHITCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-48-49-54-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Check window for hit.</td></tr>
-<tr><td><strong>BATSWING</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-53-57-49-4e-47" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Swings bat if appropriate.</td></tr>
-<tr><td><strong>BATWRITE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-57-52-49-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Xor bat from swingtype.</td></tr>
-<tr><td><strong>BCD+</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-43-44-2b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;bcd-sum&nbsp;)</code><br>Binary to decimal arithmatic.</td></tr>
-<tr><td><strong>BLDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Ball thrown or hit.</td></tr>
-<tr><td><strong>BLMOTION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-4d-4f-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Set pc for ram pa table -tractor ball.</td></tr>
-<tr><td><strong>BLPOSCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-50-4f-53-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Branches on HITYET.</td></tr>
-<tr><td><strong>BMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;music-address&nbsp;--&nbsp;)</code><br>Consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay.</td></tr>
-<tr><td><strong>BUTTONCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-55-54-54-4f-4e-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Reads buttons for swing run & pitch it.</td></tr>
-<tr><td><strong>CHKCAUGHT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-43-41-55-47-48-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Caught set in interrupt.</td></tr>
-<tr><td><strong>CHKGROUNDER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-47-52-4f-55-4e-44-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>If grounder adjust ball direction.</td></tr>
-<tr><td><strong>CHKSCRTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-53-43-52-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Score process.</td></tr>
-<tr><td><strong>CLRBLST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4c-52-42-4c-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading.</td></tr>
-<tr><td><strong>cnline</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-63-6e-6c-69-6e-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Calls vector line write.</td></tr>
-<tr><td><strong>COMPDE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4d-50-44-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Negate DE while preserving HL.</td></tr>
-<tr><td><strong>COMPHL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4d-50-48-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Compliments HL.</td></tr>
-<tr><td><strong>COUNT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-55-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;address&nbsp;--&nbsp;address+1&nbsp;character&nbsp;)</code><br>Read the next character of a counted/high-bit-terminated string.</td></tr>
-<tr><td><strong>cpost</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-63-70-6f-73-74" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;char&nbsp;--&nbsp;x'&nbsp;y&nbsp;options&nbsp;)</code><br>Post an ascii-character on the screen ; see opt.</td></tr>
-<tr><td><strong>DEACTIVATE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-45-41-43-54-49-56-41-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Reset active bit in status.</td></tr>
-<tr><td><strong>DI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Disable maskable Z80 interrupts.</td></tr>
-<tr><td><strong>DIVHLBY4</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-49-56-48-4c-42-59-34" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Divide HL by 4.</td></tr>
-<tr><td><strong>DO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;limit&nbsp;start&nbsp;--&nbsp;)</code><br>Enter a counted loop using a three-cell return-stack frame.</td></tr>
-<tr><td><strong>DSTCALC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-53-54-43-41-4c-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Calc deltas to destination.</td></tr>
-<tr><td><strong>DSTLD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-53-54-4c-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively.</td></tr>
-<tr><td><strong>EI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Enable maskable Z80 interrupts.</td></tr>
-<tr><td><strong>EIDI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-49-44-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Executes EI then DI, providing the Z80 interrupt opportunity used by callers.</td></tr>
-<tr><td><strong>EMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Selects ENDMUSIC and initializes timing/repetition to one.</td></tr>
-<tr><td><strong>EX</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-58" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation.</td></tr>
-<tr><td><strong>FILL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-49-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;value&nbsp;address&nbsp;count&nbsp;--&nbsp;)</code><br>Fill consecutive bytes with a specified value.</td></tr>
-<tr><td><strong>FLDDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-44-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Fielders take position logic.</td></tr>
-<tr><td><strong>FLSHOFF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-4f-46-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Disables flashing and services cleanup under DI.</td></tr>
-<tr><td><strong>FMIRROR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4d-49-52-52-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order.</td></tr>
-<tr><td><strong>HITRUN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-49-54-52-55-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Activate proper runners and set trwbase.</td></tr>
-<tr><td><strong>HOMERCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4f-4d-45-52-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;y&nbsp;x&nbsp;hit-type&nbsp;random-x&nbsp;random-y&nbsp;--&nbsp;)</code><br>Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination.</td></tr>
-<tr><td><strong>I</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;index&nbsp;)</code><br>Fetch the innermost counted-loop index.</td></tr>
-<tr><td><strong>IEX</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-45-58" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;saved-interrupt-frame&nbsp;--&nbsp;)</code><br>Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call.</td></tr>
-<tr><td><strong>INDEXW</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-44-45-58-57" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Call routine A- disp HL- table add.</td></tr>
-<tr><td><strong>INFIELD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-46-49-45-4c-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses IFSPAN to process game state.</td></tr>
-<tr><td><strong>INFLDACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-46-4c-44-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Set infielders active.</td></tr>
-<tr><td><strong>ISTART</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-53-54-41-52-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;interrupt-address&nbsp;--&nbsp;)</code><br>Disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT.</td></tr>
-<tr><td><strong>KILLOF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4b-49-4c-4c-4f-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Stop outfield tractor ball control.</td></tr>
-<tr><td><strong>LOADANM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4f-41-44-41-4e-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Loads magic & anm HL-top of playact table.</td></tr>
-<tr><td><strong>LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Advance a counted loop and test its termination.</td></tr>
-<tr><td><strong>MULTHLBY4</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-55-4c-54-48-4c-42-59-34" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Multiplies the magnitude of HL by four through shifts, then restores its sign.</td></tr>
-<tr><td><strong>MUSCPU</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-55-53-43-50-55" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Declare cross-screen dispatch labels and begin assembling MUSCPU.</td></tr>
-<tr><td><strong>NDUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x1&nbsp;…&nbsp;xn&nbsp;n&nbsp;--&nbsp;x1&nbsp;…&nbsp;xn&nbsp;x1&nbsp;…&nbsp;xn&nbsp;)</code><br>Duplicate the top n parameter-stack cells.</td></tr>
-<tr><td><strong>OFFFDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-46-46-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>All player off field control.</td></tr>
-<tr><td><strong>OFLDTBL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-4c-44-54-42-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Gives all three outfielders OFTBLPA, activates them and returns.</td></tr>
-<tr><td><strong>OFMOTION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-4d-4f-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Set pc for ram pa table -tractor ball.</td></tr>
-<tr><td><strong>ON1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;</td></tr>
-<tr><td><strong>ON2ND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-32-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;</td></tr>
-<tr><td><strong>ON3RD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-33-52-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;</td></tr>
-<tr><td><strong>OPCODECHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-50-43-4f-44-45-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Called by plyactupdate.</td></tr>
-<tr><td><strong>OUTFLDACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-46-4c-44-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Sets outfielders active.</td></tr>
-<tr><td><strong>PACTLOAD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-41-43-54-4c-4f-41-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Loads vect from plyact.</td></tr>
-<tr><td><strong>PATFETCH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-41-54-46-45-54-43-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Loads actual pattern IX-vector.</td></tr>
-<tr><td><strong>PERSPECTIVE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-45-52-53-50-45-43-54-49-56-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Pattern size determined by y.</td></tr>
-<tr><td><strong>PLAYACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4c-41-59-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Called in intterupt does update prc.</td></tr>
-<tr><td><strong>PMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;music-address&nbsp;--&nbsp;)</code><br>Installs a stream unconditionally and sets priority, repeat count and note timer.</td></tr>
-<tr><td><strong>PTAUTOTM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-54-41-55-54-4f-54-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Pitch auto timer.</td></tr>
-<tr><td><strong>RESETRUNNERS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-53-45-54-52-55-4e-4e-45-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Reset runners to order of on base.</td></tr>
-<tr><td><strong>RND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;upper-bound&nbsp;--&nbsp;random-value&nbsp;)</code><br>Produce a random value scaled to the supplied bound.</td></tr>
-<tr><td><strong>RUNDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Runner base running control.</td></tr>
-<tr><td><strong>SENTRY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-4e-54-52-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Game loop.</td></tr>
-<tr><td><strong>SETACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Sets avtive bit in status.</td></tr>
-<tr><td><strong>STARTMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-41-52-54-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Clears its request.</td></tr>
-<tr><td><strong>strtline</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-73-74-72-74-6c-69-6e-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;--&nbsp;)</code><br>Given X Y sets up start of line.</td></tr>
-<tr><td><strong>SWAN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;value&nbsp;--&nbsp;nibble-swapped-value&nbsp;)</code><br>Exchange the high and low nibbles of the low byte.</td></tr>
-<tr><td><strong>TBALLPITCH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-42-41-4c-4c-50-49-54-43-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Loads pitch velocities.</td></tr>
-<tr><td><strong>THROWANIM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-52-4f-57-41-4e-49-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Sets up BLDST and player anim.</td></tr>
-<tr><td><strong>THROWBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-52-4f-57-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Finish scoring first.</td></tr>
-<tr><td><strong>THWANMSET</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-57-41-4e-4d-53-45-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Set up throw animation.</td></tr>
-<tr><td><strong>TIMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-49-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Interrupt timer routine.</td></tr>
-<tr><td><strong>VECTOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-45-43-54-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Vectors and limit checks.</td></tr>
-<tr><td><strong>VERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Does pattern board erase from vector IX.</td></tr>
-<tr><td><strong>VWRITE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-57-52-49-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Does reloff relabs patbrd from vector IX.</td></tr>
-<tr><td><strong>WAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Given A wait period stop every thing.</td></tr>
-<tr><td><strong>WAITTHRW</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-41-49-54-54-48-52-57" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Sets flag for 1stbaseman to wait throw.</td></tr>
-<tr><td><strong>WRITE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-52-49-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;pattern&nbsp;dimensions&nbsp;options&nbsp;--&nbsp;)</code><br>Write with X Y sizes ; pattern with no header.</td></tr>
-<tr><td><strong>WRITR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-52-49-54-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;x&nbsp;y&nbsp;relative-pattern&nbsp;options&nbsp;--&nbsp;)</code><br>Write with a relative pattern.</td></tr>
+<tr><td><strong>+LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2b-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses LOOP to process game state.<br><code>(&nbsp;increment&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ALLFLDACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4c-4c-46-4c-44-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets all fielders active.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ANMSEQLOAD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-4d-53-45-51-4c-4f-41-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Finds proper anm seq by per=#.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BALLERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-4c-4c-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Preserves BC/IY around native BLERASE and returns to TERSE.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BATHIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-48-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>He hit it time to get em running.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BATHITCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-48-49-54-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Check window for hit.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BATSWING</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-53-57-49-4e-47" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Swings bat if appropriate.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BATWRITE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-54-57-52-49-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Xor bat from swingtype.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BCD+</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-43-44-2b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Binary to decimal arithmatic.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;bcd-sum&nbsp;)</code></td></tr>
+<tr><td><strong>BLDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Ball thrown or hit.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BLMOTION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-4d-4f-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set pc for ram pa table -tractor ball.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BLPOSCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-50-4f-53-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Branches on HITYET.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay.<br><code>(&nbsp;music-address&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BUTTONCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-55-54-54-4f-4e-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reads buttons for swing run & pitch it.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKCAUGHT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-43-41-55-47-48-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Caught set in interrupt.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKGROUNDER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-47-52-4f-55-4e-44-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>If grounder adjust ball direction.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKSCRTIME</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-53-43-52-54-49-4d-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Score process.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CLRBLST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4c-52-42-4c-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>cnline</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-63-6e-6c-69-6e-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Calls vector line write.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>COMPDE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4d-50-44-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Negate DE while preserving HL.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>COMPHL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4d-50-48-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compliments HL.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>COUNT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-55-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Read the next character of a counted/high-bit-terminated string.<br><code>(&nbsp;address&nbsp;--&nbsp;address+1&nbsp;character&nbsp;)</code></td></tr>
+<tr><td><strong>cpost</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-63-70-6f-73-74" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Post an ascii-character on the screen ; see opt.<br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;char&nbsp;--&nbsp;x'&nbsp;y&nbsp;options&nbsp;)</code></td></tr>
+<tr><td><strong>DEACTIVATE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-45-41-43-54-49-56-41-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reset active bit in status.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Disable maskable Z80 interrupts.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DIVHLBY4</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-49-56-48-4c-42-59-34" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Divide HL by 4.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Enter a counted loop using a three-cell return-stack frame.<br><code>(&nbsp;limit&nbsp;start&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DSTCALC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-53-54-43-41-4c-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Calc deltas to destination.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DSTLD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-53-54-4c-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>EI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Enable maskable Z80 interrupts.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>EIDI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-49-44-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Executes EI then DI, providing the Z80 interrupt opportunity used by callers.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>EMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Selects ENDMUSIC and initializes timing/repetition to one.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>EX</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-58" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FILL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-49-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fill consecutive bytes with a specified value.<br><code>(&nbsp;value&nbsp;address&nbsp;count&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FLDDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-44-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fielders take position logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FLSHOFF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-4f-46-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Disables flashing and services cleanup under DI.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FMIRROR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4d-49-52-52-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HITRUN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-49-54-52-55-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Activate proper runners and set trwbase.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HOMERCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4f-4d-45-52-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination.<br><code>(&nbsp;y&nbsp;x&nbsp;hit-type&nbsp;random-x&nbsp;random-y&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>I</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetch the innermost counted-loop index.<br><code>(&nbsp;--&nbsp;index&nbsp;)</code></td></tr>
+<tr><td><strong>IEX</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-45-58" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call.<br><code>(&nbsp;saved-interrupt-frame&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INDEXW</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-44-45-58-57" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Call routine A- disp HL- table add.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INFIELD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-46-49-45-4c-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses IFSPAN to process game state.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INFLDACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-46-4c-44-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set infielders active.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ISTART</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-53-54-41-52-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT.<br><code>(&nbsp;interrupt-address&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>KILLOF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4b-49-4c-4c-4f-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Stop outfield tractor ball control.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LOADANM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4f-41-44-41-4e-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Loads magic & anm HL-top of playact table.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Advance a counted loop and test its termination.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MULTHLBY4</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-55-4c-54-48-4c-42-59-34" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Multiplies the magnitude of HL by four through shifts, then restores its sign.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>MUSCPU</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-55-53-43-50-55" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Declare cross-screen dispatch labels and begin assembling MUSCPU.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>NDUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Duplicate the top n parameter-stack cells.<br><code>(&nbsp;x1&nbsp;…&nbsp;xn&nbsp;n&nbsp;--&nbsp;x1&nbsp;…&nbsp;xn&nbsp;x1&nbsp;…&nbsp;xn&nbsp;)</code></td></tr>
+<tr><td><strong>OFFFDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-46-46-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>All player off field control.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OFLDTBL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-4c-44-54-42-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Gives all three outfielders OFTBLPA, activates them and returns.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OFMOTION</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-4d-4f-54-49-4f-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set pc for ram pa table -tractor ball.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ON1ST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-31-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ON2ND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-32-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ON3RD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-4e-33-52-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OPCODECHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-50-43-4f-44-45-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Called by plyactupdate.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OUTFLDACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-46-4c-44-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets outfielders active.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PACTLOAD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-41-43-54-4c-4f-41-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Loads vect from plyact.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PATFETCH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-41-54-46-45-54-43-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Loads actual pattern IX-vector.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PERSPECTIVE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-45-52-53-50-45-43-54-49-56-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Pattern size determined by y.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PLAYACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4c-41-59-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Called in intterupt does update prc.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Installs a stream unconditionally and sets priority, repeat count and note timer.<br><code>(&nbsp;music-address&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PTAUTOTM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-54-41-55-54-4f-54-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Pitch auto timer.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RESETRUNNERS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-45-53-45-54-52-55-4e-4e-45-52-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reset runners to order of on base.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Produce a random value scaled to the supplied bound.<br><code>(&nbsp;upper-bound&nbsp;--&nbsp;random-value&nbsp;)</code></td></tr>
+<tr><td><strong>RUNDST</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-55-4e-44-53-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Runner base running control.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SENTRY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-4e-54-52-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Game loop.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SETACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets avtive bit in status.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>STARTMUSIC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-54-41-52-54-4d-55-53-49-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Clears its request.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>strtline</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-73-74-72-74-6c-69-6e-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Given X Y sets up start of line.<br><code>(&nbsp;x&nbsp;y&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SWAN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Exchange the high and low nibbles of the low byte.<br><code>(&nbsp;value&nbsp;--&nbsp;nibble-swapped-value&nbsp;)</code></td></tr>
+<tr><td><strong>TBALLPITCH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-42-41-4c-4c-50-49-54-43-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Loads pitch velocities.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>THROWANIM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-52-4f-57-41-4e-49-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets up BLDST and player anim.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>THROWBALL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-52-4f-57-42-41-4c-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Finish scoring first.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>THWANMSET</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-48-57-41-4e-4d-53-45-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set up throw animation.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TIMER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-49-4d-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Interrupt timer routine.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>VECTOR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-45-43-54-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Vectors and limit checks.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>VERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Does pattern board erase from vector IX.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>VWRITE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-56-57-52-49-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Does reloff relabs patbrd from vector IX.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WAIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-41-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Given A wait period stop every thing.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WAITTHRW</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-41-49-54-54-48-52-57" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets flag for 1stbaseman to wait throw.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WRITE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-52-49-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Write with X Y sizes ; pattern with no header.<br><code>(&nbsp;x&nbsp;y&nbsp;pattern&nbsp;dimensions&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WRITR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-52-49-54-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Write with a relative pattern.<br><code>(&nbsp;x&nbsp;y&nbsp;relative-pattern&nbsp;options&nbsp;--&nbsp;)</code></td></tr>
 </tbody>
 </table>
 
@@ -374,53 +362,53 @@
 
 <table>
 <tbody>
-<tr><td><strong>AUTOR1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-55-54-4f-52-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners.</td></tr>
-<tr><td><strong>AUTOR2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-55-54-4f-52-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Run second-runner automation logic.</td></tr>
-<tr><td><strong>AUTOR3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-55-54-4f-52-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Run third-runner automation logic.</td></tr>
-<tr><td><strong>BLERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Erases ball.</td></tr>
-<tr><td><strong>CHKATBS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-41-54-42-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Check if active player at base in- A vstatus.</td></tr>
-<tr><td><strong>CHKCOIN1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-43-4f-49-4e-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Chk door 1 for coin drop.</td></tr>
-<tr><td><strong>CHKCOIN2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-43-4f-49-4e-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Chk door 2 for coin drop.</td></tr>
-<tr><td><strong>CMPOF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4d-50-4f-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Calculates proper deltas and patterns.</td></tr>
-<tr><td><strong>COLORBAND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4c-4f-52-42-41-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;saved-interrupt-frame&nbsp;--&nbsp;)</code><br>Schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.</td></tr>
-<tr><td><strong>debounce</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-64-65-62-6f-75-6e-63-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Debounce input transitions.</td></tr>
-<tr><td><strong>FETCH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-45-54-43-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Read the current music command byte; INCPC, HLOAD, and PCJUMP provide related stream operations.</td></tr>
-<tr><td><strong>FLSHWUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-57-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Handle flash callback.</td></tr>
-<tr><td><strong>FNBB</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4e-42-42" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Native game routine; source body below.</td></tr>
-<tr><td><strong>FONTUNPACK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4f-4e-54-55-4e-50-41-43-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Reads two packed bytes and starts a five-row unpack loop.</td></tr>
-<tr><td><strong>FRO1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses AUTOR1 to process game state.</td></tr>
-<tr><td><strong>FRO12</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses AUTOR1 and AUTOR2 to process game state.</td></tr>
-<tr><td><strong>FRO123</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses AUTOR1 and AUTOR2 to process game state.</td></tr>
-<tr><td><strong>FRO13</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Uses AUTOR2 to process game state.</td></tr>
-<tr><td><strong>FRO2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Native game routine; source body below.</td></tr>
-<tr><td><strong>FRO23</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Native game routine; source body below.</td></tr>
-<tr><td><strong>FRO3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Native game routine; source body below.</td></tr>
-<tr><td><strong>HLOAD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4c-4f-41-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.</td></tr>
-<tr><td><strong>IFSPAN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-46-53-50-41-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value.</td></tr>
-<tr><td><strong>INCPC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-43-50-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.</td></tr>
-<tr><td><strong>loadpc</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-6c-6f-61-64-70-63" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Installs MUSPC and STARTPC.</td></tr>
-<tr><td><strong>LVRSTAT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-56-52-53-54-41-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Load vstat for all runners in- A value.</td></tr>
-<tr><td><strong>NBB</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-42-42" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Do nothing for the empty-bases case.</td></tr>
-<tr><td><strong>OFBLCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-42-4c-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Chk for catch or close when cmsw.</td></tr>
-<tr><td><strong>PCJUMP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-43-4a-55-4d-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.</td></tr>
-<tr><td><strong>relabs</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-72-65-6c-61-62-73" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Relative X Y to magic address conversion.</td></tr>
-<tr><td><strong>reloff</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-72-65-6c-6f-66-66" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Compute relative offset of x , y of pattern.</td></tr>
-<tr><td><strong>RO1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.</td></tr>
-<tr><td><strong>RO12</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Activates both forced runners, selecting a double-play or ordinary target.</td></tr>
-<tr><td><strong>RO123</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Select forced advancement and double-play targets for second- and third-base runners.</td></tr>
-<tr><td><strong>RO13</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Handles first-and-third occupancy and may branch through SETDBLPLAY.</td></tr>
-<tr><td><strong>RO2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.</td></tr>
-<tr><td><strong>RO23</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>RO23 and RO123 choose forced advancement and double-play targets for their base combinations.</td></tr>
-<tr><td><strong>RO3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.</td></tr>
-<tr><td><strong>SETDBLPLAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-44-42-4c-50-4c-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Sets up double play HL-guy on 1st.</td></tr>
-<tr><td><strong>TAKEOFF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-41-4b-45-4f-46-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Turn proper runners on.</td></tr>
-<tr><td><strong>TBALLPRC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-42-41-4c-4c-50-52-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Pitch or control outfield.</td></tr>
-<tr><td><strong>TBLVEL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-42-4c-56-45-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Tractorball vel HL-# add. D-max vel.</td></tr>
-<tr><td><strong>TIMEDCR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-49-4d-45-44-43-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>HL-timer add if goes to zero return 1 else 0.</td></tr>
-<tr><td><strong>TOOFCK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-4f-4f-46-43-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Time out outfield check.</td></tr>
-<tr><td><strong>WALKOVER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-41-4c-4b-4f-56-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Walked runner at base.</td></tr>
-<tr><td><strong>write</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-77-72-69-74-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;)</code><br>Software write with x y size.</td></tr>
-<tr><td><strong>writep</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-77-72-69-74-65-70" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;IY=patadr&nbsp;BC=ex/mag+shf&nbsp;HL=scradr&nbsp;---&nbsp;)</code><br>Software write with pattern size on pattern.</td></tr>
+<tr><td><strong>AUTOR1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-55-54-4f-52-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>AUTOR2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-55-54-4f-52-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Run second-runner automation logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>AUTOR3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-55-54-4f-52-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Run third-runner automation logic.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BLERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-4c-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Erases ball.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKATBS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-41-54-42-53" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Check if active player at base in- A vstatus.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKCOIN1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-43-4f-49-4e-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Chk door 1 for coin drop.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CHKCOIN2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-48-4b-43-4f-49-4e-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Chk door 2 for coin drop.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>CMPOF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4d-50-4f-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Calculates proper deltas and patterns.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>COLORBAND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4c-4f-52-42-41-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.<br><code>(&nbsp;saved-interrupt-frame&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>debounce</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-64-65-62-6f-75-6e-63-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Debounce input transitions.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FETCH</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-45-54-43-48" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Read the current music command byte; INCPC, HLOAD, and PCJUMP provide related stream operations.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FLSHWUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4c-53-48-57-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Handle flash callback.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FNBB</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4e-42-42" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Native game routine; source body below.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FONTUNPACK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-4f-4e-54-55-4e-50-41-43-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reads two packed bytes and starts a five-row unpack loop.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FRO1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses AUTOR1 to process game state.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FRO12</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses AUTOR1 and AUTOR2 to process game state.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FRO123</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses AUTOR1 and AUTOR2 to process game state.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FRO13</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-31-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses AUTOR2 to process game state.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FRO2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Native game routine; source body below.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FRO23</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Native game routine; source body below.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>FRO3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-46-52-4f-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Native game routine; source body below.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>HLOAD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-4c-4f-41-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>IFSPAN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-46-53-50-41-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>INCPC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-43-50-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>loadpc</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-6c-6f-61-64-70-63" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Installs MUSPC and STARTPC.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LVRSTAT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-56-52-53-54-41-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Load vstat for all runners in- A value.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>NBB</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-42-42" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Do nothing for the empty-bases case.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OFBLCHK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-46-42-4c-43-48-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Chk for catch or close when cmsw.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>PCJUMP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-50-43-4a-55-4d-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>relabs</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-72-65-6c-61-62-73" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Relative X Y to magic address conversion.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>reloff</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-72-65-6c-6f-66-66" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compute relative offset of x , y of pattern.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RO1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RO12</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Activates both forced runners, selecting a double-play or ordinary target.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RO123</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select forced advancement and double-play targets for second- and third-base runners.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RO13</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-31-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Handles first-and-third occupancy and may branch through SETDBLPLAY.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RO2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-32" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RO23</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-32-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>RO23 and RO123 choose forced advancement and double-play targets for their base combinations.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>RO3</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-33" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>SETDBLPLAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-45-54-44-42-4c-50-4c-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets up double play HL-guy on 1st.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TAKEOFF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-41-4b-45-4f-46-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Turn proper runners on.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TBALLPRC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-42-41-4c-4c-50-52-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Pitch or control outfield.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TBLVEL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-42-4c-56-45-4c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Tractorball vel HL-# add. D-max vel.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TIMEDCR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-49-4d-45-44-43-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>HL-timer add if goes to zero return 1 else 0.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>TOOFCK</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-54-4f-4f-46-43-4b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Time out outfield check.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>WALKOVER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-57-41-4c-4b-4f-56-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Walked runner at base.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>write</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-77-72-69-74-65" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Software write with x y size.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>writep</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-77-72-69-74-65-70" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Software write with pattern size on pattern.<br><code>(&nbsp;IY=patadr&nbsp;BC=ex/mag+shf&nbsp;HL=scradr&nbsp;---&nbsp;)</code></td></tr>
 </tbody>
 </table>
 
@@ -429,8 +417,8 @@
 
 <table>
 <tbody>
-<tr><td><strong>BASE!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-53-45-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;base&nbsp;--&nbsp;)</code><br>Set the number base.</td></tr>
-<tr><td><strong>BASE@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-53-45-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br><code>(&nbsp;--&nbsp;base&nbsp;)</code><br>Fetch the current number base.</td></tr>
+<tr><td><strong>BASE!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-53-45-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Set the number base.<br><code>(&nbsp;base&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>BASE@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-53-45-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetch the current number base.<br><code>(&nbsp;--&nbsp;base&nbsp;)</code></td></tr>
 </tbody>
 </table>
 
@@ -439,9 +427,9 @@
 
 ### <a name="terse-word-2d"></a><span>-</span>
 
-`( a b -- difference )`
-
 Subtract the top value from the preceding value.
+
+`( a b -- difference )`
 
 ```text
 _minus:
@@ -453,11 +441,13 @@ _minus:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
+---
+
 ### <a name="terse-word-21"></a><span>!</span>
 
-`( value address -- )`
-
 Store one 16-bit cell.
+
+`( value address -- )`
 
 ```text
 _bang:
@@ -469,11 +459,13 @@ _bang:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
+---
+
 ### <a name="terse-word-40"></a><span>@</span>
 
-`( address -- value )`
-
 Fetch one 16-bit cell.
+
+`( address -- value )`
 
 ```text
 _at:
@@ -485,27 +477,35 @@ _at:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-### <a name="terse-word-2a"></a><span>&#42;</span>
+---
 
-`( m n -- product )`
+### <a name="terse-word-2a"></a><span>&#42;</span>
 
 16-bit signed multiplication; result = m × n (16-bit cell).
 
+`( m n -- product )`
+
+
+
+---
+
 ### <a name="terse-word-2f"></a><span>/</span>
 
-`( a b -- quotient )`
-
 Divide the preceding stack value by the top value.
+
+`( a b -- quotient )`
 
 ```terse
 : / /MOD DROP ;
 ```
 
+---
+
 ### <a name="terse-word-2b"></a><span>+</span>
 
-`( a b -- sum )`
-
 Add two stack values.
+
+`( a b -- sum )`
 
 ```text
 _plus:
@@ -516,11 +516,13 @@ _plus:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
+---
+
 ### <a name="terse-word-3c"></a><span>&lt;</span>
 
-`( a b -- flag )`
-
 Compare whether the preceding value is less than the top value.
+
+`( a b -- flag )`
 
 ```z80
 _less:
@@ -539,11 +541,13 @@ _less:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
+---
+
 ### <a name="terse-word-3d"></a><span>=</span>
 
-`( a b -- flag )`
-
 Compare two values for equality.
+
+`( a b -- flag )`
 
 ```text
 _equal:
@@ -558,11 +562,13 @@ _equal:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
+---
+
 ### <a name="terse-word-3e"></a><span>&gt;</span>
 
-`( a b -- flag )`
-
 Compare whether the preceding value is greater than the top value.
+
+`( a b -- flag )`
 
 ```z80
 _gt:
@@ -571,11 +577,13 @@ _gt:
             jp      $0116               ; Jump into signed less-than evaluation
 ```
 
+---
+
 ### <a name="terse-word-30-3d"></a><span>0=</span>
 
-`( n -- flag )`
-
 Return a condition indicating zero.
+
+`( n -- flag )`
 
 ```text
 _zeroequal:
@@ -583,11 +591,13 @@ _zeroequal:
             jp      $00F7               ; Jump into equal comparison routine
 ```
 
+---
+
 ### <a name="terse-word-32-44-55-50"></a><span>2DUP</span>
 
-`( a b -- a b a b )`
-
 Duplicate the top two stack cells.
+
+`( a b -- a b a b )`
 
 ```text
 _2DUP:
@@ -600,11 +610,13 @@ _2DUP:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
+---
+
 ### <a name="terse-word-41-4e-44"></a><span>AND</span>
 
-`( a b -- result )`
-
 Bitwise AND of two values.
+
+`( a b -- result )`
 
 ```text
 _AND:
@@ -622,11 +634,13 @@ _AND:
 
 **Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-42-41-4c-4c-50-52-43"><code>TBALLPRC</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
+---
+
 ### <a name="terse-word-41-52-52-41-59"></a><span>ARRAY</span>
 
-`( size -- )`
-
 Allocate/name an indexed cell array from a the size.
+
+`( size -- )`
 
 ```text
 _ARRAY:
@@ -637,19 +651,25 @@ _ARRAY:
 
 **Used by:** <a href="#terse-word-4e-44-55-50"><code>NDUP</code></a>.
 
+---
+
 ### <a name="terse-word-41-53-4d"></a><span>ASM</span>
+
+The DNA TERSE 81 Glossary defines this host dictionary operation. The host implementation is not part of the Extra Bases target ROM.
 
 `( -- )`
 
 Select the Z80 assembler vocabulary in the development host.
 
-The DNA TERSE 81 Glossary defines this host dictionary operation. The host implementation is not part of the Extra Bases target ROM.
+
+
+---
 
 ### <a name="terse-word-42-21"></a><span>B!</span>
 
-`( byte address -- )`
-
 Store one byte.
+
+`( byte address -- )`
 
 ```text
 _Bbang:
@@ -661,11 +681,13 @@ _Bbang:
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-45-54-46"><code>GETF</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-48-49-54-44-53-54"><code>HITDST</code></a>, <a href="#terse-word-48-52-42-59-32"><code>HRBY2</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-53-42-21"><code>SB!</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-47-4f"><code>STRINGGO</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-5a-45-52-4f-52-41-4d"><code>ZERORAM</code></a>.
 
+---
+
 ### <a name="terse-word-42-40"></a><span>B@</span>
 
-`( address -- byte )`
-
 Fetch one byte.
+
+`( address -- byte )`
 
 ```text
 _Bat:
@@ -678,17 +700,23 @@ _Bat:
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-43-48-4b-47-4d-43-4e-54"><code>CHKGMCNT</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>, <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>, <a href="#terse-word-44-4f-53-53-54-52-49-4b-45"><code>DOSSTRIKE</code></a>, <a href="#terse-word-44-50-31-32-43-4e"><code>DP12CN</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-45-54-46"><code>GETF</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-48-52-42-59-32"><code>HRBY2</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-52-55-4e-31-43-48-4b-31-53-54"><code>RUN1CHK1ST</code></a>, <a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44"><code>RUN1CHK2ND</code></a>, <a href="#terse-word-52-55-4e-32-43-48-4b"><code>RUN2CHK</code></a>, <a href="#terse-word-52-55-4e-32-43-48-4b-31-32-4e-44"><code>RUN2CHK12ND</code></a>, <a href="#terse-word-52-55-4e-32-43-48-4b-31-53-54"><code>RUN2CHK1ST</code></a>, <a href="#terse-word-52-55-4e-33-43-48-4b"><code>RUN3CHK</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-43-4e-54"><code>TCNT</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
-### <a name="terse-word-42-41-52-52-41-59"></a><span>BARRAY</span>
+---
 
-`( size -- )`
+### <a name="terse-word-42-41-52-52-41-59"></a><span>BARRAY</span>
 
 Create a named array of size uninitialized bytes; indexing the resulting word returns the byte address.
 
+`( size -- )`
+
+
+
+---
+
 ### <a name="terse-word-42-45-47-49-4e"></a><span>BEGIN</span>
 
-`( -- )`
-
 Immediate XC wrapper that records a loop's object address.
+
+`( -- )`
 
 ```terse
 : BEGIN } XC-BEGIN { ;
@@ -696,29 +724,43 @@ Immediate XC wrapper that records a loop's object address.
 
 **Used by:** <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
-### <a name="terse-word-43-4f-44-45"></a><span>CODE</span>
+---
 
-`( -- )`
+### <a name="terse-word-43-4f-44-45"></a><span>CODE</span>
 
 Create a dictionary word implemented in assembler; enter assembler vocabulary for the definition.
 
-### <a name="terse-word-43-4f-4e-53-54-41-4e-54"></a><span>CONSTANT</span>
+`( -- )`
 
-`( value -- )`
+
+
+---
+
+### <a name="terse-word-43-4f-4e-53-54-41-4e-54"></a><span>CONSTANT</span>
 
 Create a named word whose execution pushes its defining value.
 
-### <a name="terse-word-44-45-43-49-4d-41-4c"></a><span>DECIMAL</span>
+`( value -- )`
 
-`( -- )`
+
+
+---
+
+### <a name="terse-word-44-45-43-49-4d-41-4c"></a><span>DECIMAL</span>
 
 Select decimal numeric conversion base.
 
+`( -- )`
+
+
+
+---
+
 ### <a name="terse-word-44-52-4f-50"></a><span>DROP</span>
 
-`( x -- )`
-
 Discard the top stack cell.
+
+`( x -- )`
 
 ```text
 _DROP:
@@ -728,11 +770,13 @@ _DROP:
 
 **Used by:** <a href="#terse-word-43-50-4f-53-54"><code>CPOST</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>, <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-53-50-4f-53-54"><code>SPOST</code></a>, <a href="#terse-word-53-54-52-49-4e-47-47-4f"><code>STRINGGO</code></a>, <a href="#terse-word-53-57-2b-33-30"><code>SW+30</code></a>, <a href="#terse-word-53-57-2b-34-35"><code>SW+45</code></a>, <a href="#terse-word-53-57-2b-39-30"><code>SW+90</code></a>, <a href="#terse-word-53-57-2d-33-30"><code>SW-30</code></a>, <a href="#terse-word-53-57-2d-34-35"><code>SW-45</code></a>, <a href="#terse-word-53-57-2d-39-30"><code>SW-90</code></a>, <a href="#terse-word-53-57-30"><code>SW0</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
+---
+
 ### <a name="terse-word-44-55-50"></a><span>DUP</span>
 
-`( x -- x x )`
-
 Duplicate the top stack cell.
+
+`( x -- x x )`
 
 ```text
 _DUP:
@@ -744,21 +788,25 @@ _DUP:
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4c-49-4e-45"><code>DLINE</code></a>, <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>, <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-4e-4f-44-44-53"><code>INNODDS</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-52-45-43-4c-49-4e-45"><code>RECLINE</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-53-57-2b-33-30"><code>SW+30</code></a>, <a href="#terse-word-53-57-2b-34-35"><code>SW+45</code></a>, <a href="#terse-word-53-57-2d-33-30"><code>SW-30</code></a>, <a href="#terse-word-53-57-2d-34-35"><code>SW-45</code></a>, <a href="#terse-word-53-57-30"><code>SW0</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-57-55-50-47-4f"><code>WUPGO</code></a>.
 
+---
+
 ### <a name="terse-word-45-4c-53-45"></a><span>ELSE</span>
 
-`( -- )`
-
 Immediate XC wrapper that emits an unconditional branch and resolves the preceding conditional branch.
+
+`( -- )`
 
 ```terse
 : ELSE } XC-ELSE { ;
 ```
 
+---
+
 ### <a name="terse-word-45-4e-44"></a><span>END</span>
 
-`( flag -- )`
-
 Immediate XC wrapper emitting a conditional back-branch; game loops repeat until the condition becomes true.
+
+`( flag -- )`
 
 ```terse
 : END } XC-END { ;
@@ -766,35 +814,47 @@ Immediate XC wrapper emitting a conditional back-branch; game loops repeat until
 
 **Used by:** <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
+---
+
 ### <a name="terse-word-48-45-52-45"></a><span>HERE</span>
+
+The DNA TERSE 81 Glossary defines this host dictionary operation. The host implementation is not part of the Extra Bases target ROM.
 
 `( -- address )`
 
 Return the address of the next free dictionary location.
 
-The DNA TERSE 81 Glossary defines this host dictionary operation. The host implementation is not part of the Extra Bases target ROM.
+
+
+---
 
 ### <a name="terse-word-48-45-58"></a><span>HEX</span>
 
+Select hexadecimal numeric conversion base.
+
 `( -- )`
 
-Select hexadecimal numeric conversion base.
+
+
+---
 
 ### <a name="terse-word-49-46"></a><span>IF</span>
 
-`( flag -- )`
-
 Immediate XC wrapper that emits a conditional target branch through XC-IF.
+
+`( flag -- )`
 
 ```terse
 : IF } XC-IF { ;
 ```
 
+---
+
 ### <a name="terse-word-49-4e-50"></a><span>INP</span>
 
-`( port -- value )`
-
 Read an 8-bit input-port value and push it zero-extended.
+
+`( port -- value )`
 
 ```z80
 _INP:
@@ -807,11 +867,13 @@ _INP:
             jp      (iy)                ; Resume TERSE interpreter
 ```
 
+---
+
 ### <a name="terse-word-4c-49-54"></a><span>LIT</span>
 
-`( -- value )`
-
 Fetch the next inline dictionary cell and push it as a 16-bit literal.
+
+`( -- value )`
 
 ```z80
 _LITERAL:
@@ -825,11 +887,13 @@ _LITERAL:
             jp      (iy)                ; Resume TERSE interpreter
 ```
 
+---
+
 ### <a name="terse-word-4f-52"></a><span>OR</span>
 
-`( a b -- result )`
-
 Bitwise inclusive OR of two values.
+
+`( a b -- result )`
 
 ```text
 _OR:
@@ -847,11 +911,13 @@ _OR:
 
 **Used by:** <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
+---
+
 ### <a name="terse-word-4f-55-54-50"></a><span>OUTP</span>
 
-`( value port -- )`
-
 Write the low byte of a value to a hardware output port.
+
+`( value port -- )`
 
 ```z80
 _OUTP:
@@ -863,11 +929,13 @@ _OUTP:
             jp      (iy)                ; Resume TERSE interpreter
 ```
 
+---
+
 ### <a name="terse-word-4f-56-45-52"></a><span>OVER</span>
 
-`( a b -- a b a )`
-
 Copy the second stack cell to the top.
+
+`( a b -- a b a )`
 
 ```text
 _OVER:
@@ -881,11 +949,13 @@ _OVER:
 
 **Used by:** <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-54"></a><span>ROT</span>
 
-`( a b c -- b c a )`
-
 Rotate the top three stack cells.
+
+`( a b c -- b c a )`
 
 ```text
 _ROT:
@@ -899,11 +969,13 @@ _ROT:
 
 **Used by:** <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>, <a href="#terse-word-53-42-41-4c-4c-31"><code>SBALL1</code></a>, <a href="#terse-word-53-42-41-4c-4c-32"><code>SBALL2</code></a>, <a href="#terse-word-53-42-41-4c-4c-33"><code>SBALL3</code></a>, <a href="#terse-word-53-46-4f-55-4c"><code>SFOUL</code></a>, <a href="#terse-word-53-48-4f-4d-45-52"><code>SHOMER</code></a>, <a href="#terse-word-53-4f-55-54-31"><code>SOUT1</code></a>, <a href="#terse-word-53-4f-55-54-32"><code>SOUT2</code></a>, <a href="#terse-word-53-4f-55-54-33"><code>SOUT3</code></a>, <a href="#terse-word-53-53-41-46-45"><code>SSAFE</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-31"><code>SSTRIKE1</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-32"><code>SSTRIKE2</code></a>, <a href="#terse-word-53-57-41-4c-4b"><code>SWALK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-41-50"></a><span>SWAP</span>
 
-`( a b -- b a )`
-
 Exchange the top two stack cells.
+
+`( a b -- b a )`
 
 ```text
 _SWAP:
@@ -916,27 +988,35 @@ _SWAP:
 
 **Used by:** <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-43-4c-49-4e-45"><code>RECLINE</code></a>, <a href="#terse-word-53-21"><code>S!</code></a>, <a href="#terse-word-53-42-21"><code>SB!</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
+---
+
 ### <a name="terse-word-54-48-45-4e"></a><span>THEN</span>
 
-`( -- )`
-
 Immediate XC wrapper that resolves a saved target branch destination.
+
+`( -- )`
 
 ```terse
 : THEN } XC-THEN { ;
 ```
 
-### <a name="terse-word-56-41-52-49-41-42-4c-45"></a><span>VARIABLE</span>
+---
 
-`( initial-value -- )`
+### <a name="terse-word-56-41-52-49-41-42-4c-45"></a><span>VARIABLE</span>
 
 Create a named initialized 16-bit variable.
 
+`( initial-value -- )`
+
+
+
+---
+
 ### <a name="terse-word-58-4f-52"></a><span>XOR</span>
 
-`( a b -- result )`
-
 Bitwise exclusive OR of two values.
+
+`( a b -- result )`
 
 ```text
 _XOR:
@@ -954,21 +1034,25 @@ _XOR:
 
 **Used by:** <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
+---
+
 ### <a name="terse-word-5d-27-5b"></a><span>]'[</span>
 
-`( -- )`
-
 Source-level compiler/TERSE definition shown below.
+
+`( -- )`
 
 ```text
 : ]'[ [COMPILE] ' ;
 ```
 
+---
+
 ### <a name="terse-word-5e"></a><span>^</span>
 
-`( -- )`
-
 Uses ABVOLS and MCVOLS to compose game logic.
+
+`( -- )`
 
 ```text
 { : ^ } EF ABVOLS 0F MCVOLS { ; }
@@ -976,11 +1060,13 @@ Uses ABVOLS and MCVOLS to compose game logic.
 
 **Calls:** <a href="#terse-word-41-42-56-4f-4c-53"><code>ABVOLS</code></a>, <a href="#terse-word-4d-43-56-4f-4c-53"><code>MCVOLS</code></a>.
 
+---
+
 ### <a name="terse-word-3c-49-4e-54-45-52-52-55-50-54-53"></a><span>&lt;INTERRUPTS</span>
 
-`( -- )`
-
 Mark the start of interrupt data.
+
+`( -- )`
 
 ```text
 { : <INTERRUPTS } DATA HERE { ; }
@@ -988,11 +1074,13 @@ Mark the start of interrupt data.
 
 **Calls:** <a href="#terse-word-48-45-52-45"><code>HERE</code></a>.
 
+---
+
 ### <a name="terse-word-41-42-56-4f-4c-53"></a><span>ABVOLS</span>
 
-`( volume -- )`
-
 Emit the music volume command.
+
+`( volume -- )`
 
 ```text
 { : ABVOLS } 16 B, B, { ; }
@@ -1000,11 +1088,13 @@ Emit the music volume command.
 
 **Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>, <a href="#terse-word-52-45-53-54"><code>REST</code></a>, <a href="#terse-word-5e"><code>^</code></a>.
 
+---
+
 ### <a name="terse-word-41-43-54-2c"></a><span>ACT,</span>
 
-`( -- )`
-
 Emit a playaction record.
+
+`( -- )`
 
 ```text
 { : ACT, } , B, , , { ; }
@@ -1012,11 +1102,13 @@ Emit a playaction record.
 
 **Used by:** <a href="#terse-word-42-41-43-54-2c"><code>BACT,</code></a>, <a href="#terse-word-4c-43-42-2c"><code>LCB,</code></a>, <a href="#terse-word-52-43-42-2c"><code>RCB,</code></a>, <a href="#terse-word-53-54-50-2c"><code>STP,</code></a>.
 
+---
+
 ### <a name="terse-word-41-4e-4f-54-45"></a><span>ANOTE</span>
 
-`( duration tone -- )`
-
 Emit a channel A note followed by its duration.
+
+`( duration tone -- )`
 
 ```text
 { : ANOTE } ATONE DURATION { ; }
@@ -1024,11 +1116,13 @@ Emit a channel A note followed by its duration.
 
 **Calls:** <a href="#terse-word-41-54-4f-4e-45"><code>ATONE</code></a>, <a href="#terse-word-44-55-52-41-54-49-4f-4e"><code>DURATION</code></a>.
 
+---
+
 ### <a name="terse-word-41-54-4f-4e-45"></a><span>ATONE</span>
 
-`( tone -- )`
-
 Emit tone setting for channel A.
+
+`( tone -- )`
 
 ```text
 { : ATONE } 11 B,
@@ -1037,11 +1131,13 @@ B, { ; }
 
 **Used by:** <a href="#terse-word-41-4e-4f-54-45"><code>ANOTE</code></a>, <a href="#terse-word-4e-4f-54-45-53"><code>NOTES</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-43-54-2c"></a><span>BACT,</span>
 
-`( -- )`
-
 Emit a ball-action record.
+
+`( -- )`
 
 ```text
 { : BACT, } BAL ACT, { ; }
@@ -1051,11 +1147,13 @@ Emit a ball-action record.
 
 **Used by:** <a href="#terse-word-4c-4b-2c"><code>LK,</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-4c-4c-54-49-4d-45"></a><span>BALLTIME</span>
 
-`( -- )`
-
 Balls process.
+
+`( -- )`
 
 ```text
 : BALLTIME ( balls process )
@@ -1067,31 +1165,37 @@ CLRBLST ELSE MBALL DOSBALL THEN SBO ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-42-21"><code>B!</code></a>, <a href="#terse-word-42-40"><code>B@</code></a>, <a href="#terse-word-53-57-41-4c-4b"><code>SWALK</code></a>, <a href="#terse-word-4d-59-41-48"><code>MYAH</code></a>, <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>, <a href="#terse-word-48-49-54-52-55-4e"><code>HITRUN</code></a>, <a href="#terse-word-57-55-50-47-4f"><code>WUPGO</code></a>, <a href="#terse-word-43-4c-52-42-4c-53-54"><code>CLRBLST</code></a>, <a href="#terse-word-4d-42-41-4c-4c"><code>MBALL</code></a>, <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>.
 
+---
+
 ### <a name="terse-word-42-4c-44-53-54-2c"></a><span>BLDST,</span>
 
-`( -- )`
-
 Emit the ball destination command.
+
+`( -- )`
 
 ```text
 { : BLDST, } OPBLDST B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-42-4c-4d-4f-54-2c"></a><span>BLMOT,</span>
 
-`( -- )`
-
 Emit the ball motion command.
+
+`( -- )`
 
 ```text
 { : BLMOT, } OPBLMOT B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-42-4e-4f-54-45"></a><span>BNOTE</span>
 
-`( duration tone -- )`
-
 Emit a channel B note followed by its duration.
+
+`( duration tone -- )`
 
 ```text
 { : BNOTE } BTONE DURATION
@@ -1100,11 +1204,13 @@ Emit a channel B note followed by its duration.
 
 **Calls:** <a href="#terse-word-42-54-4f-4e-45"><code>BTONE</code></a>, <a href="#terse-word-44-55-52-41-54-49-4f-4e"><code>DURATION</code></a>.
 
+---
+
 ### <a name="terse-word-42-4f-4e-45"></a><span>BONE</span>
 
-`( address -- )`
-
 Store byte value 1.
+
+`( address -- )`
 
 ```text
 : BONE ( cange byte memory cell to 1 ) 1 SB! ;
@@ -1114,11 +1220,13 @@ Store byte value 1.
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-32-4e-44-4c-53"><code>F2NDLS</code></a>, <a href="#terse-word-46-32-4e-44-52-53"><code>F2NDRS</code></a>, <a href="#terse-word-46-42-4c-4c-53"><code>FBLLS</code></a>, <a href="#terse-word-46-42-4c-52-53"><code>FBLRS</code></a>, <a href="#terse-word-46-4c-53-48-54-4f-4e"><code>FLSHTON</code></a>, <a href="#terse-word-46-53-53-4c-53"><code>FSSLS</code></a>, <a href="#terse-word-46-53-53-52-53"><code>FSSRS</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-48-4c-4c-53"><code>HLLS</code></a>, <a href="#terse-word-48-4c-53"><code>HLS</code></a>, <a href="#terse-word-48-4d-53"><code>HMS</code></a>, <a href="#terse-word-48-52-4c-53"><code>HRLS</code></a>, <a href="#terse-word-48-52-53"><code>HRS</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>, <a href="#terse-word-53-54-46-4c-44"><code>STFLD</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-42-54-4f-4e-45"></a><span>BTONE</span>
 
-`( tone -- )`
-
 Emit tone setting for channel B.
+
+`( tone -- )`
 
 ```text
 { : BTONE } 12 B, B, { ; }
@@ -1126,11 +1234,13 @@ Emit tone setting for channel B.
 
 **Used by:** <a href="#terse-word-42-4e-4f-54-45"><code>BNOTE</code></a>, <a href="#terse-word-4e-4f-54-45-53"><code>NOTES</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
+---
+
 ### <a name="terse-word-42-56"></a><span>BV</span>
 
-`( -- )`
-
 Define a named byte variable.
+
+`( -- )`
 
 ```text
 { : BV } BVARIABLE { ; }
@@ -1138,11 +1248,13 @@ Define a named byte variable.
 
 **Used by:** <a href="#terse-word-42-56-3d"><code>BV=</code></a>.
 
+---
+
 ### <a name="terse-word-42-56-3d"></a><span>BV=</span>
 
-`( -- )`
-
 Uses BV to compose game logic.
+
+`( -- )`
 
 ```text
 { : BV= } 0 BVARIABLE { ; }
@@ -1150,11 +1262,13 @@ Uses BV to compose game logic.
 
 **Calls:** <a href="#terse-word-42-56"><code>BV</code></a>.
 
+---
+
 ### <a name="terse-word-42-5a-45-52-4f"></a><span>BZERO</span>
 
-`( address -- )`
-
 Store byte value 0.
+
+`( address -- )`
 
 ```text
 : BZERO ( change byte memory cell to 0 ) 0 SB! ;
@@ -1164,11 +1278,13 @@ Store byte value 0.
 
 **Used by:** <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-48-49-54-44-53-54"><code>HITDST</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-43-3d"></a><span>C=</span>
 
-`( value -- )`
-
 Uses CONSTANT to compose game logic.
+
+`( value -- )`
 
 ```text
 { : C= } CONSTANT { ; }
@@ -1176,11 +1292,13 @@ Uses CONSTANT to compose game logic.
 
 **Calls:** <a href="#terse-word-43-4f-4e-53-54-41-4e-54"><code>CONSTANT</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-47-53"></a><span>CHGS</span>
 
-`( -- )`
-
 Posts CHANGE SIDES.
+
+`( -- )`
 
 ```text
 : CHGS 1C00 2000 828 A" CHANGE SIDES" SPOST ;
@@ -1190,11 +1308,13 @@ Posts CHANGE SIDES.
 
 **Used by:** <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-46-4c-53-48-53-54-41-59"></a><span>CHKFLSHSTAY</span>
 
-`( -- )`
-
 When isccp turn off check for wupwrt.
+
+`( -- )`
 
 ```text
 : CHKFLSHSTAY ( when isccp turn off check for wupwrt )
@@ -1209,11 +1329,13 @@ DOWUP BZERO THEN ;
 
 **Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-47-4d-43-4e-54"></a><span>CHKGMCNT</span>
 
-`( -- credits )`
-
 Posts the appropriate prompt around a timed wait and returns the current credit byte.
+
+`( -- credits )`
 
 ```text
 : CHKGMCNT DP12CN C0 TWAIT DP12CN CREDITS B@ ;
@@ -1223,11 +1345,13 @@ Posts the appropriate prompt around a timed wait and returns the current credit 
 
 **Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-43-4d-41-4a-4f-52"></a><span>CMAJOR</span>
 
-`( -- )`
-
 Initialize the C-major sound pattern.
+
+`( -- )`
 
 ```text
 { : CMAJOR } 1C MASTER 0 NOISE EF ABVOLS 0F MCVOLS { ; }
@@ -1235,11 +1359,13 @@ Initialize the C-major sound pattern.
 
 **Calls:** <a href="#terse-word-4d-41-53-54-45-52"><code>MASTER</code></a>, <a href="#terse-word-4e-4f-49-53-45"><code>NOISE</code></a>, <a href="#terse-word-41-42-56-4f-4c-53"><code>ABVOLS</code></a>, <a href="#terse-word-4d-43-56-4f-4c-53"><code>MCVOLS</code></a>.
 
+---
+
 ### <a name="terse-word-43-4e-4c-49-4e-45"></a><span>CNLINE</span>
 
-`( -- )`
-
 Saves a new XIN/YIN endpoint and calls cnline from the current line state.
+
+`( -- )`
 
 ```text
 : CNLINE ( continue line to this point , given X Y )
@@ -1250,11 +1376,13 @@ YIN ! XIN ! cnline ;
 
 **Used by:** <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>.
 
+---
+
 ### <a name="terse-word-43-4e-4f-54-45"></a><span>CNOTE</span>
 
-`( duration tone -- )`
-
 Emit a channel C note followed by its duration.
+
+`( duration tone -- )`
 
 ```text
 { : CNOTE } CTONE DURATION { ; }
@@ -1264,11 +1392,13 @@ Emit a channel C note followed by its duration.
 
 **Used by:** <a href="#terse-word-4e-4f-54-45-53"><code>NOTES</code></a>.
 
+---
+
 ### <a name="terse-word-43-4f-4e-47-52"></a><span>CONGR</span>
 
-`( -- )`
-
 Display the congratulatory prompt.
+
+`( -- )`
 
 ```text
 : CONGR 700 1000 828 A" CONGRATULATIONS YOU ARE VERY GOOD"
@@ -1279,11 +1409,13 @@ SPOST 0E00 2800 828 A" LETS PLAY AGAIN I WILL BUY" SPOST ;
 
 **Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-43-50-4f-53-54"></a><span>CPOST</span>
 
-`( x y options char -- )`
-
 Draw one character at the specified position.
+
+`( x y options char -- )`
 
 ```text
 : CPOST ( post an ascii-character on the screen ; see options )
@@ -1296,11 +1428,13 @@ cpost 3DROP ;
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-48-4f-4d"><code>HOM</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>, <a href="#terse-word-53-43-52-53"><code>SCRS</code></a>, <a href="#terse-word-56-49-53"><code>VIS</code></a>.
 
+---
+
 ### <a name="terse-word-43-52-45-44-41-52-52-4f-57"></a><span>CREDARROW</span>
 
-`( -- )`
-
 Update last inning arrow.
+
+`( -- )`
 
 ```text
 : CREDARROW ( update last inning arrow ) DI UPCRED BZERO
@@ -1319,11 +1453,13 @@ CHKFLSHSTAY ELSE DROP THEN THEN EI ;
 
 **Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
+---
+
 ### <a name="terse-word-43-54-4f-4e-45"></a><span>CTONE</span>
 
-`( tone -- )`
-
 Emit tone setting for channel C.
+
+`( tone -- )`
 
 ```text
 { : CTONE } 13 B, B, { ; }
@@ -1331,11 +1467,13 @@ Emit tone setting for channel C.
 
 **Used by:** <a href="#terse-word-43-4e-4f-54-45"><code>CNOTE</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
+---
+
 ### <a name="terse-word-44-45-41-43-54-2c"></a><span>DEACT,</span>
 
-`( -- )`
-
 Emit vector-deactivation command.
+
+`( -- )`
 
 ```text
 { : DEACT, } 0C B, { ; }
@@ -1343,11 +1481,13 @@ Emit vector-deactivation command.
 
 **Used by:** <a href="#terse-word-4c-43-42-2c"><code>LCB,</code></a>, <a href="#terse-word-4c-4b-2c"><code>LK,</code></a>, <a href="#terse-word-52-43-42-2c"><code>RCB,</code></a>, <a href="#terse-word-53-54-50-2c"><code>STP,</code></a>.
 
+---
+
 ### <a name="terse-word-44-4c-49-4e-45"></a><span>DLINE</span>
 
-`( x1 y1 x2 y2 -- )`
-
 Draw a line , given X Y start coor X Y ending coor.
+
+`( x1 y1 x2 y2 -- )`
 
 ```text
 : DLINE ( draw a line , given X Y start coor X Y ending coor )
@@ -1359,11 +1499,13 @@ SWAB ( set y for relabs ) strtline cnline ;
 
 **Used by:** <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>, <a href="#terse-word-52-45-43-4c-49-4e-45"><code>RECLINE</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-43-48-47-53"></a><span>DOCHGS</span>
 
-`( -- )`
-
 Flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER.
+
+`( -- )`
 
 ```text
 : DOCHGS ' CHGS FLSHTON 28 DWAIT FLSHOFF GAMEOVER BZERO ;
@@ -1373,11 +1515,13 @@ Flashes CHANGE SIDES during a delay, stops it and clears GAMEOVER.
 
 **Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-45-48-4f-4d-45-52"></a><span>DOEHOMER</span>
 
-`( -- )`
-
 Display the home-run message.
+
+`( -- )`
 
 ```text
 : DOEHOMER SHOMER ;
@@ -1385,11 +1529,13 @@ Display the home-run message.
 
 **Calls:** <a href="#terse-word-53-48-4f-4d-45-52"><code>SHOMER</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-47-4f-56-45-52"></a><span>DOGOVER</span>
 
-`( -- )`
-
 Do game over.
+
+`( -- )`
 
 ```text
 : DOGOVER ( do game over )
@@ -1405,11 +1551,13 @@ FLSHOFF DROP 0 PLYR1UP BZERO ( plyr1up 0 ) EIDI ;
 
 **Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-48-4f-4d-45-52"></a><span>DOHOMER</span>
 
-`( -- )`
-
 Erases the ball, displays HOMER, resets counts and clears the event timer.
+
+`( -- )`
 
 ```text
 : DOHOMER BALLERASE SHOMER CLRBLST SBO STRINGOFFTIMER BZERO ;
@@ -1417,11 +1565,13 @@ Erases the ball, displays HOMER, resets counts and clears the event timer.
 
 **Calls:** <a href="#terse-word-42-41-4c-4c-45-52-41-53-45"><code>BALLERASE</code></a>, <a href="#terse-word-53-48-4f-4d-45-52"><code>SHOMER</code></a>, <a href="#terse-word-43-4c-52-42-4c-53-54"><code>CLRBLST</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>, <a href="#terse-word-42-5a-45-52-4f"><code>BZERO</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-53-41-46-45"></a><span>DOSAFE</span>
 
-`( -- )`
-
 Play the safe-call music and display its message.
+
+`( -- )`
 
 ```text
 : DOSAFE MSAFE SSAFE ;
@@ -1429,11 +1579,13 @@ Play the safe-call music and display its message.
 
 **Calls:** <a href="#terse-word-4d-53-41-46-45"><code>MSAFE</code></a>, <a href="#terse-word-53-53-41-46-45"><code>SSAFE</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-53-42-41-4c-4c"></a><span>DOSBALL</span>
 
-`( x y options -- )`
-
 DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.
+
+`( x y options -- )`
 
 ```text
 : DOSBALL BALLS B@ DUP 31 = IF DROP SBALL1 ELSE 32 = IF SBALL2
@@ -1444,11 +1596,13 @@ ELSE SBALL3 THEN THEN ;
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-53-4f-55-54"></a><span>DOSOUT</span>
 
-`( x y options -- )`
-
 Inspect the $30-based count character and display the matching out message.
+
+`( x y options -- )`
 
 ```text
 : DOSOUT OUTS B@ DUP 31 = IF DROP SOUT1 ELSE 32 = IF SOUT2
@@ -1459,11 +1613,13 @@ ELSE SOUT3 THEN THEN ;
 
 **Used by:** <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f-53-53-54-52-49-4b-45"></a><span>DOSSTRIKE</span>
 
-`( x y options -- )`
-
 DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the matching message word.
+
+`( x y options -- )`
 
 ```text
 : DOSSTRIKE STRIKES B@ 31 = IF SSTRIKE1 ELSE SSTRIKE2 THEN ;
@@ -1473,11 +1629,13 @@ DOSOUT, DOSSTRIKE and DOSBALL inspect the $30-based count character and call the
 
 **Used by:** <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
+---
+
 ### <a name="terse-word-44-50-31"></a><span>DP1</span>
 
-`( -- )`
-
 Display the one-coin deposit prompt.
+
+`( -- )`
 
 ```text
 : DP1 1A00 2C00 828 A" DEPOSIT 1 COIN" SPOST ;
@@ -1487,11 +1645,13 @@ Display the one-coin deposit prompt.
 
 **Used by:** <a href="#terse-word-54-43-4e-54"><code>TCNT</code></a>.
 
+---
+
 ### <a name="terse-word-44-50-31-32-43-4e"></a><span>DP12CN</span>
 
-`( -- )`
-
 Uses B@ and SPOST to compose game logic.
+
+`( -- )`
 
 ```text
 : DP12CN CNSW1 B@ IF 300 2800 828
@@ -1503,11 +1663,13 @@ ELSE DP1CN THEN ;
 
 **Used by:** <a href="#terse-word-43-48-4b-47-4d-43-4e-54"><code>CHKGMCNT</code></a>.
 
+---
+
 ### <a name="terse-word-44-50-31-43-4e"></a><span>DP1CN</span>
 
-`( -- )`
-
 Uses SPOST to compose game logic.
+
+`( -- )`
 
 ```text
 : DP1CN 400 2800 828 A" DEPOSIT 1 COIN TO CONTINUE THIS GAME"
@@ -1518,11 +1680,13 @@ SPOST ;
 
 **Used by:** <a href="#terse-word-44-50-31-32-43-4e"><code>DP12CN</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-53-4f-52-52-59"><code>SORRY</code></a>.
 
+---
+
 ### <a name="terse-word-44-50-43-4e"></a><span>DPCN</span>
 
-`( -- )`
-
 Wait for next coin.
+
+`( -- )`
 
 ```text
 : DPCN ( wait for next coin )
@@ -1534,11 +1698,13 @@ GAMEOVER BZERO ELSE LINN BZERO UPCRED BONE THEN CREDITS 1+B! ;
 
 **Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-64-70-6f-73-74"></a><span>dpost</span>
 
-`( x y options nibble -- x y options )`
-
 Isolates a nibble, posts a digit or space according to ZEROSP/current nonzero state and clears suppression after the first significant digit.
+
+`( x y options nibble -- x y options )`
 
 ```text
 : dpost 0F AND OVER 4000 AND 4000 XOR OVER OR IF 30 +
@@ -1549,11 +1715,13 @@ SWAP BFFF AND SWAP ELSE DROP 20 THEN cpost ;
 
 **Used by:** <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>.
 
+---
+
 ### <a name="terse-word-44-54-43"></a><span>DTC</span>
 
-`( -- )`
-
 Selects decimal and invokes the host editor.
+
+`( -- )`
 
 ```text
 { : DTC } DECIMAL EDIT { ; }
@@ -1561,11 +1729,13 @@ Selects decimal and invokes the host editor.
 
 **Calls:** <a href="#terse-word-44-45-43-49-4d-41-4c"><code>DECIMAL</code></a>.
 
+---
+
 ### <a name="terse-word-44-55-52-41-54-49-4f-4e"></a><span>DURATION</span>
 
-`( duration -- )`
-
 Emit a note-duration command.
+
+`( duration -- )`
 
 ```text
 { : DURATION } 1 B, B, { ; }
@@ -1573,11 +1743,13 @@ Emit a note-duration command.
 
 **Used by:** <a href="#terse-word-41-4e-4f-54-45"><code>ANOTE</code></a>, <a href="#terse-word-42-4e-4f-54-45"><code>BNOTE</code></a>, <a href="#terse-word-43-4e-4f-54-45"><code>CNOTE</code></a>, <a href="#terse-word-52-45-53-54"><code>REST</code></a>.
 
+---
+
 ### <a name="terse-word-44-57-41-49-54"></a><span>DWAIT</span>
 
-`( limit -- )`
-
 Runs nested loops with interrupts enabled and disables them on return.
+
+`( limit -- )`
 
 ```text
 : DWAIT EI 0 DO FF 0 DO LOOP LOOP DI ;
@@ -1587,41 +1759,49 @@ Runs nested loops with interrupts enabled and disables them on return.
 
 **Used by:** <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
+---
+
 ### <a name="terse-word-46-3d"></a><span>F=</span>
 
-`( -- )`
-
 Declare a forward word with the game's source shorthand.
+
+`( -- )`
 
 ```text
 { : F= } FORWARD { ; }
 ```
 
+---
+
 ### <a name="terse-word-46-31-53-54-4c-53"></a><span>F1STLS</span>
 
-`( -- )`
-
 Select the first-base left-side action.
+
+`( -- )`
 
 ```text
 : F1STLS F1STPT F1STL1ST NOACTPA 0 ;
 ```
 
+---
+
 ### <a name="terse-word-46-31-53-54-52-53"></a><span>F1STRS</span>
 
-`( -- )`
-
 Select the first-base right-side action.
+
+`( -- )`
 
 ```text
 : F1STRS F1STPT F1STR1ST NOACTPA 0 ;
 ```
 
+---
+
 ### <a name="terse-word-46-32-4e-44-4c-53"></a><span>F2NDLS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : F2NDLS DPHIT BONE HRPT HL1ST F2NDL2ND 0 ;
@@ -1629,11 +1809,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-46-32-4e-44-52-53"></a><span>F2NDRS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : F2NDRS DPHIT BONE HRPT HL1ST F2NDR2ND 0 ;
@@ -1641,31 +1823,37 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-46-33-52-44-4c-53"></a><span>F3RDLS</span>
 
-`( -- )`
-
 Select the third-base left-side action.
+
+`( -- )`
 
 ```text
 : F3RDLS F3RDLSS F3RDL3RD 1 ;
 ```
 
+---
+
 ### <a name="terse-word-46-33-52-44-52-53"></a><span>F3RDRS</span>
 
-`( -- )`
-
 Select the third-base right-side action.
+
+`( -- )`
 
 ```text
 : F3RDRS NOACTPA F3RDR3RD 1 ;
 ```
 
+---
+
 ### <a name="terse-word-46-42-4c-4c-53"></a><span>FBLLS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : FBLLS NOACTPA FBLL3RD
@@ -1674,11 +1862,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-46-42-4c-52-53"></a><span>FBLRS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : FBLRS FOUL BONE THROWAROUND BONE NOACTPA
@@ -1687,11 +1877,13 @@ FBLR1ST NOACTPA 0 ;
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-46-49-45-4c-44-57-52-54"></a><span>FIELDWRT</span>
 
-`( -- )`
-
 Write field outline.
+
+`( -- )`
 
 ```text
 : FIELDWRT ( write field outline )
@@ -1703,11 +1895,13 @@ FINDEX BZERO GETF GETF GETF GETF DLINE
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
+---
+
 ### <a name="terse-word-46-4c"></a><span>FL</span>
 
-`( -- )`
-
 Set up all of background.
+
+`( -- )`
 
 ```text
 : FL ( set up all of background )
@@ -1734,21 +1928,25 @@ F00 SUP
 
 **Used by:** <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
+---
+
 ### <a name="terse-word-46-4c-44-44-53-54-2c"></a><span>FLDDST,</span>
 
-`( -- )`
-
 Emit the fielder destination command.
+
+`( -- )`
 
 ```text
 { : FLDDST, } 7 B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-46-4c-46-49-4c-4c"></a><span>FLFILL</span>
 
-`( -- )`
-
 Fills the background while allowing interrupts.
+
+`( -- )`
 
 ```text
 : FLFILL EI 0 4000 3C00 FILL DI ;
@@ -1758,11 +1956,13 @@ Fills the background while allowing interrupts.
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>.
 
+---
+
 ### <a name="terse-word-46-4c-53-48-4d-45"></a><span>FLSHME</span>
 
-`( -- )`
-
 Executes only a nonzero address whose top two bits are clear.
+
+`( -- )`
 
 ```text
 : FLSHME FLSHWHO @ DUP 0C000 AND 0= OVER 0 <> AND IF EX ELSE DROP THEN ;
@@ -1772,11 +1972,13 @@ Executes only a nonzero address whose top two bits are clear.
 
 **Used by:** <a href="#terse-word-46-4c-53-48-57-55-50"><code>FLSHWUP</code></a>.
 
+---
+
 ### <a name="terse-word-46-4c-53-48-54-4f-4e"></a><span>FLSHTON</span>
 
-`( -- )`
-
 Saves a callback and starts its timer.
+
+`( -- )`
 
 ```text
 : FLSHTON FLSHWHO ! FLSHON BONE FLSHTIME BONE ;
@@ -1786,11 +1988,13 @@ Saves a callback and starts its timer.
 
 **Used by:** <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-57-55-50-54-4f-4e"><code>WUPTON</code></a>.
 
+---
+
 ### <a name="terse-word-46-4f-55-4c-54-49-4d-45"></a><span>FOULTIME</span>
 
-`( -- )`
-
 Foulball process.
+
+`( -- )`
 
 ```text
 : FOULTIME ( foulball process )
@@ -1800,21 +2004,25 @@ ELSE 1+B! SBO THEN ;
 
 **Calls:** <a href="#terse-word-53-46-4f-55-4c"><code>SFOUL</code></a>, <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-42-40"><code>B@</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>, <a href="#terse-word-42-21"><code>B!</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>.
 
+---
+
 ### <a name="terse-word-46-4f-57-52"></a><span>FOWR</span>
 
-`( -- )`
-
 Save radix, select hex, define FOWR and allocate endpoint/current-coordinate, bit-position, framebuffer-address, pixel-type and mode cells.
+
+`( -- )`
 
 ```text
 { : FOWR } FORWARD { ; }
 ```
 
+---
+
 ### <a name="terse-word-46-53-53-4c-53"></a><span>FSSLS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : FSSLS DPHIT BONE FSSLSS HR3RD 1 ;
@@ -1822,11 +2030,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-46-53-53-52-53"></a><span>FSSRS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : FSSRS DPHIT BONE FSSRSS HR3RD 1 ;
@@ -1834,11 +2044,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-47-45-54-46"></a><span>GETF</span>
 
-`( -- index field-byte )`
-
 Fetches FIELD bytes sequentially.
+
+`( -- index field-byte )`
 
 ```text
 : GETF FINDEX B@ FIELD B@ FINDEX 1+B! ;
@@ -1848,11 +2060,13 @@ Fetches FIELD bytes sequentially.
 
 **Used by:** <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>.
 
+---
+
 ### <a name="terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"></a><span>GRNDRACTION</span>
 
-`( sector -- )`
-
 Consumes a selected hit-sector index, executes its `GSTBL` word, then installs the appropriate fielder playaction addresses.
+
+`( sector -- )`
 
 ```text
 : GRNDRACTION ( given sectnm set up infield action )
@@ -1869,11 +2083,13 @@ HRSS HR3RD LDINFLDPA THEN ;
 
 **Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>.
 
+---
+
 ### <a name="terse-word-47-52-4e-44-52-48-49-54"></a><span>GRNDRHIT</span>
 
-`( -- )`
-
 Computes a ground-ball sector from randomized timing and pitch direction, dispatches `GRNDRACTION`, then sets ball destination.
+
+`( -- )`
 
 ```text
 : GRNDRHIT ( grounder ) GRNDR BONE 2 VVEL BL B!
@@ -1894,11 +2110,13 @@ VDSTY BL ! THEN HITDST ;
 
 **Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
+---
+
 ### <a name="terse-word-48-49-54-44-53-54"></a><span>HITDST</span>
 
-`( -- )`
-
 Chooses hit location.
+
+`( -- )`
 
 ```text
 : HITDST ( chooses hit location ) VUPDATE# BL BZERO
@@ -1910,11 +2128,13 @@ BAL THWPA ! 2800 VX BL ! AD00 VY BL ! ;
 
 **Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
+---
+
 ### <a name="terse-word-48-4c-4c-53"></a><span>HLLS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : HLLS HITOF BONE NOACTPA HLL3RD 1 ;
@@ -1922,11 +2142,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-48-4c-53"></a><span>HLS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : HLS HITOF BONE HLSS HL3RD 1 ;
@@ -1934,11 +2156,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-48-4d-53"></a><span>HMS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : HMS HITOF BONE HMSS HR3RD 1 ;
@@ -1946,11 +2170,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-48-4f-4d"></a><span>HOM</span>
 
-`( -- )`
-
 Draw HOME using a large initial character and the remainder of the string.
+
+`( -- )`
 
 ```text
 : HOM 4200 7A00 828 48 CPOST 4400 7F00 8828 A" OME" SPOST ;
@@ -1960,11 +2186,13 @@ Draw HOME using a large initial character and the remainder of the string.
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
+---
+
 ### <a name="terse-word-48-52-42-59-32"></a><span>HRBY2</span>
 
-`( -- )`
-
 Halves HRAT.
+
+`( -- )`
 
 ```text
 : HRBY2 HRAT B@ 2/ HRAT B! ;
@@ -1974,11 +2202,13 @@ Halves HRAT.
 
 **Used by:** <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>.
 
+---
+
 ### <a name="terse-word-48-52-4c-53"></a><span>HRLS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : HRLS HITOF BONE HRPT HRL1ST NOACTPA 0 ;
@@ -1986,11 +2216,13 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-48-52-53"></a><span>HRS</span>
 
-`( -- )`
-
 Uses BONE to compose game logic.
+
+`( -- )`
 
 ```text
 : HRS HITOF BONE HRPT HR1ST HR2ND 0 ;
@@ -1998,21 +2230,25 @@ Uses BONE to compose game logic.
 
 **Calls:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>.
 
+---
+
 ### <a name="terse-word-49-27"></a><span>I'</span>
 
-`( -- )`
-
 Emit the target's indexed immediate reference.
+
+`( -- )`
 
 ```text
 { : I' } 0CD B, ]'[ { 2+ } , B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-49-43-4f-44-45"></a><span>ICODE</span>
 
-`( -- )`
-
 Defines the native interrupt handler and emits its Z80 register-save prologue in the host compiler.
+
+`( -- )`
 
 ```text
 { : ICODE } CODE { [ } ASM { ] } NEXT XTHL, D PUSH, B PUSH,
@@ -2023,11 +2259,13 @@ ASM { ; }
 
 **Calls:** <a href="#terse-word-41-53-4d"><code>ASM</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-45-58-54"></a><span>INEXT</span>
 
-`( -- )`
-
 Emits a jump to IEX.
+
+`( -- )`
 
 ```text
 { : INEXT } { LIT [ } ' IEX { , } ASM { ] } JMP, { ; }
@@ -2035,11 +2273,13 @@ Emits a jump to IEX.
 
 **Calls:** <a href="#terse-word-4c-49-54"><code>LIT</code></a>, <a href="#terse-word-49-45-58"><code>IEX</code></a>, <a href="#terse-word-41-53-4d"><code>ASM</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-4c-4f-47"></a><span>INLOG</span>
 
-`( -- )`
-
 Infield master logic.
+
+`( -- )`
 
 ```text
 : INLOG ( infield master logic ) NOCATCH BZERO LBASE BZERO
@@ -2056,11 +2296,13 @@ ELSE GRNDRHIT THEN ALLFLDACT ;
 
 **Used by:** <a href="#terse-word-42-41-54-48-49-54"><code>BATHIT</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-4e-4f-44-44-53"></a><span>INNODDS</span>
 
-`( -- )`
-
 Derives IODDS from inning, computer/player swing control and bonus-inning state.
+
+`( -- )`
 
 ```text
 : INNODDS
@@ -2072,11 +2314,13 @@ THEN ELSE 1 - IODTBL B@ THEN THEN IODDS B! ;
 
 **Calls:** <a href="#terse-word-42-40"><code>B@</code></a>, <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>, <a href="#terse-word-42-21"><code>B!</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-53-43-4e"></a><span>INSCN</span>
 
-`( -- )`
-
 Insert coin call.
+
+`( -- )`
 
 ```text
 : INSCN ( insert coin call )
@@ -2093,11 +2337,13 @@ THEN 2880 4C00 BASE2PAT 428 WRITR ;
 
 **Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-53-54-52-43"></a><span>INSTRC</span>
 
-`( -- )`
-
 Instructions.
+
+`( -- )`
 
 ```text
 : INSTRC ( instructions )
@@ -2119,11 +2365,13 @@ FLFILL 6000 2800 828 A" PRESS ANY BUTTON TO START GAME" SPOST
 
 **Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-53-57-41-49-54"></a><span>INSWAIT</span>
 
-`( count -- )`
-
 Enables interrupts, loops until its count expires or any masked active-low button is pressed, sets INSOUT on input and disables interrupts on return.
+
+`( count -- )`
 
 ```text
 : INSWAIT EI BEGIN FF 0 DO LOOP
@@ -2135,11 +2383,13 @@ Enables interrupts, loops until its count expires or any masked active-low butto
 
 **Used by:** <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-54-45-52-52-55-50-54-53-3e"></a><span>INTERRUPTS&gt;</span>
 
-`( -- )`
-
 Emit the interrupt-vector dispatch jump.
+
+`( -- )`
 
 ```text
 { : INTERRUPTS> } { [ } ASM { ] } JMP, { ; }
@@ -2147,11 +2397,13 @@ Emit the interrupt-vector dispatch jump.
 
 **Calls:** <a href="#terse-word-41-53-4d"><code>ASM</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-54-48-49-47-48-52-45-53"></a><span>INTHIGHRES</span>
 
-`( -- )`
-
 Intialize screen for commercial mode.
+
+`( -- )`
 
 ```text
 : INTHIGHRES ( intialize screen for commercial mode )
@@ -2163,11 +2415,13 @@ Intialize screen for commercial mode.
 
 **Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
+---
+
 ### <a name="terse-word-49-53-43-4e"></a><span>ISCN</span>
 
-`( -- )`
-
 Display the V15 instruction message.
+
+`( -- )`
 
 ```text
 : ISCN 1C00 1000 828 A" V15" SPOST ;
@@ -2177,21 +2431,25 @@ Display the V15 instruction message.
 
 **Used by:** <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>.
 
+---
+
 ### <a name="terse-word-4c-41-42-4c-45"></a><span>LABLE</span>
 
-`( -- )`
-
 Provide the original source's label-definition alias.
+
+`( -- )`
 
 ```text
 { : LABLE } DATA { ; }
 ```
 
+---
+
 ### <a name="terse-word-4c-43-42-2c"></a><span>LCB,</span>
 
-`( -- )`
-
 Uses ACT, and DEACT, to compose game logic.
+
+`( -- )`
 
 ```text
 { : LCB, } 0 0 0 LCB ACT, DEACT, { ; }
@@ -2199,11 +2457,13 @@ Uses ACT, and DEACT, to compose game logic.
 
 **Calls:** <a href="#terse-word-41-43-54-2c"><code>ACT,</code></a>, <a href="#terse-word-44-45-41-43-54-2c"><code>DEACT,</code></a>.
 
+---
+
 ### <a name="terse-word-4c-44-49-4e-46-4c-44-50-41"></a><span>LDINFLDPA</span>
 
-`( -- )`
-
 Consumes stacked action pointers and installs them for third base, shortstop, second base, first base and pitcher, then continues the source chain.
+
+`( -- )`
 
 ```text
 : LDINFLDPA VPLAYACTPC 3RD ! VPLAYACTPC SS ! VPLAYACTPC 2ND !
@@ -2212,11 +2472,13 @@ VPLAYACTPC 1ST ! VPLAYACTPC PT ! ;
 
 **Used by:** <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
+---
+
 ### <a name="terse-word-4c-44-50-43"></a><span>LDPC</span>
 
-`( -- )`
-
 Emit/load the music program-counter value.
+
+`( -- )`
 
 ```text
 { : LDPC } 3 B, , { ; }
@@ -2224,21 +2486,25 @@ Emit/load the music program-counter value.
 
 **Used by:** <a href="#terse-word-51-55-49-54"><code>QUIT</code></a>.
 
+---
+
 ### <a name="terse-word-4c-44-50-43-43"></a><span>LDPCC</span>
 
-`( -- )`
-
 Emit/load a music program-counter command.
+
+`( -- )`
 
 ```text
 { : LDPCC } 2 B, , { ; }
 ```
 
+---
+
 ### <a name="terse-word-4c-4b-2c"></a><span>LK,</span>
 
-`( -- )`
-
 Uses BACT, and DEACT, to compose game logic.
+
+`( -- )`
 
 ```text
 { : LK, } 0 0 0 BACT, DEACT, { ; }
@@ -2246,11 +2512,13 @@ Uses BACT, and DEACT, to compose game logic.
 
 **Calls:** <a href="#terse-word-42-41-43-54-2c"><code>BACT,</code></a>, <a href="#terse-word-44-45-41-43-54-2c"><code>DEACT,</code></a>.
 
+---
+
 ### <a name="terse-word-4c-53-45-54-54-46-43-4f-4f-52"></a><span>LSETTFCOOR</span>
 
-`( -- )`
-
 Set take field coor & status -active , xpand.
+
+`( -- )`
 
 ```text
 : LSETTFCOOR ( set take field coor & status -active , xpand )
@@ -2274,11 +2542,13 @@ NBD RUNPA ! STND OFPA ! NBD TBLPA ! BAL THWPA ! ;
 
 **Used by:** <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>.
 
+---
+
 ### <a name="terse-word-4d-41-53-54-45-52"></a><span>MASTER</span>
 
-`( -- )`
-
 Define the game's master music stream.
+
+`( -- )`
 
 ```text
 { : MASTER } 10 B, B, { ; }
@@ -2286,11 +2556,13 @@ Define the game's master music stream.
 
 **Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>.
 
+---
+
 ### <a name="terse-word-4d-42-41-4c-4c"></a><span>MBALL</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MBALL 0 BALLSCORE BMUSIC ;
@@ -2300,11 +2572,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>.
 
+---
+
 ### <a name="terse-word-4d-43-41-4e-4e-4f-4e"></a><span>MCANNON</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MCANNON 0 CANNONSCORE BMUSIC ;
@@ -2314,11 +2588,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
+---
+
 ### <a name="terse-word-4d-43-4f-49-4e"></a><span>MCOIN</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MCOIN 0 COINSCORE BMUSIC ;
@@ -2328,11 +2604,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-43-48-4b-43-4f-49-4e-31"><code>CHKCOIN1</code></a>, <a href="#terse-word-43-48-4b-43-4f-49-4e-32"><code>CHKCOIN2</code></a>.
 
+---
+
 ### <a name="terse-word-4d-43-56-4f-4c-53"></a><span>MCVOLS</span>
 
-`( volume -- )`
-
 Emit music-channel volume values.
+
+`( volume -- )`
 
 ```text
 { : MCVOLS } 15 B, B, { ; }
@@ -2340,11 +2618,13 @@ Emit music-channel volume values.
 
 **Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>, <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>, <a href="#terse-word-52-45-53-54"><code>REST</code></a>, <a href="#terse-word-5e"><code>^</code></a>.
 
+---
+
 ### <a name="terse-word-4d-46-45-4e-43-45"></a><span>MFENCE</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MFENCE 0 FENCESCORE BMUSIC ;
@@ -2354,11 +2634,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
+---
+
 ### <a name="terse-word-4d-46-4f-55-4c"></a><span>MFOUL</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MFOUL 0 FOULSCORE BMUSIC ;
@@ -2368,11 +2650,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>.
 
+---
+
 ### <a name="terse-word-4d-48-49-54"></a><span>MHIT</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MHIT 0 CRACKSCORE BMUSIC ;
@@ -2382,11 +2666,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
+---
+
 ### <a name="terse-word-4d-4c-49-4e-4e"></a><span>MLINN</span>
 
-`( -- )`
-
 Mark last inning.
+
+`( -- )`
 
 ```text
 : MLINN ( mark last inning ) DI PX0 2A A5 4D 3 RECTAN LINN B@
@@ -2398,11 +2684,13 @@ THEN A500 IMRK 301 828 WRITE ELSE DROP DROP THEN EI ;
 
 **Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-4d-4f-50-45-4e-45-52-53"></a><span>MOPENERS</span>
 
-`( -- )`
-
 Uses PMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MOPENERS 0 TAKE-ME PMUSIC ;
@@ -2412,11 +2700,13 @@ Uses PMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
+---
+
 ### <a name="terse-word-4d-4f-55-54"></a><span>MOUT</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MOUT 0 OUTSCORE BMUSIC ;
@@ -2426,11 +2716,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
+---
+
 ### <a name="terse-word-4d-53-41-46-45"></a><span>MSAFE</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MSAFE 0 SAFESCORE BMUSIC ;
@@ -2440,11 +2732,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-44-4f-53-41-46-45"><code>DOSAFE</code></a>.
 
+---
+
 ### <a name="terse-word-4d-53-54-52-49-4b-45"></a><span>MSTRIKE</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MSTRIKE 0 STRIKESCORE BMUSIC ;
@@ -2454,11 +2748,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
+---
+
 ### <a name="terse-word-4d-59-41-48"></a><span>MYAH</span>
 
-`( -- )`
-
 Uses BMUSIC to compose game logic.
+
+`( -- )`
 
 ```text
 : MYAH 0 CHEERSSCORE BMUSIC ;
@@ -2468,11 +2764,13 @@ Uses BMUSIC to compose game logic.
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>, <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
+---
+
 ### <a name="terse-word-4e-4f-49-53-45"></a><span>NOISE</span>
 
-`( -- )`
-
 Emit a noise/sound command.
+
+`( -- )`
 
 ```text
 { : NOISE } 17 B, B, { ; }
@@ -2480,11 +2778,13 @@ Emit a noise/sound command.
 
 **Used by:** <a href="#terse-word-43-4d-41-4a-4f-52"><code>CMAJOR</code></a>.
 
+---
+
 ### <a name="terse-word-4e-4f-54-45-53"></a><span>NOTES</span>
 
-`( -- )`
-
 Uses ATONE and BTONE to compose game logic.
+
+`( -- )`
 
 ```text
 { : NOTES } ATONE BTONE CNOTE { ; }
@@ -2492,11 +2792,13 @@ Uses ATONE and BTONE to compose game logic.
 
 **Calls:** <a href="#terse-word-41-54-4f-4e-45"><code>ATONE</code></a>, <a href="#terse-word-42-54-4f-4e-45"><code>BTONE</code></a>, <a href="#terse-word-43-4e-4f-54-45"><code>CNOTE</code></a>.
 
+---
+
 ### <a name="terse-word-4e-50-4f-53-54"></a><span>NPOST</span>
 
-`( x y options address length -- )`
-
 Post a bcd number on the screen ; see options.
+
+`( x y options address length -- )`
 
 ```text
 : NPOST ( post a bcd number on the screen ; see options )
@@ -2510,61 +2812,73 @@ OVER + SWAP DO I B@ SWAN dpost I B@ dpost LOOP
 
 **Used by:** <a href="#terse-word-53-43-4f-52-45-4d-45"><code>SCOREME</code></a>.
 
+---
+
 ### <a name="terse-word-4f-46-46-44-53-54-2c"></a><span>OFFDST,</span>
 
-`( -- )`
-
 Emit the outfielder destination command.
+
+`( -- )`
 
 ```text
 { : OFFDST, } 9 B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-4f-46-4d-4f-54-2c"></a><span>OFMOT,</span>
 
-`( -- )`
-
 Emit the outfield motion command.
+
+`( -- )`
 
 ```text
 { : OFMOT, } 5 B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-4f-4e-31-53-54-2c"></a><span>ON1ST,</span>
 
-`( -- )`
-
 Emit the first-base playaction command.
+
+`( -- )`
 
 ```text
 { : ON1ST, } 2 B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-4f-4e-32-4e-44-2c"></a><span>ON2ND,</span>
 
-`( -- )`
-
 Emit the second-base playaction command.
+
+`( -- )`
 
 ```text
 { : ON2ND, } 3 B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-4f-4e-33-52-44-2c"></a><span>ON3RD,</span>
 
-`( -- )`
-
 Emit the third-base playaction command.
+
+`( -- )`
 
 ```text
 { : ON3RD, } 4 B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-4f-55-54-46-4c-44-48-49-54"></a><span>OUTFLDHIT</span>
 
-`( -- )`
-
 Fly ball.
+
+`( -- )`
 
 ```text
 : OUTFLDHIT ( fly ball ) 18 TOTIMER B! HITOF BONE 3 VVEL BL B!
@@ -2580,11 +2894,13 @@ HL2ND HLOUTSSPA ELSE HROUT2NDPA HRSS THEN HR3RD LDINFLDPA ;
 
 **Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
+---
+
 ### <a name="terse-word-4f-55-54-4c-49-4e-45"></a><span>OUTLINE</span>
 
-`( x y width height -- )`
-
 Creates rectanguler outline.
+
+`( x y width height -- )`
 
 ```text
 : OUTLINE ( creates rectanguler outline )
@@ -2597,11 +2913,13 @@ Creates rectanguler outline.
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
+---
+
 ### <a name="terse-word-4f-55-54-54-49-4d-45"></a><span>OUTTIME</span>
 
-`( -- )`
-
 Out prc.
+
+`( -- )`
 
 ```text
 : OUTTIME ( out prc )
@@ -2623,11 +2941,13 @@ ELSE MOUT THEN CLRBLST SBO DOSOUT ;
 
 **Used by:** <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
+---
+
 ### <a name="terse-word-50-4c-52-43-48-4b"></a><span>PLRCHK</span>
 
-`( -- )`
-
 Reads active-low start bits from port $14, chooses one-player/computer or two-player mode and invokes STRTBALL.
+
+`( -- )`
 
 ```text
 : PLRCHK 14 INP DUP 10 AND 10 XOR IF DROP CMPLR BONE STRTBALL
@@ -2640,11 +2960,13 @@ CNSW12 BONE THEN STRTBALL THEN THEN THEN ;
 
 **Used by:** <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
+---
+
 ### <a name="terse-word-50-4c-52-53-45-4c-45-43-54"></a><span>PLRSELECT</span>
 
-`( -- )`
-
 Select singel player or 2 player.
+
+`( -- )`
 
 ```text
 : PLRSELECT ( select singel player or 2 player )
@@ -2656,11 +2978,13 @@ SPLR SELECT BZERO MLINN ;
 
 **Used by:** <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
+---
+
 ### <a name="terse-word-50-50-4f-53-54"></a><span>PPOST</span>
 
-`( x y options string -- x y options )`
-
 Draw a counted string and keep drawing coordinates.
+
+`( x y options string -- x y options )`
 
 ```text
 : PPOST ( post an ascii-string on the screen leaving x y and
@@ -2675,11 +2999,13 @@ COUNT OVER + SWAP DO I B@ cpost LOOP ;
 
 **Used by:** <a href="#terse-word-53-50-4f-53-54"><code>SPOST</code></a>.
 
+---
+
 ### <a name="terse-word-50-55-50"></a><span>PUP</span>
 
-`( -- )`
-
 Power up routine.
+
+`( -- )`
 
 ```text
 : PUP ( power up routine )
@@ -2691,11 +3017,13 @@ DI FL SGO EI GAMEOVER BONE TF SENTRY ;
 
 **Calls:** <a href="#terse-word-49-4e-54-48-49-47-48-52-45-53"><code>INTHIGHRES</code></a>, <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-4f-55-54-50"><code>OUTP</code></a>, <a href="#terse-word-44-49"><code>DI</code></a>, <a href="#terse-word-53-43-52-45-52-41-53-45"><code>SCRERASE</code></a>, <a href="#terse-word-45-4d-55-53-49-43"><code>EMUSIC</code></a>, <a href="#terse-word-53-31-30"><code>S10</code></a>, <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-53-47-4f"><code>SGO</code></a>, <a href="#terse-word-45-49"><code>EI</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-50-58-30"></a><span>PX0</span>
 
-`( -- )`
-
 Emit zero/white pixel patterns and define PX1/PX0 to select them.
+
+`( -- )`
 
 ```text
 : PX0 0 PXT0 PXTYPE ! ;
@@ -2703,11 +3031,13 @@ Emit zero/white pixel patterns and define PX1/PX0 to select them.
 
 **Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>.
 
+---
+
 ### <a name="terse-word-50-58-31"></a><span>PX1</span>
 
-`( -- )`
-
 Emit zero/white pixel patterns and define PX1/PX0 to select them.
+
+`( -- )`
 
 ```text
 : PX1 0 PXT1 PXTYPE ! ;
@@ -2715,11 +3045,13 @@ Emit zero/white pixel patterns and define PX1/PX0 to select them.
 
 **Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>.
 
+---
+
 ### <a name="terse-word-51-55-49-45-54"></a><span>QUIET</span>
 
-`( -- )`
-
 Uses ABVOLS and MCVOLS to compose game logic.
+
+`( -- )`
 
 ```text
 { : QUIET } 0 ABVOLS
@@ -2728,11 +3060,13 @@ Uses ABVOLS and MCVOLS to compose game logic.
 
 **Calls:** <a href="#terse-word-41-42-56-4f-4c-53"><code>ABVOLS</code></a>, <a href="#terse-word-4d-43-56-4f-4c-53"><code>MCVOLS</code></a>, <a href="#terse-word-41-54-4f-4e-45"><code>ATONE</code></a>, <a href="#terse-word-42-54-4f-4e-45"><code>BTONE</code></a>, <a href="#terse-word-43-54-4f-4e-45"><code>CTONE</code></a>, <a href="#terse-word-51-55-49-54"><code>QUIT</code></a>.
 
+---
+
 ### <a name="terse-word-51-55-49-54"></a><span>QUIT</span>
 
-`( -- )`
-
 Uses HERE and LDPC to compose game logic.
+
+`( -- )`
 
 ```text
 { : QUIT } 4 B, HERE LDPC { ; }
@@ -2742,11 +3076,13 @@ Uses HERE and LDPC to compose game logic.
 
 **Used by:** <a href="#terse-word-51-55-49-45-54"><code>QUIET</code></a>.
 
+---
+
 ### <a name="terse-word-52-43-42-2c"></a><span>RCB,</span>
 
-`( -- )`
-
 Uses ACT, and DEACT, to compose game logic.
+
+`( -- )`
 
 ```text
 { : RCB, } 0 0 0 RCB ACT, DEACT, { ; }
@@ -2754,21 +3090,25 @@ Uses ACT, and DEACT, to compose game logic.
 
 **Calls:** <a href="#terse-word-41-43-54-2c"><code>ACT,</code></a>, <a href="#terse-word-44-45-41-43-54-2c"><code>DEACT,</code></a>.
 
+---
+
 ### <a name="terse-word-52-44-52-4e-44-4e-54-45"></a><span>RDRNDNTE</span>
 
-`( -- )`
-
 Emit a randomized note with a rest interval.
+
+`( -- )`
 
 ```text
 { : RDRNDNTE } 0 B, B, B, B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-52-45-43-4c-49-4e-45"></a><span>RECLINE</span>
 
-`( x y width height options -- x y width height options )`
-
 Draws a horizontal rectangle row without consuming the five retained rectangle arguments.
+
+`( x y width height options -- x y width height options )`
 
 ```text
 : RECLINE 4 PICK 4 PICK 2DUP SWAP 6 PICK + SWAP DLINE ;
@@ -2778,11 +3118,13 @@ Draws a horizontal rectangle row without consuming the five retained rectangle a
 
 **Used by:** <a href="#terse-word-52-45-43-54-41-4e"><code>RECTAN</code></a>.
 
+---
+
 ### <a name="terse-word-52-45-43-54-41-4e"></a><span>RECTAN</span>
 
-`( x y width height -- )`
-
 In X, Y, X length, Y length, pxtype set.
+
+`( x y width height -- )`
 
 ```text
 : RECTAN ( in X, Y, X length, Y length, pxtype set )
@@ -2794,11 +3136,13 @@ DROP ;
 
 **Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-53-43-52-53"><code>SCRS</code></a>.
 
+---
+
 ### <a name="terse-word-52-45-53-54"></a><span>REST</span>
 
-`( duration -- )`
-
 Insert a silent music interval.
+
+`( duration -- )`
 
 ```text
 { : REST } 0 ABVOLS 0 MCVOLS 0A DURATION { ; }
@@ -2806,21 +3150,25 @@ Insert a silent music interval.
 
 **Calls:** <a href="#terse-word-41-42-56-4f-4c-53"><code>ABVOLS</code></a>, <a href="#terse-word-4d-43-56-4f-4c-53"><code>MCVOLS</code></a>, <a href="#terse-word-44-55-52-41-54-49-4f-4e"><code>DURATION</code></a>.
 
+---
+
 ### <a name="terse-word-52-45-53-54-2c"></a><span>REST,</span>
 
-`( -- )`
-
 Emit a resting playaction record.
+
+`( -- )`
 
 ```text
 { : REST, } NBD , B, 0 , 0 , { ; }
 ```
 
+---
+
 ### <a name="terse-word-52-45-54-50-41"></a><span>RETPA</span>
 
-`( -- )`
-
 Return to position pa.
+
+`( -- )`
 
 ```text
 : RETPA ( return to position pa )
@@ -2832,31 +3180,37 @@ B@ 80 OR F7 AND SB! VLENGTH + LOOP DROP ;
 
 **Used by:** <a href="#terse-word-53-54-46-4c-44"><code>STFLD</code></a>.
 
+---
+
 ### <a name="terse-word-52-4e-44-4e-54-45"></a><span>RNDNTE</span>
 
-`( -- )`
-
 Emit a randomized musical note.
+
+`( -- )`
 
 ```text
 { : RNDNTE } 0 B, B, 0 B, FF B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-52-52-52-4e-44-4e-54-45"></a><span>RRRNDNTE</span>
 
-`( -- )`
-
 Emit a sequence of randomized notes.
+
+`( -- )`
 
 ```text
 { : RRRNDNTE } 0 B, B, 0 B, B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-52-55-4e-31-43-48-4b-31-53-54"></a><span>RUN1CHK1ST</span>
 
-`( -- occupancy-code vector-address )`
-
 Selects the runner vector for an occupied first-base slot, or delegates to the next occupancy test.
+
+`( -- occupancy-code vector-address )`
 
 ```text
 : RUN1CHK1ST VWBASE R1 B@ 1 = IF 1 VMAGIC R2
@@ -2867,11 +3221,13 @@ ELSE RUN1CHK2ND THEN ;
 
 **Used by:** <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>.
 
+---
+
 ### <a name="terse-word-52-55-4e-31-43-48-4b-32-4e-44"></a><span>RUN1CHK2ND</span>
 
-`( -- occupancy-code vector-address )`
-
 Chooses the next runner vector according to runner 1's second-base occupancy.
+
+`( -- occupancy-code vector-address )`
 
 ```text
 : RUN1CHK2ND VWBASE R1 B@ 2 = IF RUN2CHK12ND
@@ -2882,11 +3238,13 @@ ELSE RUN2CHK THEN ;
 
 **Used by:** <a href="#terse-word-52-55-4e-31-43-48-4b-31-53-54"><code>RUN1CHK1ST</code></a>.
 
+---
+
 ### <a name="terse-word-52-55-4e-32-43-48-4b"></a><span>RUN2CHK</span>
 
-`( -- occupancy-code vector-address )`
-
 Returns the runner code and vector for the next open base.
+
+`( -- occupancy-code vector-address )`
 
 ```text
 : RUN2CHK VWBASE R2 B@ 0 = IF 3 VMAGIC R2
@@ -2897,11 +3255,13 @@ ELSE RUN2CHK1ST THEN ;
 
 **Used by:** <a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44"><code>RUN1CHK2ND</code></a>.
 
+---
+
 ### <a name="terse-word-52-55-4e-32-43-48-4b-31-32-4e-44"></a><span>RUN2CHK12ND</span>
 
-`( -- occupancy-code vector-address )`
-
 Returns runner 2 or 3 vector based on second-base occupancy.
+
+`( -- occupancy-code vector-address )`
 
 ```text
 : RUN2CHK12ND VWBASE R2 B@ 0 = IF 2 VMAGIC R2
@@ -2912,11 +3272,13 @@ ELSE 4 VMAGIC R3 THEN ;
 
 **Used by:** <a href="#terse-word-52-55-4e-31-43-48-4b-32-4e-44"><code>RUN1CHK2ND</code></a>.
 
+---
+
 ### <a name="terse-word-52-55-4e-32-43-48-4b-31-53-54"></a><span>RUN2CHK1ST</span>
 
-`( -- occupancy-code vector-address )`
-
 Chooses runner 3 or delegates according to runner 2's first-base state.
+
+`( -- occupancy-code vector-address )`
 
 ```text
 : RUN2CHK1ST VWBASE R2 B@ 1 = IF 6 VMAGIC R3
@@ -2927,11 +3289,13 @@ ELSE RUN3CHK THEN ;
 
 **Used by:** <a href="#terse-word-52-55-4e-32-43-48-4b"><code>RUN2CHK</code></a>.
 
+---
+
 ### <a name="terse-word-52-55-4e-33-43-48-4b"></a><span>RUN3CHK</span>
 
-`( -- occupancy-code vector-address )`
-
 Returns runner 3 or 4 code/vector from third runner's occupancy.
+
+`( -- occupancy-code vector-address )`
 
 ```text
 : RUN3CHK VWBASE R3 B@ 0 = IF 7 VMAGIC R3 ELSE 5 VMAGIC R4
@@ -2942,21 +3306,25 @@ THEN ;
 
 **Used by:** <a href="#terse-word-52-55-4e-32-43-48-4b-31-53-54"><code>RUN2CHK1ST</code></a>.
 
+---
+
 ### <a name="terse-word-52-55-4e-44-53-54-2c"></a><span>RUNDST,</span>
 
-`( -- )`
-
 Emit the runner destination command.
+
+`( -- )`
 
 ```text
 { : RUNDST, } 8 B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-53-21"></a><span>S!</span>
 
-`( address value -- )`
-
 Store cell with address-first arguments.
+
+`( address value -- )`
 
 ```text
 : S! SWAP ! ;
@@ -2966,11 +3334,13 @@ Store cell with address-first arguments.
 
 **Used by:** <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>.
 
+---
+
 ### <a name="terse-word-53-31-30"></a><span>S10</span>
 
-`( -- )`
-
 Starts INTERRUPTS0 through ISTART.
+
+`( -- )`
 
 ```text
 : S10 INTERRUPTS0 ISTART ;
@@ -2980,11 +3350,13 @@ Starts INTERRUPTS0 through ISTART.
 
 **Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
+---
+
 ### <a name="terse-word-53-31-31"></a><span>S11</span>
 
-`( -- )`
-
 Starts INTERRUPTS1.
+
+`( -- )`
 
 ```text
 : S11 INTERRUPTS1 ISTART ;
@@ -2994,11 +3366,13 @@ Starts INTERRUPTS1.
 
 **Used by:** <a href="#terse-word-53-54-41-52-54-4d-55-53-49-43"><code>STARTMUSIC</code></a>.
 
+---
+
 ### <a name="terse-word-53-42-21"></a><span>SB!</span>
 
-`( address value -- )`
-
 Store byte with address-first arguments.
+
+`( address value -- )`
 
 ```text
 : SB! SWAP B! ;
@@ -3008,11 +3382,13 @@ Store byte with address-first arguments.
 
 **Used by:** <a href="#terse-word-42-4f-4e-45"><code>BONE</code></a>, <a href="#terse-word-42-5a-45-52-4f"><code>BZERO</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-57-55-50-47-4f"><code>WUPGO</code></a>.
 
+---
+
 ### <a name="terse-word-53-42-41-4c-4c-31"></a><span>SBALL1</span>
 
-`( x y options -- )`
-
 Draw the BALL 1 message.
+
+`( x y options -- )`
 
 ```text
 : SBALL1 2200 2ROT A" BALL 1" SPOST ;
@@ -3022,11 +3398,13 @@ Draw the BALL 1 message.
 
 **Used by:** <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>.
 
+---
+
 ### <a name="terse-word-53-42-41-4c-4c-32"></a><span>SBALL2</span>
 
-`( x y options -- )`
-
 Draw the BALL 2 message.
+
+`( x y options -- )`
 
 ```text
 : SBALL2 2200 2ROT A" BALL 2" SPOST ;
@@ -3036,11 +3414,13 @@ Draw the BALL 2 message.
 
 **Used by:** <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>.
 
+---
+
 ### <a name="terse-word-53-42-41-4c-4c-33"></a><span>SBALL3</span>
 
-`( x y options -- )`
-
 Draw the BALL 3 message.
+
+`( x y options -- )`
 
 ```text
 : SBALL3 2200 2ROT A" BALL 3" SPOST ;
@@ -3050,11 +3430,13 @@ Draw the BALL 3 message.
 
 **Used by:** <a href="#terse-word-44-4f-53-42-41-4c-4c"><code>DOSBALL</code></a>.
 
+---
+
 ### <a name="terse-word-53-42-4f"></a><span>SBO</span>
 
-`( -- )`
-
 Posts the three $30-based count characters at their fixed positions.
+
+`( -- )`
 
 ```text
 : SBO 3700 B000 308 BALLS B@ CPOST 3F00 B000 308 STRIKES B@
@@ -3065,11 +3447,13 @@ CPOST 4700 B000 308 OUTS B@ CPOST ;
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-53-53-41-46-45"><code>SSAFE</code></a>, <a href="#terse-word-53-54-52-49-4b-45-54-49-4d-45"><code>STRIKETIME</code></a>.
 
+---
+
 ### <a name="terse-word-53-43-4f-52-45-4d-45"></a><span>SCOREME</span>
 
-`( -- )`
-
 Plop scores up.
+
+`( -- )`
 
 ```text
 : SCOREME ( plop scores up )
@@ -3080,11 +3464,13 @@ HOMERUN B@ IF MCANNON ELSE MYAH THEN ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-42-40"><code>B@</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-42-5a-45-52-4f"><code>BZERO</code></a>, <a href="#terse-word-4d-43-41-4e-4e-4f-4e"><code>MCANNON</code></a>, <a href="#terse-word-4d-59-41-48"><code>MYAH</code></a>.
 
+---
+
 ### <a name="terse-word-53-43-52-45-52-41-53-45"></a><span>SCRERASE</span>
 
-`( -- )`
-
 Erase entire screen.
+
+`( -- )`
 
 ```text
 : SCRERASE ( erase entire screen )
@@ -3095,11 +3481,13 @@ Erase entire screen.
 
 **Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
+---
+
 ### <a name="terse-word-53-43-52-53"></a><span>SCRS</span>
 
-`( -- )`
-
 Clears two score rectangles and draws zero score characters.
+
+`( -- )`
 
 ```text
 : SCRS 1F 8A 18 0E RECTAN 107 8A 18 0E RECTAN
@@ -3110,11 +3498,13 @@ B00 8C00 308 30 CPOST 4500 8C00 308 30 CPOST ;
 
 **Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>.
 
+---
+
 ### <a name="terse-word-53-45-54-46-44-53-54"></a><span>SETFDST</span>
 
-`( -- )`
-
 Set up fielder destination values.
+
+`( -- )`
 
 ```text
 : SETFDST ( set up fielder destination values )
@@ -3128,11 +3518,13 @@ Set up fielder destination values.
 2800 VDSTX CF ! 1600 VDSTY CF ! ;
 ```
 
+---
+
 ### <a name="terse-word-53-45-54-54-46"></a><span>SETTF</span>
 
-`( -- )`
-
 Performs coordinate/action initialization under DI/EI, then restores the compile-time radix and stops loading.
+
+`( -- )`
 
 ```text
 : SETTF DI LSETTFCOOR STFLD SETTFPA EI ;
@@ -3140,11 +3532,13 @@ Performs coordinate/action initialization under DI/EI, then restores the compile
 
 **Calls:** <a href="#terse-word-44-49"><code>DI</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-53-54-46-4c-44"><code>STFLD</code></a>, <a href="#terse-word-53-45-54-54-46-50-41"><code>SETTFPA</code></a>, <a href="#terse-word-45-49"><code>EI</code></a>.
 
+---
+
 ### <a name="terse-word-53-45-54-54-46-50-41"></a><span>SETTFPA</span>
 
-`( -- )`
-
 Take field pa.
+
+`( -- )`
 
 ```text
 : SETTFPA ( take field pa )
@@ -3158,11 +3552,13 @@ TBLPA VPLAYACTPC BL ! ;
 
 **Used by:** <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>.
 
+---
+
 ### <a name="terse-word-53-46-4f-55-4c"></a><span>SFOUL</span>
 
-`( -- )`
-
 Uses ROT and SPOST to compose game logic.
+
+`( -- )`
 
 ```text
 : SFOUL 2400 2ROT A" FOUL " SPOST ;
@@ -3172,11 +3568,13 @@ Uses ROT and SPOST to compose game logic.
 
 **Used by:** <a href="#terse-word-46-4f-55-4c-54-49-4d-45"><code>FOULTIME</code></a>.
 
+---
+
 ### <a name="terse-word-53-47-4f"></a><span>SGO</span>
 
-`( -- )`
-
 Uses SPOST to compose game logic.
+
+`( -- )`
 
 ```text
 : SGO 2000 2D00 828 A" GAME OVER" SPOST ;
@@ -3186,11 +3584,13 @@ Uses SPOST to compose game logic.
 
 **Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-53-48-4f-4d-45-52"></a><span>SHOMER</span>
 
-`( -- )`
-
 Uses ROT and SPOST to compose game logic.
+
+`( -- )`
 
 ```text
 : SHOMER 2300 2ROT A" HOMER" SPOST ;
@@ -3200,11 +3600,13 @@ Uses ROT and SPOST to compose game logic.
 
 **Used by:** <a href="#terse-word-44-4f-45-48-4f-4d-45-52"><code>DOEHOMER</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>.
 
+---
+
 ### <a name="terse-word-53-4f-52-52-59"></a><span>SORRY</span>
 
-`( -- )`
-
 Display the losing-player prompt.
+
+`( -- )`
 
 ```text
 : SORRY 1B00 1000 828 A" TOO BAD I WON" SPOST DP1CN ;
@@ -3214,11 +3616,13 @@ Display the losing-player prompt.
 
 **Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-53-4f-55-54-31"></a><span>SOUT1</span>
 
-`( x y options -- )`
-
 Draw the 1 OUT message.
+
+`( x y options -- )`
 
 ```text
 : SOUT1 2300 2ROT A" 1 OUT" SPOST ;
@@ -3228,11 +3632,13 @@ Draw the 1 OUT message.
 
 **Used by:** <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>.
 
+---
+
 ### <a name="terse-word-53-4f-55-54-32"></a><span>SOUT2</span>
 
-`( x y options -- )`
-
 Draw the 2 OUT message.
+
+`( x y options -- )`
 
 ```text
 : SOUT2 2200 2ROT A" 2 OUTS" SPOST ;
@@ -3242,11 +3648,13 @@ Draw the 2 OUT message.
 
 **Used by:** <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>.
 
+---
+
 ### <a name="terse-word-53-4f-55-54-33"></a><span>SOUT3</span>
 
-`( x y options -- )`
-
 Draw the 3 OUT message.
+
+`( x y options -- )`
 
 ```text
 : SOUT3 2200 2ROT A" 3 OUTS" SPOST ;
@@ -3256,11 +3664,13 @@ Draw the 3 OUT message.
 
 **Used by:** <a href="#terse-word-44-4f-53-4f-55-54"><code>DOSOUT</code></a>.
 
+---
+
 ### <a name="terse-word-53-50-4c-52"></a><span>SPLR</span>
 
-`( -- )`
-
 SPLR12/SPLR display available player choices;
+
+`( -- )`
 
 ```text
 : SPLR CNSW1 B@ IF CREDITS B@ 1 <> IF SPLR12 ELSE 0E00 2000 828
@@ -3273,11 +3683,13 @@ SPOST STRT1 BONE THEN ELSE SPLR12 THEN ;
 
 **Used by:** <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>.
 
+---
+
 ### <a name="terse-word-53-50-4c-52-31-32"></a><span>SPLR12</span>
 
-`( -- )`
-
 SPLR12/SPLR display available player choices;
+
+`( -- )`
 
 ```text
 : SPLR12 1400 2000 828 A" SELECT 1 OR 2 PLAYERS" SPOST ;
@@ -3287,11 +3699,13 @@ SPLR12/SPLR display available player choices;
 
 **Used by:** <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>.
 
+---
+
 ### <a name="terse-word-53-50-4f-53-54"></a><span>SPOST</span>
 
-`( x y options string -- )`
-
 Draw a string.
+
+`( x y options string -- )`
 
 ```text
 : SPOST ( post an ascii-string on the screen ; see options )
@@ -3305,11 +3719,13 @@ PPOST 3DROP ;
 
 **Used by:** <a href="#terse-word-43-48-47-53"><code>CHGS</code></a>, <a href="#terse-word-43-4f-4e-47-52"><code>CONGR</code></a>, <a href="#terse-word-44-50-31"><code>DP1</code></a>, <a href="#terse-word-44-50-31-32-43-4e"><code>DP12CN</code></a>, <a href="#terse-word-44-50-31-43-4e"><code>DP1CN</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-48-4f-4d"><code>HOM</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>, <a href="#terse-word-49-4e-53-54-52-43"><code>INSTRC</code></a>, <a href="#terse-word-49-53-43-4e"><code>ISCN</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-53-42-41-4c-4c-31"><code>SBALL1</code></a>, <a href="#terse-word-53-42-41-4c-4c-32"><code>SBALL2</code></a>, <a href="#terse-word-53-42-41-4c-4c-33"><code>SBALL3</code></a>, <a href="#terse-word-53-46-4f-55-4c"><code>SFOUL</code></a>, <a href="#terse-word-53-47-4f"><code>SGO</code></a>, <a href="#terse-word-53-48-4f-4d-45-52"><code>SHOMER</code></a>, <a href="#terse-word-53-4f-52-52-59"><code>SORRY</code></a>, <a href="#terse-word-53-4f-55-54-31"><code>SOUT1</code></a>, <a href="#terse-word-53-4f-55-54-32"><code>SOUT2</code></a>, <a href="#terse-word-53-4f-55-54-33"><code>SOUT3</code></a>, <a href="#terse-word-53-50-4c-52"><code>SPLR</code></a>, <a href="#terse-word-53-50-4c-52-31-32"><code>SPLR12</code></a>, <a href="#terse-word-53-53-41-46-45"><code>SSAFE</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-31"><code>SSTRIKE1</code></a>, <a href="#terse-word-53-53-54-52-49-4b-45-32"><code>SSTRIKE2</code></a>, <a href="#terse-word-53-55-50"><code>SUP</code></a>, <a href="#terse-word-53-57-41-4c-4b"><code>SWALK</code></a>, <a href="#terse-word-54-43-4e-54"><code>TCNT</code></a>, <a href="#terse-word-56-49-53"><code>VIS</code></a>, <a href="#terse-word-59-4f-55-31-53-54"><code>YOU1ST</code></a>.
 
+---
+
 ### <a name="terse-word-53-53-41-46-45"></a><span>SSAFE</span>
 
-`( x y options -- )`
-
 Display SAFE and redraw counts using SBO.
+
+`( x y options -- )`
 
 ```text
 : SSAFE 2400 2ROT A" SAFE " SPOST SBO ;
@@ -3319,11 +3735,13 @@ Display SAFE and redraw counts using SBO.
 
 **Used by:** <a href="#terse-word-44-4f-53-41-46-45"><code>DOSAFE</code></a>.
 
+---
+
 ### <a name="terse-word-53-53-54-52-49-4b-45-31"></a><span>SSTRIKE1</span>
 
-`( x y options -- )`
-
 Draw the STRIKE 1 message.
+
+`( x y options -- )`
 
 ```text
 : SSTRIKE1 2000 2ROT A" STRIKE 1" SPOST ;
@@ -3333,11 +3751,13 @@ Draw the STRIKE 1 message.
 
 **Used by:** <a href="#terse-word-44-4f-53-53-54-52-49-4b-45"><code>DOSSTRIKE</code></a>.
 
+---
+
 ### <a name="terse-word-53-53-54-52-49-4b-45-32"></a><span>SSTRIKE2</span>
 
-`( x y options -- )`
-
 Draw the STRIKE 2 message.
+
+`( x y options -- )`
 
 ```text
 : SSTRIKE2 2100 2ROT A" STRIKE 2" SPOST ;
@@ -3347,11 +3767,13 @@ Draw the STRIKE 2 message.
 
 **Used by:** <a href="#terse-word-44-4f-53-53-54-52-49-4b-45"><code>DOSSTRIKE</code></a>.
 
+---
+
 ### <a name="terse-word-53-54-46-4c-44"></a><span>STFLD</span>
 
-`( -- )`
-
 Installs RETPA and TAKEFIELD.
+
+`( -- )`
 
 ```text
 : STFLD RETPA TAKEFIELD BONE ;
@@ -3361,11 +3783,13 @@ Installs RETPA and TAKEFIELD.
 
 **Used by:** <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>.
 
+---
+
 ### <a name="terse-word-53-54-50-2c"></a><span>STP,</span>
 
-`( -- )`
-
 Emit a standing-action record.
+
+`( -- )`
 
 ```text
 { : STP, } 0 0 0 STND ACT, DEACT, { ; }
@@ -3373,11 +3797,13 @@ Emit a standing-action record.
 
 **Calls:** <a href="#terse-word-41-43-54-2c"><code>ACT,</code></a>, <a href="#terse-word-44-45-41-43-54-2c"><code>DEACT,</code></a>.
 
+---
+
 ### <a name="terse-word-53-54-52-49-4b-45-54-49-4d-45"></a><span>STRIKETIME</span>
 
-`( -- )`
-
 Strike process.
+
+`( -- )`
 
 ```text
 : STRIKETIME ( strike process )
@@ -3387,11 +3813,13 @@ ELSE MSTRIKE DOSSTRIKE THEN SBO ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-42-21"><code>B!</code></a>, <a href="#terse-word-42-40"><code>B@</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-4d-53-54-52-49-4b-45"><code>MSTRIKE</code></a>, <a href="#terse-word-44-4f-53-53-54-52-49-4b-45"><code>DOSSTRIKE</code></a>, <a href="#terse-word-53-42-4f"><code>SBO</code></a>.
 
+---
+
 ### <a name="terse-word-53-54-52-49-4e-47-47-4f"></a><span>STRINGGO</span>
 
-`( string erase-flag -- )`
-
 Given string , stringerase.
+
+`( string erase-flag -- )`
 
 ```text
 : STRINGGO ( given string , stringerase )
@@ -3405,11 +3833,13 @@ DROP DROP ;
 
 **Used by:** <a href="#terse-word-53-54-52-49-4e-47-50-52-43"><code>STRINGPRC</code></a>.
 
+---
+
 ### <a name="terse-word-53-54-52-49-4e-47-50-52-43"></a><span>STRINGPRC</span>
 
-`( -- )`
-
 String display.
+
+`( -- )`
 
 ```text
 : STRINGPRC ( string display )
@@ -3422,11 +3852,13 @@ THEN STRINGERASE BZERO ;
 
 **Calls:** <a href="#terse-word-42-40"><code>B@</code></a>, <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-42-5a-45-52-4f"><code>BZERO</code></a>, <a href="#terse-word-53-54-52-49-4e-47-47-4f"><code>STRINGGO</code></a>, <a href="#terse-word-42-21"><code>B!</code></a>.
 
+---
+
 ### <a name="terse-word-53-54-52-54-42-41-4c-4c"></a><span>STRTBALL</span>
 
-`( -- )`
-
 Runs instructions, redraws the field, clears scores and game state, applies credit handling, shows the computer-game greeting, starts TF and opening music.
+
+`( -- )`
 
 ```text
 : STRTBALL DI INSTRC FL F00 SUP 3F00 SUP
@@ -3440,11 +3872,13 @@ CMPLR B@ IF YOU1ST 50 DWAIT YOU1ST THEN
 
 **Used by:** <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>.
 
+---
+
 ### <a name="terse-word-53-55-50"></a><span>SUP</span>
 
-`( -- )`
-
 Posts UP.
+
+`( -- )`
 
 ```text
 : SUP 8C00 8828 A" UP" SPOST ;
@@ -3454,11 +3888,13 @@ Posts UP.
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-2d-33-30"></a><span>SW-30</span>
 
-`( random dx -- sector )`
-
 Maps a −30° swing and horizontal direction into a baseball sector code.
+
+`( random dx -- sector )`
 
 ```text
 : SW-30 DUP IF 1 = IF ( x=1 ) IF F1STR ELSE HR THEN
@@ -3469,11 +3905,13 @@ ELSE DROP HR THEN THEN ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-2d-34-35"></a><span>SW-45</span>
 
-`( random dx -- sector )`
-
 Maps a −45° swing and horizontal direction into a baseball sector code.
+
+`( random dx -- sector )`
 
 ```text
 : SW-45 DUP IF 1 = IF ( x=1 ) DROP FBR
@@ -3484,11 +3922,13 @@ ELSE DROP HRL THEN THEN ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-2d-39-30"></a><span>SW-90</span>
 
-`( a b -- )`
-
 Ignores direction/random inputs and returns the far-right foul sector.
+
+`( a b -- )`
 
 ```text
 : SW-90 DROP DROP FBR ;
@@ -3496,11 +3936,13 @@ Ignores direction/random inputs and returns the far-right foul sector.
 
 **Calls:** <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-2b-33-30"></a><span>SW+30</span>
 
-`( random dx -- sector )`
-
 Maps a +30° swing and horizontal direction into a baseball sector code.
+
+`( random dx -- sector )`
 
 ```text
 : SW+30 DUP IF 1 = IF ( x=1 ) IF HL ELSE FSSR THEN
@@ -3511,11 +3953,13 @@ ELSE DROP HL THEN THEN ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-2b-34-35"></a><span>SW+45</span>
 
-`( random dx -- sector )`
-
 Maps a +45° swing and horizontal direction into a baseball sector code.
+
+`( random dx -- sector )`
 
 ```text
 : SW+45 DUP IF 1 = IF ( x=1 ) IF HLL ELSE F3RDR THEN
@@ -3526,11 +3970,13 @@ ELSE DROP HLL THEN THEN ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-2b-39-30"></a><span>SW+90</span>
 
-`( a b -- )`
-
 Discard the two inputs and return the far-left foul sector.
+
+`( a b -- )`
 
 ```text
 : SW+90 DROP DROP FBL ;
@@ -3538,11 +3984,13 @@ Discard the two inputs and return the far-left foul sector.
 
 **Calls:** <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-30"></a><span>SW0</span>
 
-`( random dx -- sector )`
-
 Maps a central swing and horizontal direction into a baseball sector code.
+
+`( random dx -- sector )`
 
 ```text
 : SW0 DUP IF 1 = IF ( x=1 ) IF F2NDR ELSE HM THEN
@@ -3552,11 +4000,13 @@ ELSE ( x=0 ) DROP IF HM ELSE F2NDR THEN THEN ;
 
 **Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-41-4c-4b"></a><span>SWALK</span>
 
-`( x y options -- )`
-
 Uses ROT and SPOST to compose game logic.
+
+`( x y options -- )`
 
 ```text
 : SWALK 2400 2ROT A" WALK" SPOST ;
@@ -3566,11 +4016,13 @@ Uses ROT and SPOST to compose game logic.
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>.
 
+---
+
 ### <a name="terse-word-54-43-4e-54"></a><span>TCNT</span>
 
-`( -- )`
-
 Chooses one-coin versus per-player continuation wording from CNSW12 and current credits.
+
+`( -- )`
 
 ```text
 : TCNT 700 1800 828 A" TO CONTINUE GAME AT END OF INNING" SPOST
@@ -3582,11 +4034,13 @@ A" DEPOSIT 1 COIN PER PLAYER" SPOST THEN ELSE DP1 THEN ;
 
 **Used by:** <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-54-45-52-53-45-43-48-4b"></a><span>TERSECHK</span>
 
-`( -- )`
-
 Look at terse routine flags.
+
+`( -- )`
 
 ```text
 : TERSECHK ( look at terse routine flags ) 0 RND DROP
@@ -3598,11 +4052,13 @@ CHKPLRS B@ IF PLRCHK THEN UPCRED B@ IF CREDARROW THEN ;
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-54-46"></a><span>TF</span>
 
-`( -- )`
-
 Take the field.
+
+`( -- )`
 
 ```text
 : TF ( take the field )
@@ -3639,21 +4095,25 @@ HITYET BONE MYAH S10 ;
 
 **Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>.
 
+---
+
 ### <a name="terse-word-54-48-57-2c"></a><span>THW,</span>
 
-`( -- )`
-
 Emit the throw command.
+
+`( -- )`
 
 ```text
 { : THW, } 0B B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-54-57-41-49-54"></a><span>TWAIT</span>
 
-`( count -- )`
-
 Terse wait period.
+
+`( count -- )`
 
 ```text
 : TWAIT ( terse wait period )
@@ -3667,11 +4127,13 @@ DROP DI ;
 
 **Used by:** <a href="#terse-word-43-48-4b-47-4d-43-4e-54"><code>CHKGMCNT</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-50-43-4e"><code>DPCN</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-56"></a><span>V</span>
 
-`( -- )`
-
 Uses VARIABLE to compose game logic.
+
+`( -- )`
 
 ```text
 { : V } VARIABLE { ; }
@@ -3681,11 +4143,13 @@ Uses VARIABLE to compose game logic.
 
 **Used by:** <a href="#terse-word-56-3d"><code>V=</code></a>.
 
+---
+
 ### <a name="terse-word-56-3d"></a><span>V=</span>
 
-`( -- )`
-
 Uses V and VARIABLE to compose game logic.
+
+`( -- )`
 
 ```text
 { : V= } 0 VARIABLE { ; }
@@ -3693,21 +4157,25 @@ Uses V and VARIABLE to compose game logic.
 
 **Calls:** <a href="#terse-word-56"><code>V</code></a>, <a href="#terse-word-56-41-52-49-41-42-4c-45"><code>VARIABLE</code></a>.
 
+---
+
 ### <a name="terse-word-56-49-42-53"></a><span>VIBS</span>
 
-`( value -- )`
-
 Emit a vibrato setting.
+
+`( value -- )`
 
 ```text
 { : VIBS } 14 B, B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-56-49-53"></a><span>VIS</span>
 
-`( -- )`
-
 HOM and VIS draw HOME/VISITOR using a large initial character and the remaining string;
+
+`( -- )`
 
 ```text
 : VIS 700 7A00 828 56 CPOST 900 7F00 8828 A" ISITOR" SPOST ;
@@ -3717,11 +4185,13 @@ HOM and VIS draw HOME/VISITOR using a large initial character and the remaining 
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
+---
+
 ### <a name="terse-word-57-48-42-4f-44-44-53"></a><span>WHBODDS</span>
 
-`( -- )`
-
 Sets who is on base calculates play odds.
+
+`( -- )`
 
 ```text
 : WHBODDS ( sets who is on base calculates play odds )
@@ -3741,21 +4211,25 @@ THEN THEN THEN DROP THEN ;
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-54-48-52-4f-57-42-41-4c-4c"><code>THROWBALL</code></a>.
 
+---
+
 ### <a name="terse-word-57-54-48-57-2c"></a><span>WTHW,</span>
 
-`( -- )`
-
 Emit the wait-for-throw command.
+
+`( -- )`
 
 ```text
 { : WTHW, } 0D B, { ; }
 ```
 
+---
+
 ### <a name="terse-word-57-55-50-47-4f"></a><span>WUPGO</span>
 
-`( -- )`
-
 Activates WHOSUP with runner/automatic-forward flags.
+
+`( -- )`
 
 ```text
 : WUPGO WHOSUP @ DUP VSTATUS + 81 SB! VRSTAT + 3 SB! ;
@@ -3765,11 +4239,13 @@ Activates WHOSUP with runner/automatic-forward flags.
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
+---
+
 ### <a name="terse-word-57-55-50-54-4f-4e"></a><span>WUPTON</span>
 
-`( -- )`
-
 Installs WUPWRT.
+
+`( -- )`
 
 ```text
 : WUPTON ' WUPWRT FLSHTON ;
@@ -3779,11 +4255,13 @@ Installs WUPWRT.
 
 **Used by:** <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>.
 
+---
+
 ### <a name="terse-word-57-55-50-57-52-54"></a><span>WUPWRT</span>
 
-`( -- )`
-
 Write whos up for flash.
+
+`( -- )`
 
 ```text
 : WUPWRT ( write whos up for flash )
@@ -3794,11 +4272,13 @@ PTAUTOTM PLYR1UP B@ IF HOM ELSE VIS THEN ;
 
 **Used by:** <a href="#terse-word-42-55-54-54-4f-4e-43-48-4b"><code>BUTTONCHK</code></a>, <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-57-55-50-54-4f-4e"><code>WUPTON</code></a>.
 
+---
+
 ### <a name="terse-word-59-4f-55-31-53-54"></a><span>YOU1ST</span>
 
-`( -- )`
-
 Posts the greeting/extra-inning challenge, then continues to 306.
+
+`( -- )`
 
 ```text
 : YOU1ST 1A00 1000 828 A" YOU ARE UP 1ST" SPOST 0F00 3000 828
@@ -3810,11 +4290,13 @@ A" GOOD LUCK" SPOST ;
 
 **Used by:** <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>.
 
+---
+
 ### <a name="terse-word-5a-45-52-4f-52-41-4d"></a><span>ZERORAM</span>
 
-`( -- )`
-
 Clears $270 bytes starting at $7C30 and resets OFTFCNT.
+
+`( -- )`
 
 ```text
 : ZERORAM DI 0 7C30 270 FILL 3 OFTFCNT B! DI ;
@@ -3824,12 +4306,15 @@ Clears $270 bytes starting at $7C30 and resets OFTFCNT.
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>.
 
+---
+
 ### <a name="terse-word-2b-4c-4f-4f-50"></a><span>+LOOP</span>
+
+Uses LOOP to process game state.
+
 `( increment -- )`
 
 Increment consumed; IX loop frame updated or released
-
-Uses LOOP to process game state.
 
 ```text
 CODE +LOOP <ASSEMBLE H POP, H A MOV, 0 X E LDX, 1 X D LDX,
@@ -3844,12 +4329,15 @@ LABEL PLDONE 6 D LXI, D DADX, NEXT
 
 **Calls:** <a href="#terse-word-4c-4f-4f-50"><code>LOOP</code></a>.
 
+---
+
 ### <a name="terse-word-41-4c-4c-46-4c-44-41-43-54"></a><span>ALLFLDACT</span>
+
+Sets all fielders active.
+
 `( -- )`
 
 RAM: infield/outfield active flags set; returns NEXT
-
-Sets all fielders active.
 
 ```text
 CODE ALLFLDACT ( sets all fielders active )
@@ -3860,12 +4348,15 @@ CODE ALLFLDACT ( sets all fielders active )
 
 **Used by:** <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>.
 
+---
+
 ### <a name="terse-word-41-4e-4d-53-45-51-4c-4f-41-44"></a><span>ANMSEQLOAD</span>
+
+Finds proper anm seq by per=#.
+
 `( -- )`
 
 Uses IX's current VANMH/VANML animation table pointer and VPERS# to select an indexed 16-bit animation sequence address; stores it in IX:VANMSEQH/VANMSEQL and returns natively.
-
-Finds proper anm seq by per=#.
 
 ```text
 CODE ANMSEQLOAD ( finds proper anm seq by per=# )
@@ -3879,12 +4370,15 @@ D VANMSEQH X STX, E VANMSEQL X STX, RET,
 
 **Used by:** <a href="#terse-word-50-4c-41-59-41-43-54"><code>PLAYACT</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-4c-4c-45-52-41-53-45"></a><span>BALLERASE</span>
+
+Preserves BC/IY around native BLERASE and returns to TERSE.
+
 `( -- )`
 
 BC, IY preserved; ball cleared; returns NEXT
-
-Preserves BC/IY around native BLERASE and returns to TERSE.
 
 ```text
 CODE BALLERASE B PUSH, Y PUSHX, BLERASE CALL,
@@ -3895,12 +4389,15 @@ Y POPX, B POP, NEXT
 
 **Used by:** <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-54-48-49-54"></a><span>BATHIT</span>
+
+He hit it time to get em running.
+
 `( -- )`
 
 Writes HITYET, invokes INLOG with interrupts disabled, clears HITTIME, PITCHTIME and SWINGGO, then executes EI and returns natively.
-
-He hit it time to get em running.
 
 ```text
 CODE BATHIT ( he hit it time to get em running )
@@ -3913,12 +4410,15 @@ SWINGGO STA, EI, RET,
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-54-48-49-54-43-48-4b"></a><span>BATHITCHK</span>
+
+Check window for hit.
+
 `( -- )`
 
 Takes the swing-state entry through HL, looks up its hit window via BWTBL/INDEXW, compares ball Y/X against it, and, on a new hit, sets HITTIME and HITGOING and calls BLERASE; returns natively.
-
-Check window for hit.
 
 ```text
 CODE BATHITCHK ( check window for hit )
@@ -3933,12 +4433,15 @@ HITTIME STA, HITGOING STA, BLERASE CALL, RET,
 
 **Used by:** <a href="#terse-word-42-41-54-53-57-49-4e-47"><code>BATSWING</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-54-53-57-49-4e-47"></a><span>BATSWING</span>
+
+Swings bat if appropriate.
+
 `( -- )`
 
 Reads swing counters from RAM, calls 'BATWRITE'/'BATHITCHK', updates swing/strike state
-
-Swings bat if appropriate.
 
 ```text
 CODE BATSWING ( swings bat if appropriate )
@@ -3959,12 +4462,15 @@ THEN, THEN, THEN, RET,
 
 **Calls:** <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-42-41-54-48-49-54-43-48-4b"><code>BATHITCHK</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-54-57-52-49-54-45"></a><span>BATWRITE</span>
+
+Xor bat from swingtype.
+
 `( -- )`
 
 HL = swing-state pointer; derives drawing parameters and calls native pattern writer; restores HL
-
-Xor bat from swingtype.
 
 ```text
 CODE BATWRITE ( xor bat from swingtype )
@@ -3979,12 +4485,15 @@ H POP, RET,
 
 **Used by:** <a href="#terse-word-42-41-54-53-57-49-4e-47"><code>BATSWING</code></a>.
 
+---
+
 ### <a name="terse-word-42-43-44-2b"></a><span>BCD+</span>
+
+Binary to decimal arithmatic.
+
 `( a b -- bcd-sum )`
 
 HL contains BCD sum, pushed onto parameter stack
-
-Binary to decimal arithmatic.
 
 ```text
 CODE BCD+ ( binary to decimal arithmatic )
@@ -3994,12 +4503,15 @@ H POP, D POP, E A MOV, L ADD, DAA, A L MOV,
 D A MOV, H ADC, DAA, A H MOV, H PUSH, NEXT
 ```
 
+---
+
 ### <a name="terse-word-42-4c-44-53-54"></a><span>BLDST</span>
+
+Ball thrown or hit.
+
 `( -- )`
 
 Ball-vector update helper: computes motion/destination, handles catch/throw transitions
-
-Ball thrown or hit.
 
 ```text
 CODE BLDST ( ball thrown or hit )
@@ -4025,24 +4537,30 @@ THEN, THWPA H LXI, VECTPC SHLD, B POP, RET,
 
 **Calls:** <a href="#terse-word-44-53-54-4c-44"><code>DSTLD</code></a>, <a href="#terse-word-44-53-54-43-41-4c-43"><code>DSTCALC</code></a>, <a href="#terse-word-43-4d-50-4f-46"><code>CMPOF</code></a>, <a href="#terse-word-4b-49-4c-4c-4f-46"><code>KILLOF</code></a>.
 
+---
+
 ### <a name="terse-word-42-4c-4d-4f-54-49-4f-4e"></a><span>BLMOTION</span>
+
+Set pc for ram pa table -tractor ball.
+
 `( -- )`
 
 Loads HL with TBLPA, stores it into VECTPC and returns natively; no TERSE parameter-stack cells are consumed.
-
-Set pc for ram pa table -tractor ball.
 
 ```text
 CODE BLMOTION ( set pc for ram pa table -tractor ball )
 TBLPA H LXI, VECTPC SHLD, RET,
 ```
 
+---
+
 ### <a name="terse-word-42-4c-50-4f-53-43-48-4b"></a><span>BLPOSCHK</span>
+
+Branches on HITYET.
+
 `( -- )`
 
 IX = ball vector; checks ball/pitch position, collision flags and destination vector
-
-Branches on HITYET.
 
 ```text
 CODE BLPOSCHK
@@ -4073,12 +4591,15 @@ A XRA, OFTBLGO STA, TOOF STA, ( ofl t.o. timer ) THEN, RET,
 
 **Calls:** <a href="#terse-word-4f-46-42-4c-43-48-4b"><code>OFBLCHK</code></a>, <a href="#terse-word-4c-56-52-53-54-41-54"><code>LVRSTAT</code></a>.
 
+---
+
 ### <a name="terse-word-42-4d-55-53-49-43"></a><span>BMUSIC</span>
+
+Consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay.
+
 `( music-address -- )`
 
 Pops the music address into HL unconditionally. If PRIORITY is zero, calls loadpc, clears NOTETIMER and sets MULTIPLE to one; otherwise leaves the current music stream and timers unchanged.
-
-Consumes a stream pointer and installs it only when PRIORITY is zero, setting one repetition and clearing the note delay.
 
 ```text
 CODE BMUSIC PRIORITY LDA, H POP, A ORA, 0=, IF, loadpc CALL,
@@ -4089,12 +4610,15 @@ NOTETIMER STA, A INR, MULTIPLE STA, THEN, NEXT
 
 **Used by:** <a href="#terse-word-4d-42-41-4c-4c"><code>MBALL</code></a>, <a href="#terse-word-4d-43-41-4e-4e-4f-4e"><code>MCANNON</code></a>, <a href="#terse-word-4d-43-4f-49-4e"><code>MCOIN</code></a>, <a href="#terse-word-4d-46-45-4e-43-45"><code>MFENCE</code></a>, <a href="#terse-word-4d-46-4f-55-4c"><code>MFOUL</code></a>, <a href="#terse-word-4d-48-49-54"><code>MHIT</code></a>, <a href="#terse-word-4d-4f-55-54"><code>MOUT</code></a>, <a href="#terse-word-4d-53-41-46-45"><code>MSAFE</code></a>, <a href="#terse-word-4d-53-54-52-49-4b-45"><code>MSTRIKE</code></a>, <a href="#terse-word-4d-59-41-48"><code>MYAH</code></a>.
 
+---
+
 ### <a name="terse-word-42-55-54-54-4f-4e-43-48-4b"></a><span>BUTTONCHK</span>
+
+Reads buttons for swing run & pitch it.
+
 `( -- )`
 
 Samples controls and updates pitch/run flags; saves/restores IX/IY on native calls
-
-Reads buttons for swing run & pitch it.
 
 ```text
 CODE BUTTONCHK ( reads buttons for swing run & pitch it )
@@ -4127,12 +4651,15 @@ SWING STA, THEN, RET, -->
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-43-41-55-47-48-54"></a><span>CHKCAUGHT</span>
+
+Caught set in interrupt.
+
 `( -- )`
 
 Interrupt-side caught-ball handler; saves native vector registers and changes runner/score flags
-
-Caught set in interrupt.
 
 ```text
 CODE CHKCAUGHT ( caught set in interrupt )
@@ -4181,12 +4708,15 @@ EI, RET, ASSEMBLE>
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-47-52-4f-55-4e-44-45-52"></a><span>CHKGROUNDER</span>
+
+If grounder adjust ball direction.
+
 `( -- )`
 
 IX = ball vector; adjusts velocity using grounder lookup; preserves HL across table lookup
-
-If grounder adjust ball direction.
 
 ```text
 CODE CHKGROUNDER ( if grounder adjust ball direction )
@@ -4200,12 +4730,15 @@ VXH X A LDX, 0A0 CPI, ' COMPDE CC, H POP, D DAD, RET,
 
 **Used by:** <a href="#terse-word-56-45-43-54-4f-52"><code>VECTOR</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-53-43-52-54-49-4d-45"></a><span>CHKSCRTIME</span>
+
+Score process.
+
 `( -- )`
 
 Scores play events from RAM, updates runner/base and score state; temporary IX stack saves balance on return
-
-Score process.
 
 ```text
 CODE CHKSCRTIME ( score process ) DI,
@@ -4222,12 +4755,15 @@ M A MOV, 1 ADI, DAA, A M MOV, D A MOV, SCORESHOW STA, RET,
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-43-4c-52-42-4c-53-54"></a><span>CLRBLST</span>
+
+Resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading.
+
 `( -- )`
 
 Stores ASCII zero ($30) into ball and strike counters; 'NEXT'
-
-Resets ball and strike bytes to ASCII zero ($30), returns to TERSE and continues loading.
 
 ```text
 CODE CLRBLST 30 A MVI, BALLS STA, STRIKES STA, NEXT
@@ -4235,12 +4771,15 @@ CODE CLRBLST 30 A MVI, BALLS STA, STRIKES STA, NEXT
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-44-4f-48-4f-4d-45-52"><code>DOHOMER</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
+---
+
 ### <a name="terse-word-63-6e-6c-69-6e-65"></a><span>cnline</span>
+
+Calls vector line write.
+
 `( -- )`
 
 Saves BC, IX and IY around 'VECTOR'; restores registers before 'NEXT'
-
-Calls vector line write.
 
 ```text
 CODE cnline ( calls vector line write )
@@ -4253,12 +4792,15 @@ PE, IF, EI, THEN, NEXT
 
 **Used by:** <a href="#terse-word-43-4e-4c-49-4e-45"><code>CNLINE</code></a>, <a href="#terse-word-44-4c-49-4e-45"><code>DLINE</code></a>.
 
+---
+
 ### <a name="terse-word-43-4f-4d-50-44-45"></a><span>COMPDE</span>
+
+Negate DE while preserving HL.
+
 `( -- )`
 
 Negates DE through COMPHL after exchanging DE/HL, then restores the caller's original HL; returns natively.
-
-Negate DE while preserving HL.
 
 ```text
 CODE COMPDE H PUSH, XCHG, ' COMPHL CALL, XCHG, H POP, RET,
@@ -4268,12 +4810,15 @@ CODE COMPDE H PUSH, XCHG, ' COMPHL CALL, XCHG, H POP, RET,
 
 **Used by:** <a href="#terse-word-43-48-4b-47-52-4f-55-4e-44-45-52"><code>CHKGROUNDER</code></a>.
 
+---
+
 ### <a name="terse-word-43-4f-4d-50-48-4c"></a><span>COMPHL</span>
+
+Compliments HL.
+
 `( -- )`
 
 Returns the two's-complement negation of HL (bitwise complement of both bytes followed by increment); no TERSE parameter-stack cells are consumed.
-
-Compliments HL.
 
 ```text
 CODE COMPHL ( compliments HL )
@@ -4282,12 +4827,15 @@ H A MOV, CMA, A H MOV, L A MOV, CMA, A L MOV, H INX, RET,
 
 **Used by:** <a href="#terse-word-43-4f-4d-50-44-45"><code>COMPDE</code></a>, <a href="#terse-word-44-49-56-48-4c-42-59-34"><code>DIVHLBY4</code></a>, <a href="#terse-word-44-53-54-43-41-4c-43"><code>DSTCALC</code></a>, <a href="#terse-word-4d-55-4c-54-48-4c-42-59-34"><code>MULTHLBY4</code></a>, <a href="#terse-word-4f-46-42-4c-43-48-4b"><code>OFBLCHK</code></a>, <a href="#terse-word-54-42-4c-56-45-4c"><code>TBLVEL</code></a>.
 
+---
+
 ### <a name="terse-word-43-4f-55-4e-54"></a><span>COUNT</span>
+
+Read the next character of a counted/high-bit-terminated string.
+
 `( address -- address+1 character )`
 
 Character returned with high-bit terminator stripped; address advanced by one
-
-Read the next character of a counted/high-bit-terminated string.
 
 ```z80
             pop     hl                  ; Pop string address from parameter stack
@@ -4303,12 +4851,15 @@ Read the next character of a counted/high-bit-terminated string.
 
 **Used by:** <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>.
 
+---
+
 ### <a name="terse-word-63-70-6f-73-74"></a><span>cpost</span>
+
+Post an ascii-character on the screen ; see opt.
+
 `( x y options char -- x' y options )`
 
 Consumes drawing position, options and character; returns updated x and retained state
-
-Post an ascii-character on the screen ; see opt.
 
 ```text
 CODE cpost ( post an ascii-character on the screen ; see opt. )
@@ -4341,24 +4892,30 @@ EXAF, PE, IF, EI, THEN, NEXT
 
 **Used by:** <a href="#terse-word-43-50-4f-53-54"><code>CPOST</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-64-70-6f-73-74"><code>dpost</code></a>.
 
+---
+
 ### <a name="terse-word-44-45-41-43-54-49-56-41-54-45"></a><span>DEACTIVATE</span>
+
+Reset active bit in status.
+
 `( -- )`
 
 Clears the VACT bit of VSTATUS in the vector addressed by IX, writes 1 to SAMEDLT and returns natively.
-
-Reset active bit in status.
 
 ```text
 CODE DEACTIVATE ( reset active bit in status )
 VACT VSTATUS X RESX, 1 A MVI, SAMEDLT STA, RET,
 ```
 
+---
+
 ### <a name="terse-word-44-49"></a><span>DI</span>
+
+Disable maskable Z80 interrupts.
+
 `( -- )`
 
 Maskable interrupts disabled; parameter stack unchanged
-
-Disable maskable Z80 interrupts.
 
 ```z80
 _DI:
@@ -4368,12 +4925,15 @@ _DI:
 
 **Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-4c-46-49-4c-4c"><code>FLFILL</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-4c-52-53-45-4c-45-43-54"><code>PLRSELECT</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>, <a href="#terse-word-53-54-52-54-42-41-4c-4c"><code>STRTBALL</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>, <a href="#terse-word-5a-45-52-4f-52-41-4d"><code>ZERORAM</code></a>.
 
+---
+
 ### <a name="terse-word-44-49-56-48-4c-42-59-34"></a><span>DIVHLBY4</span>
+
+Divide HL by 4.
+
 `( -- )`
 
 HL ← signed(HL / 4)
-
-Divide HL by 4.
 
 ```text
 CODE DIVHLBY4 ( divide HL by 4 )
@@ -4387,12 +4947,15 @@ PSW POP, ' COMPHL CNZ, RET,
 
 **Used by:** <a href="#terse-word-56-45-43-54-4f-52"><code>VECTOR</code></a>.
 
+---
+
 ### <a name="terse-word-44-4f"></a><span>DO</span>
+
+Enter a counted loop using a three-cell return-stack frame.
+
 `( limit start -- )`
 
 Two parameter-stack cells consumed; IX return stack holds start, limit and loop IP
-
-Enter a counted loop using a three-cell return-stack frame.
 
 ```z80
 _DO:
@@ -4411,12 +4974,15 @@ _DO:
 
 **Used by:** <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
+---
+
 ### <a name="terse-word-44-53-54-43-41-4c-43"></a><span>DSTCALC</span>
+
+Calc deltas to destination.
+
 `( -- )`
 
 HL ← dy; DE ← dx; BC ← action selector
-
-Calc deltas to destination.
 
 ```text
 CODE DSTCALC ( calc deltas to destination )
@@ -4454,12 +5020,15 @@ A XRA, RDST STA, VGO VSTATUS X SETX, THEN, RET, ASSEMBLE>
 
 **Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>, <a href="#terse-word-43-4d-50-4f-46"><code>CMPOF</code></a>, <a href="#terse-word-46-4c-44-44-53-54"><code>FLDDST</code></a>, <a href="#terse-word-4f-46-46-46-44-53-54"><code>OFFFDST</code></a>.
 
+---
+
 ### <a name="terse-word-44-53-54-4c-44"></a><span>DSTLD</span>
+
+Reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively.
+
 `( -- )`
 
 IX input vector; HL ← destination X; DE ← destination Y
-
-Reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively.
 
 ```text
 CODE DSTLD
@@ -4470,12 +5039,15 @@ RET,
 
 **Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>, <a href="#terse-word-46-4c-44-44-53-54"><code>FLDDST</code></a>.
 
+---
+
 ### <a name="terse-word-45-49"></a><span>EI</span>
+
+Enable maskable Z80 interrupts.
+
 `( -- )`
 
 Maskable interrupts enabled; parameter stack unchanged
-
-Enable maskable Z80 interrupts.
 
 ```z80
 _EI:
@@ -4487,12 +5059,15 @@ _EI:
 
 **Used by:** <a href="#terse-word-43-52-45-44-41-52-52-4f-57"><code>CREDARROW</code></a>, <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-46-4c-46-49-4c-4c"><code>FLFILL</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-50-4c-52-43-48-4b"><code>PLRCHK</code></a>, <a href="#terse-word-50-55-50"><code>PUP</code></a>, <a href="#terse-word-53-45-54-54-46"><code>SETTF</code></a>, <a href="#terse-word-54-46"><code>TF</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
+---
+
 ### <a name="terse-word-45-49-44-49"></a><span>EIDI</span>
+
+Executes EI then DI, providing the Z80 interrupt opportunity used by callers.
+
 `( -- )`
 
 Emits 'EI' then 'DI', returns through 'NEXT'
-
-Executes EI then DI, providing the Z80 interrupt opportunity used by callers.
 
 ```text
 CODE EIDI EI, DI, NEXT
@@ -4500,12 +5075,15 @@ CODE EIDI EI, DI, NEXT
 
 **Used by:** <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-46-4c"><code>FL</code></a>.
 
+---
+
 ### <a name="terse-word-45-4d-55-53-49-43"></a><span>EMUSIC</span>
+
+Selects ENDMUSIC and initializes timing/repetition to one.
+
 `( -- )`
 
 Initializes music state and returns through 'NEXT'
-
-Selects ENDMUSIC and initializes timing/repetition to one.
 
 ```text
 CODE EMUSIC 0 ENDMUSIC H LXI, loadpc CALL, 1 A MVI, NOTETIMER
@@ -4516,12 +5094,15 @@ STA, MULTIPLE STA, NEXT ( CALL EMUSIC AS AN INIT IN PROGRAM )
 
 **Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
+---
+
 ### <a name="terse-word-45-58"></a><span>EX</span>
+
+Emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation.
+
 `( -- )`
 
 Emits 'RET' instruction and continues through 'NEXT'
-
-Emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation.
 
 ```text
 CODE EX C9 B, NEXT
@@ -4529,12 +5110,15 @@ CODE EX C9 B, NEXT
 
 **Used by:** <a href="#terse-word-46-4c-53-48-4d-45"><code>FLSHME</code></a>, <a href="#terse-word-47-52-4e-44-52-41-43-54-49-4f-4e"><code>GRNDRACTION</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-53-54-52-49-4e-47-47-4f"><code>STRINGGO</code></a>.
 
+---
+
 ### <a name="terse-word-46-49-4c-4c"></a><span>FILL</span>
+
+Fill consecutive bytes with a specified value.
+
 `( value address count -- )`
 
 Bytes [address..address+count−1] filled with value; parameter stack consumed
-
-Fill consecutive bytes with a specified value.
 
 ```z80
             rst     $08                 ; Enter the inline TERSE thread
@@ -4554,12 +5138,15 @@ Fill consecutive bytes with a specified value.
 
 **Used by:** <a href="#terse-word-46-4c-46-49-4c-4c"><code>FLFILL</code></a>, <a href="#terse-word-53-43-52-45-52-41-53-45"><code>SCRERASE</code></a>, <a href="#terse-word-5a-45-52-4f-52-41-4d"><code>ZERORAM</code></a>.
 
+---
+
 ### <a name="terse-word-46-4c-44-44-53-54"></a><span>FLDDST</span>
+
+Fielders take position logic.
+
 `( -- )`
 
 IX = fielder vector; computes velocity/destination and updates playaction state through native helpers
-
-Fielders take position logic.
 
 ```text
 CODE FLDDST ( fielders take position logic )
@@ -4578,12 +5165,15 @@ THEN, FLDPA H LXI, VECTPC SHLD, RET,
 
 **Calls:** <a href="#terse-word-44-53-54-4c-44"><code>DSTLD</code></a>, <a href="#terse-word-44-53-54-43-41-4c-43"><code>DSTCALC</code></a>.
 
+---
+
 ### <a name="terse-word-46-4c-53-48-4f-46-46"></a><span>FLSHOFF</span>
+
+Disables flashing and services cleanup under DI.
+
 `( -- )`
 
 Preserves BC, sets FLSHON to zero, disables interrupts (DI), calls FLSHWUP, restores BC, then resumes via NEXT; there is no EI in this routine.
-
-Disables flashing and services cleanup under DI.
 
 ```text
 CODE FLSHOFF B PUSH, A XRA, FLSHON STA, DI, FLSHWUP CALL,
@@ -4594,12 +5184,15 @@ B POP, NEXT
 
 **Used by:** <a href="#terse-word-43-48-4b-46-4c-53-48-53-54-41-59"><code>CHKFLSHSTAY</code></a>, <a href="#terse-word-44-4f-43-48-47-53"><code>DOCHGS</code></a>, <a href="#terse-word-44-4f-47-4f-56-45-52"><code>DOGOVER</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>.
 
+---
+
 ### <a name="terse-word-46-4d-49-52-52-4f-52"></a><span>FMIRROR</span>
+
+Selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order.
+
 `( -- )`
 
 Preserves BC while mirroring field graphics and returns through 'NEXT'
-
-Selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order.
 
 ```text
 CODE FMIRROR B PUSH, 0C A MVI, XPAND OUT,
@@ -4616,12 +5209,15 @@ FORWARD IFMAIN FORWARD IFMOUND
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
+---
+
 ### <a name="terse-word-48-49-54-52-55-4e"></a><span>HITRUN</span>
+
+Activate proper runners and set trwbase.
+
 `( -- )`
 
 Selects runner activation and throw target via indexed native dispatch; restores BC before 'NEXT'
-
-Activate proper runners and set trwbase.
 
 ```text
 CODE HITRUN ( activate proper runners and set trwbase )
@@ -4639,12 +5235,15 @@ DECIMAL ;S
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-54-49-4d-45"><code>BALLTIME</code></a>, <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>.
 
+---
+
 ### <a name="terse-word-48-4f-4d-45-52-43-48-4b"></a><span>HOMERCHK</span>
+
+Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination.
+
 `( y x hit-type random-x random-y -- )`
 
 Five TERSE inputs consumed; ball/homer state updated
-
-Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination.
 
 ```text
 CODE HOMERCHK ( chk for homer or fence hit )
@@ -4673,12 +5272,15 @@ THEN, THEN, VDSTX BL SHLD, VDSTY BL SDED, EXX, NEXT -->
 
 **Used by:** <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>.
 
+---
+
 ### <a name="terse-word-49"></a><span>I</span>
+
+Fetch the innermost counted-loop index.
+
 `( -- index )`
 
 Loop index copied from IX return-stack frame to parameter stack; IX frame intact
-
-Fetch the innermost counted-loop index.
 
 ```z80
 _Rat:
@@ -4690,12 +5292,15 @@ _Rat:
 
 **Used by:** <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>.
 
+---
+
 ### <a name="terse-word-49-45-58"></a><span>IEX</span>
+
+Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call.
+
 `( saved-interrupt-frame -- )`
 
 Saved interrupt register frame restored, interrupt enabled
-
-Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call.
 
 ```text
 CODE IEX PSW POP, B POP, D POP, H POP, EXX, EXAF,
@@ -4704,12 +5309,15 @@ PSW POP, B POP, D POP, H POP, EI, RET,
 
 **Used by:** <a href="#terse-word-49-4e-45-58-54"><code>INEXT</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-44-45-58-57"></a><span>INDEXW</span>
+
+Call routine A- disp HL- table add.
+
 `( -- )`
 
 Inputs A = table index and HL = base address; computes HL = base + 2 × index, reads the little-endian indexed word into DE, restores A, and returns with HL pointing to the selected table entry.
-
-Call routine A- disp HL- table add.
 
 ```text
 CODE INDEXW ( call routine A- disp HL- table add )
@@ -4721,12 +5329,15 @@ M E MOV, H INX, M D MOV, H DCX, PSW POP, RET,
 
 **Used by:** <a href="#terse-word-41-4e-4d-53-45-51-4c-4f-41-44"><code>ANMSEQLOAD</code></a>, <a href="#terse-word-42-41-54-48-49-54-43-48-4b"><code>BATHITCHK</code></a>, <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-43-48-4b-47-52-4f-55-4e-44-45-52"><code>CHKGROUNDER</code></a>, <a href="#terse-word-48-49-54-52-55-4e"><code>HITRUN</code></a>, <a href="#terse-word-48-4f-4d-45-52-43-48-4b"><code>HOMERCHK</code></a>, <a href="#terse-word-4c-4f-41-44-41-4e-4d"><code>LOADANM</code></a>, <a href="#terse-word-4f-50-43-4f-44-45-43-48-4b"><code>OPCODECHK</code></a>, <a href="#terse-word-50-41-54-46-45-54-43-48"><code>PATFETCH</code></a>, <a href="#terse-word-54-41-4b-45-4f-46-46"><code>TAKEOFF</code></a>, <a href="#terse-word-54-48-52-4f-57-41-4e-49-4d"><code>THROWANIM</code></a>, <a href="#terse-word-54-48-52-4f-57-42-41-4c-4c"><code>THROWBALL</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-46-49-45-4c-44"></a><span>INFIELD</span>
+
+Uses IFSPAN to process game state.
+
 `( -- )`
 
 Draws infield stripes/pitcher mound; preserves BC and IX around row-rendering helpers
-
-Uses IFSPAN to process game state.
 
 ```text
 CODE INFIELD B PUSH, X PUSHX,
@@ -4744,12 +5355,15 @@ X POPX, B POP, NEXT
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-46-4c-44-41-43-54"></a><span>INFLDACT</span>
+
+Set infielders active.
+
 `( -- )`
 
 Sets HL to first infield vector, A to five records, and calls 'SETACT'
-
-Set infielders active.
 
 ```text
 CODE INFLDACT ( set infielders active )
@@ -4760,12 +5374,15 @@ VSTATUS PT H LXI, 5 A MVI, ' SETACT CALL, RET,
 
 **Used by:** <a href="#terse-word-41-4c-4c-46-4c-44-41-43-54"><code>ALLFLDACT</code></a>.
 
+---
+
 ### <a name="terse-word-49-53-54-41-52-54"></a><span>ISTART</span>
+
+Disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT.
+
 `( interrupt-address -- )`
 
 RAM[IPNT] ← interrupt handler address; mode IM2
-
-Disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT.
 
 ```text
 CODE ISTART DI, H POP, IPNT SHLD, 8 A MVI, INMOD OUT,
@@ -4775,12 +5392,15 @@ INFBK OUT, IM2, EI, NEXT
 
 **Used by:** <a href="#terse-word-53-31-30"><code>S10</code></a>, <a href="#terse-word-53-31-31"><code>S11</code></a>.
 
+---
+
 ### <a name="terse-word-4b-49-4c-4c-4f-46"></a><span>KILLOF</span>
+
+Stop outfield tractor ball control.
+
 `( -- )`
 
 Clears outfield delta words and control flag; selects standing playaction
-
-Stop outfield tractor ball control.
 
 ```text
 CODE KILLOF ( stop outfield tractor ball control )
@@ -4790,12 +5410,15 @@ A XRA, OFTBLGO STA, RET,
 
 **Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>.
 
+---
+
 ### <a name="terse-word-4c-4f-41-44-41-4e-4d"></a><span>LOADANM</span>
+
+Loads magic & anm HL-top of playact table.
+
 `( -- )`
 
 Reads the next magic byte into IX:VMAGIC, uses the following pattern index with INDEXW/PATTERNS to store IX:VANMH/VANML, then returns HL advanced past both playaction bytes.
-
-Loads magic & anm HL-top of playact table.
 
 ```text
 CODE LOADANM ( loads magic & anm HL-top of playact table )
@@ -4810,12 +5433,15 @@ H POP, ( pc ) H INX, RET, ( returns updated pc in HL )
 
 **Used by:** <a href="#terse-word-50-41-43-54-4c-4f-41-44"><code>PACTLOAD</code></a>.
 
+---
+
 ### <a name="terse-word-4c-4f-4f-50"></a><span>LOOP</span>
+
+Advance a counted loop and test its termination.
+
 `( -- )`
 
 Parameter stack unchanged; IX loop index incremented, loop frame retained or released
-
-Advance a counted loop and test its termination.
 
 ```z80
 _LOOP:
@@ -4843,12 +5469,15 @@ _LOOP:
 
 **Used by:** <a href="#terse-word-2b-4c-4f-4f-50"><code>+LOOP</code></a>, <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
+---
+
 ### <a name="terse-word-4d-55-4c-54-48-4c-42-59-34"></a><span>MULTHLBY4</span>
+
+Multiplies the magnitude of HL by four through shifts, then restores its sign.
+
 `( -- )`
 
 HL ← signed(4×HL)
-
-Multiplies the magnitude of HL by four through shifts, then restores its sign.
 
 ```text
 CODE MULTHLBY4
@@ -4860,12 +5489,15 @@ L SLAR, H RALR, PSW POP, ' COMPHL CNZ, RET,
 
 **Used by:** <a href="#terse-word-42-41-54-48-49-54-43-48-4b"><code>BATHITCHK</code></a>, <a href="#terse-word-4f-46-42-4c-43-48-4b"><code>OFBLCHK</code></a>.
 
+---
+
 ### <a name="terse-word-4d-55-53-43-50-55"></a><span>MUSCPU</span>
+
+Declare cross-screen dispatch labels and begin assembling MUSCPU.
+
 `( -- )`
 
 Music tick handler; updates note timer, decodes music commands and drives sound ports
-
-Declare cross-screen dispatch labels and begin assembling MUSCPU.
 
 ```text
 CODE MUSCPU <ASSEMBLE
@@ -4892,12 +5524,15 @@ LABEL MUSEND A ORA, PROCESS JZ, B POP, RET,
 
 **Calls:** <a href="#terse-word-46-45-54-43-48"><code>FETCH</code></a>, <a href="#terse-word-49-4e-43-50-43"><code>INCPC</code></a>, <a href="#terse-word-48-4c-4f-41-44"><code>HLOAD</code></a>, <a href="#terse-word-52-4e-44"><code>RND</code></a>, <a href="#terse-word-50-43-4a-55-4d-50"><code>PCJUMP</code></a>.
 
+---
+
 ### <a name="terse-word-4e-44-55-50"></a><span>NDUP</span>
+
+Duplicate the top n parameter-stack cells.
+
 `( x1 … xn n -- x1 … xn x1 … xn )`
 
 Parameter stack retains original n cells and appends a copy; count removed
-
-Duplicate the top n parameter-stack cells.
 
 ```z80
 _NPICK:
@@ -4924,12 +5559,15 @@ _NPICK_LOOP:
 
 **Used by:** <a href="#terse-word-4f-55-54-4c-49-4e-45"><code>OUTLINE</code></a>.
 
+---
+
 ### <a name="terse-word-4f-46-46-46-44-53-54"></a><span>OFFFDST</span>
+
+All player off field control.
+
 `( -- )`
 
 IX = active fielder vector; selects off-field destination, computes movement deltas
-
-All player off field control.
 
 ```text
 CODE OFFFDST ( all player off field control ) <ASSEMBLE
@@ -4953,12 +5591,15 @@ F= NFORW F= RFDST F= REND F= NOFPU F= CKATBS F= RVACT
 
 **Calls:** <a href="#terse-word-44-53-54-43-41-4c-43"><code>DSTCALC</code></a>.
 
+---
+
 ### <a name="terse-word-4f-46-4c-44-54-42-4c"></a><span>OFLDTBL</span>
+
+Gives all three outfielders OFTBLPA, activates them and returns.
+
 `( -- )`
 
 Clears OFTOTBL, disables interrupts, stores OFTBLPA in the right-, center- and left-fielder VPLAYACTPC cells, calls OUTFLDACT, enables interrupts and returns natively.
-
-Gives all three outfielders OFTBLPA, activates them and returns.
 
 ```text
 CODE OFLDTBL OFTBLPA H LXI, A XRA, OFTOTBL STA,
@@ -4970,12 +5611,15 @@ DI, VPLAYACTPC RF SHLD, VPLAYACTPC CF SHLD, VPLAYACTPC LF SHLD,
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-4f-46-4d-4f-54-49-4f-4e"></a><span>OFMOTION</span>
+
+Set pc for ram pa table -tractor ball.
+
 `( -- )`
 
 If the action byte at OFPA+1 equals 4 (standing), clears VACT in the IX vector; then writes OFPA into VECTPC and returns natively.
-
-Set pc for ram pa table -tractor ball.
 
 ```text
 CODE OFMOTION ( set pc for ram pa table -tractor ball )
@@ -4984,45 +5628,57 @@ OFPA { 1+ } LDA, 4 CPI, ( stnd ? )
 OFPA H LXI, VECTPC SHLD, RET,
 ```
 
+---
+
 ### <a name="terse-word-4f-4e-31-53-54"></a><span>ON1ST</span>
+
+ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
+
 `( -- )`
 
 RAM[FLDON1ST] ← IX
-
-ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
 
 ```text
 CODE ON1ST X PUSHX, H POP, FLDON1ST SHLD, RET,
 ```
 
+---
+
 ### <a name="terse-word-4f-4e-32-4e-44"></a><span>ON2ND</span>
+
+ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
+
 `( -- )`
 
 RAM[FLDON2ND] ← IX
-
-ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
 
 ```text
 CODE ON2ND X PUSHX, H POP, FLDON2ND SHLD, RET,
 ```
 
+---
+
 ### <a name="terse-word-4f-4e-33-52-44"></a><span>ON3RD</span>
+
+ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
+
 `( -- )`
 
 RAM[FLDON3RD] ← IX
-
-ON1ST/ON2ND/ON3RD save IX into the corresponding defender-pointer cell;
 
 ```text
 CODE ON3RD X PUSHX, H POP, FLDON3RD SHLD, RET,
 ```
 
+---
+
 ### <a name="terse-word-4f-50-43-4f-44-45-43-48-4b"></a><span>OPCODECHK</span>
+
+Called by plyactupdate.
+
 `( -- )`
 
 HL = playaction cursor; looks up opcode handler and executes with a native return trampoline
-
-Called by plyactupdate.
 
 ```text
 CODE OPCODECHK ( called by plyactupdate ) <ASSEMBLE
@@ -5038,12 +5694,15 @@ VECTPC LHLD, THEN, RET, ASSEMBLE>
 
 **Used by:** <a href="#terse-word-50-41-43-54-4c-4f-41-44"><code>PACTLOAD</code></a>.
 
+---
+
 ### <a name="terse-word-4f-55-54-46-4c-44-41-43-54"></a><span>OUTFLDACT</span>
+
+Sets outfielders active.
+
 `( -- )`
 
 Sets HL to first outfield vector, A to three records, and calls 'SETACT'
-
-Sets outfielders active.
 
 ```text
 CODE OUTFLDACT ( sets outfielders active )
@@ -5054,12 +5713,15 @@ VSTATUS LF H LXI, 3 A MVI, ' SETACT CALL, RET,
 
 **Used by:** <a href="#terse-word-41-4c-4c-46-4c-44-41-43-54"><code>ALLFLDACT</code></a>, <a href="#terse-word-43-4d-50-4f-46"><code>CMPOF</code></a>, <a href="#terse-word-4f-46-4c-44-54-42-4c"><code>OFLDTBL</code></a>.
 
+---
+
 ### <a name="terse-word-50-41-43-54-4c-4f-41-44"></a><span>PACTLOAD</span>
+
+Loads vect from plyact.
+
 `( -- )`
 
 IX = target vector; reads playaction stream, dispatches opcodes, advances vector PC
-
-Loads vect from plyact.
 
 ```text
 CODE PACTLOAD ( loads vect from plyact )
@@ -5079,12 +5741,15 @@ RET, -->
 
 **Used by:** <a href="#terse-word-50-4c-41-59-41-43-54"><code>PLAYACT</code></a>.
 
+---
+
 ### <a name="terse-word-50-41-54-46-45-54-43-48"></a><span>PATFETCH</span>
+
+Loads actual pattern IX-vector.
+
 `( -- )`
 
 IX = vector; selects animation-frame pattern from sequence table and stores its address
-
-Loads actual pattern IX-vector.
 
 ```text
 CODE PATFETCH ( loads actual pattern IX-vector )
@@ -5102,12 +5767,15 @@ D VPATH X STX, E VPATL X STX, RET,
 
 **Used by:** <a href="#terse-word-50-4c-41-59-41-43-54"><code>PLAYACT</code></a>.
 
+---
+
 ### <a name="terse-word-50-45-52-53-50-45-43-54-49-56-45"></a><span>PERSPECTIVE</span>
+
+Pattern size determined by y.
+
 `( -- )`
 
 IX = vector; derives perspective class from Y and updates redraw flag if class changed
-
-Pattern size determined by y.
 
 ```text
 CODE PERSPECTIVE ( pattern size determined by y )
@@ -5121,12 +5789,15 @@ D VPERS# X STX, <>, IF, VHW VSTATUS X SETX, THEN,
 RET,
 ```
 
+---
+
 ### <a name="terse-word-50-4c-41-59-41-43-54"></a><span>PLAYACT</span>
+
+Called in intterupt does update prc.
+
 `( -- )`
 
 Reads 'VECTIX', preserves BC/IX, advances vector animation/update through helper routines
-
-Called in intterupt does update prc.
 
 ```text
 CODE PLAYACT ( called in intterupt does update prc )
@@ -5142,12 +5813,15 @@ X POPX, B POP, RET,
 
 **Calls:** <a href="#terse-word-50-41-43-54-4c-4f-41-44"><code>PACTLOAD</code></a>, <a href="#terse-word-41-4e-4d-53-45-51-4c-4f-41-44"><code>ANMSEQLOAD</code></a>, <a href="#terse-word-50-41-54-46-45-54-43-48"><code>PATFETCH</code></a>.
 
+---
+
 ### <a name="terse-word-50-4d-55-53-49-43"></a><span>PMUSIC</span>
+
+Installs a stream unconditionally and sets priority, repeat count and note timer.
+
 `( music-address -- )`
 
 HL consumes music address; RAM priority/timers updated
-
-Installs a stream unconditionally and sets priority, repeat count and note timer.
 
 ```text
 CODE PMUSIC H POP, loadpc CALL, 1 A MVI, MULTIPLE STA,
@@ -5158,12 +5832,15 @@ PRIORITY STA, NOTETIMER STA, NEXT
 
 **Used by:** <a href="#terse-word-4d-4f-50-45-4e-45-52-53"><code>MOPENERS</code></a>.
 
+---
+
 ### <a name="terse-word-50-54-41-55-54-4f-54-4d"></a><span>PTAUTOTM</span>
+
+Pitch auto timer.
+
 `( -- )`
 
 Calls 'TIMEDCR' for pitch timeout and returns through 'NEXT'
-
-Pitch auto timer.
 
 ```text
 CODE PTAUTOTM ( pitch auto timer )
@@ -5174,12 +5851,15 @@ TIMEOUT H LXI, FLDCLR LDA, A ANA, TIMEDCR CZ, NEXT
 
 **Used by:** <a href="#terse-word-57-55-50-57-52-54"><code>WUPWRT</code></a>.
 
+---
+
 ### <a name="terse-word-52-45-53-45-54-52-55-4e-4e-45-52-53"></a><span>RESETRUNNERS</span>
+
+Reset runners to order of on base.
+
 `( -- )`
 
 Runs four occupancy-compaction passes using LDIR to move runner records upward; clears runner 4 base/motion, sets its position/pattern/playaction, and stores status 1 to R1, R3, R3 and R4 in the original listing (R2 is not named by those stores).
-
-Reset runners to order of on base.
 
 ```text
 CODE RESETRUNNERS ( reset runners to order of on base )
@@ -5202,12 +5882,15 @@ FORWARD OUTOFFF FORWARD CCLEAVE
 
 **Used by:** <a href="#terse-word-54-48-52-4f-57-42-41-4c-4c"><code>THROWBALL</code></a>.
 
+---
+
 ### <a name="terse-word-52-4e-44"></a><span>RND</span>
+
+Produce a random value scaled to the supplied bound.
+
 `( upper-bound -- random-value )`
 
 Upper bound consumed and scaled random result pushed; random seed advanced
-
-Produce a random value scaled to the supplied bound.
 
 ```z80
             exx                         ; Save TERSE VM registers in alternate set
@@ -5272,12 +5955,15 @@ _MULU_DONE:
 
 **Used by:** <a href="#terse-word-47-52-4e-44-52-48-49-54"><code>GRNDRHIT</code></a>, <a href="#terse-word-49-4e-4c-4f-47"><code>INLOG</code></a>, <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-48-49-54"><code>OUTFLDHIT</code></a>, <a href="#terse-word-54-45-52-53-45-43-48-4b"><code>TERSECHK</code></a>, <a href="#terse-word-57-48-42-4f-44-44-53"><code>WHBODDS</code></a>.
 
+---
+
 ### <a name="terse-word-52-55-4e-44-53-54"></a><span>RUNDST</span>
+
+Runner base running control.
+
 `( -- )`
 
 IX = runner record; processes base occupancy, auto-forward and movement state
-
-Runner base running control.
 
 ```text
 CODE RUNDST ( runner base running control ) <ASSEMBLE
@@ -5328,12 +6014,15 @@ RUNPA H LXI, VECTPC SHLD, B POP, RET, ASSEMBLE> -->
 
 **Calls:** <a href="#terse-word-4c-56-52-53-54-41-54"><code>LVRSTAT</code></a>.
 
+---
+
 ### <a name="terse-word-53-45-4e-54-52-59"></a><span>SENTRY</span>
+
+Game loop.
+
 `( -- )`
 
 Native game scheduler; calls tick services, invokes 'TERSECHK', then loops
-
-Game loop.
 
 ```text
 CODE SENTRY ( game loop ) B PUSH,
@@ -5355,12 +6044,15 @@ B POP, ' SENTRY JMP, -->
 
 **Used by:** <a href="#terse-word-50-55-50"><code>PUP</code></a>.
 
+---
+
 ### <a name="terse-word-53-45-54-41-43-54"></a><span>SETACT</span>
+
+Sets avtive bit in status.
+
 `( -- )`
 
 HL,A input vector/count; VACT set across records
-
-Sets avtive bit in status.
 
 ```text
 CODE SETACT ( sets avtive bit in status )
@@ -5371,12 +6063,15 @@ BEGIN, VACT M SET, D DAD, A DCR, 0=, END, RET,
 
 **Used by:** <a href="#terse-word-49-4e-46-4c-44-41-43-54"><code>INFLDACT</code></a>, <a href="#terse-word-4f-55-54-46-4c-44-41-43-54"><code>OUTFLDACT</code></a>.
 
+---
+
 ### <a name="terse-word-53-54-41-52-54-4d-55-53-49-43"></a><span>STARTMUSIC</span>
+
+Clears its request.
+
 `( -- )`
 
 Selects event music from state flags and dispatches music requests
-
-Clears its request.
 
 ```text
 CODE STARTMUSIC A XRA, STMUSIC STA,
@@ -5390,12 +6085,15 @@ ELSE, DOVERB MCANNON DOVERB S11 THEN, THEN, RET,
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-73-74-72-74-6c-69-6e-65"></a><span>strtline</span>
+
+Given X Y sets up start of line.
+
 `( x y -- )`
 
 Pops X and Y to native registers, computes address/line setup; returns via 'NEXT'
-
-Given X Y sets up start of line.
 
 ```text
 CODE strtline ( given X Y sets up start of line )
@@ -5411,12 +6109,15 @@ SADR SHLD, B POP, NEXT
 
 **Used by:** <a href="#terse-word-44-4c-49-4e-45"><code>DLINE</code></a>.
 
+---
+
 ### <a name="terse-word-53-57-41-4e"></a><span>SWAN</span>
+
+Exchange the high and low nibbles of the low byte.
+
 `( value -- nibble-swapped-value )`
 
 High byte unchanged; low byte rotated four bits; result replaces input
-
-Exchange the high and low nibbles of the low byte.
 
 ```z80
 _SWABN:
@@ -5433,12 +6134,15 @@ _SWABN:
 
 **Used by:** <a href="#terse-word-45-49"><code>EI</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>.
 
+---
+
 ### <a name="terse-word-54-42-41-4c-4c-50-49-54-43-48"></a><span>TBALLPITCH</span>
+
+Loads pitch velocities.
+
 `( -- )`
 
 Computes pitcher/trackball velocity updates and writes movement fields
-
-Loads pitch velocities.
 
 ```text
 CODE TBALLPITCH ( loads pitch velocities )
@@ -5458,12 +6162,15 @@ THEN, THEN, THEN, TBLDX SDED, EI, RET,
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-54-48-52-4f-57-41-4e-49-4d"></a><span>THROWANIM</span>
+
+Sets up BLDST and player anim.
+
 `( -- )`
 
 Prepares ball/throw vector data; saves/restores IX and IY around native update
-
-Sets up BLDST and player anim.
 
 ```text
 CODE THROWANIM ( sets up BLDST and player anim )
@@ -5499,12 +6206,15 @@ THROW STA, Y POPX, X POPX, EI, RET, -->
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-54-48-52-4f-57-42-41-4c-4c"></a><span>THROWBALL</span>
+
+Finish scoring first.
+
 `( -- )`
 
 Builds the pitch or throw state, updates ball vector and runner decisions
-
-Finish scoring first.
 
 ```text
 CODE THROWBALL FLDCLR LDA, A ANA, RNZ, ( finish scoring first )
@@ -5528,12 +6238,15 @@ VGO M RES, EI, RET,
 
 **Used by:** <a href="#terse-word-53-45-4e-54-52-59"><code>SENTRY</code></a>.
 
+---
+
 ### <a name="terse-word-54-48-57-41-4e-4d-53-45-54"></a><span>THWANMSET</span>
+
+Set up throw animation.
+
 `( -- )`
 
 Reads thrower vector from IX and stores 'WHOTHROWS'; initializes animation flags
-
-Set up throw animation.
 
 ```text
 CODE THWANMSET ( set up throw animation )
@@ -5546,12 +6259,15 @@ THROWANM STA, RET, ( set for sentry call )
 
 **Used by:** <a href="#terse-word-57-41-49-54-54-48-52-57"><code>WAITTHRW</code></a>.
 
+---
+
 ### <a name="terse-word-54-49-4d-45-52"></a><span>TIMER</span>
+
+Interrupt timer routine.
+
 `( -- )`
 
 Scans game timers with 'TIMEDCR' and invokes native event handlers
-
-Interrupt timer routine.
 
 ```text
 CODE TIMER ( interrupt timer routine )
@@ -5574,12 +6290,15 @@ TOOF H LXI, TIMEDCR CALL, A ANA, TOOFCK CNZ, RET,
 
 **Calls:** <a href="#terse-word-54-49-4d-45-44-43-52"><code>TIMEDCR</code></a>, <a href="#terse-word-43-4d-50-4f-46"><code>CMPOF</code></a>, <a href="#terse-word-46-4c-53-48-57-55-50"><code>FLSHWUP</code></a>, <a href="#terse-word-54-41-4b-45-4f-46-46"><code>TAKEOFF</code></a>, <a href="#terse-word-57-41-4c-4b-4f-56-45-52"><code>WALKOVER</code></a>, <a href="#terse-word-54-4f-4f-46-43-4b"><code>TOOFCK</code></a>.
 
+---
+
 ### <a name="terse-word-56-45-43-54-4f-52"></a><span>VECTOR</span>
+
+Vectors and limit checks.
+
 `( -- )`
 
 IX = vector record; advances positions and applies hardware limits
-
-Vectors and limit checks.
 
 ```text
 CODE VECTOR ( vectors and limit checks )
@@ -5602,12 +6321,15 @@ RET,
 
 **Used by:** <a href="#terse-word-63-6e-6c-69-6e-65"><code>cnline</code></a>.
 
+---
+
 ### <a name="terse-word-56-45-52-41-53-45"></a><span>VERASE</span>
+
+Does pattern board erase from vector IX.
+
 `( -- )`
 
 IX = vector record; derives previous pattern/screen address and calls native 'writep'
-
-Does pattern board erase from vector IX.
 
 ```text
 CODE VERASE ( does pattern board erase from vector IX )
@@ -5621,12 +6343,15 @@ writep CALL, RET,
 
 **Used by:** <a href="#terse-word-42-4c-45-52-41-53-45"><code>BLERASE</code></a>.
 
+---
+
 ### <a name="terse-word-56-57-52-49-54-45"></a><span>VWRITE</span>
+
+Does reloff relabs patbrd from vector IX.
+
 `( -- )`
 
 IX = vector record; derives pattern position, calls 'reloff'/'relabs'/'writep', saves erase address
-
-Does reloff relabs patbrd from vector IX.
 
 ```text
 CODE VWRITE ( does reloff relabs patbrd from vector IX )
@@ -5643,12 +6368,15 @@ RET,
 
 **Calls:** <a href="#terse-word-72-65-6c-6f-66-66"><code>reloff</code></a>, <a href="#terse-word-72-65-6c-61-62-73"><code>relabs</code></a>, <a href="#terse-word-77-72-69-74-65-70"><code>writep</code></a>.
 
+---
+
 ### <a name="terse-word-57-41-49-54"></a><span>WAIT</span>
+
+Given A wait period stop every thing.
+
 `( -- )`
 
 Uses incoming A as the outer delay count, preserves it on the native stack while an inner $FF-count busy loop runs, decrements the outer count and returns when it reaches zero.
-
-Given A wait period stop every thing.
 
 ```text
 CODE WAIT ( given A wait period stop every thing )
@@ -5656,12 +6384,15 @@ BEGIN, PSW PUSH, 0FF A MVI, BEGIN, A DCR, 0=, END,
 PSW POP, A DCR, 0=, END, RET,
 ```
 
+---
+
 ### <a name="terse-word-57-41-49-54-54-48-52-57"></a><span>WAITTHRW</span>
+
+Sets flag for 1stbaseman to wait throw.
+
 `( -- )`
 
 Configures throw animation and wait state; A used for flags, native 'RET'
-
-Sets flag for 1stbaseman to wait throw.
 
 ```text
 CODE WAITTHRW ( sets flag for 1stbaseman to wait throw )
@@ -5671,12 +6402,15 @@ THROWANM STA, 20 A MVI, WAITTHROW STA, RET,
 
 **Calls:** <a href="#terse-word-54-48-57-41-4e-4d-53-45-54"><code>THWANMSET</code></a>.
 
+---
+
 ### <a name="terse-word-57-52-49-54-45"></a><span>WRITE</span>
+
+Write with X Y sizes ; pattern with no header.
+
 `( x y pattern dimensions options -- )`
 
 Stack consumes x,y,pattern,dimensions,options; framebuffer updated
-
-Write with X Y sizes ; pattern with no header.
 
 ```text
 CODE WRITE ( write with X Y sizes ; pattern with no header )
@@ -5693,12 +6427,15 @@ write CALL, EXX, H PUSH, Y POPX, NEXT
 
 **Used by:** <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>.
 
+---
+
 ### <a name="terse-word-57-52-49-54-52"></a><span>WRITR</span>
+
+Write with a relative pattern.
+
 `( x y relative-pattern options -- )`
 
 Stack consumes x,y,relative-pattern,options; framebuffer updated
-
-Write with a relative pattern.
 
 ```text
 CODE WRITR ( write with a relative pattern )
@@ -5714,12 +6451,15 @@ writep CALL, EXX, H PUSH, Y POPX, NEXT
 
 **Used by:** <a href="#terse-word-46-4c"><code>FL</code></a>, <a href="#terse-word-49-4e-53-43-4e"><code>INSCN</code></a>.
 
+---
+
 ### <a name="terse-word-41-55-54-4f-52-31"></a><span>AUTOR1</span>
+
+AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners.
+
 `( -- )`
 
 Writes automatic-run and active flags into runner 1 status fields
-
-AUTOR1/2/3 set VRSTAT=3 and VSTATUS=$81 for their respective runners.
 
 ```text
 SUBR AUTOR1 3 A MVI, VRSTAT R1 STA, 81 A MVI, VSTATUS R1 STA,
@@ -5728,12 +6468,15 @@ RET, ( sets vauto , vforw , vact , vrun )
 
 **Used by:** <a href="#terse-word-46-52-4f-31"><code>FRO1</code></a>, <a href="#terse-word-46-52-4f-31-32"><code>FRO12</code></a>, <a href="#terse-word-46-52-4f-31-32-33"><code>FRO123</code></a>, <a href="#terse-word-52-4f-31"><code>RO1</code></a>, <a href="#terse-word-52-4f-31-32"><code>RO12</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>, <a href="#terse-word-52-4f-31-33"><code>RO13</code></a>, <a href="#terse-word-52-4f-32"><code>RO2</code></a>, <a href="#terse-word-52-4f-32-33"><code>RO23</code></a>, <a href="#terse-word-52-4f-33"><code>RO3</code></a>.
 
+---
+
 ### <a name="terse-word-41-55-54-4f-52-32"></a><span>AUTOR2</span>
+
+Run second-runner automation logic.
+
 `( -- )`
 
 Writes automatic-run and active flags into runner 2 status fields
-
-Run second-runner automation logic.
 
 ```text
 SUBR AUTOR2 3 A MVI, VRSTAT R2 STA, 81 A MVI, VSTATUS R2 STA,
@@ -5742,12 +6485,15 @@ RET,
 
 **Used by:** <a href="#terse-word-46-52-4f-31-32"><code>FRO12</code></a>, <a href="#terse-word-46-52-4f-31-32-33"><code>FRO123</code></a>, <a href="#terse-word-46-52-4f-31-33"><code>FRO13</code></a>, <a href="#terse-word-52-4f-31-32"><code>RO12</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>, <a href="#terse-word-52-4f-31-33"><code>RO13</code></a>, <a href="#terse-word-52-4f-32-33"><code>RO23</code></a>.
 
+---
+
 ### <a name="terse-word-41-55-54-4f-52-33"></a><span>AUTOR3</span>
+
+Run third-runner automation logic.
+
 `( -- )`
 
 Writes automatic-run and active flags into runner 3 status fields
-
-Run third-runner automation logic.
 
 ```text
 SUBR AUTOR3 3 A MVI, VRSTAT R3 STA, 81 A MVI, VSTATUS R3 STA,
@@ -5756,12 +6502,15 @@ RET,
 
 **Used by:** <a href="#terse-word-46-52-4f-31-32-33"><code>FRO123</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>.
 
+---
+
 ### <a name="terse-word-42-4c-45-52-41-53-45"></a><span>BLERASE</span>
+
+Erases ball.
+
 `( -- )`
 
 Saves/restores IX; addresses ball vector, erases image, clears active bit
-
-Erases ball.
 
 ```text
 SUBR BLERASE ( erases ball )
@@ -5773,12 +6522,15 @@ X POPX, ( stop ball ) NOBOD H LXI, VPAT BL SHLD, RET,
 
 **Used by:** <a href="#terse-word-42-41-4c-4c-45-52-41-53-45"><code>BALLERASE</code></a>, <a href="#terse-word-42-41-54-48-49-54-43-48-4b"><code>BATHITCHK</code></a>, <a href="#terse-word-54-48-57-41-4e-4d-53-45-54"><code>THWANMSET</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-41-54-42-53"></a><span>CHKATBS</span>
+
+Check if active player at base in- A vstatus.
+
 `( -- )`
 
 A = vector status flags, E = accumulator; increments E if active and not at base
-
-Check if active player at base in- A vstatus.
 
 ```text
 SUBR CHKATBS ( check if active player at base in- A vstatus )
@@ -5787,12 +6539,15 @@ VACT A BIT, RZ, VATBS A BIT, RNZ, E INR, RET,
 
 **Used by:** <a href="#terse-word-54-48-52-4f-57-41-4e-49-4d"><code>THROWANIM</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-43-4f-49-4e-31"></a><span>CHKCOIN1</span>
+
+Chk door 1 for coin drop.
+
 `( -- )`
 
 Reads coin-door 1 via 'debounce'; updates credits and signals coin event
-
-Chk door 1 for coin drop.
 
 ```text
 SUBR CHKCOIN1 ( chk door 1 for coin drop )
@@ -5804,12 +6559,15 @@ UPCRED STA, A XRA, SPBON STA, DOVERB MCOIN RET,
 
 **Calls:** <a href="#terse-word-64-65-62-6f-75-6e-63-65"><code>debounce</code></a>, <a href="#terse-word-4d-43-4f-49-4e"><code>MCOIN</code></a>.
 
+---
+
 ### <a name="terse-word-43-48-4b-43-4f-49-4e-32"></a><span>CHKCOIN2</span>
+
+Chk door 2 for coin drop.
+
 `( -- )`
 
 Reads coin-door 2 via 'debounce'; updates credits with door/DIP-specific increments
-
-Chk door 2 for coin drop.
 
 ```text
 SUBR CHKCOIN2 ( chk door 2 for coin drop )
@@ -5824,12 +6582,15 @@ A XRA, SPBON STA, DOVERB MCOIN RET,
 
 **Calls:** <a href="#terse-word-64-65-62-6f-75-6e-63-65"><code>debounce</code></a>, <a href="#terse-word-4d-43-4f-49-4e"><code>MCOIN</code></a>.
 
+---
+
 ### <a name="terse-word-43-4d-50-4f-46"></a><span>CMPOF</span>
+
+Calculates proper deltas and patterns.
+
 `( -- )`
 
 Selects outfielder vector in IX, computes deltas and activates outfield control
-
-Calculates proper deltas and patterns.
 
 ```text
 SUBR CMPOF ( calculates proper deltas and patterns )
@@ -5846,12 +6607,15 @@ VDSTX BL LHLD, VDSTY BL LDED, 20 A MVI, VGO VSTATUS X RESX,
 
 **Used by:** <a href="#terse-word-42-4c-44-53-54"><code>BLDST</code></a>, <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>, <a href="#terse-word-54-4f-4f-46-43-4b"><code>TOOFCK</code></a>.
 
+---
+
 ### <a name="terse-word-43-4f-4c-4f-52-42-41-4e-44"></a><span>COLORBAND</span>
+
+Schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.
+
 `( saved-interrupt-frame -- )`
 
 Updates INLIN and IPNT; when FLSHSTAY is zero, writes palette ports 3 and 1. Restores AF and HL from its interrupt bridge, then explicitly enables maskable interrupts (EI) and returns.
-
-Schedules the next INLIN value via IPNT, conditionally changes palette entries, preserves AF/HL and returns with interrupts enabled.
 
 ```text
 SUBR COLORBAND NEXT XTHL, PSW PUSH, M A MOV, INLIN OUT,
@@ -5860,12 +6624,15 @@ H INX, IPNT SHLD, FLSHSTAY LDA, A ANA, 0=, IF,
 PSW POP, H POP, EI, RET, ( palette only: preserve AF/HL )
 ```
 
+---
+
 ### <a name="terse-word-64-65-62-6f-75-6e-63-65"></a><span>debounce</span>
+
+Debounce input transitions.
+
 `( -- )`
 
 A = input port, HL = bit mask, DE = sampling duration; returns A = accepted pulse/zero
-
-Debounce input transitions.
 
 ```text
 SUBR debounce <ASSEMBLE
@@ -5879,12 +6646,15 @@ B E MOV, ( try again ) READPORT JMP, ASSEMBLE>
 
 **Used by:** <a href="#terse-word-43-48-4b-43-4f-49-4e-31"><code>CHKCOIN1</code></a>, <a href="#terse-word-43-48-4b-43-4f-49-4e-32"><code>CHKCOIN2</code></a>.
 
+---
+
 ### <a name="terse-word-46-45-54-43-48"></a><span>FETCH</span>
+
+Read the current music command byte; INCPC, HLOAD, and PCJUMP provide related stream operations.
+
 `( -- )`
 
 HL ← MUSICPC; A ← byte at HL
-
-Read the current music command byte; INCPC, HLOAD, and PCJUMP provide related stream operations.
 
 ```text
 SUBR FETCH MUSPC LHLD, M A MOV, RET,
@@ -5892,12 +6662,15 @@ SUBR FETCH MUSPC LHLD, M A MOV, RET,
 
 **Used by:** <a href="#terse-word-48-4c-4f-41-44"><code>HLOAD</code></a>, <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
+---
+
 ### <a name="terse-word-46-4c-53-48-57-55-50"></a><span>FLSHWUP</span>
+
+Handle flash callback.
+
 `( -- )`
 
 Saves/restores IX and IY while updating flash timer and callback
-
-Handle flash callback.
 
 ```text
 SUBR FLSHWUP ( handle flash callback )
@@ -5913,23 +6686,29 @@ THEN, Y POPX, X POPX, RET,
 
 **Used by:** <a href="#terse-word-46-4c-53-48-4f-46-46"><code>FLSHOFF</code></a>, <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
+---
+
 ### <a name="terse-word-46-4e-42-42"></a><span>FNBB</span>
+
+Native game routine; source body below.
+
 `( -- )`
 
 Native no-op helper; immediate 'RET'
-
-Native game routine; source body below.
 
 ```text
 SUBR FNBB RET,
 ```
 
+---
+
 ### <a name="terse-word-46-4f-4e-54-55-4e-50-41-43-4b"></a><span>FONTUNPACK</span>
+
+Reads two packed bytes and starts a five-row unpack loop.
+
 `( -- )`
 
 HL = packed font source; expands bytes into 'FONTWORK'; HL returns its address
-
-Reads two packed bytes and starts a five-row unpack loop.
 
 ```text
 SUBR FONTUNPACK B PUSH, M E MOV, H INX, M D MOV,
@@ -5941,12 +6720,15 @@ FNTLP DJNZ, B POP, 0 FONTWORK H LXI, RET,
 
 **Used by:** <a href="#terse-word-63-70-6f-73-74"><code>cpost</code></a>.
 
+---
+
 ### <a name="terse-word-46-52-4f-31"></a><span>FRO1</span>
+
+Uses AUTOR1 to process game state.
+
 `( -- )`
 
 Calls 'AUTOR1'; native 'RET'
-
-Uses AUTOR1 to process game state.
 
 ```text
 SUBR FRO1 AUTOR1 CALL, RET,
@@ -5954,12 +6736,15 @@ SUBR FRO1 AUTOR1 CALL, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>.
 
+---
+
 ### <a name="terse-word-46-52-4f-31-32"></a><span>FRO12</span>
+
+Uses AUTOR1 and AUTOR2 to process game state.
+
 `( -- )`
 
 Calls 'AUTOR1', 'AUTOR2'; native 'RET'
-
-Uses AUTOR1 and AUTOR2 to process game state.
 
 ```text
 SUBR FRO12 AUTOR1 CALL, AUTOR2 CALL, RET,
@@ -5967,12 +6752,15 @@ SUBR FRO12 AUTOR1 CALL, AUTOR2 CALL, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>, <a href="#terse-word-41-55-54-4f-52-32"><code>AUTOR2</code></a>.
 
+---
+
 ### <a name="terse-word-46-52-4f-31-32-33"></a><span>FRO123</span>
+
+Uses AUTOR1 and AUTOR2 to process game state.
+
 `( -- )`
 
 Calls 'AUTOR1', 'AUTOR2', 'AUTOR3'; native 'RET'
-
-Uses AUTOR1 and AUTOR2 to process game state.
 
 ```text
 SUBR FRO123 AUTOR1 CALL, AUTOR2 CALL, AUTOR3 CALL, RET,
@@ -5980,12 +6768,15 @@ SUBR FRO123 AUTOR1 CALL, AUTOR2 CALL, AUTOR3 CALL, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>, <a href="#terse-word-41-55-54-4f-52-32"><code>AUTOR2</code></a>, <a href="#terse-word-41-55-54-4f-52-33"><code>AUTOR3</code></a>.
 
+---
+
 ### <a name="terse-word-46-52-4f-31-33"></a><span>FRO13</span>
+
+Uses AUTOR2 to process game state.
+
 `( -- )`
 
 Writes incoming A to VSTATUS for runner R1, calls AUTOR2 (which sets runner R2 automatic-run/active state), then returns.
-
-Uses AUTOR2 to process game state.
 
 ```text
 SUBR FRO13 VSTATUS R1 STA, AUTOR2 CALL, RET,
@@ -5993,45 +6784,57 @@ SUBR FRO13 VSTATUS R1 STA, AUTOR2 CALL, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-32"><code>AUTOR2</code></a>.
 
+---
+
 ### <a name="terse-word-46-52-4f-32"></a><span>FRO2</span>
+
+Native game routine; source body below.
+
 `( -- )`
 
 Stores incoming A in VSTATUS for runner R1 and returns. The original FRO2 body names R1, not R2.
-
-Native game routine; source body below.
 
 ```text
 SUBR FRO2 VSTATUS R1 STA, RET,
 ```
 
+---
+
 ### <a name="terse-word-46-52-4f-32-33"></a><span>FRO23</span>
+
+Native game routine; source body below.
+
 `( -- )`
 
 Writes runner-1 and runner-2 status; native 'RET'
-
-Native game routine; source body below.
 
 ```text
 SUBR FRO23 VSTATUS R1 STA, VSTATUS R2 STA, RET,
 ```
 
+---
+
 ### <a name="terse-word-46-52-4f-33"></a><span>FRO3</span>
+
+Native game routine; source body below.
+
 `( -- )`
 
 Stores incoming A in VSTATUS for runner R1 and returns. The original FRO3 body names R1, not R3.
-
-Native game routine; source body below.
 
 ```text
 SUBR FRO3 VSTATUS R1 STA, RET,
 ```
 
+---
+
 ### <a name="terse-word-48-4c-4f-41-44"></a><span>HLOAD</span>
+
+FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
+
 `( -- )`
 
 HL ← zero-extended music byte
-
-FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
 ```text
 SUBR HLOAD FETCH CALL, INCPC CALL, 0 H MVI, A L MOV, RET,
@@ -6041,12 +6844,15 @@ SUBR HLOAD FETCH CALL, INCPC CALL, 0 H MVI, A L MOV, RET,
 
 **Used by:** <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
+---
+
 ### <a name="terse-word-49-46-53-50-41-4e"></a><span>IFSPAN</span>
+
+Preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value.
+
 `( -- )`
 
 Uses incoming A and C for fielder span calculation; returns native register results
-
-Preserves the row address, captures the encoded endpoint and derives the optional gap count from its high bit/value.
 
 ```text
 SUBR IFSPAN D PUSH, A H MOV, C L MOV, 0 A MVI,
@@ -6066,12 +6872,15 @@ CY, IF, H INX, THEN, IFPIX DJNZ, D POP,
 
 **Used by:** <a href="#terse-word-49-4e-46-49-45-4c-44"><code>INFIELD</code></a>.
 
+---
+
 ### <a name="terse-word-49-4e-43-50-43"></a><span>INCPC</span>
+
+FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
+
 `( -- )`
 
 Loads the 16-bit MUSPC pointer into HL, increments it by one and stores it back; returns natively.
-
-FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
 ```text
 SUBR INCPC MUSPC LHLD, H INX, MUSPC SHLD, RET,
@@ -6079,12 +6888,15 @@ SUBR INCPC MUSPC LHLD, H INX, MUSPC SHLD, RET,
 
 **Used by:** <a href="#terse-word-48-4c-4f-41-44"><code>HLOAD</code></a>, <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
+---
+
 ### <a name="terse-word-6c-6f-61-64-70-63"></a><span>loadpc</span>
+
+Installs MUSPC and STARTPC.
+
 `( -- )`
 
 RAM[MUSPC], RAM[STARTPC] ← HL
-
-Installs MUSPC and STARTPC.
 
 ```text
 SUBR loadpc MUSPC SHLD, STARTPC SHLD, RET,
@@ -6092,12 +6904,15 @@ SUBR loadpc MUSPC SHLD, STARTPC SHLD, RET,
 
 **Used by:** <a href="#terse-word-42-4d-55-53-49-43"><code>BMUSIC</code></a>, <a href="#terse-word-45-4d-55-53-49-43"><code>EMUSIC</code></a>, <a href="#terse-word-50-4d-55-53-49-43"><code>PMUSIC</code></a>.
 
+---
+
 ### <a name="terse-word-4c-56-52-53-54-41-54"></a><span>LVRSTAT</span>
+
+Load vstat for all runners in- A value.
+
 `( -- )`
 
 Input A is stored unchanged to VRSTAT for runners R1, R2, R3 and R4; returns natively.
-
-Load vstat for all runners in- A value.
 
 ```text
 SUBR LVRSTAT ( load vstat for all runners in- A value )
@@ -6107,23 +6922,29 @@ RET,
 
 **Used by:** <a href="#terse-word-42-4c-50-4f-53-43-48-4b"><code>BLPOSCHK</code></a>, <a href="#terse-word-43-48-4b-43-41-55-47-48-54"><code>CHKCAUGHT</code></a>, <a href="#terse-word-52-55-4e-44-53-54"><code>RUNDST</code></a>.
 
+---
+
 ### <a name="terse-word-4e-42-42"></a><span>NBB</span>
+
+Do nothing for the empty-bases case.
+
 `( -- )`
 
 Native no-op helper; immediate 'RET'
-
-Do nothing for the empty-bases case.
 
 ```text
 SUBR NBB RET,
 ```
 
+---
+
 ### <a name="terse-word-4f-46-42-4c-43-48-4b"></a><span>OFBLCHK</span>
+
+Chk for catch or close when cmsw.
+
 `( -- )`
 
 D = maximum catch distance; checks nearby ball/player vectors, returns native result in A
-
-Chk for catch or close when cmsw.
 
 ```text
 SUBR OFBLCHK ( chk for catch or close when cmsw )
@@ -6141,12 +6962,15 @@ D DSBC, ' COMPHL CC, D POP, 10 A MVI, H CMP, >=, IF,
 
 **Used by:** <a href="#terse-word-42-4c-50-4f-53-43-48-4b"><code>BLPOSCHK</code></a>, <a href="#terse-word-42-55-54-54-4f-4e-43-48-4b"><code>BUTTONCHK</code></a>.
 
+---
+
 ### <a name="terse-word-50-43-4a-55-4d-50"></a><span>PCJUMP</span>
+
+FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
+
 `( -- )`
 
 Reads MUSPC into HL, fetches the following little-endian target bytes into DE, and stores DE to MUSPC; returns natively.
-
-FETCH reads the current command byte, INCPC advances MUSPC, HLOAD reads/advances a byte into HL, and PCJUMP loads MUSPC from the following little-endian address.
 
 ```text
 SUBR PCJUMP MUSPC LHLD, M E MOV, H INX, M D MOV,
@@ -6155,12 +6979,15 @@ MUSPC SDED, RET,
 
 **Used by:** <a href="#terse-word-4d-55-53-43-50-55"><code>MUSCPU</code></a>.
 
+---
+
 ### <a name="terse-word-72-65-6c-61-62-73"></a><span>relabs</span>
+
+Relative X Y to magic address conversion.
+
 `( -- )`
 
 BC ← expansion/shift; HL ← screen address
-
-Relative X Y to magic address conversion.
 
 ```text
 SUBR relabs ( relative X Y to magic address conversion )
@@ -6178,12 +7005,15 @@ MRFLOP C BIT, 0<>, IF, NEG, 0=, IF, H DCX, THEN, THEN,
 
 **Used by:** <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-56-57-52-49-54-45"><code>VWRITE</code></a>, <a href="#terse-word-57-52-49-54-45"><code>WRITE</code></a>, <a href="#terse-word-57-52-49-54-52"><code>WRITR</code></a>, <a href="#terse-word-63-70-6f-73-74"><code>cpost</code></a>, <a href="#terse-word-73-74-72-74-6c-69-6e-65"><code>strtline</code></a>.
 
+---
+
 ### <a name="terse-word-72-65-6c-6f-66-66"></a><span>reloff</span>
+
+Compute relative offset of x , y of pattern.
+
 `( -- )`
 
 DE ← x offset; HL ← y offset; IY ← absolute pattern
-
-Compute relative offset of x , y of pattern.
 
 ```text
 SUBR reloff ( compute relative offset of x , y of pattern )
@@ -6200,12 +7030,15 @@ D POP, Y INXX, Y INXX, ( offset pattern ) RET,
 
 **Used by:** <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-56-57-52-49-54-45"><code>VWRITE</code></a>, <a href="#terse-word-57-52-49-54-52"><code>WRITR</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-31"></a><span>RO1</span>
+
+RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
+
 `( -- )`
 
 Activates runner 1 and selects a native runner pointer in BC, conditional on double-play state
-
-RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
 
 ```text
 SUBR RO1 AUTOR1 CALL, DPHIT LDA, A ANA,
@@ -6214,12 +7047,15 @@ SETDBLPLAY JNZ, VMAGIC R2 B LXI, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>, <a href="#terse-word-53-45-54-44-42-4c-50-4c-41-59"><code>SETDBLPLAY</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-31-32"></a><span>RO12</span>
+
+Activates both forced runners, selecting a double-play or ordinary target.
+
 `( -- )`
 
 Activates runners 1 and 2; selects the next runner pointer in BC
-
-Activates both forced runners, selecting a double-play or ordinary target.
 
 ```text
 SUBR RO12 AUTOR1 CALL, AUTOR2 CALL,
@@ -6229,12 +7065,15 @@ VMAGIC R3 B LXI, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>, <a href="#terse-word-41-55-54-4f-52-32"><code>AUTOR2</code></a>, <a href="#terse-word-53-45-54-44-42-4c-50-4c-41-59"><code>SETDBLPLAY</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-31-32-33"></a><span>RO123</span>
+
+RO23 and RO123 choose forced advancement and double-play targets for their base combinations.
+
 `( -- )`
 
 Activates runners 1–3; selects runner pointer in BC, conditional on double play
-
-RO23 and RO123 choose forced advancement and double-play targets for their base combinations.
 
 ```text
 SUBR RO123 AUTOR1 CALL, AUTOR2 CALL, AUTOR3 CALL,
@@ -6244,12 +7083,15 @@ SETDBLPLAY JNZ, VMAGIC R1 B LXI, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>, <a href="#terse-word-41-55-54-4f-52-32"><code>AUTOR2</code></a>, <a href="#terse-word-41-55-54-4f-52-33"><code>AUTOR3</code></a>, <a href="#terse-word-53-45-54-44-42-4c-50-4c-41-59"><code>SETDBLPLAY</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-31-33"></a><span>RO13</span>
+
+Handles first-and-third occupancy and may branch through SETDBLPLAY.
+
 `( -- )`
 
 Activates runner 2, then chooses runner pointer and double-play path
-
-Handles first-and-third occupancy and may branch through SETDBLPLAY.
 
 ```text
 SUBR RO13 AUTOR2 CALL, DPHIT LDA, A ANA,
@@ -6260,12 +7102,15 @@ VMAGIC R3 B LXI, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-32"><code>AUTOR2</code></a>, <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>, <a href="#terse-word-53-45-54-44-42-4c-50-4c-41-59"><code>SETDBLPLAY</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-32"></a><span>RO2</span>
+
+RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
+
 `( -- )`
 
 Activates runner 1 conditionally; returns BC = runner 2 vector
-
-RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
 
 ```text
 SUBR RO2 HLSIDE LDA, A ANA, 0=, IF,
@@ -6274,12 +7119,15 @@ AUTOR1 CALL, THEN, VMAGIC R2 B LXI, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-32-33"></a><span>RO23</span>
+
+Select forced advancement and double-play targets for second- and third-base runners.
+
 `( -- )`
 
 Selects runner 3 in BC, conditionally activating runners 1 and 2
-
-Select forced advancement and double-play targets for second- and third-base runners.
 
 ```text
 SUBR RO23 VMAGIC R3 B LXI, DPHIT LDA, A ANA,
@@ -6289,12 +7137,15 @@ RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>, <a href="#terse-word-41-55-54-4f-52-32"><code>AUTOR2</code></a>.
 
+---
+
 ### <a name="terse-word-52-4f-33"></a><span>RO3</span>
+
+RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
+
 `( -- )`
 
 Selects runner 2 in BC, conditionally activates runner 1
-
-RO1/RO2/RO3 activate runners according to DPHIT and HLSIDE and return a candidate PLAYON record in BC.
 
 ```text
 SUBR RO3 VMAGIC R2 B LXI, DPHIT LDA, A ANA,
@@ -6303,12 +7154,15 @@ AUTOR1 CNZ, RET,
 
 **Calls:** <a href="#terse-word-41-55-54-4f-52-31"><code>AUTOR1</code></a>.
 
+---
+
 ### <a name="terse-word-53-45-54-44-42-4c-50-4c-41-59"></a><span>SETDBLPLAY</span>
+
+Sets up double play HL-guy on 1st.
+
 `( -- )`
 
 Sets DBLPLAY to 1 and returns; HL is documented as the runner-on-first pointer by the original source comment but is not read by this subroutine.
-
-Sets up double play HL-guy on 1st.
 
 ```text
 SUBR SETDBLPLAY ( sets up double play HL-guy on 1st )
@@ -6317,12 +7171,15 @@ SUBR SETDBLPLAY ( sets up double play HL-guy on 1st )
 
 **Used by:** <a href="#terse-word-52-4f-31"><code>RO1</code></a>, <a href="#terse-word-52-4f-31-32"><code>RO12</code></a>, <a href="#terse-word-52-4f-31-32-33"><code>RO123</code></a>, <a href="#terse-word-52-4f-31-33"><code>RO13</code></a>.
 
+---
+
 ### <a name="terse-word-54-41-4b-45-4f-46-46"></a><span>TAKEOFF</span>
+
+Turn proper runners on.
+
 `( -- )`
 
 Dispatches runner-activation handler via BC/table and native return trampoline
-
-Turn proper runners on.
 
 ```text
 SUBR TAKEOFF ( turn proper runners on ) <ASSEMBLE
@@ -6336,12 +7193,15 @@ LABEL TORET RET, ASSEMBLE>
 
 **Used by:** <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
+---
+
 ### <a name="terse-word-54-42-41-4c-4c-50-52-43"></a><span>TBALLPRC</span>
+
+Pitch or control outfield.
+
 `( -- )`
 
 Samples trackball port and computes tractor-ball/outfielder velocity state
-
-Pitch or control outfield.
 
 ```text
 SUBR TBALLPRC ( pitch or control outfield ) <ASSEMBLE
@@ -6369,12 +7229,15 @@ LABEL LDOFPA OFPA SHLD, RET, ASSEMBLE>
 
 **Calls:** <a href="#terse-word-41-4e-44"><code>AND</code></a>, <a href="#terse-word-54-42-4c-56-45-4c"><code>TBLVEL</code></a>.
 
+---
+
 ### <a name="terse-word-54-42-4c-56-45-4c"></a><span>TBLVEL</span>
+
+Tractorball vel HL-# add. D-max vel.
+
 `( -- )`
 
 Inputs HL = velocity-byte address and D = maximum parameter. Reads the signed velocity byte, selects magnitude $80 or $1B0 according to threshold 3, applies the original sign and returns the signed 16-bit result in HL (returns zero if the byte is zero).
-
-Tractorball vel HL-# add. D-max vel.
 
 ```text
 SUBR TBLVEL ( tractorball vel HL-# add. D-max vel )
@@ -6388,12 +7251,15 @@ PSW POP, ' COMPHL CNZ, RET,
 
 **Used by:** <a href="#terse-word-54-42-41-4c-4c-50-52-43"><code>TBALLPRC</code></a>.
 
+---
+
 ### <a name="terse-word-54-49-4d-45-44-43-52"></a><span>TIMEDCR</span>
+
+HL-timer add if goes to zero return 1 else 0.
+
 `( -- )`
 
 Input HL addresses a timer byte. If already zero, returns A = 0 without writing; otherwise decrements the byte and returns A = 1 only on transition to zero, or 0 if still nonzero.
-
-HL-timer add if goes to zero return 1 else 0.
 
 ```text
 SUBR TIMEDCR ( HL-timer add if goes to zero return 1 else 0 )
@@ -6404,12 +7270,15 @@ ELSE, A XRA, THEN, RET,
 
 **Used by:** <a href="#terse-word-50-54-41-55-54-4f-54-4d"><code>PTAUTOTM</code></a>, <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
+---
+
 ### <a name="terse-word-54-4f-4f-46-43-4b"></a><span>TOOFCK</span>
+
+Time out outfield check.
+
 `( -- )`
 
 Decrements TOOF#. On a nonzero result, sets TOOF to $FF; when the counter reaches zero, calls CMPOF, enables interrupts (EI), and sets TOOFF to 1; returns natively.
-
-Time out outfield check.
 
 ```text
 SUBR TOOFCK ( time out outfield check )
@@ -6421,12 +7290,15 @@ ELSE, CMPOF CALL, EI, 1 A MVI, TOOFF STA, THEN, RET,
 
 **Used by:** <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
+---
+
 ### <a name="terse-word-57-41-4c-4b-4f-56-45-52"></a><span>WALKOVER</span>
+
+Walked runner at base.
+
 `( -- )`
 
 Sets 'CAUGHT' and 'THROWAROUND' flags to one
-
-Walked runner at base.
 
 ```text
 SUBR WALKOVER ( walked runner at base )
@@ -6435,12 +7307,15 @@ SUBR WALKOVER ( walked runner at base )
 
 **Used by:** <a href="#terse-word-54-49-4d-45-52"><code>TIMER</code></a>.
 
+---
+
 ### <a name="terse-word-77-72-69-74-65"></a><span>write</span>
+
+Software write with x y size.
+
 `( -- )`
 
 Inputs IY = pattern data, BC = expansion/magic/shift, DE = pattern dimensions and HL = screen address. Configures XPAND/MAGIC and writes the pattern through the raster drawing loops; this routine does not flush the shifter automatically.
-
-Software write with x y size.
 
 ```text
 SUBR write ( software write with x y size )
@@ -6463,12 +7338,15 @@ THEN, B POP, ( magic ) RET, -->
 
 **Used by:** <a href="#terse-word-57-52-49-54-45"><code>WRITE</code></a>, <a href="#terse-word-77-72-69-74-65-70"><code>writep</code></a>.
 
+---
+
 ### <a name="terse-word-77-72-69-74-65-70"></a><span>writep</span>
+
+Uses IY for the pattern address, BC for expansion/magic and shift settings, and HL for the screen address. Loads the pattern dimensions and transfers to the native drawing routine.
+
 `( -- )`
 
 Inputs: IY points to the size-prefixed pattern, BC holds expansion/magic/shift settings, and HL holds the screen address. Reads pattern X size into E and Y size into D, advances IY past the size bytes, and tail-jumps to write (no local RET).
-
-Uses IY for the pattern address, BC for expansion/magic and shift settings, and HL for the screen address. Loads the pattern dimensions and transfers to the native drawing routine.
 
 ```text
 SUBR writep ( software write with pattern size on pattern )
@@ -6481,25 +7359,31 @@ SUBR writep ( software write with pattern size on pattern )
 
 **Used by:** <a href="#terse-word-42-41-54-57-52-49-54-45"><code>BATWRITE</code></a>, <a href="#terse-word-56-45-52-41-53-45"><code>VERASE</code></a>, <a href="#terse-word-56-57-52-49-54-45"><code>VWRITE</code></a>, <a href="#terse-word-57-52-49-54-52"><code>WRITR</code></a>.
 
+---
+
 ### <a name="terse-word-42-41-53-45-21"></a><span>BASE!</span>
 
-`( base -- )`
-
 Set the number base.
+
+`( base -- )`
 
 ```text
 { : BASE! } BASE ! { ; }
 ```
 
+---
+
 ### <a name="terse-word-42-41-53-45-40"></a><span>BASE@</span>
 
-`( -- base )`
-
 Fetch the current number base.
+
+`( -- base )`
 
 ```text
 { : BASE@ } BASE @ { ; }
 ```
+
+---
 
 ## Source notes
 
