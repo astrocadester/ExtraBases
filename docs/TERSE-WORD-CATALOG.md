@@ -272,25 +272,25 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>cnline</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Saves BC, IX and IY around VECTOR; restores registers before NEXT</sub> | <a href="#cnline--native-code" title="View implementation">📄</a> | Calls vector line write. |
 | <strong>COMPDE</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: DE ← −DE; HL preserved</sub> | <a href="#compde--native-code" title="View implementation">📄</a> | COMPDE applies the same operation to DE while preserving HL. |
 | <strong>COMPHL</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: HL ← −HL</sub> | <a href="#comphl--native-code" title="View implementation">📄</a> | Compliments HL. |
-| <strong>COUNT</strong><br><code>(&nbsp;address&nbsp;--&nbsp;address+1&nbsp;length&nbsp;)</code><br><sub>Z80 after: native return; register outputs not established from this entry</sub> | <a href="#count--native-code" title="View implementation">📄</a> | Fetch the address and length of a counted string. |
+| <strong>COUNT</strong><br><code>(&nbsp;address&nbsp;--&nbsp;address+1&nbsp;character&nbsp;)</code><br><sub>Z80 after: Character returned with high-bit terminator stripped; address advanced by one |Read the next character of a counted/high-bit-terminated string.48193
 | <strong>cpost</strong><br><code>(&nbsp;x&nbsp;y&nbsp;options&nbsp;char&nbsp;--&nbsp;x'&nbsp;y&nbsp;options&nbsp;)</code><br><sub>Z80 after: Consumes drawing position, options and character; returns updated x and retained state</sub> | <a href="#cpost--native-code" title="View implementation">📄</a> | Post an ascii-character on the screen ; see opt. |
 | <strong>DEACTIVATE</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: IX addresses vector; resets active status bit, writes SAMEDLT, returns</sub> | <a href="#deactivate--native-code" title="View implementation">📄</a> | Reset active bit in status. |
-| <strong>DI</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Native binding to interrupt-disable primitive in the target ROM</sub> | <a href="#di--native-code" title="View implementation">📄</a> | Disable interrupts. |
+| <strong>DI</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Maskable interrupts disabled; parameter stack unchanged |Disable maskable Z80 interrupts.49080
 | <strong>DIVHLBY4</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: HL ← signed(HL / 4)</sub> | <a href="#divhlby4--native-code" title="View implementation">📄</a> | Divide HL by 4. |
-| <strong>DO</strong><br><code>(&nbsp;limit&nbsp;start&nbsp;--&nbsp;)</code><br><sub>Z80 after: Return stack IX gets 3-word counted loop frame</sub> | <a href="#do--native-code" title="View implementation">📄</a> | Enter a counted loop. |
+| <strong>DO</strong><br><code>(&nbsp;limit&nbsp;start&nbsp;--&nbsp;)</code><br><sub>Z80 after: Two parameter-stack cells consumed; IX return stack holds start, limit and loop IP |Enter a counted loop using a three-cell return-stack frame.49445
 | <strong>DSTCALC</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: HL ← dy; DE ← dx; BC ← action selector</sub> | <a href="#dstcalc--native-code" title="View implementation">📄</a> | Calc deltas to destination. |
 | <strong>DSTLD</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: IX input vector; HL ← destination X; DE ← destination Y</sub> | <a href="#dstld--native-code" title="View implementation">📄</a> | DSTLD reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively. |
-| <strong>EI</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Native binding to interrupt-enable primitive in the target ROM</sub> | <a href="#ei--native-code" title="View implementation">📄</a> | Uses SWAN to process game state. |
+| <strong>EI</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Maskable interrupts enabled; parameter stack unchanged |Enable maskable Z80 interrupts.50262
 | <strong>EIDI</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Emits EI then DI, returns through NEXT</sub> | <a href="#eidi--native-code" title="View implementation">📄</a> | EIDI executes EI then DI, providing the Z80 interrupt opportunity used by callers. |
 | <strong>EMUSIC</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Initializes music state and returns through NEXT</sub> | <a href="#emusic--native-code" title="View implementation">📄</a> | EMUSIC selects ENDMUSIC and initializes timing/repetition to one; |
 | <strong>EX</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Emits RET instruction and continues through NEXT</sub> | <a href="#ex--native-code" title="View implementation">📄</a> | EX emits $C9 (RET) before NEXT, allowing an address on the parameter stack to become a native execution transfer in this target implementation. |
-| <strong>FILL</strong><br><code>(&nbsp;value&nbsp;address&nbsp;count&nbsp;--&nbsp;)</code><br><sub>Z80 after: The target word is a threaded RST $08 program at $0253: ROT ROT 2DUP ! SWAP DROP DUP 1+ ROT 1-…</sub> | <a href="#fill--native-code" title="View implementation">📄</a> | Fill a memory/screen range. |
+| <strong>FILL</strong><br><code>(&nbsp;value&nbsp;address&nbsp;count&nbsp;--&nbsp;)</code><br><sub>Z80 after: Bytes [address..address+count−1] filled with value; parameter stack consumed |Fill consecutive bytes with a specified value.51392
 | <strong>FLDDST</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: IX = fielder vector; computes velocity/destination and updates playaction state through native…</sub> | <a href="#flddst--native-code" title="View implementation">📄</a> | Fielders take position logic. |
 | <strong>FLSHOFF</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Preserves BC; clears flash state and calls FLSHWUP before NEXT</sub> | <a href="#flshoff--native-code" title="View implementation">📄</a> | FLSHOFF disables flashing and services cleanup under DI. |
 | <strong>FMIRROR</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Preserves BC while mirroring field graphics and returns through NEXT</sub> | <a href="#fmirror--native-code" title="View implementation">📄</a> | FMIRROR selects expansion/magic settings and copies $50 bytes per row through the magic-write area for $C0 rows, reversing horizontal byte order. |
 | <strong>HITRUN</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Selects runner activation and throw target via indexed native dispatch; restores BC before NEXT</sub> | <a href="#hitrun--native-code" title="View implementation">📄</a> | Activate proper runners and set trwbase. |
 | <strong>HOMERCHK</strong><br><code>(&nbsp;y&nbsp;x&nbsp;hit-type&nbsp;random-x&nbsp;random-y&nbsp;--&nbsp;)</code><br><sub>Z80 after: Five TERSE inputs consumed; ball/homer state updated</sub> | <a href="#homerchk--native-code" title="View implementation">📄</a> | Consumes two random offsets, hit type and ball coordinates from the TERSE parameter stack; sets fence/homer state and ball destination. |
-| <strong>I</strong><br><code>(&nbsp;--&nbsp;index&nbsp;)</code><br><sub>Z80 after: Current IX loop index pushed to parameter stack</sub> | <a href="#i--native-code" title="View implementation">📄</a> | Native game routine; source body below. |
+| <strong>I</strong><br><code>(&nbsp;--&nbsp;index&nbsp;)</code><br><sub>Z80 after: Loop index copied from IX return-stack frame to parameter stack; IX frame intact |Fetch the innermost counted-loop index.53264
 | <strong>IEX</strong><br><code>(&nbsp;saved-interrupt-frame&nbsp;--&nbsp;)</code><br><sub>Z80 after: Saved interrupt register frame restored, interrupt enabled</sub> | <a href="#iex--native-code" title="View implementation">📄</a> | Restores two saved Z80 register banks, enables interrupts, then returns from the interrupt bridge; this is an interrupt-frame convention, not an ordinary TERSE data-word call. |
 | <strong>INDEXW</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: A,HL input table index/base; DE ← indexed word</sub> | <a href="#indexw--native-code" title="View implementation">📄</a> | Call routine A- disp HL- table add. |
 | <strong>INFIELD</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Draws infield stripes/pitcher mound; preserves BC and IX around row-rendering helpers</sub> | <a href="#infield--native-code" title="View implementation">📄</a> | Uses IFSPAN to process game state. |
@@ -298,10 +298,10 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>ISTART</strong><br><code>(&nbsp;interrupt-address&nbsp;--&nbsp;)</code><br><sub>Z80 after: RAM[IPNT] ← interrupt handler address; mode IM2</sub> | <a href="#istart--native-code" title="View implementation">📄</a> | ISTART disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT. |
 | <strong>KILLOF</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Clears outfield delta words and control flag; selects standing playaction</sub> | <a href="#killof--native-code" title="View implementation">📄</a> | Stop outfield tractor ball control. |
 | <strong>LOADANM</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: HL ← next playaction cursor; IX vector updated</sub> | <a href="#loadanm--native-code" title="View implementation">📄</a> | Loads magic & anm HL-top of playact table. |
-| <strong>LOOP</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: IX loop frame updated or released</sub> | <a href="#loop--native-code-1" title="View implementation">📄</a> | Advance or terminate a counted loop. |
+| <strong>LOOP</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Parameter stack unchanged; IX loop index incremented, loop frame retained or released |Advance a counted loop and test its termination.55424
 | <strong>MULTHLBY4</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: HL ← signed(4×HL)</sub> | <a href="#multhlby4--native-code" title="View implementation">📄</a> | MULTHLBY4 multiplies the magnitude of HL by four through shifts, then restores its sign. |
 | <strong>MUSCPU</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Music tick handler; updates note timer, decodes music commands and drives sound ports</sub> | <a href="#muscpu--native-code" title="View implementation">📄</a> | Declare cross-screen dispatch labels and begin assembling MUSCPU. |
-| <strong>NDUP</strong><br><code>(&nbsp;x1&nbsp;…&nbsp;xn&nbsp;n&nbsp;--&nbsp;x1&nbsp;…&nbsp;xn&nbsp;x1&nbsp;…&nbsp;xn&nbsp;)</code><br><sub>Z80 after: The ROM's $0260 NPICK primitive removes count n, copies the preceding n 16-bit parameter-stack…</sub> | <a href="#ndup--native-code" title="View implementation">📄</a> | Uses ARRAY to process game state. |
+| <strong>NDUP</strong><br><code>(&nbsp;x1&nbsp;…&nbsp;xn&nbsp;n&nbsp;--&nbsp;x1&nbsp;…&nbsp;xn&nbsp;x1&nbsp;…&nbsp;xn&nbsp;)</code><br><sub>Z80 after: Parameter stack retains original n cells and appends a copy; count removed |Duplicate the top n parameter-stack cells.56394
 | <strong>OFFFDST</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: IX = active fielder vector; selects off-field destination, computes movement deltas</sub> | <a href="#offfdst--native-code" title="View implementation">📄</a> | All player off field control. |
 | <strong>OFLDTBL</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Assigns outfielder playaction table, invokes OUTFLDACT, and returns</sub> | <a href="#ofldtbl--native-code" title="View implementation">📄</a> | OFLDTBL gives all three outfielders OFTBLPA, activates them and returns; |
 | <strong>OFMOTION</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Sets VECTPC from OFPA, conditional on action opcode and IX status</sub> | <a href="#ofmotion--native-code" title="View implementation">📄</a> | Set pc for ram pa table -tractor ball. |
@@ -317,13 +317,13 @@ This catalog identifies TERSE words used or defined in Extra Bases, with their s
 | <strong>PMUSIC</strong><br><code>(&nbsp;music-address&nbsp;--&nbsp;)</code><br><sub>Z80 after: HL consumes music address; RAM priority/timers updated</sub> | <a href="#pmusic--native-code" title="View implementation">📄</a> | PMUSIC installs a stream unconditionally and sets priority, repeat count and note timer. |
 | <strong>PTAUTOTM</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Calls TIMEDCR for pitch timeout and returns through NEXT</sub> | <a href="#ptautotm--native-code" title="View implementation">📄</a> | Pitch auto timer. |
 | <strong>RESETRUNNERS</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Reorders runner vector records by occupancy and resets final runner slot</sub> | <a href="#resetrunners--native-code" title="View implementation">📄</a> | Reset runners to order of on base. |
-| <strong>RND</strong><br><code>(&nbsp;upper-bound&nbsp;--&nbsp;random-value&nbsp;)</code><br><sub>Z80 after: Stack upper bound replaced with scaled random value</sub> | <a href="#rnd--native-code" title="View implementation">📄</a> | Generate a random number. |
+| <strong>RND</strong><br><code>(&nbsp;upper-bound&nbsp;--&nbsp;random-value&nbsp;)</code><br><sub>Z80 after: Upper bound consumed and scaled random result pushed; random seed advanced |Produce a random value scaled to the supplied bound.60548
 | <strong>RUNDST</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: IX = runner record; processes base occupancy, auto-forward and movement state</sub> | <a href="#rundst--native-code" title="View implementation">📄</a> | Runner base running control. |
 | <strong>SENTRY</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Native game scheduler; calls tick services, invokes TERSECHK, then loops</sub> | <a href="#sentry--native-code" title="View implementation">📄</a> | Game loop. |
 | <strong>SETACT</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: HL,A input vector/count; VACT set across records</sub> | <a href="#setact--native-code" title="View implementation">📄</a> | Sets avtive bit in status. |
 | <strong>STARTMUSIC</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Selects event music from state flags and dispatches music requests</sub> | <a href="#startmusic--native-code" title="View implementation">📄</a> | STARTMUSIC clears its request. |
 | <strong>strtline</strong><br><code>(&nbsp;x&nbsp;y&nbsp;--&nbsp;)</code><br><sub>Z80 after: Pops X and Y to native registers, computes address/line setup; returns via NEXT</sub> | <a href="#strtline--native-code" title="View implementation">📄</a> | Given X Y sets up start of line. |
-| <strong>SWAN</strong><br><code>(&nbsp;value&nbsp;--&nbsp;nibble-swapped-value&nbsp;)</code><br><sub>Z80 after: Parameter stack top ← nibble-swapped low byte</sub> | <a href="#swan--native-code" title="View implementation">📄</a> | Transfer interrupt/screen execution state. |
+| <strong>SWAN</strong><br><code>(&nbsp;value&nbsp;--&nbsp;nibble-swapped-value&nbsp;)</code><br><sub>Z80 after: High byte unchanged; low byte rotated four bits; result replaces input |Exchange the high and low nibbles of the low byte.62269
 | <strong>TBALLPITCH</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Computes pitcher/trackball velocity updates and writes movement fields</sub> | <a href="#tballpitch--native-code" title="View implementation">📄</a> | Loads pitch velocities. |
 | <strong>THROWANIM</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Prepares ball/throw vector data; saves/restores IX and IY around native update</sub> | <a href="#throwanim--native-code" title="View implementation">📄</a> | Sets up BLDST and player anim. |
 | <strong>THROWBALL</strong><br><code>(&nbsp;--&nbsp;)</code><br><sub>Z80 after: Builds the pitch or throw state, updates ball vector and runner decisions</sub> | <a href="#throwball--native-code" title="View implementation">📄</a> | Finish scoring first. |
@@ -4247,11 +4247,11 @@ H A MOV, CMA, A H MOV, L A MOV, CMA, A L MOV, H INX, RET,
 
 ### `COUNT` — native CODE
 
-`( address -- address+1 length )`
+`( address -- address+1 character )`
 
-`Z80 after: native return; register outputs not established from this entry`
+`Z80 after: Character returned with high-bit terminator stripped; address advanced by one`
 
-Fetch the address and length of a counted string.
+Read the next character of a counted/high-bit-terminated string.
 
 ```z80
             pop     hl                  ; Pop string address from parameter stack
@@ -4323,9 +4323,9 @@ VACT VSTATUS X RESX, 1 A MVI, SAMEDLT STA, RET,
 
 `( -- )`
 
-`Z80 after: Native binding to interrupt-disable primitive in the target ROM`
+`Z80 after: Maskable interrupts disabled; parameter stack unchanged`
 
-Disable interrupts.
+Disable maskable Z80 interrupts.
 
 ```z80
 _DI:
@@ -4359,9 +4359,9 @@ PSW POP, ' COMPHL CNZ, RET,
 
 `( limit start -- )`
 
-`Z80 after: Return stack IX gets 3-word counted loop frame`
+`Z80 after: Two parameter-stack cells consumed; IX return stack holds start, limit and loop IP`
 
-Enter a counted loop.
+Enter a counted loop using a three-cell return-stack frame.
 
 ```z80
 _DO:
@@ -4445,9 +4445,9 @@ RET,
 
 `( -- )`
 
-`Z80 after: Native binding to interrupt-enable primitive in the target ROM`
+`Z80 after: Maskable interrupts enabled; parameter stack unchanged`
 
-Uses SWAN to process game state.
+Enable maskable Z80 interrupts.
 
 ```z80
 _EI:
@@ -4508,9 +4508,9 @@ CODE EX C9 B, NEXT
 
 `( value address count -- )`
 
-`Z80 after: The target word is a threaded 'RST $08' program at '$0253': 'ROT ROT 2DUP ! SWAP DROP DUP 1+ ROT 1- BMOVE RETURN'`
+`Z80 after: Bytes [address..address+count−1] filled with value; parameter stack consumed`
 
-Fill a memory/screen range.
+Fill consecutive bytes with a specified value.
 
 ```z80
             rst     $08                 ; Enter the inline TERSE thread
@@ -4526,10 +4526,6 @@ Fill a memory/screen range.
             DB      $0A                 ; $025D: 1-
             DB      $0B                 ; $025E: BMOVE
             DB      $03                 ; $025F: RETURN
-```
-
-```text
-CODE FILL ROMHERE !
 ```
 
 **Used by:** `FLFILL`, `SCRERASE`, `ZERORAM`.
@@ -4662,9 +4658,9 @@ THEN, THEN, VDSTX BL SHLD, VDSTY BL SDED, EXX, NEXT -->
 
 `( -- index )`
 
-`Z80 after: Current IX loop index pushed to parameter stack`
+`Z80 after: Loop index copied from IX return-stack frame to parameter stack; IX frame intact`
 
-Native game routine; source body below.
+Fetch the innermost counted-loop index.
 
 ```z80
 _Rat:
@@ -4807,9 +4803,9 @@ H POP, ( pc ) H INX, RET, ( returns updated pc in HL )
 
 `( -- )`
 
-`Z80 after: IX loop frame updated or released`
+`Z80 after: Parameter stack unchanged; IX loop index incremented, loop frame retained or released`
 
-Advance or terminate a counted loop.
+Advance a counted loop and test its termination.
 
 ```z80
 _LOOP:
@@ -4892,9 +4888,9 @@ LABEL MUSEND A ORA, PROCESS JZ, B POP, RET,
 
 `( x1 … xn n -- x1 … xn x1 … xn )`
 
-`Z80 after: The ROM's '$0260' 'NPICK' primitive removes count 'n', copies the preceding 'n' 16-bit parameter-stack cells in order, and leaves the originals intact`
+`Z80 after: Parameter stack retains original n cells and appends a copy; count removed`
 
-Uses ARRAY to process game state.
+Duplicate the top n parameter-stack cells.
 
 ```z80
 _NPICK:
@@ -5218,9 +5214,9 @@ FORWARD OUTOFFF FORWARD CCLEAVE
 
 `( upper-bound -- random-value )`
 
-`Z80 after: Stack upper bound replaced with scaled random value`
+`Z80 after: Upper bound consumed and scaled random result pushed; random seed advanced`
 
-Generate a random number.
+Produce a random value scaled to the supplied bound.
 
 ```z80
             exx                         ; Save TERSE VM registers in alternate set
@@ -5433,9 +5429,9 @@ SADR SHLD, B POP, NEXT
 
 `( value -- nibble-swapped-value )`
 
-`Z80 after: Parameter stack top ← nibble-swapped low byte`
+`Z80 after: High byte unchanged; low byte rotated four bits; result replaces input`
 
-Transfer interrupt/screen execution state.
+Exchange the high and low nibbles of the low byte.
 
 ```z80
 _SWABN:
