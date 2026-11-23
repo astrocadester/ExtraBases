@@ -4253,9 +4253,16 @@ H A MOV, CMA, A H MOV, L A MOV, CMA, A L MOV, H INX, RET,
 
 Fetch the address and length of a counted string.
 
-```text
-CODE COUNT ROMHERE !
-( COUNT uses the native counted-string routine )
+```z80
+            pop     hl                  ; Pop string address from parameter stack
+            ld      a,(hl)              ; Read character byte
+            inc     hl                  ; Advance string pointer
+            push    hl                  ; Push updated string pointer
+            ld      l,a                 ; Move character code to low byte
+            res     7,l                 ; Strip bit 7 string-end flag
+            ld      h,$00               ; Zero-extend high byte
+            push    hl                  ; Push character code onto stack
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Used by:** `PPOST`.
@@ -4320,8 +4327,10 @@ VACT VSTATUS X RESX, 1 A MVI, SAMEDLT STA, RET,
 
 Disable interrupts.
 
-```text
-CODE DI
+```z80
+_DI:
+            di                          ; Disable hardware interrupts
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Used by:** `CREDARROW`, `DOGOVER`, `DWAIT`, `FLFILL`, `INSWAIT`, `MLINN`, `PLRCHK`, `PLRSELECT`, `PUP`, `SETTF`, `STRTBALL`, `TF`, `TWAIT`, `ZERORAM`.
@@ -4354,8 +4363,19 @@ PSW POP, ' COMPHL CNZ, RET,
 
 Enter a counted loop.
 
-```text
-CODE DO
+```z80
+_DO:
+            ld      de,$FFFA            ; Offset to allocate 3 words on Return Stack
+            add     ix,de               ; Move Return Stack Pointer (IX) down 6 bytes
+            pop     hl                  ; Pop loop initial index (x1)
+            pop     de                  ; Pop loop limit value (x2)
+            ld      (ix+$00),l          ; Store loop index LSB on Return Stack
+            ld      (ix+$01),h          ; Store loop index MSB on Return Stack
+            ld      (ix+$02),e          ; Store loop limit LSB on Return Stack
+            ld      (ix+$03),d          ; Store loop limit MSB on Return Stack
+            ld      (ix+$04),c          ; Store current IP LSB (loop body start)
+            ld      (ix+$05),b          ; Store current IP MSB (loop body start)
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Used by:** `DWAIT`, `FIELDWRT`, `INSWAIT`, `LSETTFCOOR`, `MLINN`, `NPOST`, `OUTTIME`, `PPOST`, `RETPA`, `TWAIT`.
@@ -4429,10 +4449,10 @@ RET,
 
 Uses SWAN to process game state.
 
-```text
-CODE EI 0249 ROMHERE ! CODE SWAN
-ROMHERE !
-( VGS screen handeling verbs INTCOMMERCIAL , FILL , SCRERASE )
+```z80
+_EI:
+            ei                          ; Enable hardware interrupts
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Calls:** `SWAN`.
@@ -4492,11 +4512,20 @@ CODE EX C9 B, NEXT
 
 Fill a memory/screen range.
 
-```text
-FILL  ($0253)
-RST $08
-ROT  ROT  2DUP  !  SWAP  DROP
-DUP  1+  ROT  1-  BMOVE  RETURN
+```z80
+            rst     $08                 ; Enter the inline TERSE thread
+            DB      $05                 ; $0254: ROT
+            DB      $05                 ; $0255: ROT
+            DB      $06                 ; $0256: 2DUP
+            DB      $02                 ; $0257: !
+            DB      $01                 ; $0258: SWAP
+            DB      $07                 ; $0259: DROP
+            DB      $08                 ; $025A: DUP
+            DB      $09                 ; $025B: 1+
+            DB      $05                 ; $025C: ROT
+            DB      $0A                 ; $025D: 1-
+            DB      $0B                 ; $025E: BMOVE
+            DB      $03                 ; $025F: RETURN
 ```
 
 ```text
@@ -4637,18 +4666,12 @@ THEN, THEN, VDSTX BL SHLD, VDSTY BL SDED, EXX, NEXT -->
 
 Native game routine; source body below.
 
-```text
-CODE I
-ROMHERE !
-FORWARD PLPOS FORWARD PLBACK FORWARD PLDONE
-CODE +LOOP <ASSEMBLE H POP, H A MOV, 0 X E LDX, 1 X D LDX,
-D DAD, L 0 X STX, H 1 X STX,
-2 X E LDX, 3 X D LDX, A ORA, D DSBC,
-PSW PUSH, H POP, 7 A BIT, L A MOV, PLPOS JZ,
-84 ANI, PLBACK JPE, PLDONE JMP,
-( BB parameter control - reconstructed continuation )
-LABEL PLPOS 84 ANI, PLBACK JPO,
-LABEL PLDONE 6 D LXI, D DADX, NEXT
+```z80
+_Rat:
+            ld      l,(ix+$00)          ; Read Return Stack top LSB
+            ld      h,(ix+$01)          ; Read Return Stack top MSB
+            push    hl                  ; Push copied word onto parameter stack
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Used by:** `NPOST`, `PPOST`.
@@ -4788,8 +4811,28 @@ H POP, ( pc ) H INX, RET, ( returns updated pc in HL )
 
 Advance or terminate a counted loop.
 
-```text
-CODE LOOP
+```z80
+_LOOP:
+            ld      l,(ix+$00)          ; Read current loop index from Return Stack
+            ld      h,(ix+$01)
+            inc     hl                  ; Increment loop index by 1
+            ld      (ix+$00),l          ; Store updated index back to Return Stack
+            ld      (ix+$01),h
+            ld      e,(ix+$02)          ; Read loop limit value from Return Stack
+            ld      d,(ix+$03)
+            xor     a                   ; Clear carry flag
+            sbc     hl,de               ; Compare index against limit (index - limit)
+            push    af                  ; Save comparison flags
+            pop     hl                  ; Move flags into HL
+            ld      a,l                 ; Extract status flags byte
+            and     $84                 ; Mask Sign (bit 7) and Overflow (bit 2) flags
+            jp      po,$01B7            ; If sign matches overflow, loop continues
+            ld      de,$0006            ; Loop complete: deallocate 3-word loop frame
+            add     ix,de               ; Advance Return Stack Pointer (IX)
+            jp      $01BD               ; Jump to exit loop and return to interpreter
+            ld      c,(ix+$04)          ; Loop continues: reload loop start IP into BC
+            ld      b,(ix+$05)
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Used by:** `+LOOP`, `DWAIT`, `FIELDWRT`, `INSWAIT`, `LSETTFCOOR`, `MLINN`, `NPOST`, `OUTTIME`, `PPOST`, `RETPA`, `TWAIT`.
@@ -4853,10 +4896,25 @@ LABEL MUSEND A ORA, PROCESS JZ, B POP, RET,
 
 Uses ARRAY to process game state.
 
-```text
-CODE NDUP ROMHERE !
-( HIGH SPEED RANDOM NUMBER - native kernel binding )
-HEX VPTR @ 07C06 VPTR ! 2 ARRAY RND# VPTR !
+```z80
+_NPICK:
+            exx                         ; Save TERSE VM registers in alternate set
+            pop     bc                  ; Pop item count from parameter stack
+            dec     c                   ; Decrement loop count
+            ld      hl,$0001            ; Offset to target stack frame
+            add     hl,sp               ; Add stack pointer
+            add     hl,bc               ; Multiply count by 2 for word offset
+            add     hl,bc
+_NPICK_LOOP:
+            ld      d,(hl)              ; Read high byte from stack
+            dec     hl                  ; Decrement stack pointer
+            ld      e,(hl)              ; Read low byte from stack
+            push    de                  ; Push copied word onto stack
+            dec     hl                  ; Decrement stack pointer
+            dec     c                   ; Decrement loop counter
+            jp      p,_NPICK_LOOP       ; Loop until all requested items copied
+            exx                         ; Restore TERSE VM registers
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Calls:** `ARRAY`.
@@ -5164,124 +5222,65 @@ FORWARD OUTOFFF FORWARD CCLEAVE
 
 Generate a random number.
 
-```text
-CODE RND ROMHERE !
-( NUMBER TABLE FOR STRING DISPLAY ROUTINES )
-BTABLE characters ( FILL IN CHARACTER TABLES )
-( SPACE 0 1 2 3 4 5 6 7 8 9 )
-00 B, 00 B, 00 B, 00 B, 00 B, 00 B, 00 B, 00 B, 00 B, 00 B,
-3C B, 7E B, 66 B, 66 B, 66 B, 66 B, 66 B, 66 B, 7E B, 3C B,
-18 B, 38 B, 18 B, 18 B, 18 B, 18 B, 18 B, 18 B, 3C B, 3C B,
-3C B, 7E B, 66 B, 06 B, 3E B, 7C B, 60 B, 60 B, 7E B, 7E B,
-3C B, 7E B, 66 B, 06 B, 1C B, 1E B, 06 B, 66 B, 7E B, 3C B,
-66 B, 66 B, 66 B, 66 B, 7E B, 7E B, 06 B, 06 B, 06 B, 06 B,
-7C B, 7C B, 60 B, 60 B, 7C B, 7E B, 06 B, 66 B, 7E B, 3C B,
-3C B, 7C B, 60 B, 60 B, 7C B, 7E B, 66 B, 66 B, 7E B, 3C B,
-7E B, 7E B, 06 B, 0E B, 0C B, 1C B, 18 B, 38 B, 30 B, 30 B,
-3C B, 7E B, 66 B, 66 B, 3C B, 7E B, 66 B, 66 B, 7E B, 3C B,
-3C B, 7E B, 66 B, 66 B, 7E B, 3E B, 06 B, 06 B, 3E B, 3C B,
-( CHARACTER PATTERN TABLE FOR DISPLAY )
-( A B C D E F G H I J K L M )
-18 B, 3C B, 7E B, 66 B, 66 B, 66 B, 7E B, 7E B, 66 B, 66 B,
-7C B, 7E B, 66 B, 66 B, 7C B, 7E B, 66 B, 66 B, 7E B, 7C B,
-3C B, 7E B, 66 B, 60 B, 60 B, 60 B, 60 B, 66 B, 7E B, 3C B,
-7C B, 7E B, 66 B, 66 B, 66 B, 66 B, 66 B, 66 B, 7E B, 7C B,
-7E B, 7E B, 60 B, 60 B, 7C B, 7C B, 60 B, 60 B, 7E B, 7E B,
-7E B, 7E B, 60 B, 60 B, 7C B, 7C B, 60 B, 60 B, 60 B, 60 B,
-3C B, 7E B, 60 B, 60 B, 60 B, 6E B, 6E B, 66 B, 7E B, 3C B,
-66 B, 66 B, 66 B, 66 B, 7E B, 7E B, 66 B, 66 B, 66 B, 66 B,
-3C B, 3C B, 18 B, 18 B, 18 B, 18 B, 18 B, 18 B, 3C B, 3C B,
-06 B, 06 B, 06 B, 06 B, 06 B, 06 B, 66 B, 66 B, 7E B, 3C B,
-66 B, 66 B, 6C B, 7C B, 78 B, 78 B, 6C B, 6E B, 66 B, 66 B,
-60 B, 60 B, 60 B, 60 B, 60 B, 60 B, 60 B, 60 B, 7E B, 7E B,
-C3 B, E7 B, E7 B, DB B, DB B, C3 B, C3 B, C3 B, C3 B, C3 B,
-( CHARACTER PATTERN TABLE CONT. )
-( N O P Q R S T U V W X Y Z )
-66 B, 66 B, 76 B, 7E B, 7E B, 6E B, 66 B, 66 B, 66 B, 66 B,
-3C B, 7E B, 66 B, 66 B, 66 B, 66 B, 66 B, 66 B, 7E B, 3C B,
-7C B, 7E B, 66 B, 66 B, 7E B, 7C B, 60 B, 60 B, 60 B, 60 B,
-3C B, 7E B, 66 B, 66 B, 66 B, 66 B, 66 B, 6E B, 64 B, 3A B,
-7C B, 7E B, 66 B, 66 B, 7E B, 7C B, 6E B, 66 B, 66 B, 66 B,
-3C B, 7E B, 66 B, 60 B, 7C B, 3E B, 06 B, 66 B, 7E B, 3C B,
-7E B, 7E B, 18 B, 18 B, 18 B, 18 B, 18 B, 18 B, 18 B, 18 B,
-66 B, 66 B, 66 B, 66 B, 66 B, 66 B, 66 B, 66 B, 7E B, 3C B,
-66 B, 66 B, 66 B, 66 B, 66 B, 7E B, 3C B, 3C B, 18 B, 18 B,
-C3 B, C3 B, C3 B, DB B, DB B, DB B, FF B, E7 B, C3 B, C3 B,
-66 B, 66 B, 7E B, 3C B, 18 B, 18 B, 3C B, 7E B, 66 B, 66 B,
-66 B, 66 B, 7E B, 3C B, 18 B, 18 B, 18 B, 18 B, 18 B, 18 B,
-7E B, 7E B, 06 B, 0E B, 1C B, 38 B, 70 B, 60 B, 7E B, 7E B,
-( VGS-SMALL FONT CHARACTER SET 3 BY 5 )
-BTABLE smallfont 00 B, 00 B, ( SPACE )
-092 B, 020 B, ( ! )
-02D B, 00 B, ( " )
-07D B, 05F B, ( # )
-03A B, 02F B, ( $ )
-08C B, 018 B, ( % )
-080 B, 05A B, ( & )
-012 B, 00 B, ( ' )
-022 B, 029 B, ( LEFT PAREN )
-04A B, 022 B, ( RIGHT PAREN )
-0A8 B, 0A B, ( * )
-0D0 B, 05 B, ( + )
-00 B, 044 B, ( , )
-0C0 B, 01 B, ( - )
-00 B, 020 B, ( . ) -->
-( VGS-SMALL FONT CHARACTER SET 3 BY 5 )
-088 B, 08 B, ( / )
-06A B, 02B B, ( 00 )
-092 B, 024 B, ( 01 )
-0CF B, 079 B, ( 2 )
-0CF B, 072 B, ( 3 )
-0ED B, 013 B, ( 4 )
-0A7 B, 063 B, ( 5 )
-0E7 B, 07B B, ( 6 )
-08F B, 024 B, ( 7 )
-0EF B, 07B B, ( 8 )
-0EF B, 073 B, ( 9 )
-010 B, 04 B, ( : )
-010 B, 044 B, ( ; )
-011 B, 015 B, ( < )
-038 B, 0E B, ( = ) -->
-( VGS-SMALL FONT CHARACTER SET 3 BY 5 )
-054 B, 044 B, ( > )
-08F B, 020 B, ( ? )
-0EF B, 069 B, ( @ )
-0EF B, 05B B, ( A )
-0AF B, 07B B, ( B )
-027 B, 079 B, ( C )
-06E B, 06B B, ( D )
-0A7 B, 079 B, ( E )
-0A7 B, 049 B, ( F )
-067 B, 07B B, ( G )
-0ED B, 05B B, ( H )
-097 B, 074 B, ( I )
-049 B, 07A B, ( J )
-0AD B, 05B B, ( K )
-024 B, 079 B, ( L ) -->
-( VGS-SMALL FONT CHARACTER SET 3 BY 5 )
-0FD B, 05B B, ( M )
-06E B, 05B B, ( N )
-06F B, 07B B, ( O )
-0EF B, 049 B, ( P )
-06F B, 01F B, ( Q )
-0AE B, 05B B, ( R )
-0E7 B, 073 B, ( S )
-097 B, 024 B, ( T )
-06D B, 07B B, ( U )
-06D B, 02B B, ( V )
-0ED B, 05F B, ( W )
-0AD B, 05A B, ( X )
-0AD B, 024 B, ( Y )
-08F B, 078 B, ( Z )
-( VGS-SMALL FONT CHARACTER SET 3 BY 5 )
-026 B, 069 B, ( [ )
-0A0 B, 02 B, ( BACK SLASH )
-04B B, 032 B, ( ] )
-0BA B, 024 B, ( ^ )
-0D1 B, 015 B, ( RIGHT )
-BASE! ;S
-( system verbs )
-( Unused 1-B! omitted to fit the released infield )
+```z80
+            exx                         ; Save TERSE VM registers in alternate set
+            ld      bc,(RAM_RND_LOW)          ; Load low 16 bits of 32-bit random seed
+            ld      hl,$1321            ; Low word of 32-bit LCG multiplier
+            add     hl,bc               ; Accumulate low word
+            push    hl                  ; Save intermediate low result on stack
+            ld      hl,$2776            ; High word of 32-bit LCG multiplier
+            adc     hl,bc               ; Accumulate high word
+            ld      de,(RAM_RND_HIGH)          ; Load high 16 bits of 32-bit random seed
+            add     hl,de
+            ex      (sp),hl
+            add     hl,bc
+            ex      (sp),hl
+            adc     hl,de
+            ex      (sp),hl
+            add     hl,bc
+            ex      (sp),hl
+            adc     hl,de
+            ex      (sp),hl
+            ld      d,e
+            ld      e,b
+            ld      b,c
+            ld      c,$00
+            add     hl,bc
+            ld      (RAM_RND_LOW),hl          ; Store updated low word of random seed
+            pop     hl
+            adc     hl,de
+            ld      (RAM_RND_HIGH),hl          ; Store updated high word of random seed
+            exx                         ; Switch to primary register set
+            ld      hl,$0000            ; Clear 32-bit accumulator low word
+            ld      d,h                 ; Clear 32-bit accumulator high word
+            ld      e,l
+            exx                         ; Switch to alternate register set
+            ex      de,hl               ; Move multiplicand into DE
+            pop     bc                  ; Pop multiplier operand from stack
+            ld      hl,$0000            ; Clear product low word
+_MULU_LOOP:
+            srl     b                   ; Shift multiplier right 1 bit
+            rr      c
+            jp      nc,_MULU_SKIP       ; If bit 0 clear, skip addition
+            add     hl,de               ; Add multiplicand to product low word
+            exx                         ; Switch to primary set for high word add
+            adc     hl,de               ; Add multiplicand to product high word
+            exx                         ; Switch back to alternate set
+_MULU_SKIP:
+            ld      a,b                 ; Test if multiplier is zero
+            or      c
+            jp      z,_MULU_DONE        ; If zero, multiplication complete
+            sla     e                   ; Shift multiplicand left 1 bit
+            rl      d
+            exx                         ; Switch to primary set for high word shift
+            rl      e
+            rl      d
+            exx                         ; Switch back to alternate set
+            jp      _MULU_LOOP          ; Continue multiplication loop
+_MULU_DONE:
+            exx                         ; Switch to primary set
+            push    hl                  ; Push result onto parameter stack
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Used by:** `GRNDRHIT`, `INLOG`, `MUSCPU`, `OUTFLDHIT`, `TERSECHK`, `WHBODDS`.
@@ -5438,10 +5437,17 @@ SADR SHLD, B POP, NEXT
 
 Transfer interrupt/screen execution state.
 
-```text
-CODE SWAN
-ROMHERE !
-( VGS screen handeling verbs INTCOMMERCIAL , FILL , SCRERASE )
+```z80
+_SWABN:
+            pop     hl                  ; Pop target word from parameter stack
+            ld      a,l                 ; Extract low byte
+            rlca                        ; Rotate nibbles left 4 bits
+            rlca
+            rlca
+            rlca
+            ld      l,a                 ; Store swapped nibble byte back into L
+            push    hl                  ; Push result onto parameter stack
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 **Used by:** `EI`, `NPOST`.
