@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0005</code></p>
+<p align="right"><code>v20261123-0006</code></p>
 
 # Extra Bases — TERSE Word Catalog
 
@@ -1740,10 +1740,10 @@ Fills the background while allowing interrupts.
 Executes only a nonzero address whose top two bits are clear.
 
 ```text
-: FLSHME FLSHWHO @ DUP 0C000 AND 0= OVER 0 <> AND IF EX
+: FLSHME FLSHWHO @ DUP 0C000 AND 0= OVER 0 <> AND IF EX ELSE DROP THEN ;
 ```
 
-**Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-41-4e-44"><code>AND</code></a>, <a href="#terse-word-4f-56-45-52"><code>OVER</code></a>, <a href="#terse-word-45-58"><code>EX</code></a>.
+**Calls:** <a href="#terse-word-44-55-50"><code>DUP</code></a>, <a href="#terse-word-41-4e-44"><code>AND</code></a>, <a href="#terse-word-4f-56-45-52"><code>OVER</code></a>, <a href="#terse-word-45-58"><code>EX</code></a>, <a href="#terse-word-45-4c-53-45"><code>ELSE</code></a>, <a href="#terse-word-44-52-4f-50"><code>DROP</code></a>, <a href="#terse-word-54-48-45-4e"><code>THEN</code></a>.
 
 **Used by:** <a href="#terse-word-46-4c-53-48-57-55-50"><code>FLSHWUP</code></a>.
 
