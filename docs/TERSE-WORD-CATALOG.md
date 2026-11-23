@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0017</code></p>
+<p align="right"><code>v20261123-0018</code></p>
 
 # Extra Bases - TERSE Glossary
 
@@ -717,7 +717,27 @@ Create a named array of size uninitialized bytes; indexing the resulting word re
 
 **1979 XC host reference.** The public `BARRAY` word delegates to `G79-BARRAY`. Its defining word allocates bytes using `G79-ALLOC`; the execution behavior uses `BTLIT`. This is host XC source, not a native Extra Bases ROM primitive.
 
-```z80
+**Readable TERSE definition — 1979 XC, decoded defining word at $7602:**
+
+```forth
+: BARRAY G79-BARRAY ;
+: G79-BARRAY
+  G79XC DEFINITIONS
+  0 pv
+  <BUILDS
+    G79-ALLOC
+    0 prnt, IMMED
+    G79XC DEFINITIONS
+  (DOES>)
+    ref BTLIT ;
+```
+
+`G79-BARRAY` supplies allocation and a byte-indexing execution behavior; `BARRAY` is its wrapper.
+
+<details>
+<summary>Original decoded XC thread (address-level reference)</summary>
+
+```asm
 xt_76c8_BARRAY: ; BARRAY
         rst $08 ; $76C8 enter TERSE thread
         dw xt_7602_G79_BARRAY ; $76C9 G79-BARRAY
@@ -742,6 +762,8 @@ xt_7602_G79_BARRAY: ; G79-BARRAY
         dw xt_833b_BTLIT ; $761E BTLIT
         dw xt_0074_EXIT ; $7620 EXIT
 ```
+
+</details>
 
 
 ---
@@ -768,7 +790,30 @@ Create a dictionary word implemented in assembler; enter assembler vocabulary fo
 
 **1979 XC host reference.** Defines a native verb in `G79VERBS`, switches between the XC and assembler vocabularies, and uses its compile-state path to emit a native reference. This listing documents the host XC mechanism, not target-side game code.
 
-```z80
+**Readable TERSE definition — 1979 XC, decoded TERSE thread at $81CE:**
+
+```forth
+: CODE
+  G79VERBS DEFINITIONS
+  1 pv
+  <BUILDS
+    G79-HERE 1 prnt, IMMED
+    G79XC DEFINITIONS ASM
+  (DOES>)
+    G79-XCSTATE @ IF
+      ref @ byt, p
+    ELSE
+      errtype
+      ." VERB NOT EXECUTED" .ABORT
+    THEN ;
+```
+
+The conditional is decoded from `jzero`/`jump` thread offsets; the displayed string notation expands the stored inline-string payload. This is a readable reconstruction of the original thread, not a claim about the original editor's spacing.
+
+<details>
+<summary>Original decoded XC thread (address-level reference)</summary>
+
+```asm
 xt_81ce_CODE: ; CODE
         rst $08 ; $81CE enter TERSE thread
         dw xt_6a59_alias_G79VERBS ; $81CF alias_G79VERBS
@@ -805,6 +850,8 @@ thread_8217: ;
         dw xt_0074_EXIT ; $8217 EXIT
 ```
 
+</details>
+
 
 ---
 
@@ -816,7 +863,26 @@ Create a named word whose execution pushes its defining value.
 
 **1979 XC host reference.** `CONSTANT` delegates to `G79-CONSTANT`, whose defining-word behavior creates a literal-emitting word through `XCLIT`. This is the cross-compiler's definition, not a native Extra Bases token.
 
-```z80
+**Readable TERSE definition — 1979 XC, decoded defining word at $750F:**
+
+```forth
+: CONSTANT G79-CONSTANT ;
+: G79-CONSTANT
+  G79XC DEFINITIONS
+  0 pv
+  <BUILDS
+    0 prnt, IMMED
+    G79XC DEFINITIONS
+  (DOES>)
+    ref XCLIT ;
+```
+
+`XCLIT` is retained as the original compiler word; no literal-emission logic has been invented.
+
+<details>
+<summary>Original decoded XC thread (address-level reference)</summary>
+
+```asm
 xt_765b_CONSTANT: ; CONSTANT
         rst $08 ; $765B enter TERSE thread
         dw xt_750f_G79_CONSTANT ; $765C G79-CONSTANT
@@ -841,6 +907,8 @@ xt_750f_G79_CONSTANT: ; G79-CONSTANT
         dw xt_0074_EXIT ; $752B EXIT
 ```
 
+</details>
+
 
 ---
 
@@ -852,15 +920,70 @@ Select decimal numeric conversion base.
 
 **1982 XC System host reference.** The original threaded word stores decimal base `$0A` into `BASE`; this reference is separate from the Extra Bases runtime.
 
-```z80
-xt_1de5_DECIMAL: ; DECIMAL
+**Readable TERSE definition — 1982 XC System, decoded thread at xt_1de5_DECIMAL: ; DECIMAL
         rst $08 ; $1DE5 enter TERSE thread
         dw xt_00a5_BLIT ; $1DE6 BLIT
         db $000A ; $1DE8 8-bit literal
         dw xt_0709_BASE ; $1DE9 BASE
         dw xt_0187__ ; $1DEB !
-        dw xt_00af_EXIT ; $1DED EXIT
+        dw xt_00af_EXIT ; $1DED EXITDE5:**
+
+```forth
+: DECIMAL 0A BASE ! ;
 ```
+
+`0A` is hexadecimal `$0A` (decimal 10), matching the stored `BLIT $0A`.
+
+<details>
+<summary>Original decoded XC thread (address-level reference)</summary>
+
+```asm
+xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; $1DE5 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DE6 BLIT
+        db $000A ; $1DE8 8-bit literal
+        dw xt_0709_BASE ; $1DE9 BASE
+        dw xt_0187__ ; $1DEB !
+        dw xt_00af_EXIT ; $1DED EXITDE5 enter TERSE thread
+        dw xt_00a5_BLIT ; xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; $1DE5 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DE6 BLIT
+        db $000A ; $1DE8 8-bit literal
+        dw xt_0709_BASE ; $1DE9 BASE
+        dw xt_0187__ ; $1DEB !
+        dw xt_00af_EXIT ; $1DED EXITDE6 BLIT
+        db $000A ; xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; $1DE5 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DE6 BLIT
+        db $000A ; $1DE8 8-bit literal
+        dw xt_0709_BASE ; $1DE9 BASE
+        dw xt_0187__ ; $1DEB !
+        dw xt_00af_EXIT ; $1DED EXITDE8 8-bit literal
+        dw xt_0709_BASE ; xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; $1DE5 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DE6 BLIT
+        db $000A ; $1DE8 8-bit literal
+        dw xt_0709_BASE ; $1DE9 BASE
+        dw xt_0187__ ; $1DEB !
+        dw xt_00af_EXIT ; $1DED EXITDE9 BASE
+        dw xt_0187__ ; xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; $1DE5 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DE6 BLIT
+        db $000A ; $1DE8 8-bit literal
+        dw xt_0709_BASE ; $1DE9 BASE
+        dw xt_0187__ ; $1DEB !
+        dw xt_00af_EXIT ; $1DED EXITDEB !
+        dw xt_00af_EXIT ; xt_1de5_DECIMAL: ; DECIMAL
+        rst $08 ; $1DE5 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DE6 BLIT
+        db $000A ; $1DE8 8-bit literal
+        dw xt_0709_BASE ; $1DE9 BASE
+        dw xt_0187__ ; $1DEB !
+        dw xt_00af_EXIT ; $1DED EXITDED EXIT
+```
+
+</details>
 
 
 ---
@@ -935,7 +1058,19 @@ Return the address of the next free dictionary location.
 
 **1979 XC host reference.** `HERE` delegates to `G79-HERE`, which fetches the current value from the `G79-ROMHERE` pointer. This is the XC dictionary/object pointer, not a target-side Extra Bases primitive.
 
-```z80
+**Readable TERSE definition — 1979 XC, decoded thread at $7729:**
+
+```forth
+: HERE G79-HERE ;
+: G79-HERE G79-ROMHERE @ ;
+```
+
+`G79-ROMHERE` is the XC dictionary/output pointer; this describes host compilation, not target execution.
+
+<details>
+<summary>Original decoded XC thread (address-level reference)</summary>
+
+```asm
 xt_7729_HERE: ; HERE
         rst $08 ; $7729 enter TERSE thread
         dw xt_6e78_G79_HERE ; $772A G79-HERE
@@ -948,6 +1083,8 @@ xt_6e78_G79_HERE: ; G79-HERE
         dw xt_0074_EXIT ; $6E7D EXIT
 ```
 
+</details>
+
 
 ---
 
@@ -959,15 +1096,82 @@ Select hexadecimal numeric conversion base.
 
 **1982 XC System host reference.** The original threaded word stores hexadecimal base `$10` into `BASE`; this reference is separate from the Extra Bases runtime.
 
-```z80
-xt_1dd1_HEX: ; HEX
+**Readable TERSE definition — 1982 XC System, decoded thread at xt_1dd1_HEX: ; HEX
         rst $08 ; $1DD1 enter TERSE thread
         dw xt_00a5_BLIT ; $1DD2 BLIT
         db $0010 ; $1DD4 8-bit literal
         dw xt_0709_BASE ; $1DD5 BASE
         dw xt_0187__ ; $1DD7 !
-        dw xt_00af_EXIT ; $1DD9 EXIT
+        dw xt_00af_EXIT ; $1DD9 EXITDD1:**
+
+```forth
+: HEX 10 BASE ! ;
 ```
+
+The `10` is hexadecimal `xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXIT0` (decimal 16), matching the stored `BLIT xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXIT0`.
+
+<details>
+<summary>Original decoded XC thread (address-level reference)</summary>
+
+```asm
+xt_1dd1_HEX: ; HEX
+        rst $08 ; xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXITDD1 enter TERSE thread
+        dw xt_00a5_BLIT ; xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXITDD2 BLIT
+        db $0010 ; xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXITDD4 8-bit literal
+        dw xt_0709_BASE ; xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXITDD5 BASE
+        dw xt_0187__ ; xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXITDD7 !
+        dw xt_00af_EXIT ; xt_1dd1_HEX: ; HEX
+        rst $08 ; $1DD1 enter TERSE thread
+        dw xt_00a5_BLIT ; $1DD2 BLIT
+        db $0010 ; $1DD4 8-bit literal
+        dw xt_0709_BASE ; $1DD5 BASE
+        dw xt_0187__ ; $1DD7 !
+        dw xt_00af_EXIT ; $1DD9 EXITDD9 EXIT
+```
+
+</details>
 
 
 ---
@@ -1144,7 +1348,28 @@ Define a named 16-bit variable; the 1979 XC wrapper discards its incoming value 
 
 **1979 XC host reference.** The original `VARIABLE` wrapper drops the incoming stack value, pushes a cell size of two bytes, and calls `G79-VARI` to define allocated storage. This 1979 behavior should not be described as automatically initializing the cell with the dropped value.
 
-```z80
+**Readable TERSE definition — 1979 XC, decoded defining word at $7692:**
+
+```forth
+: VARIABLE
+  DROP 2 G79-VARI ;
+: G79-VARI
+  G79XC DEFINITIONS
+  0 pv
+  <BUILDS
+    G79-ALLOC
+    0 prnt, IMMED
+    G79XC DEFINITIONS
+  (DOES>)
+    ref XCLIT ;
+```
+
+`VARIABLE` discards its incoming value and allocates a two-byte cell. The resulting value is not initialized from the discarded operand.
+
+<details>
+<summary>Original decoded XC thread (address-level reference)</summary>
+
+```asm
 xt_7692_VARIABLE: ; VARIABLE
         rst $08 ; $7692 enter TERSE thread
         dw xt_0294_DROP ; $7693 DROP
@@ -1172,6 +1397,8 @@ xt_75d5_G79_VARI: ; G79-VARI
         dw xt_8316_XCLIT ; $75F1 XCLIT
         dw xt_0074_EXIT ; $75F3 EXIT
 ```
+
+</details>
 
 
 ---
