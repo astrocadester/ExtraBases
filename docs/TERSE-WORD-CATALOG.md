@@ -7,7 +7,7 @@
 <tr><td><strong>-</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;difference&nbsp;)</code><br>Subtract the top value from the preceding value.<br><a href="#terse-word-2d" title="View implementation">📄</a></td></tr>
 <tr><td><strong>!</strong><br><code>(&nbsp;value&nbsp;address&nbsp;--&nbsp;)</code><br>Store one 16-bit cell.<br><a href="#terse-word-21" title="View implementation">📄</a></td></tr>
 <tr><td><strong>@</strong><br><code>(&nbsp;address&nbsp;--&nbsp;value&nbsp;)</code><br>Fetch one 16-bit cell.<br><a href="#terse-word-40" title="View implementation">📄</a></td></tr>
-<tr><td><strong>*</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;product&nbsp;)</code><br>Multiply two stack values.<br><a href="#terse-word-2a" title="View implementation">📄</a></td></tr>
+<tr><td><strong>*</strong><br><code>(&nbsp;m&nbsp;n&nbsp;--&nbsp;product&nbsp;)</code><br>Multiply two stack values.<br><a href="#terse-word-2a" title="View implementation">📄</a></td></tr>
 <tr><td><strong>/</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;quotient&nbsp;)</code><br>Divide the preceding stack value by the top value.<br><a href="#terse-word-2f" title="View implementation">📄</a></td></tr>
 <tr><td><strong>+</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;sum&nbsp;)</code><br>Add two stack values.<br><a href="#terse-word-2b" title="View implementation">📄</a></td></tr>
 <tr><td><strong>&lt;</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code><br>Compare whether the preceding value is less than the top value.<br><a href="#terse-word-3c" title="View implementation">📄</a></td></tr>
@@ -30,13 +30,13 @@
 <tr><td><strong>END</strong><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code><br>Immediate XC wrapper emitting a conditional back-branch; game loops repeat until the condition becomes true.<br><a href="#terse-word-45-4e-44" title="View implementation">📄</a></td></tr>
 <tr><td><strong>HEX</strong><br><code>(&nbsp;--&nbsp;)</code><br>Select radix sixteen for parsing subsequent source numbers.<br><a href="#terse-word-48-45-58" title="View implementation">📄</a></td></tr>
 <tr><td><strong>IF</strong><br><code>(&nbsp;flag&nbsp;--&nbsp;)</code><br>Immediate XC wrapper that emits a conditional target branch through XC-IF.<br><a href="#terse-word-49-46" title="View implementation">📄</a></td></tr>
-<tr><td><strong>LIT</strong><br><code>(&nbsp;--&nbsp;value;&nbsp;inline&nbsp;cell&nbsp;)</code><br>Compiler literal mechanism used by INEXT's host macro.<br><a href="#terse-word-4c-49-54" title="View implementation">📄</a></td></tr>
+<tr><td><strong>LIT</strong><br><code>(&nbsp;--&nbsp;value&nbsp;)</code><br>Compiler literal mechanism used by INEXT's host macro.<br><a href="#terse-word-4c-49-54" title="View implementation">📄</a></td></tr>
 <tr><td><strong>OR</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code><br>Bitwise inclusive OR of two values.<br><a href="#terse-word-4f-52" title="View implementation">📄</a></td></tr>
 <tr><td><strong>OVER</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;)</code><br>Copy the second stack cell to the top.<br><a href="#terse-word-4f-56-45-52" title="View implementation">📄</a></td></tr>
 <tr><td><strong>ROT</strong><br><code>(&nbsp;a&nbsp;b&nbsp;c&nbsp;--&nbsp;b&nbsp;c&nbsp;a&nbsp;)</code><br>Rotate the top three stack cells.<br><a href="#terse-word-52-4f-54" title="View implementation">📄</a></td></tr>
 <tr><td><strong>SWAP</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;b&nbsp;a&nbsp;)</code><br>Exchange the top two stack cells.<br><a href="#terse-word-53-57-41-50" title="View implementation">📄</a></td></tr>
 <tr><td><strong>THEN</strong><br><code>(&nbsp;--&nbsp;)</code><br>Immediate XC wrapper that resolves a saved target branch destination.<br><a href="#terse-word-54-48-45-4e" title="View implementation">📄</a></td></tr>
-<tr><td><strong>VARIABLE</strong><br><code>(&nbsp;--&nbsp;)</code><br>Allocate/name a cell variable with the initial value in this dialect.<br><a href="#terse-word-56-41-52-49-41-42-4c-45" title="View implementation">📄</a></td></tr>
+<tr><td><strong>VARIABLE</strong><br><code>(&nbsp;initial-value&nbsp;--&nbsp;)</code><br>Allocate/name a cell variable with the initial value in this dialect.<br><a href="#terse-word-56-41-52-49-41-42-4c-45" title="View implementation">📄</a></td></tr>
 <tr><td><strong>XOR</strong><br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code><br>Bitwise exclusive OR of two values.<br><a href="#terse-word-58-4f-52" title="View implementation">📄</a></td></tr>
 </tbody>
 </table>
@@ -637,6 +637,12 @@ Create a named array of size uninitialized bytes; indexing the resulting word re
 **DNA TERSE 81 Glossary, page 8.** Defining form: `size BARRAY name`. At use: `index name` leaves the address of byte `index` (no bounds check).
 
 
+```text
+size BARRAY name
+index name  ( -- byte-address )
+```
+
+
 ### <a name="terse-word-42-45-47-49-4e"></a>`BEGIN`
 
 `( -- )`
@@ -658,6 +664,13 @@ Create a dictionary word implemented in assembler; enter assembler vocabulary fo
 **DNA TERSE 81 Glossary, page 11.** Defining form: `CODE name` followed by assembler instructions. A named native word is entered into the host dictionary.
 
 
+```text
+CODE name
+  ... Z80 assembler instructions ...
+  NEXT
+```
+
+
 ### <a name="terse-word-43-4f-4e-53-54-41-4e-54"></a>`CONSTANT`
 
 `( value -- )`
@@ -665,6 +678,12 @@ Create a dictionary word implemented in assembler; enter assembler vocabulary fo
 Create a named word whose execution pushes its defining value.
 
 **DNA TERSE 81 Glossary, page 11.** Defining form: `value CONSTANT name`. Runtime effect of `name`: `( -- value )`.
+
+
+```text
+value CONSTANT name
+name  ( -- value )
+```
 
 
 ### <a name="terse-word-44-45-43-49-4d-41-4c"></a>`DECIMAL`
@@ -860,6 +879,12 @@ Immediate XC wrapper that resolves a saved target branch destination.
 Create a named initialized 16-bit variable.
 
 **DNA TERSE 81 Glossary, page 22.** Defining form: `initial-value VARIABLE name`. Runtime effect of `name`: `( -- address )`.
+
+
+```text
+initial-value VARIABLE name
+name  ( -- address )
+```
 
 
 ### <a name="terse-word-58-4f-52"></a>`XOR`
