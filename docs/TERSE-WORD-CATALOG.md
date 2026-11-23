@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0004</code></p>
+<p align="right"><code>v20261123-0005</code></p>
 
 # Extra Bases — TERSE Word Catalog
 
@@ -497,8 +497,21 @@ _plus:
 
 Compare whether the preceding value is less than the top value.
 
-```text
+```z80
 _less:
+            pop     de                  ; Pop second operand (n) from parameter stack
+            pop     hl                  ; Pop first operand (m) from parameter stack
+            xor     a                   ; Clear carry flag
+            sbc     hl,de               ; Compute m - n
+            ld      de,$0000            ; Default result to 0 (false)
+            push    af                  ; Save flags resulting from subtraction
+            pop     hl                  ; Move flags into HL
+            ld      a,l                 ; Extract Z80 status flags byte
+            and     $84                 ; Mask Sign (bit 7) and Overflow (bit 2) flags
+            jp      pe,$0125            ; If sign matches overflow flag, m >= n
+            inc     de                  ; Set result to 1 (true, m < n)
+            push    de                  ; Push boolean result onto parameter stack
+            jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
 ### <a name="terse-word-3d"></a><span>=</span>
@@ -526,8 +539,11 @@ _equal:
 
 Compare whether the preceding value is greater than the top value.
 
-```text
+```z80
 _gt:
+            pop     hl                  ; Pop first operand (m)
+            pop     de                  ; Pop second operand (n)
+            jp      $0116               ; Jump into signed less-than evaluation
 ```
 
 ### <a name="terse-word-30-3d"></a><span>0=</span>
