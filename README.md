@@ -144,6 +144,10 @@ The foreground sentry at `$3E4E` polls the pending game flags and calls button, 
 
 Cabinet and DIP inputs use the sound/I/O read ports. Port `$13` returns the selected trackball delta; writing `$28` selects its axis/station. Port `$20` drives coin-counter outputs. The [memory and I/O reference](docs/extra_bases_memory_map.md) records the address ranges and bit assignments.
 
+## Disk
+
+![Extra Bases Disk](images/EB-disk.png)
+
 ## References
 
 - [Extra Bases hardware reference](docs/extra_bases_hardware_reference.md)
